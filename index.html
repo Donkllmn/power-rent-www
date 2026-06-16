@@ -11,7 +11,7 @@
 <style>
   :root{
     --ink:#15171C; --ink2:#22262F; --ink3:#2D323C;
-    --amber:#F5A524; --amber-d:#D9890B;
+    --amber:#E11D2A; --amber-d:#B71420;
     --paper:#FFFFFF; --bg:#F6F7F9; --bg2:#EEF0F4;
     --tx:#1B1F27; --muted:#5C6472; --line:#E4E7EC;
     --maxw:1180px;
@@ -28,7 +28,7 @@
   /* buttons */
   .btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:15px;padding:14px 22px;border-radius:12px;cursor:pointer;border:2px solid transparent;transition:transform .12s,background .15s,box-shadow .15s;white-space:nowrap}
   .btn:active{transform:translateY(1px)}
-  .btn-amber{background:var(--amber);color:var(--ink);box-shadow:0 6px 20px rgba(245,165,36,.32)}
+  .btn-amber{background:var(--amber);color:#fff;box-shadow:0 6px 20px rgba(225,29,42,.32)}
   .btn-amber:hover{background:var(--amber-d)}
   .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.28)}
   .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.06)}
@@ -50,9 +50,9 @@
   .burger{display:none;background:none;border:0;color:#fff;cursor:pointer;padding:6px}
 
   /* hero */
-  .hero{background:radial-gradient(1200px 600px at 80% -10%,rgba(245,165,36,.16),transparent 60%),var(--ink);color:#fff;position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.06)}
+  .hero{background:radial-gradient(1200px 600px at 80% -10%,rgba(225,29,42,.16),transparent 60%),var(--ink);color:#fff;position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.06)}
   .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding:72px 0 80px}
-  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--amber);background:rgba(245,165,36,.1);border:1px solid rgba(245,165,36,.25);padding:6px 13px;border-radius:30px;margin-bottom:22px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--amber);background:rgba(225,29,42,.1);border:1px solid rgba(225,29,42,.25);padding:6px 13px;border-radius:30px;margin-bottom:22px}
   .hero h1{font-size:clamp(34px,5vw,58px);font-weight:900;margin-bottom:18px}
   .hero h1 em{font-style:normal;color:var(--amber)}
   .hero p.lead{font-size:clamp(16px,2vw,19px);color:#C2C7D0;max-width:520px;margin-bottom:30px}
@@ -84,7 +84,7 @@
   /* why */
   .why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
   .why-item{display:flex;gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px}
-  .why-item .ic{width:42px;height:42px;border-radius:10px;background:rgba(245,165,36,.14);color:var(--amber-d);display:flex;align-items:center;justify-content:center;flex:0 0 42px}
+  .why-item .ic{width:42px;height:42px;border-radius:10px;background:rgba(225,29,42,.14);color:var(--amber-d);display:flex;align-items:center;justify-content:center;flex:0 0 42px}
   .why-item h3{font-size:16.5px;font-weight:700;margin-bottom:5px}
   .why-item p{color:var(--muted);font-size:14.5px}
 
@@ -123,7 +123,7 @@
   .contact-card{background:var(--ink2);border:1px solid var(--ink3);border-radius:18px;padding:30px}
   .crow{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--ink3)}
   .crow:last-child{border-bottom:0}
-  .crow .ic{width:42px;height:42px;border-radius:10px;background:rgba(245,165,36,.14);color:var(--amber);display:flex;align-items:center;justify-content:center;flex:0 0 42px}
+  .crow .ic{width:42px;height:42px;border-radius:10px;background:rgba(225,29,42,.14);color:var(--amber);display:flex;align-items:center;justify-content:center;flex:0 0 42px}
   .crow .k{font-size:12.5px;color:#8A91A0}
   .crow .v{font-weight:600;font-size:15px;color:#fff}
 
@@ -164,7 +164,7 @@
 <header>
   <div class="wrap nav">
     <a href="#" class="logo" aria-label="Power Rent">
-      <span class="mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 13h11V6H5L3 9v4Z" fill="#15171C"/><path d="M14 8h4l3 4v1h-7V8Z" fill="#15171C"/><circle cx="7" cy="16" r="2.2" fill="#15171C"/><circle cx="17" cy="16" r="2.2" fill="#15171C"/></svg></span>
+      <span class="mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 13h11V6H5L3 9v4Z" fill="#fff"/><path d="M14 8h4l3 4v1h-7V8Z" fill="#fff"/><circle cx="7" cy="16" r="2.2" fill="#fff"/><circle cx="17" cy="16" r="2.2" fill="#fff"/></svg></span>
       Power<span>Rent</span>
     </a>
     <nav class="nav-links" id="navLinks">
@@ -203,27 +203,27 @@
       <svg viewBox="0 0 460 300" fill="none" xmlns="http://www.w3.org/2000/svg">
         <!-- road -->
         <line x1="20" y1="250" x2="440" y2="250" stroke="#3A3F4A" stroke-width="3"/>
-        <line x1="40" y1="268" x2="120" y2="268" stroke="#F5A524" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+        <line x1="40" y1="268" x2="120" y2="268" stroke="#E11D2A" stroke-width="4" stroke-linecap="round" opacity=".8"/>
         <line x1="150" y1="268" x2="230" y2="268" stroke="#3A3F4A" stroke-width="4" stroke-linecap="round"/>
         <line x1="260" y1="268" x2="340" y2="268" stroke="#3A3F4A" stroke-width="4" stroke-linecap="round"/>
         <!-- van body -->
-        <path d="M60 110 h210 a14 14 0 0 1 14 14 v96 h-238 a10 10 0 0 1 -10 -10 v-86 a14 14 0 0 1 14 -14 Z" fill="#1E222B" stroke="#F5A524" stroke-width="3"/>
+        <path d="M60 110 h210 a14 14 0 0 1 14 14 v96 h-238 a10 10 0 0 1 -10 -10 v-86 a14 14 0 0 1 14 -14 Z" fill="#1E222B" stroke="#E11D2A" stroke-width="3"/>
         <!-- cab -->
-        <path d="M284 130 h54 l46 44 v46 h-100 Z" fill="#1E222B" stroke="#F5A524" stroke-width="3"/>
+        <path d="M284 130 h54 l46 44 v46 h-100 Z" fill="#1E222B" stroke="#E11D2A" stroke-width="3"/>
         <!-- windshield -->
         <path d="M292 138 h40 l34 32 h-74 Z" fill="#2B313C" stroke="#3A3F4A" stroke-width="2"/>
         <!-- side panel lines -->
         <line x1="120" y1="120" x2="120" y2="210" stroke="#2B313C" stroke-width="2"/>
         <line x1="190" y1="120" x2="190" y2="210" stroke="#2B313C" stroke-width="2"/>
         <!-- POWER text on van -->
-        <text x="70" y="180" fill="#F5A524" font-family="Archivo, sans-serif" font-weight="900" font-size="34" letter-spacing="1">POWER</text>
+        <text x="70" y="180" fill="#E11D2A" font-family="Archivo, sans-serif" font-weight="900" font-size="34" letter-spacing="1">POWER</text>
         <!-- wheels -->
-        <circle cx="120" cy="222" r="26" fill="#15171C" stroke="#F5A524" stroke-width="3"/>
+        <circle cx="120" cy="222" r="26" fill="#15171C" stroke="#E11D2A" stroke-width="3"/>
         <circle cx="120" cy="222" r="10" fill="#2B313C"/>
-        <circle cx="330" cy="222" r="26" fill="#15171C" stroke="#F5A524" stroke-width="3"/>
+        <circle cx="330" cy="222" r="26" fill="#15171C" stroke="#E11D2A" stroke-width="3"/>
         <circle cx="330" cy="222" r="10" fill="#2B313C"/>
         <!-- headlight -->
-        <rect x="378" y="196" width="8" height="12" rx="2" fill="#F5A524"/>
+        <rect x="378" y="196" width="8" height="12" rx="2" fill="#E11D2A"/>
       </svg>
     </div>
   </div>
@@ -326,10 +326,10 @@
     </div>
     <div class="contact-card rv">
       <!-- UZUPEŁNIJ: adres, e-mail i godziny otwarcia -->
-      <div class="crow"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div><div><div class="k">Adres</div><div class="v">Radom, ul. ___________ <!-- uzupełnij --></div></div></div>
+      <div class="crow"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div><div><div class="k">Adres</div><div class="v"><a href="https://www.google.com/maps/search/?api=1&amp;query=Power+Rent+Mokra+2A+Radom" target="_blank" rel="noopener" style="color:#fff">Mokra 2A, 26-600 Radom</a></div></div></div>
       <div class="crow"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .7-.2 1l-2.3 2.2Z"/></svg></div><div><div class="k">Telefon</div><div class="v">664 201 202</div></div></div>
-      <div class="crow"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div><div><div class="k">E-mail</div><div class="v">biuro@power-rent.pl <!-- uzupełnij/potwierdź --></div></div></div>
-      <div class="crow"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><div class="k">Godziny</div><div class="v">Pn–Pt ___ · Sb ___ <!-- uzupełnij --></div></div></div>
+      <div class="crow"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div><div><div class="k">E-mail</div><div class="v"><a href="mailto:Donkozak@gmail.com" style="color:#fff">Donkozak@gmail.com</a></div></div></div>
+      <div class="crow"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><div class="k">Godziny</div><div class="v">Pn–Pt 08:00–17:00 · Sb 08:00–14:00 · Nd zamknięte</div></div></div>
     </div>
   </div>
 </section>
