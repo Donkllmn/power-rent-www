@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rezerwacja auta — Power Rent Radom</title>
+<meta name="description" content="Zarezerwuj bus lub auto dostawcze w Power Rent Radom. Wypełnij formularz rezerwacji lub zadzwoń pod 664 201 202 — potwierdzimy dostępność i ustalimy najlepszą cenę.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a href="index.html" class="logo" aria-label="Power Rent — strona główna"><span class="logo-badge">P</span><span class="logo-text"><span class="lr">Power</span><span class="lk">Rent</span></span></a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="nav-links" id="navLinks">
+      <a href="o-nas.html">O nas</a>
+      <a href="oferta.html">Nasza oferta</a>
+      <a href="uslugi.html">Usługi dodatkowe</a>
+      <a href="faq.html">FAQ</a>
+      <a href="cennik.html">Cennik</a>
+      <a href="kontakt.html">Kontakt</a>
+      <a href="rezerwacje.html" class="nav-cta btn btn-red active" style="padding:9px 16px;font-size:14px">Rezerwacja</a>
+    </nav>
+    <div class="nav-actions"><a href="tel:664201202" class="nav-phone"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .7-.2 1l-2.3 2.2Z"/></svg>664 201 202</a></div>
+  </div>
+</header>
+
+<section class="band">
+  <div class="wrap">
+    <div class="crumb"><a href="index.html">Strona główna</a><span class="sep">/</span>Rezerwacja</div>
+    <h1>Rezerwacja auta</h1>
+    <p>Wypełnij krótki formularz, a my potwierdzimy dostępność i ustalimy najlepszą cenę. Spieszysz się? Zadzwoń — auto wydamy nawet tego samego dnia.</p>
+    <span class="accent"></span>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="rv">
+        <form class="form-card" data-demo>
+          <div class="form-ok">Dziękujemy! Zapytanie rezerwacyjne zostało przyjęte. Skontaktujemy się telefonicznie, aby potwierdzić dostępność i szczegóły. W pilnych sprawach dzwoń pod 664 201 202.</div>
+          <div class="field"><label for="r-seg">Rodzaj pojazdu</label>
+            <select id="r-seg" required>
+              <option value="" disabled selected>Wybierz segment…</option>
+              <option>Mikrobus (segment S)</option>
+              <option>Małe auto dostawcze (segment M)</option>
+              <option>Duże auto dostawcze (segment L)</option>
+              <option>Przedłużane auto dostawcze (L+)</option>
+              <option>Największe auto dostawcze (XL)</option>
+              <option>Bus 8/9-osobowy</option>
+              <option>Auto-laweta</option>
+              <option>Chłodnia — furgon</option>
+              <option>Chłodnia — kontener</option>
+              <option>Auto z plandeką</option>
+              <option>Auto osobowe — sedan</option>
+              <option>Auto osobowe — kombi automat</option>
+              <option>Auto osobowe — SUV automat</option>
+              <option>Nie wiem — proszę o doradztwo</option>
+            </select>
+          </div>
+          <div class="field-row">
+            <div class="field"><label for="r-from">Termin odbioru</label><input id="r-from" type="date" required></div>
+            <div class="field"><label for="r-to">Termin zwrotu</label><input id="r-to" type="date" required></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label for="r-name">Imię i nazwisko</label><input id="r-name" type="text" placeholder="Jan Kowalski" required></div>
+            <div class="field"><label for="r-phone">Telefon</label><input id="r-phone" type="tel" placeholder="600 000 000" required></div>
+          </div>
+          <div class="field"><label for="r-msg">Dodatkowe informacje (opcjonalnie)</label><textarea id="r-msg" placeholder="Np. podstawienie pod adres, większy limit km, wyjazd za granicę…"></textarea></div>
+          <button type="submit" class="btn btn-red" style="width:100%">Wyślij zapytanie rezerwacyjne</button>
+          <p class="form-note">To zapytanie wstępne — rezerwację potwierdzamy telefonicznie. Pełne formalności załatwiamy przy odbiorze auta.</p>
+        </form>
+      </div>
+
+      <div class="rv">
+        <div class="card" style="background:var(--ink);color:#fff;border:0;margin-bottom:16px">
+          <div class="ic" style="background:var(--red);color:#fff"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .7-.2 1l-2.3 2.2Z"/></svg></div>
+          <h3 style="color:#fff">Wolisz od ręki? Zadzwoń</h3>
+          <p style="color:#A6ACB8">Najszybszy sposób na rezerwację. Powiedz, czego potrzebujesz i na kiedy — resztę ustalimy w rozmowie.</p>
+          <a href="tel:664201202" class="btn btn-red" style="margin-top:6px">664 201 202</a>
+        </div>
+        <div class="card">
+          <h3>Co warto przygotować</h3>
+          <ul class="svc-list" style="grid-template-columns:1fr;margin-top:6px">
+            <li>dowód osobisty lub paszport</li>
+            <li>prawo jazdy odpowiedniej kategorii</li>
+            <li>planowany termin i trasę</li>
+            <li>informację o ewentualnym wyjeździe za granicę</li>
+          </ul>
+          <p style="color:var(--muted);font-size:13.5px;margin-top:14px">Szczegóły dotyczące dokumentów i kaucji znajdziesz w <a href="faq.html" style="color:var(--red);font-weight:600">FAQ</a> oraz <a href="cennik.html" style="color:var(--red);font-weight:600">Cenniku</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand"><a href="index.html" class="logo logo--light"><span class="logo-badge">P</span><span class="logo-text"><span class="lr">Power</span><span class="lk">Rent</span></span></a><p>Wypożyczalnia busów i aut dostawczych w Radomiu. Ponad 10 lat na rynku, ponad 50 aut.</p><a href="tel:664201202" class="footer-phone">664 201 202</a></div>
+    <div class="footer-col"><h4>Nawigacja</h4><ul><li><a href="o-nas.html">O nas</a></li><li><a href="oferta.html">Nasza oferta</a></li><li><a href="uslugi.html">Usługi dodatkowe</a></li><li><a href="faq.html">FAQ</a></li><li><a href="cennik.html">Cennik</a></li><li><a href="rezerwacje.html">Rezerwacja</a></li></ul></div>
+    <div class="footer-col"><h4>Kontakt</h4><ul class="footer-contact"><li><span>Mokra 2A, 26-600 Radom</span></li><li><span class="lab">Tel:</span> <a href="tel:664201202">664 201 202</a></li><li><span class="lab">E-mail:</span> <a href="mailto:Donkozak@gmail.com">Donkozak@gmail.com</a></li><li><span class="lab">Godziny:</span> <span>Pn–Pt 8–17 · Sb 8–14</span></li></ul></div>
+  </div>
+  <div class="wrap footer-bottom">© 2026 Power Rent · Mokra 2A, 26-600 Radom · Wszelkie prawa zastrzeżone</div>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>

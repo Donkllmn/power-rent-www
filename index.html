@@ -4,362 +4,187 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Power Rent — wynajem busów i aut dostawczych w Radomiu</title>
-<meta name="description" content="Wypożyczalnia busów i aut dostawczych w Radomiu. Od małego Doblo po Iveco i lawety. Wydanie w 10 minut, auta sprawdzone i ubezpieczone, podstawienie pod adres. Zadzwoń: 664 201 202.">
+<meta name="description" content="Wypożyczalnia busów i aut dostawczych w Radomiu. Ponad 50 aut, ponad 10 lat doświadczenia. Wydanie w 10 minut, auta sprawdzone i ubezpieczone, podstawienie pod adres. Ceny już od 90 zł. Tel: 664 201 202.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#15171C; --ink2:#22262F; --ink3:#2D323C;
-    --amber:#E11D2A; --amber-d:#B71420;
-    --paper:#FFFFFF; --bg:#F6F7F9; --bg2:#EEF0F4;
-    --tx:#1B1F27; --muted:#5C6472; --line:#E4E7EC;
-    --maxw:1180px;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{font-family:'Inter',system-ui,sans-serif;color:var(--tx);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
-  h1,h2,h3,.disp{font-family:'Archivo',sans-serif;letter-spacing:-.02em;line-height:1.05}
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-  .mono{font-feature-settings:"tnum"}
-  img{max-width:100%}
-
-  /* buttons */
-  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:15px;padding:14px 22px;border-radius:12px;cursor:pointer;border:2px solid transparent;transition:transform .12s,background .15s,box-shadow .15s;white-space:nowrap}
-  .btn:active{transform:translateY(1px)}
-  .btn-amber{background:var(--amber);color:#fff;box-shadow:0 6px 20px rgba(225,29,42,.32)}
-  .btn-amber:hover{background:var(--amber-d)}
-  .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.28)}
-  .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.06)}
-  .btn-dark{background:var(--ink);color:#fff}
-  .btn-dark:hover{background:#000}
-
-  /* header */
-  header{position:sticky;top:0;z-index:50;background:rgba(21,23,28,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
-  .nav{display:flex;align-items:center;gap:22px;height:70px}
-  .logo{display:flex;align-items:center;gap:11px;color:#fff;font-family:'Archivo';font-weight:900;font-size:20px;letter-spacing:-.02em}
-  .logo .mark{width:36px;height:36px;border-radius:9px;background:var(--amber);display:flex;align-items:center;justify-content:center;flex:0 0 36px}
-  .logo span{color:var(--amber)}
-  .nav-links{display:flex;gap:26px;margin-left:18px}
-  .nav-links a{color:#C9CDD6;font-size:14.5px;font-weight:500;transition:color .15s}
-  .nav-links a:hover{color:#fff}
-  .nav-right{margin-left:auto;display:flex;align-items:center;gap:14px}
-  .nav-tel{display:flex;align-items:center;gap:8px;color:#fff;font-weight:700;font-size:15px}
-  .nav-tel svg{color:var(--amber)}
-  .burger{display:none;background:none;border:0;color:#fff;cursor:pointer;padding:6px}
-
-  /* hero */
-  .hero{background:radial-gradient(1200px 600px at 80% -10%,rgba(225,29,42,.16),transparent 60%),var(--ink);color:#fff;position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.06)}
-  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding:72px 0 80px}
-  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--amber);background:rgba(225,29,42,.1);border:1px solid rgba(225,29,42,.25);padding:6px 13px;border-radius:30px;margin-bottom:22px}
-  .hero h1{font-size:clamp(34px,5vw,58px);font-weight:900;margin-bottom:18px}
-  .hero h1 em{font-style:normal;color:var(--amber)}
-  .hero p.lead{font-size:clamp(16px,2vw,19px);color:#C2C7D0;max-width:520px;margin-bottom:30px}
-  .hero-cta{display:flex;gap:13px;flex-wrap:wrap;margin-bottom:38px}
-  .stats{display:flex;gap:30px;flex-wrap:wrap}
-  .stat .n{font-family:'Archivo';font-weight:800;font-size:28px;color:#fff;line-height:1}
-  .stat .n em{font-style:normal;color:var(--amber)}
-  .stat .l{font-size:13px;color:#9298A4;margin-top:5px}
-  .hero-art{display:flex;align-items:center;justify-content:center}
-  .hero-art svg{width:100%;max-width:440px;height:auto}
-
-  /* section base */
-  section{padding:76px 0}
-  .sec-head{max-width:680px;margin-bottom:42px}
-  .sec-head .kick{font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--amber-d);margin-bottom:12px}
-  .sec-head h2{font-size:clamp(26px,3.5vw,38px);font-weight:800;margin-bottom:14px}
-  .sec-head p{color:var(--muted);font-size:17px}
-
-  /* fleet */
-  .fleet{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .fleet-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .card{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:24px;transition:transform .15s,box-shadow .15s,border-color .15s}
-  .card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(20,23,30,.09);border-color:#D7DBE2}
-  .card .ic{width:46px;height:46px;border-radius:11px;background:var(--ink);color:var(--amber);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
-  .card h3{font-size:18px;font-weight:800;margin-bottom:7px}
-  .card p{color:var(--muted);font-size:14.5px;margin-bottom:12px}
-  .card .models{font-size:12.5px;color:#8A91A0;font-weight:600;letter-spacing:.01em}
-
-  /* why */
-  .why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-  .why-item{display:flex;gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px}
-  .why-item .ic{width:42px;height:42px;border-radius:10px;background:rgba(225,29,42,.14);color:var(--amber-d);display:flex;align-items:center;justify-content:center;flex:0 0 42px}
-  .why-item h3{font-size:16.5px;font-weight:700;margin-bottom:5px}
-  .why-item p{color:var(--muted);font-size:14.5px}
-
-  /* steps */
-  .steps{background:var(--ink);color:#fff}
-  .steps .sec-head h2{color:#fff}
-  .steps .sec-head p{color:#A6ACB8}
-  .steps .sec-head .kick{color:var(--amber)}
-  .steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-  .step{background:var(--ink2);border:1px solid var(--ink3);border-radius:16px;padding:26px 22px}
-  .step .no{font-family:'Archivo';font-weight:900;font-size:34px;color:var(--amber);line-height:1;margin-bottom:14px}
-  .step h3{font-size:16.5px;font-weight:700;margin-bottom:7px}
-  .step p{color:#A6ACB8;font-size:14px}
-
-  /* services */
-  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .svc{display:flex;align-items:center;gap:15px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px}
-  .svc .ic{width:44px;height:44px;border-radius:11px;background:var(--ink);color:var(--amber);display:flex;align-items:center;justify-content:center;flex:0 0 44px}
-  .svc h3{font-size:16px;font-weight:700}
-  .svc p{font-size:13.5px;color:var(--muted)}
-
-  /* reviews */
-  .reviews{background:var(--bg2)}
-  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .rev{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px}
-  .rev .stars{color:var(--amber);font-size:15px;letter-spacing:2px;margin-bottom:12px}
-  .rev p{font-size:14.5px;color:#3A4150;margin-bottom:16px}
-  .rev .who{font-weight:700;font-size:14px}
-
-  /* contact */
-  .contact{background:var(--ink);color:#fff}
-  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-  .contact h2{font-size:clamp(26px,3.5vw,40px);font-weight:800;margin-bottom:14px}
-  .contact p{color:#A6ACB8;font-size:17px;margin-bottom:26px;max-width:440px}
-  .contact .tel-big{display:inline-flex;align-items:center;gap:13px;font-family:'Archivo';font-weight:900;font-size:clamp(28px,4vw,40px);color:var(--amber)}
-  .contact-card{background:var(--ink2);border:1px solid var(--ink3);border-radius:18px;padding:30px}
-  .crow{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--ink3)}
-  .crow:last-child{border-bottom:0}
-  .crow .ic{width:42px;height:42px;border-radius:10px;background:rgba(225,29,42,.14);color:var(--amber);display:flex;align-items:center;justify-content:center;flex:0 0 42px}
-  .crow .k{font-size:12.5px;color:#8A91A0}
-  .crow .v{font-weight:600;font-size:15px;color:#fff}
-
-  /* footer */
-  footer{background:#0F1115;color:#8A91A0;padding:40px 0;font-size:13.5px}
-  .foot{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
-  .foot .logo{font-size:17px}
-  .foot-links{display:flex;gap:20px;flex-wrap:wrap}
-  .foot-links a:hover{color:#fff}
-
-  /* reveal */
-  .rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
-  .rv.in{opacity:1;transform:none}
-
-  @media (max-width:920px){
-    .hero-grid{grid-template-columns:1fr;gap:18px;padding:54px 0 60px}
-    .hero-art{order:-1;max-width:320px;margin:0 auto}
-    .fleet-grid,.svc-grid,.rev-grid{grid-template-columns:repeat(2,1fr)}
-    .steps-grid{grid-template-columns:repeat(2,1fr)}
-    .contact-grid{grid-template-columns:1fr;gap:26px}
-  }
-  @media (max-width:680px){
-    .nav-links{display:none}
-    .nav-tel{display:none}
-    .burger{display:block}
-    .nav-links.open{display:flex;position:absolute;top:70px;left:0;right:0;flex-direction:column;background:var(--ink);padding:14px 24px;gap:6px;border-bottom:1px solid rgba(255,255,255,.1)}
-    .nav-links.open a{padding:9px 0}
-    .fleet-grid,.svc-grid,.rev-grid,.why-grid,.steps-grid{grid-template-columns:1fr}
-    section{padding:54px 0}
-  }
-  @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}.rv{transition:none;opacity:1;transform:none}}
-  :focus-visible{outline:2px solid var(--amber);outline-offset:3px}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ====== HEADER ====== -->
-<header>
+<header class="site-header">
   <div class="wrap nav">
-    <a href="#" class="logo" aria-label="Power Rent">
-      <span class="mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 13h11V6H5L3 9v4Z" fill="#fff"/><path d="M14 8h4l3 4v1h-7V8Z" fill="#fff"/><circle cx="7" cy="16" r="2.2" fill="#fff"/><circle cx="17" cy="16" r="2.2" fill="#fff"/></svg></span>
-      Power<span>Rent</span>
+    <a href="index.html" class="logo" aria-label="Power Rent — strona główna">
+      <span class="logo-badge">P</span>
+      <span class="logo-text"><span class="lr">Power</span><span class="lk">Rent</span></span>
     </a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <nav class="nav-links" id="navLinks">
-      <a href="#flota">Flota</a>
-      <a href="#dlaczego">Dlaczego my</a>
-      <a href="#jak">Jak to działa</a>
-      <a href="#uslugi">Usługi</a>
-      <a href="#kontakt">Kontakt</a>
+      <a href="o-nas.html">O nas</a>
+      <a href="oferta.html">Nasza oferta</a>
+      <a href="uslugi.html">Usługi dodatkowe</a>
+      <a href="faq.html">FAQ</a>
+      <a href="cennik.html">Cennik</a>
+      <a href="kontakt.html">Kontakt</a>
+      <a href="rezerwacje.html" class="nav-cta btn btn-red" style="padding:9px 16px;font-size:14px">Rezerwacja</a>
     </nav>
-    <div class="nav-right">
-      <a href="tel:664201202" class="nav-tel"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .7-.2 1l-2.3 2.2Z"/></svg>664 201 202</a>
-      <a href="tel:664201202" class="btn btn-amber" style="padding:11px 18px;font-size:14px">Zadzwoń</a>
-      <button class="burger" id="burger" aria-label="Menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    <div class="nav-actions">
+      <a href="tel:664201202" class="nav-phone"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .7-.2 1l-2.3 2.2Z"/></svg>664 201 202</a>
     </div>
   </div>
 </header>
 
-<!-- ====== HERO ====== -->
-<section class="hero" style="padding:0">
+<section class="hero">
   <div class="wrap hero-grid">
     <div>
       <span class="eyebrow">Wypożyczalnia w Radomiu</span>
       <h1>Busy i auta dostawcze <em>na wynajem</em> od ręki.</h1>
-      <p class="lead">Od małego Fiata Doblo po Iveco, Craftery i auto-lawety. Kilkadziesiąt aut gotowych do pracy — wydanie w 10 minut, papierologia do minimum.</p>
+      <p class="lead">Od małego Doblo po Iveco, Craftery i auto-lawety — ponad 50 aut gotowych do pracy. Wydanie w 10 minut, papierologia do minimum, ceny już od 90 zł.</p>
       <div class="hero-cta">
-        <a href="tel:664201202" class="btn btn-amber"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .7-.2 1l-2.3 2.2Z"/></svg>Zadzwoń: 664 201 202</a>
-        <a href="#flota" class="btn btn-ghost">Zobacz flotę</a>
+        <a href="rezerwacje.html" class="btn btn-red">Zarezerwuj auto</a>
+        <a href="tel:664201202" class="btn btn-ghost"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .7-.2 1l-2.3 2.2Z"/></svg>664 201 202</a>
       </div>
       <div class="stats">
         <div class="stat"><div class="n">10<em>+</em></div><div class="l">lat na rynku</div></div>
+        <div class="stat"><div class="n">50<em>+</em></div><div class="l">aut w taborze</div></div>
         <div class="stat"><div class="n">10 <em>min</em></div><div class="l">średni czas wydania</div></div>
-        <div class="stat"><div class="n">pod <em>adres</em></div><div class="l">podstawienie auta</div></div>
+        <div class="stat"><div class="n">24/7</div><div class="l">pomoc drogowa</div></div>
       </div>
     </div>
     <div class="hero-art" aria-hidden="true">
-      <svg viewBox="0 0 460 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- road -->
+      <svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg">
         <line x1="20" y1="250" x2="440" y2="250" stroke="#3A3F4A" stroke-width="3"/>
-        <line x1="40" y1="268" x2="120" y2="268" stroke="#E11D2A" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+        <line x1="40" y1="268" x2="120" y2="268" stroke="#E11D2A" stroke-width="4" stroke-linecap="round" opacity=".85"/>
         <line x1="150" y1="268" x2="230" y2="268" stroke="#3A3F4A" stroke-width="4" stroke-linecap="round"/>
         <line x1="260" y1="268" x2="340" y2="268" stroke="#3A3F4A" stroke-width="4" stroke-linecap="round"/>
-        <!-- van body -->
-        <path d="M60 110 h210 a14 14 0 0 1 14 14 v96 h-238 a10 10 0 0 1 -10 -10 v-86 a14 14 0 0 1 14 -14 Z" fill="#1E222B" stroke="#E11D2A" stroke-width="3"/>
-        <!-- cab -->
-        <path d="M284 130 h54 l46 44 v46 h-100 Z" fill="#1E222B" stroke="#E11D2A" stroke-width="3"/>
-        <!-- windshield -->
+        <path d="M60 110 h210 a14 14 0 0 1 14 14 v96 h-238 a10 10 0 0 1 -10 -10 v-86 a14 14 0 0 1 14 -14 Z" fill="#1C2027" stroke="#E11D2A" stroke-width="3"/>
+        <path d="M284 130 h54 l46 44 v46 h-100 Z" fill="#1C2027" stroke="#E11D2A" stroke-width="3"/>
         <path d="M292 138 h40 l34 32 h-74 Z" fill="#2B313C" stroke="#3A3F4A" stroke-width="2"/>
-        <!-- side panel lines -->
         <line x1="120" y1="120" x2="120" y2="210" stroke="#2B313C" stroke-width="2"/>
         <line x1="190" y1="120" x2="190" y2="210" stroke="#2B313C" stroke-width="2"/>
-        <!-- POWER text on van -->
         <text x="70" y="180" fill="#E11D2A" font-family="Archivo, sans-serif" font-weight="900" font-size="34" letter-spacing="1">POWER</text>
-        <!-- wheels -->
         <circle cx="120" cy="222" r="26" fill="#15171C" stroke="#E11D2A" stroke-width="3"/>
         <circle cx="120" cy="222" r="10" fill="#2B313C"/>
         <circle cx="330" cy="222" r="26" fill="#15171C" stroke="#E11D2A" stroke-width="3"/>
         <circle cx="330" cy="222" r="10" fill="#2B313C"/>
-        <!-- headlight -->
         <rect x="378" y="196" width="8" height="12" rx="2" fill="#E11D2A"/>
       </svg>
     </div>
   </div>
 </section>
 
-<!-- ====== FLEET ====== -->
-<section class="fleet" id="flota">
+<section class="sec-alt" id="flota">
   <div class="wrap">
     <div class="sec-head rv">
       <div class="kick">Nasza flota</div>
       <h2>Auto na każde zadanie</h2>
-      <p>Niezależnie od tego, czy wozisz paczki po mieście, robisz przeprowadzkę, czy przewozisz auto na lawecie — mamy odpowiedni pojazd.</p>
+      <p>Ponad 50 regularnie serwisowanych pojazdów — od miejskiej kurierki po duże transporty i lawety.</p>
     </div>
-    <div class="fleet-grid">
-      <div class="card rv"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="13" height="10" rx="2"/><path d="M16 10h3l2 3v4h-5z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg></div><h3>Małe auta dostawcze</h3><p>Zwrotne i ekonomiczne. Idealne na miasto, kurierkę i drobne dostawy.</p><div class="models">FIAT DOBLO · RENAULT KANGOO</div></div>
-      <div class="card rv"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="15" height="11" rx="2"/><path d="M17 9h3l2 3v5h-5z"/><circle cx="7" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/></svg></div><h3>Średnie auta dostawcze</h3><p>Więcej miejsca przy zwinnych gabarytach. Na przeprowadzki i większy towar.</p><div class="models">OPEL VIVARO · RENAULT TRAFIC · PEUGEOT EXPERT</div></div>
-      <div class="card rv"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="16" height="12" rx="2"/><path d="M18 9h2l2 3v5h-4z"/><circle cx="7" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/></svg></div><h3>Duże auta dostawcze</h3><p>Sporo przestrzeni ładunkowej i wygodny załadunek z boku i z tyłu.</p><div class="models">TOYOTA PROACE</div></div>
-      <div class="card rv"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="17" height="13" rx="2"/><path d="M19 8h1l2 3v6h-3z"/><circle cx="7" cy="18" r="1.7"/><circle cx="18" cy="18" r="1.7"/></svg></div><h3>Największe „blaszaki"</h3><p>Maksimum kubatury i ładowności na duże transporty i wyposażenie.</p><div class="models">IVECO DAILY · VW CRAFTER · RENAULT MASTER · PEUGEOT BOXER</div></div>
-      <div class="card rv"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="9" rx="2"/><path d="M6 7v9M10 7v9M14 7v9M18 7v9"/><circle cx="7" cy="18" r="1.5"/><circle cx="17" cy="18" r="1.5"/></svg></div><h3>Busy 9-osobowe</h3><p>Przewieziesz ekipę albo rodzinę w komforcie. Dziewięć miejsc na trasie.</p><div class="models">MINIBUS 9 OSÓB</div></div>
-      <div class="card rv"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 14h6l3-3h7l3 3"/><path d="M2 14v3h20v-3"/><circle cx="6" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/><rect x="11" y="8" width="6" height="3"/></svg></div><h3>Auto-lawety</h3><p>Przewieziesz auto bezpiecznie i zgodnie z przepisami, bez stresu.</p><div class="models">IVECO DAILY LAWETA</div></div>
-      <div class="card rv"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="15" height="12" rx="2"/><path d="M7 9h7M7 13h5"/><path d="M18 9h2l2 3v5h-4z"/><circle cx="7" cy="18" r="1.5"/><circle cx="18" cy="18" r="1.5"/></svg></div><h3>Chłodnie i mroźnie</h3><p>Transport żywności i towarów wrażliwych na temperaturę.</p><div class="models">FURGON / KONTENER CHŁODNIA</div></div>
-      <div class="card rv"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8c4-2 11-2 15 0v8H3z"/><path d="M3 16h15"/><circle cx="7" cy="18" r="1.5"/><circle cx="15" cy="18" r="1.5"/></svg></div><h3>Plandeki i windy</h3><p>Większe gabaryty i łatwy załadunek dzięki windzie towarowej.</p><div class="models">PLANDEKA · KONTENER Z WINDĄ</div></div>
-      <div class="card rv"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l2-5h10l2 5"/><path d="M3 13h18v4H3z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg></div><h3>Auta osobowe</h3><p>Gdy potrzebujesz zwykłego auta na krótko albo na dłużej.</p><div class="models">SEGMENT OSOBOWY</div></div>
+    <div class="grid-4">
+      <div class="card rv"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="13" height="10" rx="2"/><path d="M16 10h3l2 3v4h-5z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg></div><h3>Małe dostawcze</h3><p>Fiat Doblo, Renault Kangoo — na miasto i drobne dostawy.</p><span class="price-tag">od <b>200 zł</b>/doba</span></div>
+      <div class="card rv"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="16" height="12" rx="2"/><path d="M18 9h2l2 3v5h-4z"/><circle cx="7" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/></svg></div><h3>Duże „blaszaki"</h3><p>Iveco Daily, VW Crafter, Renault Master — maksimum kubatury.</p><span class="price-tag">od <b>400 zł</b>/doba</span></div>
+      <div class="card rv"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="9" rx="2"/><path d="M6 7v9M10 7v9M14 7v9M18 7v9"/><circle cx="7" cy="18" r="1.5"/><circle cx="17" cy="18" r="1.5"/></svg></div><h3>Busy 9-osobowe</h3><p>Przewieziesz ekipę albo rodzinę w komforcie.</p><span class="price-tag">od <b>300 zł</b>/doba</span></div>
+      <div class="card rv"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 14h6l3-3h7l3 3"/><path d="M2 14v3h20v-3"/><circle cx="6" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/></svg></div><h3>Auto-lawety</h3><p>Iveco Daily — przewieziesz auto bezpiecznie i legalnie.</p><span class="price-tag">od <b>380 zł</b>/doba</span></div>
     </div>
+    <div style="text-align:center;margin-top:30px"><a href="oferta.html" class="btn btn-outline">Zobacz całą flotę</a></div>
   </div>
 </section>
 
-<!-- ====== WHY ====== -->
 <section id="dlaczego">
   <div class="wrap">
     <div class="sec-head rv">
       <div class="kick">Dlaczego Power Rent</div>
       <h2>Wynajem bez nerwów i czekania</h2>
-      <p>Od ponad dekady pomagamy firmom i osobom prywatnym w Radomiu. Wiemy, że auto potrzebne jest „na już" — i tak działamy.</p>
+      <p>Od ponad dekady pomagamy firmom i osobom prywatnym w Radomiu. Auto bywa potrzebne „na już" — i tak właśnie działamy.</p>
     </div>
-    <div class="why-grid">
+    <div class="grid-3">
       <div class="why-item rv"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><h3>Wydanie w 10 minut</h3><p>Bez zbędnych formalności. Przychodzisz, podpisujesz, jedziesz.</p></div></div>
-      <div class="why-item rv"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><div><h3>Auta sprawdzone i ubezpieczone</h3><p>Regularne przeglądy i pełne ubezpieczenie każdego pojazdu.</p></div></div>
+      <div class="why-item rv"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><div><h3>Sprawdzone i ubezpieczone</h3><p>Regularne przeglądy i pełne ubezpieczenie każdego pojazdu.</p></div></div>
       <div class="why-item rv"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div><div><h3>Podstawimy pod adres</h3><p>Nie masz jak odebrać auta? Dowieziemy je tam, gdzie potrzebujesz.</p></div></div>
-      <div class="why-item rv"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div><h3>Ceny do dogadania</h3><p>Indywidualna wycena przy dłuższym najmie i rabaty dla stałych klientów.</p></div></div>
-      <div class="why-item rv"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></div><div><h3>Krótko i długoterminowo</h3><p>Na jeden dzień, na weekend albo na stałe — dopasujemy się do Ciebie.</p></div></div>
-      <div class="why-item rv"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3 7 4-14 3 7h4"/></svg></div><div><h3>Lokalnie, w Radomiu</h3><p>Znasz nas z okolicy. Jesteśmy na miejscu, gdy czegoś potrzebujesz.</p></div></div>
+      <div class="why-item rv"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div><h3>Jasne, uczciwe ceny</h3><p>Umowy bez haczyków i drobnego druku. Ceny już od 90 zł.</p></div></div>
+      <div class="why-item rv"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4v6M12 4v6M17 4v6"/><path d="M4 12h16v5a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3z"/></svg></div><div><h3>Własna myjnia i wulkanizacja</h3><p>Profesjonalna myjnia TIR i pełna wulkanizacja na miejscu.</p></div></div>
+      <div class="why-item rv"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3 7 4-14 3 7h4"/></svg></div><div><h3>Pomoc drogowa 24/7</h3><p>Awaria na trasie? Nasz numer alarmowy działa całą dobę.</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- ====== STEPS ====== -->
-<section class="steps" id="jak">
+<section class="steps-band">
   <div class="wrap">
-    <div class="sec-head rv">
-      <div class="kick">Jak to działa</div>
-      <h2>Cztery kroki do gotowego auta</h2>
-    </div>
-    <div class="steps-grid">
+    <div class="sec-head rv"><div class="kick">Jak to działa</div><h2>Cztery kroki do gotowego auta</h2></div>
+    <div class="grid-4">
       <div class="step rv"><div class="no">1</div><h3>Wybierz auto i termin</h3><p>Sprawdź flotę i zdecyduj, czego potrzebujesz oraz na kiedy.</p></div>
-      <div class="step rv"><div class="no">2</div><h3>Zadzwoń do nas</h3><p>Potwierdzimy dostępność i ustalimy najlepszą cenę.</p></div>
+      <div class="step rv"><div class="no">2</div><h3>Zadzwoń lub napisz</h3><p>Potwierdzimy dostępność i ustalimy najlepszą cenę.</p></div>
       <div class="step rv"><div class="no">3</div><h3>Odbierz lub podstawimy</h3><p>Przyjedź po auto albo skorzystaj z podstawienia pod adres.</p></div>
       <div class="step rv"><div class="no">4</div><h3>Jedź i działaj</h3><p>Auto sprawne i gotowe do pracy. Resztą zajmiesz się Ty.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ====== SERVICES ====== -->
-<section id="uslugi">
+<section class="sec-alt">
   <div class="wrap">
-    <div class="sec-head rv">
-      <div class="kick">Usługi dodatkowe</div>
-      <h2>Coś więcej niż wynajem</h2>
+    <div class="sec-head rv"><div class="kick">Usługi dodatkowe</div><h2>Coś więcej niż wynajem</h2><p>Power Rent to także parking, pomoc drogowa, wulkanizacja, myjnia TIR i transport towarów.</p></div>
+    <div class="grid-3">
+      <div class="card rv"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 16V8h4a3 3 0 0 1 0 6H9"/></svg></div><h3>Parking 24h</h3><p>Strzeżony, monitorowany 25 kamerami — także dla ciężarówek i autobusów.</p></div>
+      <div class="card rv"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3 7 4-14 3 7h4"/></svg></div><h3>Pomoc drogowa</h3><p>POWERHOL24 — transport aut, auto zastępcze, dowóz paliwa, wymiana koła.</p></div>
+      <div class="card rv"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="13" height="9" rx="1.5"/><path d="M15 10h4l3 3v3h-7z"/><circle cx="7" cy="17" r="1.6"/><circle cx="18" cy="17" r="1.6"/></svg></div><h3>Transport towarów</h3><p>Od małych ładunków do 3,5 t po zestawy o ładowności 24 t, w kraju i za granicą.</p></div>
     </div>
-    <div class="svc-grid">
-      <div class="svc rv"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4v6M12 4v6M17 4v6"/><path d="M4 12h16v5a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3z"/></svg></div><div><h3>Myjnia</h3><p>Oddasz auto czyste, bez dodatkowej fatygi.</p></div></div>
-      <div class="svc rv"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 16V8h4a3 3 0 0 1 0 6H9"/></svg></div><div><h3>Parking</h3><p>Bezpieczne miejsce dla Twojego pojazdu.</p></div></div>
-      <div class="svc rv"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="13" height="9" rx="1.5"/><path d="M15 10h4l3 3v3h-7z"/><circle cx="7" cy="17" r="1.6"/><circle cx="18" cy="17" r="1.6"/></svg></div><div><h3>Transport towarów</h3><p>Nie chcesz prowadzić? Przewieziemy ładunek za Ciebie.</p></div></div>
-    </div>
+    <div style="text-align:center;margin-top:30px"><a href="uslugi.html" class="btn btn-outline">Wszystkie usługi</a></div>
   </div>
 </section>
 
-<!-- ====== REVIEWS ====== -->
-<section class="reviews">
+<section id="opinie">
   <div class="wrap">
-    <div class="sec-head rv">
-      <div class="kick">Opinie klientów</div>
-      <h2>Wracają do nas i polecają dalej</h2>
-    </div>
-    <div class="rev-grid">
-      <div class="rev rv"><div class="stars">★★★★★</div><p>Stały klient, zawsze mogę liczyć na rabat. Auta w świetnym stanie, nie zawiodły nawet na długiej trasie.</p><div class="who">Tomek</div></div>
-      <div class="rev rv"><div class="stars">★★★★★</div><p>Papierologia ograniczona do minimum, inne wypożyczalnie powinny brać przykład. Bardzo zadowolony z obsługi i auta.</p><div class="who">Dariusz</div></div>
-      <div class="rev rv"><div class="stars">★★★★★</div><p>Auto czyściutkie, obsługa miła, formalności szybko załatwione. Polecam serdecznie.</p><div class="who">Ania</div></div>
+    <div class="sec-head rv"><div class="kick">Opinie klientów</div><h2>Wracają do nas i polecają dalej</h2></div>
+    <div class="grid-3">
+      <div class="card rv"><div style="color:var(--red);letter-spacing:2px;margin-bottom:12px">★★★★★</div><p style="color:#3A4150;font-size:14.5px">Stały klient, zawsze mogę liczyć na rabat. Auta w świetnym stanie, nie zawiodą nawet na długiej trasie.</p><div style="font-weight:700;margin-top:10px">Tomek</div></div>
+      <div class="card rv"><div style="color:var(--red);letter-spacing:2px;margin-bottom:12px">★★★★★</div><p style="color:#3A4150;font-size:14.5px">Papierologia ograniczona do minimum, inne wypożyczalnie powinny brać przykład. Bardzo zadowolony.</p><div style="font-weight:700;margin-top:10px">Dariusz</div></div>
+      <div class="card rv"><div style="color:var(--red);letter-spacing:2px;margin-bottom:12px">★★★★★</div><p style="color:#3A4150;font-size:14.5px">Auto czyściutkie, obsługa miła, formalności szybko załatwione. Polecam serdecznie.</p><div style="font-weight:700;margin-top:10px">Ania</div></div>
     </div>
   </div>
 </section>
 
-<!-- ====== CONTACT ====== -->
-<section class="contact" id="kontakt">
-  <div class="wrap contact-grid">
-    <div class="rv">
-      <h2>Potrzebujesz auta? Dzwoń.</h2>
-      <p>Powiedz, czego szukasz i na kiedy — potwierdzimy dostępność i ustalimy najlepszą cenę. Najszybciej załatwisz to telefonicznie.</p>
-      <a href="tel:664201202" class="tel-big"><svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .7-.2 1l-2.3 2.2Z"/></svg>664 201 202</a>
-    </div>
-    <div class="contact-card rv">
-      <!-- UZUPEŁNIJ: adres, e-mail i godziny otwarcia -->
-      <div class="crow"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div><div><div class="k">Adres</div><div class="v"><a href="https://www.google.com/maps/search/?api=1&amp;query=Power+Rent+Mokra+2A+Radom" target="_blank" rel="noopener" style="color:#fff">Mokra 2A, 26-600 Radom</a></div></div></div>
-      <div class="crow"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .7-.2 1l-2.3 2.2Z"/></svg></div><div><div class="k">Telefon</div><div class="v">664 201 202</div></div></div>
-      <div class="crow"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div><div><div class="k">E-mail</div><div class="v"><a href="mailto:Donkozak@gmail.com" style="color:#fff">Donkozak@gmail.com</a></div></div></div>
-      <div class="crow"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><div class="k">Godziny</div><div class="v">Pn–Pt 08:00–17:00 · Sb 08:00–14:00 · Nd zamknięte</div></div></div>
+<section class="cta-band">
+  <div class="wrap">
+    <h2>Potrzebujesz auta? <em>Dzwoń.</em></h2>
+    <p>Powiedz, czego szukasz i na kiedy — potwierdzimy dostępność i ustalimy najlepszą cenę.</p>
+    <div class="cta-actions">
+      <a href="rezerwacje.html" class="btn btn-red">Zarezerwuj online</a>
+      <a href="tel:664201202" class="btn btn-ghost">Zadzwoń: 664 201 202</a>
     </div>
   </div>
 </section>
 
-<!-- ====== FOOTER ====== -->
-<footer>
-  <div class="wrap foot">
-    <a href="#" class="logo">Power<span style="color:var(--amber)">Rent</span></a>
-    <nav class="foot-links">
-      <a href="#flota">Flota</a>
-      <a href="#dlaczego">Dlaczego my</a>
-      <a href="#uslugi">Usługi</a>
-      <a href="#kontakt">Kontakt</a>
-    </nav>
-    <div>© 2026 Power Rent · Wynajem aut w Radomiu</div>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="logo logo--light"><span class="logo-badge">P</span><span class="logo-text"><span class="lr">Power</span><span class="lk">Rent</span></span></a>
+      <p>Wypożyczalnia busów i aut dostawczych w Radomiu. Ponad 10 lat na rynku, ponad 50 aut.</p>
+      <a href="tel:664201202" class="footer-phone">664 201 202</a>
+    </div>
+    <div class="footer-col">
+      <h4>Nawigacja</h4>
+      <ul>
+        <li><a href="o-nas.html">O nas</a></li>
+        <li><a href="oferta.html">Nasza oferta</a></li>
+        <li><a href="uslugi.html">Usługi dodatkowe</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="cennik.html">Cennik</a></li>
+        <li><a href="rezerwacje.html">Rezerwacja</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Kontakt</h4>
+      <ul class="footer-contact">
+        <li><span>Mokra 2A, 26-600 Radom</span></li>
+        <li><span class="lab">Tel:</span> <a href="tel:664201202">664 201 202</a></li>
+        <li><span class="lab">E-mail:</span> <a href="mailto:Donkozak@gmail.com">Donkozak@gmail.com</a></li>
+        <li><span class="lab">Godziny:</span> <span>Pn–Pt 8–17 · Sb 8–14</span></li>
+      </ul>
+    </div>
   </div>
+  <div class="wrap footer-bottom">© 2026 Power Rent · Mokra 2A, 26-600 Radom · Wszelkie prawa zastrzeżone</div>
 </footer>
 
-<script>
-  // mobile menu
-  var burger = document.getElementById('burger');
-  var links = document.getElementById('navLinks');
-  burger.addEventListener('click', function(){ links.classList.toggle('open'); });
-  links.addEventListener('click', function(e){ if(e.target.tagName==='A') links.classList.remove('open'); });
-
-  // scroll reveal
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
-  }, { threshold:.12 });
-  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
-</script>
+<script src="script.js" defer></script>
 </body>
 </html>
