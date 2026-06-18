@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cennik — wynajem aut · Power Rent Radom</title>
+<meta name="description" content="Wynajem 40 aut dostawczych i osobowych w Radomiu. Od 200 zł/doba, OC i assistance w cenie, wydanie w 10 minut. 664 201 202.">
+<link rel="icon" href="powerrent-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== Power Rent — wspólny arkusz (premium) ===== */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --logo:url('powerrent-logo.png');
+  --ink:#0E1014;--ink2:#16191F;--red:#E11D2A;--red2:#FF3B30;--paper:#fff;--bg:#F5F6F9;
+  --line:#E7EAEF;--muted:#5C6472;--radius:20px;
+  --shadow:0 10px 30px rgba(18,20,25,.08);--shadow-lg:0 30px 70px rgba(18,20,25,.18);
+  --glow:rgba(225,29,42,.16);
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
+::selection{background:var(--red);color:#fff}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+.arch{font-family:'Archivo',sans-serif}
+
+/* ===== premium loader ===== */
+#pr-loader{position:fixed;inset:0;z-index:200;background:radial-gradient(900px 600px at 50% 30%,#1b1f27,#0a0c10);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;transition:opacity .7s ease,visibility .7s}
+#pr-loader.done{opacity:0;visibility:hidden}
+.pl-logo{width:230px;height:30px;background:var(--logo) no-repeat center/contain;filter:brightness(0) invert(1);opacity:.96;animation:plPulse 1.6s ease-in-out infinite}
+.pl-bar{width:190px;height:3px;border-radius:3px;background:rgba(255,255,255,.12);overflow:hidden}
+.pl-bar i{display:block;height:100%;width:40%;border-radius:3px;background:linear-gradient(90deg,var(--red),var(--red2));animation:plRun 1.1s ease-in-out infinite}
+.pl-txt{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#7b818d}
+@keyframes plRun{0%{transform:translateX(-110%)}100%{transform:translateX(330%)}}
+@keyframes plPulse{0%,100%{opacity:.55}50%{opacity:1}}
+
+/* ===== buttons (+ magnetic base) ===== */
+.btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:14.5px;padding:13px 22px;border-radius:12px;cursor:pointer;transition:background .18s,color .18s,transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s;border:none;font-family:inherit;will-change:transform}
+.btn svg{width:18px;height:18px;flex:0 0 auto}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 8px 22px rgba(225,29,42,.28)}
+.btn-red:hover{background:#c8141f;box-shadow:0 12px 30px rgba(225,29,42,.42)}
+.btn-light{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.btn-light:hover{border-color:var(--ink)}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.25)}
+.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.06)}
+
+/* ===== header ===== */
+.ph-header{position:sticky;top:0;z-index:90;background:rgba(255,255,255,.86);backdrop-filter:blur(14px) saturate(1.4);border-bottom:1px solid transparent;transition:border-color .25s,box-shadow .25s,background .25s}
+.ph-header.scrolled{border-bottom-color:var(--line);box-shadow:0 6px 24px rgba(18,20,25,.06)}
+.hd{display:flex;align-items:center;justify-content:space-between;height:66px}
+.hd-left{display:flex;align-items:center;gap:16px}
+.hd-logo-img{display:block;width:202px;height:26px;background:var(--logo) no-repeat left center/contain}
+.hd-back{font-size:13px;font-weight:600;color:var(--muted);display:inline-flex;align-items:center;gap:6px;border-left:1px solid var(--line);padding-left:16px;transition:color .15s}
+.hd-back:hover{color:var(--ink)}.hd-back svg{width:15px;height:15px}
+.hd-right{display:flex;align-items:center;gap:18px}
+.hd-phone{font-weight:800;font-size:15px;color:var(--ink)}
+.hd .btn{padding:9px 17px;font-size:13.5px}
+
+/* ===== generic reveal / kinetic / parallax ===== */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+.kin{display:block;overflow:hidden;padding-bottom:.06em}
+.kin>span{display:block;transform:translateY(112%);transition:transform 1s cubic-bezier(.16,1,.3,1)}
+body.ready .kin>span{transform:none}
+.kin.k2>span{transition-delay:.08s}.kin.k3>span{transition-delay:.16s}
+.fade-up{opacity:0;transform:translateY(20px);transition:opacity .9s ease,transform .9s cubic-bezier(.16,1,.3,1);transition-delay:var(--d,.2s)}
+body.ready .fade-up{opacity:1;transform:none}
+[data-parallax]{will-change:transform}
+
+/* ===== hero (kinetic) ===== */
+.hero{position:relative;color:#fff;padding:80px 0 56px;overflow:hidden;background:linear-gradient(165deg,#181c24 0%,#0b0d11 70%)}
+.hero-bg{position:absolute;inset:-10% -10% -10% -10%;z-index:0}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(820px 540px at 60% 8%,#000,transparent 76%)}
+.hero-glow{position:absolute;width:720px;height:720px;border-radius:50%;filter:blur(40px);opacity:.5}
+.hero-glow.g1{top:-280px;right:-120px;background:radial-gradient(circle,rgba(225,29,42,.5),transparent 60%)}
+.hero-glow.g2{bottom:-360px;left:-160px;background:radial-gradient(circle,rgba(60,90,200,.28),transparent 60%)}
+.hero .wrap{position:relative;z-index:2}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12.5px;font-weight:600;letter-spacing:.04em;color:#cfd3da;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:7px 15px;border-radius:30px;margin-bottom:24px}
+.hero-eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--red2);box-shadow:0 0 0 4px rgba(255,75,61,.18);animation:plPulse 1.8s ease-in-out infinite}
+.hero h1{font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(42px,8vw,92px);line-height:.95;letter-spacing:-.035em;margin-bottom:22px}
+.hero h1 .rot{color:var(--red2);display:inline-block}
+.hero-lead{font-size:18px;color:#c4c9d2;max-width:560px;margin-bottom:30px}
+.hero-cta{display:flex;gap:13px;flex-wrap:wrap;margin-bottom:42px}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:12px;max-width:820px}
+.hstat{display:flex;align-items:center;gap:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:20px 22px;transition:transform .3s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s}
+.hstat .bar{width:4px;align-self:stretch;min-height:40px;border-radius:4px;background:linear-gradient(var(--red),var(--red2));flex:0 0 auto}
+.hstat .txt{min-width:0}
+.hstat b{font-family:'Archivo',sans-serif;font-weight:900;font-size:26px;line-height:1;display:block;white-space:nowrap}
+.hstat b em{font-style:normal;color:var(--red2);font-size:.56em}
+.hstat span{font-size:12.5px;color:#9aa0ac;display:block;margin-top:6px}
+.hstat:hover{transform:translateY(-5px);border-color:rgba(225,29,42,.4);box-shadow:0 18px 40px rgba(0,0,0,.4)}
+@media(max-width:680px){.hero-stats{grid-template-columns:1fr 1fr;gap:12px;max-width:none}.hstat{padding:16px 18px}}
+.scroller{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);z-index:2;color:#7b818d;font-size:11px;letter-spacing:.2em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px}
+.scroller i{width:1px;height:34px;background:linear-gradient(#7b818d,transparent);animation:scr 1.8s ease-in-out infinite}
+@keyframes scr{0%{transform:scaleY(.3);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}100%{transform:scaleY(.3);transform-origin:bottom}}
+
+/* ===== grid + cards (3D + glow) ===== */
+.grid-wrap{margin-top:0;position:relative;z-index:5;padding:40px 0 64px}
+.filter{position:relative;z-index:6;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:0 auto 34px;max-width:1060px}
+.fchip{display:inline-flex;align-items:center;gap:9px;font-family:inherit;font-weight:700;font-size:13.5px;padding:7px 17px 7px 7px;border-radius:30px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;transition:transform .18s,box-shadow .18s,border-color .18s,background .18s,color .18s;box-shadow:0 4px 14px rgba(18,20,25,.06)}
+.fchip:first-child{padding-left:18px}
+.fchip b{font-family:'Archivo',sans-serif;font-weight:900;font-size:11.5px;background:rgba(225,29,42,.1);color:var(--red);min-width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;border-radius:30px;padding:0 8px;transition:background .18s,color .18s,transform .18s}
+.fchip:hover{transform:translateY(-2px);border-color:rgba(225,29,42,.5);box-shadow:0 12px 28px rgba(225,29,42,.16)}
+.fchip:hover b{transform:scale(1.06)}
+.fchip.active{background:var(--ink);color:#fff;border-color:var(--ink);box-shadow:0 12px 28px rgba(18,20,25,.22)}
+.fchip.active b{background:var(--red);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.16,1,.3,1),box-shadow .3s;transform-style:preserve-3d;will-change:transform}
+.card.in{opacity:1;transform:none}
+.card.is-tilt{transition:box-shadow .3s}
+.card:hover{box-shadow:0 30px 70px rgba(18,20,25,.22),0 0 0 1px rgba(225,29,42,.22)}
+.card::after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(360px circle at var(--mx,50%) var(--my,50%),var(--glow),transparent 46%);opacity:0;transition:opacity .3s;pointer-events:none;z-index:4}
+.card:hover::after{opacity:1}
+.card.pop{border-color:rgba(225,29,42,.45);box-shadow:0 16px 40px rgba(225,29,42,.16)}
+.media{position:relative;aspect-ratio:3/2;overflow:hidden;background:#11131a}
+.media img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.card:hover .media img{transform:scale(1.07)}
+.seg-tag{position:absolute;top:13px;left:13px;z-index:2;display:inline-flex;align-items:center;gap:7px;background:rgba(10,12,16,.62);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.16);color:#fff;font-size:12px;font-weight:600;padding:6px 12px 6px 7px;border-radius:30px}
+.seg-tag b{font-family:'Archivo',sans-serif;font-weight:900;background:var(--red);min-width:24px;height:22px;display:inline-flex;align-items:center;justify-content:center;border-radius:20px;font-size:11.5px;padding:0 7px}
+.ribbon{position:absolute;top:13px;right:13px;z-index:2;background:var(--red);color:#fff;font-size:11.5px;font-weight:700;padding:6px 12px;border-radius:30px;box-shadow:0 6px 16px rgba(225,29,42,.4)}
+.year{position:absolute;bottom:12px;right:12px;z-index:2;font-family:'Archivo',sans-serif;font-weight:800;font-size:12px;color:#fff;background:rgba(10,12,16,.55);backdrop-filter:blur(6px);padding:4px 11px;border-radius:20px;border:1px solid rgba(255,255,255,.14)}
+.body{padding:20px;display:flex;flex-direction:column;flex:1}
+.body h3{font-family:'Archivo',sans-serif;font-weight:800;font-size:20px;letter-spacing:-.01em;margin-bottom:3px}
+.models{font-size:12.5px;color:var(--muted);margin-bottom:14px}
+.specs-row{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.specs-row span{font-size:12px;color:#3c424d;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:5px 10px}
+.price{display:flex;align-items:baseline;gap:7px;margin-top:auto;padding-top:14px;border-top:1px solid var(--line)}
+.price .od{font-size:12px;color:var(--muted)}
+.price .v{font-family:'Archivo',sans-serif;font-weight:900;font-size:30px;line-height:1}
+.price .u{font-size:12px;color:var(--muted)}
+.tiers-mini{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.tiers-mini span{font-size:11px;color:var(--muted);background:var(--bg);border-radius:7px;padding:4px 9px}
+.tiers-mini b{font-family:'Archivo',sans-serif;color:var(--ink);font-weight:800}
+.card-cta{margin-top:15px;display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:14px;color:var(--red)}
+.card-cta i{display:inline-flex;transition:transform .2s}.card:hover .card-cta i{transform:translateX(5px)}
+.card-cta i svg{width:16px;height:16px}
+
+/* ===== how it works ===== */
+.how{max-width:1200px;margin:58px auto 0;padding:0 24px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin-bottom:10px}
+.how .eyebrow,.how h2{text-align:center}
+.how h2{font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(24px,3.4vw,34px);letter-spacing:-.02em;margin-bottom:30px}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.step{position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px;box-shadow:var(--shadow);overflow:hidden}
+.step .sn{font-family:'Archivo',sans-serif;font-weight:900;font-size:21px;color:#fff;background:var(--red);width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;margin-bottom:15px;box-shadow:0 8px 20px rgba(225,29,42,.3)}
+.step h3{font-family:'Archivo',sans-serif;font-weight:800;font-size:18px;margin-bottom:6px}
+.step p{font-size:14.5px;color:var(--muted)}
+
+/* ===== note + cta + footer ===== */
+.note{max-width:1200px;margin:10px auto 0;padding:0 24px}
+.note-in{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 22px;font-size:13.5px;color:var(--muted);display:flex;gap:14px;align-items:flex-start}
+.note-in svg{width:20px;height:20px;flex:0 0 auto;color:var(--red);margin-top:2px}
+.cta{position:relative;background:var(--ink);color:#fff;text-align:center;padding:66px 24px;margin-top:50px;overflow:hidden}
+.cta::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 50% -20%,rgba(225,29,42,.3),transparent 60%)}
+.cta>*{position:relative}
+.cta h2{font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(27px,4vw,42px);margin-bottom:10px;letter-spacing:-.02em}
+.cta h2 em{font-style:normal;color:var(--red2)}
+.cta p{color:#C4C9D2;margin-bottom:26px}
+.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.foot{background:#0a0c10;color:#8a909c;text-align:center;padding:26px 24px;font-size:13px}
+.foot b{color:#cfd3da;font-weight:700}
+
+/* ===== SUBPAGE: detail hero + sections ===== */
+.dhero{position:relative;color:#fff;padding:42px 0 66px;overflow:hidden;background:linear-gradient(165deg,#181c24,#0b0d11)}
+.dhero .hero-bg{z-index:0}.dhero .wrap{position:relative;z-index:2}
+.crumb{font-size:13px;color:#9aa0ac;margin-bottom:24px;display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.crumb a:hover{color:#fff}.crumb i{color:#5e6470;font-style:normal}
+.dgrid{display:grid;grid-template-columns:1.04fr 1fr;gap:48px;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);padding:6px 14px 6px 6px;border-radius:30px;font-size:13px;font-weight:600;color:#e7e9ee;margin-bottom:16px}
+.badge b{font-family:'Archivo',sans-serif;font-weight:900;color:#fff;background:var(--red);min-width:26px;height:24px;display:inline-flex;align-items:center;justify-content:center;border-radius:20px;font-size:12.5px;padding:0 8px}
+.dhero h1{font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(36px,5.4vw,62px);line-height:.96;letter-spacing:-.03em;margin-bottom:8px}
+.dsub{font-size:13px;text-transform:uppercase;letter-spacing:.16em;color:var(--red2);font-weight:700;margin-bottom:16px}
+.lead{font-size:16px;color:#c4c9d2;max-width:520px;margin-bottom:22px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px}
+.chip{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:9px 14px;min-width:120px;display:flex;align-items:center;gap:10px}
+.chip .ci{color:var(--red2);flex:0 0 auto}.chip .ci svg{width:18px;height:18px}
+.chip span{display:block;font-size:10.5px;color:#9298a4;text-transform:uppercase;letter-spacing:.06em}
+.chip b{font-family:'Archivo',sans-serif;font-weight:800;font-size:15px}
+.dprice{display:flex;align-items:baseline;gap:9px;margin-bottom:22px}
+.dprice .od{font-size:13px;color:#9aa0ac}.dprice .v{font-family:'Archivo',sans-serif;font-weight:900;font-size:42px;line-height:1}.dprice .u{font-size:13px;color:#c4c9d2}
+.dcta{display:flex;gap:12px;flex-wrap:wrap}
+.dmedia{position:relative;perspective:1000px}
+.ghost{position:absolute;font-family:'Archivo',sans-serif;font-weight:900;font-size:300px;line-height:1;color:rgba(255,255,255,.05);right:-4px;top:-92px;pointer-events:none;z-index:0;letter-spacing:-.05em;user-select:none}
+.photo{position:relative;z-index:1;border-radius:18px;overflow:hidden;box-shadow:0 36px 80px rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.08);transition:transform .4s ease}
+.photo img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.photo .bar{position:absolute;left:0;right:0;bottom:0;height:6px;background:var(--red)}
+.photo .yr{position:absolute;top:14px;left:14px;font-family:'Archivo',sans-serif;font-weight:800;font-size:13px;color:#fff;background:rgba(10,12,16,.55);backdrop-filter:blur(6px);padding:5px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.14)}
+.photo .rib{position:absolute;top:14px;right:14px;background:var(--red);color:#fff;font-size:12px;font-weight:700;padding:6px 13px;border-radius:30px;box-shadow:0 6px 16px rgba(225,29,42,.4)}
+.sec{padding:56px 0}
+.sec h2{font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(23px,3.3vw,33px);letter-spacing:-.02em;margin-bottom:6px}
+.sec .l2{color:var(--muted);max-width:640px;margin-bottom:26px}
+.specs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.spec{background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px;display:flex;gap:14px;align-items:center;box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s}
+.spec:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.spec .ic{width:42px;height:42px;border-radius:12px;background:rgba(225,29,42,.09);color:var(--red);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.spec .ic svg{width:21px;height:21px}
+.spec .t{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.spec .v{font-family:'Archivo',sans-serif;font-weight:800;font-size:17px;margin-top:1px}
+.pwrap{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:stretch;background:#fff;border:1px solid var(--line);border-radius:22px;padding:30px;box-shadow:var(--shadow)}
+.tiers{display:flex;flex-direction:column}
+.tiers .row{display:flex;justify-content:space-between;align-items:center;padding:15px 2px;border-bottom:1px dashed var(--line);font-size:15px}
+.tiers .row:last-child{border-bottom:none}.tiers .row span{color:var(--muted)}
+.tiers .row b{font-family:'Archivo',sans-serif;font-weight:800;font-size:18px}
+.tiers .row.hl b{color:var(--red)}
+.pside{position:relative;background:linear-gradient(165deg,#16191F,#0b0d11);color:#fff;border-radius:16px;padding:26px;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.pside::before{content:"";position:absolute;inset:0;background:radial-gradient(400px 200px at 80% -10%,rgba(225,29,42,.32),transparent 60%)}
+.pside>*{position:relative}
+.pside .ph{font-family:'Archivo',sans-serif;font-weight:900;font-size:46px;line-height:1}
+.pside .ph em{font-style:normal;color:var(--red2);font-size:.5em;font-weight:700}
+.pside .pl2{font-size:13px;color:#9aa0ac;margin:4px 0 18px}
+.pside .btn{margin-bottom:10px;justify-content:center}
+.fineprint{font-size:12.5px;color:var(--muted);margin-top:16px;display:flex;gap:10px;align-items:flex-start}
+.fineprint svg{width:16px;height:16px;color:var(--red);flex:0 0 auto;margin-top:2px}
+.pcol{min-width:0}
+.ptoggle{position:relative;display:grid;grid-template-columns:1fr 1fr;width:min(330px,100%);background:var(--bg);border:1px solid var(--line);border-radius:30px;padding:4px;margin-bottom:22px}
+.pt-opt{position:relative;z-index:2;border:none;background:none;font-family:inherit;font-weight:700;font-size:13.5px;color:var(--muted);padding:10px 14px;border-radius:30px;cursor:pointer;transition:color .25s;white-space:nowrap}
+.pt-opt.active{color:#fff}
+.pt-slider{position:absolute;z-index:1;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);background:var(--red);border-radius:30px;box-shadow:0 6px 16px rgba(225,29,42,.32);transition:transform .38s cubic-bezier(.16,1,.3,1)}
+.pwrap[data-mode="long"] .pt-slider{transform:translateX(100%)}
+.pwrap [data-panel]{display:none}
+.pwrap[data-mode="short"] [data-panel="short"],.pwrap[data-mode="long"] [data-panel="long"]{display:flex;animation:swapIn .45s ease}
+.pwrap [data-price]{display:none}
+.pwrap[data-mode="short"] [data-price="short"],.pwrap[data-mode="long"] [data-price="long"]{display:block;animation:swapIn .45s ease}
+@keyframes swapIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.uses{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.use{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px 16px;transition:transform .2s,box-shadow .2s}
+.use:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.use .uc{width:24px;height:24px;border-radius:7px;background:rgba(225,29,42,.1);color:var(--red);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.use .uc svg{width:15px;height:15px}.use span{font-size:14.5px}
+.fleet{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.mini{display:flex;flex-direction:column;gap:7px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;transition:transform .2s,box-shadow .2s,border-color .2s}
+.mini:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:rgba(225,29,42,.45)}
+.mini .ml{display:flex;align-items:center;gap:9px}
+.mini .ml b{font-family:'Archivo',sans-serif;font-weight:900;background:var(--ink);color:#fff;min-width:30px;height:24px;display:flex;align-items:center;justify-content:center;border-radius:7px;font-size:11.5px;padding:0 6px}
+.mini .mn{font-weight:700;font-size:13.5px}.mini .mp{font-size:12.5px;color:var(--muted)}
+.mini.all{background:var(--ink);color:#fff;justify-content:center;gap:8px}
+.mini.all .mn{color:#fff;display:flex;align-items:center;gap:7px}.mini.all .mn svg{width:16px;height:16px}
+.mini.all .mp{color:#aeb4c0}
+.scta{position:fixed;left:0;right:0;bottom:0;z-index:80;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:10px 16px;display:none;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 -8px 24px rgba(18,20,25,.1)}
+.scta .sp .v{font-family:'Archivo',sans-serif;font-weight:900;font-size:21px;line-height:1}
+.scta .sp small{display:block;font-size:11px;color:var(--muted)}
+.scta .sb{display:flex;gap:8px}.scta .btn{padding:11px 16px;font-size:13.5px}
+
+/* ===== responsive ===== */
+@media(max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}.dgrid{grid-template-columns:1fr;gap:30px}.ghost{font-size:200px;top:-48px;right:0}.pwrap{grid-template-columns:1fr}.uses{grid-template-columns:1fr}}
+@media(max-width:760px){.how-grid{grid-template-columns:1fr}}
+@media(max-width:680px){
+  .hero{padding:60px 0 40px}.grid{grid-template-columns:1fr;max-width:430px;margin:0 auto}
+  .hd-phone{display:none}.hd-logo-img{width:165px;height:22px}.hd-back{display:none}
+  .specs{grid-template-columns:1fr}.dcta .btn{flex:1;justify-content:center}
+  .scta{display:flex}body{padding-bottom:76px}.sec{padding:42px 0}
+  .filter{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;padding:0 4px 6px;-webkit-overflow-scrolling:touch}.fchip{flex:0 0 auto}
+  .scroller{display:none}
+}
+/* ===== dostępność (pulsująca kropka) ===== */
+.avail{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:700;color:#cfd3da;background:rgba(10,12,16,.62);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.16);padding:5px 11px 5px 9px;border-radius:30px;line-height:1}
+.media .avail{position:absolute;bottom:12px;right:12px;z-index:3}
+.avail .dot{width:9px;height:9px;border-radius:50%;background:#9aa0ac;flex:0 0 auto}
+.avail.is-in{color:#d6f5e0}.avail.is-out{color:#ffd9d9}
+.avail.is-in .dot{background:#22c55e;animation:pulseG 1.8s ease-in-out infinite}
+.avail.is-out .dot{background:#ef4444;animation:pulseR 1.1s ease-in-out infinite}
+.dhero .avail.full{margin-bottom:18px;font-size:13px;padding:8px 15px 8px 12px}
+@keyframes pulseG{0%{box-shadow:0 0 0 0 rgba(34,197,94,.55)}70%{box-shadow:0 0 0 7px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+@keyframes pulseR{0%{box-shadow:0 0 0 0 rgba(239,68,68,.6)}70%{box-shadow:0 0 0 7px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}
+.card .idx{display:none}
+
+/* ===== variant flag (tylko strony porównawcze) ===== */
+.variant-flag{position:fixed;left:16px;bottom:16px;z-index:120;background:rgba(10,12,16,.92);color:#fff;border:1px solid rgba(255,255,255,.16);border-radius:30px;padding:9px 16px;font-size:12.5px;font-weight:700;backdrop-filter:blur(8px);box-shadow:0 12px 34px rgba(0,0,0,.34)}
+.variant-flag b{color:var(--red2)}
+
+/* ============ 5 WARIANTÓW KAFELKÓW ============ */
+@keyframes flowB2{to{background-position:0 0,220% 0}}
+@keyframes flowB3{to{background-position:0 0,300% 0}}
+
+/* V1 — PowerRent Red: cienka czerwona obwódka, płynie na hover */
+body.v1 .card{border:1.5px solid transparent;background:linear-gradient(var(--paper),var(--paper)) padding-box,linear-gradient(120deg,rgba(225,29,42,.6),rgba(225,29,42,.12),rgba(225,29,42,.6)) border-box;background-size:100% 100%,220% 100%;background-position:0 0,0 0}
+body.v1 .card:hover{box-shadow:0 26px 60px rgba(18,20,25,.2),0 0 0 1px rgba(225,29,42,.28),0 0 30px rgba(225,29,42,.18);animation:flowB2 2.2s linear infinite}
+
+/* V2 — Aurora: tęczowa obwódka, ciągle płynie */
+body.v2 .card{border:1.5px solid transparent;background:linear-gradient(var(--paper),var(--paper)) padding-box,linear-gradient(120deg,#E11D2A,#ff7a3c,#ff3b8e,#7a5cff,#E11D2A) border-box;background-size:100% 100%,300% 100%;animation:flowB3 7s linear infinite}
+body.v2 .card:hover{box-shadow:0 26px 60px rgba(18,20,25,.22),0 0 32px rgba(225,29,42,.22);animation:flowB3 2.6s linear infinite}
+
+/* V3 — Carbon: ciemne karty, czerwona poświata */
+body.v3 .grid-wrap{}
+body.v3 .card{background:#14171d;border:1px solid rgba(255,255,255,.08)}
+body.v3 .card .body{background:#14171d}
+body.v3 .card h3{color:#fff}
+body.v3 .card .models{color:#9aa0ac}
+body.v3 .card .specs-row span{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1);color:#cfd3da}
+body.v3 .card .price{border-top-color:rgba(255,255,255,.1)}
+body.v3 .card .price .v{color:#fff}
+body.v3 .card .price .od,body.v3 .card .price .u{color:#8a909c}
+body.v3 .card .tiers-mini span{background:rgba(255,255,255,.05);color:#9aa0ac}
+body.v3 .card .tiers-mini b{color:#fff}
+body.v3 .card::after{background:radial-gradient(360px circle at var(--mx,50%) var(--my,50%),rgba(225,29,42,.26),transparent 46%)}
+body.v3 .card .media{position:relative}
+body.v3 .card .media::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,var(--red),var(--red2));transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.16,1,.3,1);z-index:3}
+body.v3 .card:hover .media::after{transform:scaleX(1)}
+body.v3 .card:hover{box-shadow:0 26px 60px rgba(0,0,0,.5),0 0 0 1px rgba(225,29,42,.4)}
+
+/* V4 — Index: numer 01–13 + rosnący czerwony pasek */
+body.v4 .card{border:1px solid var(--line)}
+body.v4 .card .idx{display:block;position:absolute;bottom:10px;left:14px;z-index:3;font-family:'Archivo',sans-serif;font-weight:900;font-size:42px;line-height:.8;color:#fff;opacity:.92;text-shadow:0 3px 16px rgba(0,0,0,.5)}
+body.v4 .card .body{position:relative;padding-left:26px}
+body.v4 .card .body::before{content:"";position:absolute;left:0;top:20px;bottom:20px;width:3px;border-radius:3px;background:var(--line);transform:scaleY(.35);transform-origin:top;transition:transform .4s cubic-bezier(.16,1,.3,1),background .3s}
+body.v4 .card:hover .body::before{background:var(--red);transform:scaleY(1)}
+body.v4 .card:hover{box-shadow:0 26px 60px rgba(18,20,25,.2),0 0 0 1px rgba(225,29,42,.22)}
+
+/* V5 — Glass: matowe szkło */
+body.v5 .grid-wrap{background:linear-gradient(180deg,transparent,rgba(225,29,42,.05))}
+body.v5 .card{background:rgba(255,255,255,.5);backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.65);box-shadow:0 12px 44px rgba(18,20,25,.12)}
+body.v5 .card .body{background:transparent}
+body.v5 .card .specs-row span{background:rgba(255,255,255,.5);border-color:rgba(255,255,255,.5)}
+body.v5 .card .tiers-mini span{background:rgba(255,255,255,.45)}
+body.v5 .card::before{content:"";position:absolute;left:0;right:0;top:0;height:42%;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.55),transparent);pointer-events:none;z-index:3;opacity:.7}
+body.v5 .card:hover{background:rgba(255,255,255,.72);box-shadow:0 30px 72px rgba(18,20,25,.2),0 0 0 1px rgba(225,29,42,.22)}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .kin>span,.fade-up,.reveal,.card{transform:none!important;opacity:1!important}
+  html{scroll-behavior:auto}
+}
+
+/* ===== Wyjazdy zagraniczne — finder (kaucja) ===== */
+.kfind{margin-top:8px}
+.kspot{position:relative;border:1px solid var(--line);border-radius:22px;background:linear-gradient(180deg,#fff,#fafbfd);box-shadow:0 18px 50px rgba(18,20,25,.09);margin-bottom:20px;overflow:hidden}
+.kspot::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 140% at 100% 0,rgba(225,29,42,.07),transparent 55%);pointer-events:none}
+.kspot-empty{display:flex;align-items:center;gap:16px;padding:26px 24px}
+.kse-ic svg{display:block;width:42px;height:42px;stroke:var(--red);fill:none;stroke-width:1.6;stroke-linecap:round;opacity:.85}
+.kse-tx{display:flex;flex-direction:column}
+.kse-tx b{font-family:'Archivo',sans-serif;font-weight:800;font-size:17px;color:var(--ink)}
+.kse-tx span{font-size:13.5px;color:var(--muted);font-weight:500}
+.kspot-card{display:flex;align-items:stretch;gap:22px;padding:22px 24px;position:relative}
+.kspot[data-empty="1"] .kspot-card{display:none}
+.kspot[data-empty="0"] .kspot-empty{display:none}
+.ksf{font-size:60px;line-height:1;align-self:center;font-style:normal;filter:drop-shadow(0 6px 14px rgba(0,0,0,.16))}
+.kspot-main{flex:1;display:flex;flex-direction:column;gap:14px;min-width:0}
+.kspot-name{font-family:'Archivo',sans-serif;font-weight:900;font-size:26px;letter-spacing:-.01em;color:var(--ink)}
+.kspot-vals{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.kspot-v{display:flex;flex-direction:column;gap:3px;border:1px solid var(--line);border-radius:16px;padding:14px 16px;background:#fff}
+.kspot-l{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.kspot-v b{font-family:'Archivo',sans-serif;font-weight:900;font-size:26px;line-height:1.05;color:var(--ink)}
+.kspot-s{font-size:11.5px;color:var(--muted);font-weight:500;line-height:1.35}
+.kspot-v.fee{border-color:rgba(225,29,42,.25)}.kspot-v.fee b{color:var(--red)}
+.kspot-v.fee.t1{border-color:rgba(31,157,87,.3)}.kspot-v.fee.t1 b{color:#1F9D57}
+.kspot-v.fee.t2{border-color:rgba(196,126,20,.32)}.kspot-v.fee.t2 b{color:#C47E14}
+.kspot-v.fee.t3{border-color:rgba(214,80,30,.32)}.kspot-v.fee.t3 b{color:#D6501E}
+.kspot-v.fee.t4{border-color:rgba(225,29,42,.32)}.kspot-v.fee.t4 b{color:var(--red)}
+.kspot-card.pop{animation:kpop .34s cubic-bezier(.2,.7,.3,1)}
+@keyframes kpop{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:none}}
+.ktools{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.ksearch{position:relative;flex:1 1 220px;min-width:200px;max-width:320px}
+.ksearch svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:18px;height:18px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;pointer-events:none;transition:stroke .18s}
+.ksearch input{width:100%;font-family:inherit;font-size:15px;font-weight:600;color:var(--ink);padding:11px 16px 11px 44px;border:1px solid var(--line);border-radius:13px;background:#fff;outline:none;transition:.18s;box-shadow:0 4px 14px rgba(18,20,25,.05)}
+.ksearch input::placeholder{color:var(--muted);font-weight:500}
+.ksearch input:focus{border-color:var(--red);box-shadow:0 6px 22px rgba(225,29,42,.15)}
+.ksearch:focus-within svg{stroke:var(--red)}
+.kpop{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.kpop>span{font-size:12.5px;font-weight:700;color:var(--muted)}
+.kpc{font-family:inherit;font-weight:700;font-size:13px;padding:7px 13px;border:1px solid var(--line);border-radius:30px;background:#fff;color:var(--ink);cursor:pointer;transition:.16s;box-shadow:0 3px 10px rgba(18,20,25,.05)}
+.kpc:hover{transform:translateY(-2px);border-color:rgba(225,29,42,.5);box-shadow:0 10px 22px rgba(225,29,42,.13)}
+.kgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.ktile{position:relative;text-align:left;font-family:inherit;cursor:pointer;border:1px solid var(--line);border-radius:16px;background:#fff;padding:15px 16px 14px;display:flex;flex-direction:column;gap:9px;overflow:hidden;box-shadow:0 4px 14px rgba(18,20,25,.05);transition:transform .16s,box-shadow .16s,border-color .16s}
+.ktile::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red);opacity:0;transition:opacity .16s}
+.ktile.t1::before{background:#1F9D57}.ktile.t2::before{background:#E7A234}.ktile.t3::before{background:#E2622A}.ktile.t4::before{background:var(--red)}
+.ktile:hover{transform:translateY(-3px);border-color:rgba(18,20,25,.18);box-shadow:0 16px 34px rgba(18,20,25,.12)}
+.ktile:hover::before{opacity:1}
+.ktile.on{border-color:var(--ink);box-shadow:0 16px 34px rgba(18,20,25,.14)}
+.ktile.on::before{opacity:1;width:4px}
+.ktile .kf{font-size:26px;line-height:1;font-style:normal}
+.ktn{font-family:'Archivo',sans-serif;font-weight:800;font-size:15.5px;color:var(--ink);line-height:1.1}
+.kt2{display:flex;align-items:baseline;justify-content:space-between;gap:8px;font-size:12px}
+.kt2 em{font-style:normal;font-weight:600;color:var(--muted);letter-spacing:.02em}
+.kt2 b{font-family:'Archivo',sans-serif;font-weight:800;font-size:13.5px;color:var(--ink)}
+.kt2.fee b{color:var(--red)}
+.kt2.fee.t1 b{color:#1F9D57}.kt2.fee.t2 b{color:#C47E14}.kt2.fee.t3 b{color:#D6501E}.kt2.fee.t4 b{color:var(--red)}
+.kempty{padding:22px;text-align:center;color:var(--muted);font-weight:600}
+.kempty a{color:var(--red);font-weight:800;text-decoration:none}
+.kempty a:hover{text-decoration:underline}
+@media(max-width:560px){
+  .kspot-card{flex-direction:column;gap:14px;padding:18px}
+  .ksf{font-size:48px;align-self:flex-start}
+  .kspot-name{font-size:22px}
+  .kspot-vals{grid-template-columns:1fr;gap:10px}
+  .kspot-v b{font-size:23px}
+  .kspot-empty{padding:20px}
+  .kgrid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .ktile{padding:13px 13px 12px;border-radius:14px}
+  .ktile .kf{font-size:22px}
+  .ktn{font-size:14px}
+  .kt2{font-size:11px}
+  .kpop{width:100%}
+}
+
+/* ---- kaucja krajowa pod progami (cennik podstron) ---- */
+.tiers .depo{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;padding:13px 16px;border:1px solid rgba(225,29,42,.22);background:linear-gradient(90deg,rgba(225,29,42,.08),rgba(225,29,42,.02));border-radius:14px}
+.tiers .depo .dl{display:flex;align-items:center;gap:11px;font-weight:700;font-size:14.5px;color:var(--ink)}
+.tiers .depo .di{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:9px;background:rgba(225,29,42,.12);color:var(--red);flex:none}
+.tiers .depo .di svg{width:17px;height:17px;display:block;stroke-linecap:round;stroke-linejoin:round}
+.tiers .depo b{font-family:'Archivo',sans-serif;font-weight:900;font-size:18px;color:var(--red);white-space:nowrap}
+@media(max-width:560px){.tiers .depo{padding:11px 13px}.tiers .depo .dl{font-size:13px;gap:9px}.tiers .depo .di{width:28px;height:28px}.tiers .depo b{font-size:16px}}
+
+/* ===== Cennik: wybór segmentu (okładki, opcja 4) ===== */
+.seg-intro{margin-bottom:6px}
+.seg-intro .eyebrow{margin-bottom:10px}
+.seg-lead{color:var(--muted);font-size:16px;max-width:620px;margin:6px 0 26px}
+.covers{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.cover{position:relative;border:none;padding:0;cursor:pointer;border-radius:18px;overflow:hidden;aspect-ratio:4/3;box-shadow:0 12px 30px rgba(18,20,25,.12);font-family:inherit;text-align:left;transition:transform .2s,box-shadow .2s}
+.cover img{width:100%;height:100%;object-fit:cover;transition:transform .55s}
+.cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,9,12,0) 28%,rgba(8,9,12,.5) 60%,rgba(8,9,12,.9));z-index:1}
+.cover:hover{transform:translateY(-5px);box-shadow:0 26px 54px rgba(18,20,25,.22)}
+.cover:hover img{transform:scale(1.08)}
+.cover:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.cov-code{position:absolute;top:12px;left:12px;z-index:2;font-family:'Archivo',sans-serif;font-weight:900;font-size:13px;color:#fff;background:var(--red);padding:4px 11px;border-radius:8px;box-shadow:0 6px 16px rgba(225,29,42,.45);letter-spacing:.02em}
+.cov-ov{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:16px;color:#fff;display:block}
+.cov-nm{font-family:'Archivo',sans-serif;font-weight:800;font-size:19px;line-height:1.1;display:block}
+.cov-sub{font-size:13px;opacity:.86;margin-top:2px;display:block}
+.cov-meta{display:flex;align-items:center;gap:10px;margin-top:11px}
+.cov-fr{font-family:'Archivo',sans-serif;font-weight:900;font-size:14px;background:rgba(255,255,255,.18);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);padding:4px 12px;border-radius:30px;white-space:nowrap}
+.cov-cnt{font-size:12px;opacity:.82}
+.cov-go{margin-left:auto;width:34px;height:34px;border-radius:50%;background:#fff;color:var(--ink);display:flex;align-items:center;justify-content:center;transition:.2s;flex:none}
+.cov-go svg{width:16px;height:16px}
+.cover:hover .cov-go{background:var(--red);color:#fff;transform:translateX(3px)}
+.seg-fleet[hidden]{display:none}
+.seg-bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:8px}
+.backbtn{display:inline-flex;align-items:center;gap:6px;font-family:inherit;font-weight:800;font-size:14px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:30px;padding:9px 17px;cursor:pointer;transition:.16s;box-shadow:0 4px 14px rgba(18,20,25,.06);flex:none}
+.backbtn:hover{border-color:var(--ink);transform:translateX(-2px)}
+.seg-switch.filter{margin:0;justify-content:flex-start;flex:1}
+.seg-titrow{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:18px 0 22px}
+.seg-titrow .eyebrow{flex-basis:100%;margin-bottom:2px}
+.seg-title{font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(24px,4vw,34px);letter-spacing:-.01em;margin:0}
+.seg-titsub{color:var(--muted);font-weight:600;font-size:15px}
+@media(max-width:560px){
+  .covers{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  .cov-nm{font-size:16px}.cov-sub{font-size:12px}.cov-code{font-size:12px}
+  .seg-switch.filter{width:100%}
+}
+
+/* ===================== SMACZKI ===================== */
+/* pasek postępu przewijania */
+.scroll-prog{position:fixed;top:0;left:0;right:0;height:3px;z-index:150;background:transparent;pointer-events:none}
+.scroll-prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--red),var(--red2));box-shadow:0 0 12px rgba(225,29,42,.55);transition:width .08s linear}
+
+/* przycisk "wróć na górę" */
+.totop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:none;cursor:pointer;background:var(--ink);color:#fff;display:grid;place-items:center;z-index:120;box-shadow:0 10px 26px rgba(14,16,20,.32);opacity:0;transform:translateY(14px) scale(.85);pointer-events:none;transition:opacity .3s,transform .3s,background .2s}
+.totop svg{width:20px;height:20px}
+.totop.show{opacity:1;transform:none;pointer-events:auto}
+.totop:hover{background:var(--red);transform:translateY(-2px)}
+.totop:active{transform:translateY(0) scale(.92)}
+@media(max-width:560px){.totop{right:14px;bottom:78px;width:42px;height:42px}}
+
+/* licznik floty – delikatny "pop" na koniec odliczania */
+[data-count]{display:inline-block;transform-origin:center bottom}
+[data-count].pop{animation:cntPop .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes cntPop{0%{transform:scale(1)}42%{transform:scale(1.16);color:var(--red)}100%{transform:scale(1)}}
+
+/* toast (easter egg) */
+.pr-toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,26px);z-index:230;background:var(--ink);color:#fff;padding:13px 20px;border-radius:14px;font-weight:700;font-size:14.5px;letter-spacing:.2px;box-shadow:0 16px 40px rgba(14,16,20,.42);opacity:0;pointer-events:none;border:1px solid rgba(255,255,255,.08);white-space:nowrap;transition:opacity .35s,transform .35s;max-width:90vw}
+.pr-toast.show{opacity:1;transform:translate(-50%,0)}
+.pr-toast b{color:var(--red2)}
+
+/* tryb turbo (easter egg) – szybsza rotacja słowa w nagłówku */
+body.turbo #rotw{animation-duration:.85s !important}
+
+/* ===== FLEX: powiększony licznik floty w hero ===== */
+.hstat.feat{background:rgba(225,29,42,.10);border-color:rgba(225,29,42,.34)}
+.hstat.feat .bar{min-height:58px;background:linear-gradient(180deg,var(--red),var(--red2))}
+.hstat.feat b{font-size:clamp(40px,5vw,62px);letter-spacing:-.02em;background:linear-gradient(135deg,#fff,#ffd0d3 45%,var(--red2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;filter:drop-shadow(0 6px 22px rgba(225,29,42,.42))}
+.hstat.feat span{color:#ecccce;font-weight:700;font-size:13px}
+.hstat.feat:hover{border-color:rgba(225,29,42,.62)}
+@media(max-width:680px){.hstat.feat{grid-column:1 / -1}.hstat.feat b{font-size:clamp(46px,13vw,62px)}}
+
+/* ===== wstęga atutów (marquee) ===== */
+.marquee{background:var(--ink);color:#fff;overflow:hidden;white-space:nowrap;border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07)}
+.mq-track{display:inline-flex;align-items:center;padding:13px 0;animation:mqScroll 34s linear infinite;will-change:transform}
+.marquee:hover .mq-track{animation-play-state:paused}
+.mq-i{font-family:'Archivo',sans-serif;font-weight:800;font-size:13.5px;letter-spacing:.05em;text-transform:uppercase;padding:0 22px;color:#fff;flex:0 0 auto}
+.mq-d{color:var(--red2);flex:0 0 auto;font-size:11px}
+@keyframes mqScroll{to{transform:translateX(-50%)}}
+
+/* ===== pas „flex": pochwała wielkości floty ===== */
+.fleet-brag{position:relative;left:50%;width:100vw;margin-left:-50vw;margin-right:-50vw;margin-top:54px;background:linear-gradient(165deg,#15181f,#0b0d11);color:#fff;padding:64px 0;overflow:hidden}
+.fb-glow{position:absolute;width:680px;height:680px;border-radius:50%;top:-300px;left:-160px;background:radial-gradient(circle,rgba(225,29,42,.4),transparent 60%);filter:blur(54px);opacity:.55;animation:auroraDrift 16s ease-in-out infinite alternate;will-change:transform}
+.fb-wrap{position:relative;z-index:2;display:grid;grid-template-columns:auto 1fr;gap:46px;align-items:center}
+.fb-num{display:flex;align-items:baseline;gap:12px;line-height:.88}
+.fb-num b{font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(86px,13vw,168px);letter-spacing:-.045em;background:linear-gradient(135deg,#fff,#ffd0d3 42%,var(--red2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;filter:drop-shadow(0 12px 44px rgba(225,29,42,.42))}
+.fb-unit{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(22px,3vw,34px);color:#e7c9cc}
+.eyebrow.light{color:var(--red2)}
+.fb-txt h2{font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(24px,3.4vw,40px);line-height:1.05;letter-spacing:-.02em;margin:6px 0 12px}
+.fb-txt p{color:#c4c9d2;font-size:16px;max-width:620px;margin-bottom:18px}
+.fb-chips{display:flex;flex-wrap:wrap;gap:10px}
+.fb-chips span{font-size:13px;font-weight:700;padding:8px 15px;border-radius:30px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:#fff;transition:transform .25s,border-color .25s,background .25s}
+.fb-chips span:hover{transform:translateY(-3px);border-color:rgba(225,29,42,.5);background:rgba(225,29,42,.14)}
+@keyframes auroraDrift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(90px,46px) scale(1.16)}}
+@media(max-width:760px){.fb-wrap{grid-template-columns:1fr;gap:14px}.fleet-brag{padding:48px 0;margin-top:36px}}
+
+@media(prefers-reduced-motion:reduce){.mq-track{animation:none}.fb-glow{animation:none}}
+
+</style>
+<script>
+/* ===== Power Rent — DOSTĘPNOŚĆ FLOTY =====
+   Tu sterujesz kropkami i statusem na podstronach.
+   Docelowo: podłącz bazę danych — wystarczy nadpisać window.PR_AVAILABILITY
+   wynikiem z API (np. fetch) ZANIM załaduje się pr.js, albo wołać window.PR.refreshAvailability().
+
+   status: "in"  -> dostępne  (zielona, pulsująca kropka)
+   status: "out" -> zajęte    (czerwona kropka); pole "from" = data od kiedy wolne (RRRR-MM-DD)
+*/
+window.PR_AVAILABILITY = {
+  "auto-mikrobus":   { status: "in" },
+  "auto-male":       { status: "in" },
+  "auto-proace":     { status: "in" },
+  "auto-duze":       { status: "out", from: "2026-06-21" },
+  "auto-przedluzane":{ status: "in" },
+  "auto-najwieksze": { status: "out", from: "2026-06-20" },
+  "auto-kontener":   { status: "in" },
+  "auto-plandeka":   { status: "in" },
+  "auto-chlodnia":   { status: "in" },
+  "auto-laweta":     { status: "out", from: "2026-06-23" },
+  "auto-bus":        { status: "in" },
+  "auto-sedan":      { status: "in" },
+  "auto-suv":        { status: "in" }
+};
+
+</script>
+</head>
+<body class="v4">
+<div class="scroll-prog" aria-hidden="true"><i></i></div>
+<div id="pr-loader"><div class="pl-logo"></div><div class="pl-bar"><i></i></div><div class="pl-txt">Power Rent</div></div>
+<header class="ph-header"><div class="wrap hd"><div class="hd-left"><a href="index.html" class="hd-logo" aria-label="Power Rent"><span class="hd-logo-img"></span></a></div><div class="hd-right"><a href="tel:664201202" class="hd-phone">664 201 202</a><a href="#rezerwacja" class="btn btn-red" data-magnetic="0.2">Rezerwacja</a></div></div></header>
+
+<section class="hero">
+  <div class="hero-bg"><div class="hero-grid" data-parallax="8"></div><div class="hero-glow g1" data-parallax="34"></div><div class="hero-glow g2" data-parallax="26"></div></div>
+  <div class="wrap">
+    <span class="hero-eyebrow fade-up" style="--d:.05s"><span class="dot"></span> Power Rent · Radom · wynajem aut</span>
+    <h1>
+      <span class="kin"><span>Wynajem aut</span></span>
+      <span class="kin k2"><span><span class="rot" id="rotw" data-words="dostawczych|osobowych|z chłodnią|na przeprowadzkę|do każdego zadania">dostawczych</span></span></span>
+    </h1>
+    <p class="hero-lead fade-up" style="--d:.25s">Radom i okolice. 40 sprawdzonych aut — od mikrobusa po lawetę i chłodnię. OC i assistance zawsze w cenie, wydanie w 10 minut.</p>
+    <div class="hero-cta fade-up" style="--d:.35s">
+      <a href="#flota" class="btn btn-red" data-magnetic="0.2">Zobacz flotę</a>
+      <a href="tel:664201202" class="btn btn-ghost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-3 2a14 14 0 006 6l2-3 5 2v4a2 2 0 01-2 2A17 17 0 013 6a2 2 0 012-2z"/></svg> 664 201 202</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat feat fade-up" style="--d:.42s"><span class="bar"></span><div class="txt"><b><span data-count="40">40</span></b><span>aut w naszej flocie</span></div></div>
+      <div class="hstat fade-up" style="--d:.5s"><span class="bar"></span><div class="txt"><b>od 200<em> zł</em></b><span>za dobę</span></div></div>
+      <div class="hstat fade-up" style="--d:.58s"><span class="bar"></span><div class="txt"><b>~<span data-count="10">10</span> min</b><span>wydanie auta</span></div></div>
+      <div class="hstat fade-up" style="--d:.66s"><span class="bar"></span><div class="txt"><b>W cenie</b><span>OC + assistance</span></div></div>
+    </div>
+  </div>
+</section>
+<div class="marquee" aria-hidden="true"><div class="mq-track"><span class="mq-i">40 aut w flocie</span><span class="mq-d">✦</span><span class="mq-i">OC + assistance w cenie</span><span class="mq-d">✦</span><span class="mq-i">Wydanie w 10 minut</span><span class="mq-d">✦</span><span class="mq-i">Laweta</span><span class="mq-d">✦</span><span class="mq-i">Chłodnia</span><span class="mq-d">✦</span><span class="mq-i">Busy 9-osobowe</span><span class="mq-d">✦</span><span class="mq-i">Najem długoterminowy</span><span class="mq-d">✦</span><span class="mq-i">Faktura VAT</span><span class="mq-d">✦</span><span class="mq-i">40 aut w flocie</span><span class="mq-d">✦</span><span class="mq-i">OC + assistance w cenie</span><span class="mq-d">✦</span><span class="mq-i">Wydanie w 10 minut</span><span class="mq-d">✦</span><span class="mq-i">Laweta</span><span class="mq-d">✦</span><span class="mq-i">Chłodnia</span><span class="mq-d">✦</span><span class="mq-i">Busy 9-osobowe</span><span class="mq-d">✦</span><span class="mq-i">Najem długoterminowy</span><span class="mq-d">✦</span><span class="mq-i">Faktura VAT</span><span class="mq-d">✦</span></div></div>
+
+<section class="grid-wrap" id="flota">
+  <div class="wrap">
+    <div class="seg-intro reveal" id="segIntro">
+      <div class="eyebrow">Krok 1 · wybierz segment</div>
+      <h2>Jakiego auta szukasz?</h2>
+      <p class="seg-lead">Kliknij segment, a pokażemy dopasowane auta — z cenami i dostępnością na żywo. OC i assistance zawsze w cenie.</p>
+      <div class="covers">
+      <button class="cover" data-cover="s" aria-label="Segment S — Małe auta dostawcze"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200336_fd130bf2-48c2-4327-b52d-1a09264d655d.png" alt="Segment S — Małe auta dostawcze | Power Rent Radom" loading="lazy"><span class="cov-code">S</span><span class="cov-ov"><span class="cov-nm">Segment S</span><span class="cov-sub">Małe auta dostawcze</span><span class="cov-meta"><span class="cov-fr">od 180 zł</span><span class="cov-cnt">2 auta</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
+      <button class="cover" data-cover="m" aria-label="Segment M — Średnie auta dostawcze"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200347_633102cd-ed81-4cee-99fb-1768be9f65d8.png" alt="Segment M — Średnie auta dostawcze | Power Rent Radom" loading="lazy"><span class="cov-code">M</span><span class="cov-ov"><span class="cov-nm">Segment M</span><span class="cov-sub">Średnie auta dostawcze</span><span class="cov-meta"><span class="cov-fr">od 280 zł</span><span class="cov-cnt">4 auta</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
+      <button class="cover" data-cover="l" aria-label="Segment L — Duże auta dostawcze"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200400_fa74d531-129c-44e0-be42-38a35d79899b.png" alt="Segment L — Duże auta dostawcze | Power Rent Radom" loading="lazy"><span class="cov-code">L</span><span class="cov-ov"><span class="cov-nm">Segment L</span><span class="cov-sub">Duże auta dostawcze</span><span class="cov-meta"><span class="cov-fr">od 300 zł</span><span class="cov-cnt">2 auta</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
+      <button class="cover" data-cover="lp" aria-label="Segment L+ — Przedłużane auta dostawcze"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200405_1c147392-2dab-4357-815e-824d84a8d847.png" alt="Segment L+ — Przedłużane auta dostawcze | Power Rent Radom" loading="lazy"><span class="cov-code">L+</span><span class="cov-ov"><span class="cov-nm">Segment L+</span><span class="cov-sub">Przedłużane auta dostawcze</span><span class="cov-meta"><span class="cov-fr">od 350 zł</span><span class="cov-cnt">1 auto</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
+      <button class="cover" data-cover="xl" aria-label="Segment XL — Największe auta dostawcze"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200412_27c8fc18-e150-471e-b9e5-24476c9c92c6.png" alt="Segment XL — Największe auta dostawcze | Power Rent Radom" loading="lazy"><span class="cov-code">XL</span><span class="cov-ov"><span class="cov-nm">Segment XL</span><span class="cov-sub">Największe auta dostawcze</span><span class="cov-meta"><span class="cov-fr">od 320 zł</span><span class="cov-cnt">7 aut</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
+      <button class="cover" data-cover="chl" aria-label="Auta chłodnicze — Furgony chłodnicze"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200428_833d4bb0-c7df-461a-aedc-fa8f4fbafa9c.png" alt="Auta chłodnicze — Furgony chłodnicze | Power Rent Radom" loading="lazy"><span class="cov-code">Chłodnia</span><span class="cov-ov"><span class="cov-nm">Auta chłodnicze</span><span class="cov-sub">Furgony chłodnicze</span><span class="cov-meta"><span class="cov-fr">od 500 zł</span><span class="cov-cnt">1 auto</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
+      <button class="cover" data-cover="oso" aria-label="Auta osobowe — Sedan i hatchback, automat"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200444_759ee268-7ed4-49cb-b9ef-71d97eb7963f.png" alt="Auta osobowe — Sedan i hatchback, automat | Power Rent Radom" loading="lazy"><span class="cov-code">Osobowe</span><span class="cov-ov"><span class="cov-nm">Auta osobowe</span><span class="cov-sub">Sedan i hatchback, automat</span><span class="cov-meta"><span class="cov-fr">od 230 zł</span><span class="cov-cnt">2 auta</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
+      <button class="cover" data-cover="law" aria-label="Auto laweta — Pomoc drogowa"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200434_f9dafa51-b7c5-457a-8df1-887dd70fa351.png" alt="Auto laweta — Pomoc drogowa | Power Rent Radom" loading="lazy"><span class="cov-code">Laweta</span><span class="cov-ov"><span class="cov-nm">Auto laweta</span><span class="cov-sub">Pomoc drogowa</span><span class="cov-meta"><span class="cov-fr">od 380 zł</span><span class="cov-cnt">1 auto</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
+      <button class="cover" data-cover="bus" aria-label="Busy — 8–9 osobowe"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_085325_633d50e0-0993-4247-b51a-bf7ee8c47eaa.png" alt="Busy — 8–9 osobowe | Power Rent Radom" loading="lazy"><span class="cov-code">BUS</span><span class="cov-ov"><span class="cov-nm">Busy</span><span class="cov-sub">8–9 osobowe</span><span class="cov-meta"><span class="cov-fr">od 300 zł</span><span class="cov-cnt">1 auto</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
+      </div>
+      <section class="fleet-brag reveal">
+  <div class="fb-glow" aria-hidden="true"></div>
+  <div class="wrap fb-wrap">
+    <div class="fb-num"><b><span data-count="40">40</span></b><span class="fb-unit">aut</span></div>
+    <div class="fb-txt">
+      <div class="eyebrow light">Nasza flota</div>
+      <h2>Jedna z największych flot do wynajęcia w Radomiu</h2>
+      <p>Dostawcze każdego rozmiaru — od mikrobusa po największe furgony — a do tego osobowe, laweta, chłodnia i busy 9-osobowe. Wszystko w jednym miejscu, zawsze coś wolnego, OC i assistance w cenie.</p>
+      <div class="fb-chips"><span>Dostawcze S–XL</span><span>Osobowe</span><span>Laweta</span><span>Chłodnia</span><span>Busy 9-os.</span></div>
+    </div>
+  </div>
+</section>
+
+    </div>
+    <div class="seg-fleet" id="segFleet" hidden>
+      <div class="seg-bar">
+        <button class="backbtn" data-seg-back>‹ Wszystkie segmenty</button>
+        <div class="filter seg-switch" id="segSwitch">
+        <button class="fchip" data-f="s" data-name="Segment S" data-sub="Małe auta dostawcze"><b>S</b>Małe</button>
+        <button class="fchip" data-f="m" data-name="Segment M" data-sub="Średnie auta dostawcze"><b>M</b>Średnie</button>
+        <button class="fchip" data-f="l" data-name="Segment L" data-sub="Duże auta dostawcze"><b>L</b>Duże</button>
+        <button class="fchip" data-f="lp" data-name="Segment L+" data-sub="Przedłużane auta dostawcze"><b>L+</b>Przedłużane</button>
+        <button class="fchip" data-f="xl" data-name="Segment XL" data-sub="Największe auta dostawcze"><b>XL</b>Największe</button>
+        <button class="fchip" data-f="chl" data-name="Auta chłodnicze" data-sub="Furgony chłodnicze"><b>CHŁ</b>Chłodnia</button>
+        <button class="fchip" data-f="oso" data-name="Auta osobowe" data-sub="Sedan i hatchback, automat"><b>OSO</b>Osobowe</button>
+        <button class="fchip" data-f="law" data-name="Auto laweta" data-sub="Pomoc drogowa"><b>LAW</b>Laweta</button>
+        <button class="fchip" data-f="bus" data-name="Busy" data-sub="8–9 osobowe"><b>BUS</b>Bus</button>
+        </div>
+      </div>
+      <div class="seg-titrow"><div class="eyebrow">Krok 2 · flota</div><h2 class="seg-title" id="segTitle">Segment</h2><span class="seg-titsub" id="segSub"></span></div>
+      <div class="grid" id="segGrid">
+      <a class="card" data-seg="s" data-slug="auto-mikrobus" data-tilt="9" href="auto-mikrobus.html"><div class="media"><span class="seg-tag"><b>S</b>Mikrobus</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200336_fd130bf2-48c2-4327-b52d-1a09264d655d.png" alt="Fiat Doblo 2016 — wynajem | Power Rent Radom" loading="lazy"><span class="avail" data-slug="auto-mikrobus"><i class="dot"></i><b>Dostępne</b></span></div><div class="body"><h3>Fiat Doblo</h3><div class="models">Mikrobus dostawczy · kat. B</div><div class="specs-row"><span>do ~800 kg</span><span>~3–4 m³</span><span>2–3 os.</span></div><div class="price"><span class="od">od</span><span class="v">200</span><span class="u">zł / doba</span></div><div class="tiers-mini"><span>doba od <b>200 zł</b></span><span>mies. od <b>2 900 zł</b></span></div><span class="card-cta">Zobacz szczegóły <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span></div></a>
+      <a class="card" data-seg="m" data-slug="auto-male" data-tilt="9" href="auto-male.html"><div class="media"><span class="seg-tag"><b>M</b>Średnie</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200347_633102cd-ed81-4cee-99fb-1768be9f65d8.png" alt="Peugeot Expert 2023 — wynajem | Power Rent Radom" loading="lazy"><span class="avail" data-slug="auto-male"><i class="dot"></i><b>Dostępne</b></span></div><div class="body"><h3>Peugeot Expert</h3><div class="models">Opel Vivaro · Renault Trafic · Toyota Proace</div><div class="specs-row"><span>do ~1000 kg</span><span>~5–6 m³</span><span>3 os.</span></div><div class="price"><span class="od">od</span><span class="v">280</span><span class="u">zł / doba</span></div><div class="tiers-mini"><span>doba od <b>280 zł</b></span><span>mies. od <b>3 600 zł</b></span></div><span class="card-cta">Zobacz szczegóły <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span></div></a>
+      <a class="card" data-seg="m" data-slug="auto-proace" data-tilt="9" href="auto-proace.html"><div class="media"><span class="seg-tag"><b>M</b>Średnie</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200352_7918cc33-f38f-4a41-9f53-7297a1d41c12.png" alt="Toyota Proace 2026 — wynajem | Power Rent Radom" loading="lazy"><span class="avail" data-slug="auto-proace"><i class="dot"></i><b>Dostępne</b></span></div><div class="body"><h3>Toyota Proace</h3><div class="models">Segment Średni · niskie spalanie · kat. B</div><div class="specs-row"><span>do ~1000 kg</span><span>~5–6 m³</span><span>3 os.</span></div><div class="price"><span class="od">od</span><span class="v">280</span><span class="u">zł / doba</span></div><div class="tiers-mini"><span>doba od <b>280 zł</b></span><span>mies. od <b>3 600 zł</b></span></div><span class="card-cta">Zobacz szczegóły <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span></div></a>
+      <a class="card" data-seg="l" data-slug="auto-duze" data-tilt="9" href="auto-duze.html"><div class="media"><span class="seg-tag"><b>L</b>Duże</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200400_fa74d531-129c-44e0-be42-38a35d79899b.png" alt="Renault Master 2024 — wynajem | Power Rent Radom" loading="lazy"><span class="avail" data-slug="auto-duze"><i class="dot"></i><b>Dostępne</b></span></div><div class="body"><h3>Renault Master</h3><div class="models">Furgon · przeprowadzki · palety</div><div class="specs-row"><span>do ~1400 kg</span><span>~10–13 m³</span><span>3 os.</span></div><div class="price"><span class="od">od</span><span class="v">300</span><span class="u">zł / doba</span></div><div class="tiers-mini"><span>doba od <b>300 zł</b></span><span>mies. od <b>3 900 zł</b></span></div><span class="card-cta">Zobacz szczegóły <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span></div></a>
+      <a class="card" data-seg="lp" data-slug="auto-przedluzane" data-tilt="9" href="auto-przedluzane.html"><div class="media"><span class="seg-tag"><b>L+</b>Przedłużane</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200405_1c147392-2dab-4357-815e-824d84a8d847.png" alt="Renault Master 2024 — wynajem | Power Rent Radom" loading="lazy"><span class="avail" data-slug="auto-przedluzane"><i class="dot"></i><b>Dostępne</b></span></div><div class="body"><h3>Renault Master</h3><div class="models">Wersja przedłużana (długi)</div><div class="specs-row"><span>do ~1400 kg</span><span>~13–15 m³</span><span>3 os.</span></div><div class="price"><span class="od">od</span><span class="v">350</span><span class="u">zł / doba</span></div><div class="tiers-mini"><span>doba od <b>350 zł</b></span><span>mies. od <b>4 900 zł</b></span></div><span class="card-cta">Zobacz szczegóły <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span></div></a>
+      <a class="card" data-seg="xl" data-slug="auto-najwieksze" data-tilt="9" href="auto-najwieksze.html"><div class="media"><span class="seg-tag"><b>XL</b>Największe</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200412_27c8fc18-e150-471e-b9e5-24476c9c92c6.png" alt="Volkswagen Crafter 2025 — wynajem | Power Rent Radom" loading="lazy"><span class="avail" data-slug="auto-najwieksze"><i class="dot"></i><b>Dostępne</b></span></div><div class="body"><h3>Volkswagen Crafter</h3><div class="models">Iveco Daily · Peugeot Boxer</div><div class="specs-row"><span>do ~1500 kg</span><span>~15–19 m³</span><span>3 os.</span></div><div class="price"><span class="od">od</span><span class="v">400</span><span class="u">zł / doba</span></div><div class="tiers-mini"><span>doba od <b>400 zł</b></span><span>mies. od <b>5 500 zł</b></span></div><span class="card-cta">Zobacz szczegóły <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span></div></a>
+      <a class="card" data-seg="xl" data-slug="auto-kontener" data-tilt="9" href="auto-kontener.html"><div class="media"><span class="seg-tag"><b>XL</b>Kontener</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200417_8419eb41-b939-4a30-99b7-ebe79c4036de.png" alt="Iveco Daily 2025 — wynajem | Power Rent Radom" loading="lazy"><span class="avail" data-slug="auto-kontener"><i class="dot"></i><b>Dostępne</b></span></div><div class="body"><h3>Iveco Daily</h3><div class="models">Zabudowa kontenerowa · foremny załadunek</div><div class="specs-row"><span>kontener</span><span>do ~1500 kg</span><span>3 os.</span></div><div class="price"><span class="od">od</span><span class="v">400</span><span class="u">zł / doba</span></div><div class="tiers-mini"><span>doba od <b>400 zł</b></span><span>mies. od <b>5 500 zł</b></span></div><span class="card-cta">Zobacz szczegóły <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span></div></a>
+      <a class="card" data-seg="l" data-slug="auto-plandeka" data-tilt="9" href="auto-plandeka.html"><div class="media"><span class="seg-tag"><b>L</b>Plandeka</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200422_40b83ea6-5036-4084-a16c-e02508aaedc4.png" alt="Renault Master 2024 — wynajem | Power Rent Radom" loading="lazy"><span class="avail" data-slug="auto-plandeka"><i class="dot"></i><b>Dostępne</b></span></div><div class="body"><h3>Renault Master</h3><div class="models">Zabudowa plandekowa · dostęp z boku</div><div class="specs-row"><span>plandeka</span><span>do ~1400 kg</span><span>3 os.</span></div><div class="price"><span class="od">od</span><span class="v">350</span><span class="u">zł / doba</span></div><div class="tiers-mini"><span>doba od <b>350 zł</b></span><span>mies. od <b>4 500 zł</b></span></div><span class="card-cta">Zobacz szczegóły <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span></div></a>
+      <a class="card" data-seg="chl" data-slug="auto-chlodnia" data-tilt="9" href="auto-chlodnia.html"><div class="media"><span class="seg-tag"><b>CHŁ</b>Chłodnia</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200428_833d4bb0-c7df-461a-aedc-fa8f4fbafa9c.png" alt="Iveco Daily 2025 — wynajem | Power Rent Radom" loading="lazy"><span class="avail" data-slug="auto-chlodnia"><i class="dot"></i><b>Dostępne</b></span></div><div class="body"><h3>Iveco Daily</h3><div class="models">Agregat · izoterma</div><div class="specs-row"><span>chłodnia</span><span>tak</span><span>tak</span></div><div class="price"><span class="od">od</span><span class="v">500</span><span class="u">zł / doba</span></div><div class="tiers-mini"><span>doba od <b>500 zł</b></span><span>mies. od <b>5 900 zł</b></span></div><span class="card-cta">Zobacz szczegóły <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span></div></a>
+      <a class="card" data-seg="law" data-slug="auto-laweta" data-tilt="9" href="auto-laweta.html"><div class="media"><span class="seg-tag"><b>LAW</b>Laweta</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200434_f9dafa51-b7c5-457a-8df1-887dd70fa351.png" alt="Iveco Daily 2023 — wynajem | Power Rent Radom" loading="lazy"><span class="avail" data-slug="auto-laweta"><i class="dot"></i><b>Dostępne</b></span></div><div class="body"><h3>Iveco Daily</h3><div class="models">Najazdy · przewóz aut</div><div class="specs-row"><span>przewóz aut</span><span>najazdy</span><span>do ~3 t</span></div><div class="price"><span class="od">od</span><span class="v">380</span><span class="u">zł / doba</span></div><div class="tiers-mini"><span>doba od <b>380 zł</b></span><span>mies. od <b>6 500 zł</b></span></div><span class="card-cta">Zobacz szczegóły <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span></div></a>
+      <a class="card" data-seg="bus" data-slug="auto-bus" data-tilt="9" href="auto-bus.html"><div class="media"><span class="seg-tag"><b>BUS</b>Mały bus</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_085325_633d50e0-0993-4247-b51a-bf7ee8c47eaa.png" alt="Renault Trafic 2023 — wynajem | Power Rent Radom" loading="lazy"><span class="avail" data-slug="auto-bus"><i class="dot"></i><b>Dostępne</b></span></div><div class="body"><h3>Renault Trafic</h3><div class="models">Minibus 8–9 osób · klimatyzacja · kat. B</div><div class="specs-row"><span>8–9 osób</span><span>tak</span><span>kat. B</span></div><div class="price"><span class="od">od</span><span class="v">300</span><span class="u">zł / doba</span></div><div class="tiers-mini"><span>doba od <b>300 zł</b></span><span>mies. od <b>4 900 zł</b></span></div><span class="card-cta">Zobacz szczegóły <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span></div></a>
+      <a class="card" data-seg="oso" data-slug="auto-sedan" data-tilt="9" href="auto-sedan.html"><div class="media"><span class="seg-tag"><b>OSO</b>Sedan</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200444_759ee268-7ed4-49cb-b9ef-71d97eb7963f.png" alt="Peugeot 408 GT 2025 — wynajem | Power Rent Radom" loading="lazy"><span class="avail" data-slug="auto-sedan"><i class="dot"></i><b>Dostępne</b></span></div><div class="body"><h3>Peugeot 408 GT</h3><div class="models">Auto osobowe · komfort · kat. B</div><div class="specs-row"><span>5 osób</span><span>komfort</span><span>kat. B</span></div><div class="price"><span class="od">od</span><span class="v">230</span><span class="u">zł / doba</span></div><div class="tiers-mini"><span>do 300 km <b>230 zł</b></span><span>bez limitu km <b>430 zł</b></span></div><span class="card-cta">Zobacz szczegóły <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span></div></a>
+      <a class="card" data-seg="oso" data-slug="auto-suv" data-tilt="9" href="auto-suv.html"><div class="media"><span class="seg-tag"><b>OSO</b>Hatchback</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200449_c11bbded-d5e2-4ae1-b8a6-6a78073b9905.png" alt="Škoda Scala 2025 — wynajem | Power Rent Radom" loading="lazy"><span class="avail" data-slug="auto-suv"><i class="dot"></i><b>Dostępne</b></span></div><div class="body"><h3>Škoda Scala</h3><div class="models">Auto osobowe · ekonomiczny · kat. B</div><div class="specs-row"><span>5 osób</span><span>ekonomiczny</span><span>kat. B</span></div><div class="price"><span class="od">od</span><span class="v">280</span><span class="u">zł / doba</span></div><div class="tiers-mini"><span>do 300 km <b>280 zł</b></span><span>bez limitu km <b>500 zł</b></span></div><span class="card-cta">Zobacz szczegóły <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span></div></a>
+      <a class="card" data-seg="s" data-slug="auto-kangoo" data-tilt="9" href="auto-kangoo.html"><div class="media"><span class="seg-tag"><b>S</b>Małe</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_102144_16bf0663-c0f2-4038-95bc-53aa66a197b1.png" alt="Renault Kangoo 2022 — wynajem | Power Rent Radom" loading="lazy"><span class="avail" data-slug="auto-kangoo"><i class="dot"></i><b>Dostępne</b></span></div><div class="body"><h3>Renault Kangoo</h3><div class="models">Mały furgon dostawczy · kat. B</div><div class="specs-row"><span>do ~650 kg</span><span>~3 m³</span><span>2 os.</span></div><div class="price"><span class="od">od</span><span class="v">180</span><span class="u">zł / doba</span></div><div class="tiers-mini"><span>doba od <b>180 zł</b></span><span>mies. od <b>2 700 zł</b></span></div><span class="card-cta">Zobacz szczegóły <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span></div></a>
+      <a class="card" data-seg="m" data-slug="auto-vivaro" data-tilt="9" href="auto-vivaro.html"><div class="media"><span class="seg-tag"><b>M</b>Średnie</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_100050_f36479d5-635f-4cf1-ac49-f34b4469bf4d.png" alt="Opel Vivaro 2022 — wynajem | Power Rent Radom" loading="lazy"><span class="avail" data-slug="auto-vivaro"><i class="dot"></i><b>Dostępne</b></span></div><div class="body"><h3>Opel Vivaro</h3><div class="models">Średni furgon dostawczy · kat. B</div><div class="specs-row"><span>do ~1100 kg</span><span>~5–6 m³</span><span>3 os.</span></div><div class="price"><span class="od">od</span><span class="v">280</span><span class="u">zł / doba</span></div><div class="tiers-mini"><span>doba od <b>280 zł</b></span><span>mies. od <b>3 600 zł</b></span></div><span class="card-cta">Zobacz szczegóły <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span></div></a>
+      <a class="card" data-seg="m" data-slug="auto-trafic-furgon" data-tilt="9" href="auto-trafic-furgon.html"><div class="media"><span class="seg-tag"><b>M</b>Średnie</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_100121_ea06cd22-4bed-4668-bb3b-452b64ff7849.png" alt="Renault Trafic furgon 2023 — wynajem | Power Rent Radom" loading="lazy"><span class="avail" data-slug="auto-trafic-furgon"><i class="dot"></i><b>Dostępne</b></span></div><div class="body"><h3>Renault Trafic furgon</h3><div class="models">Średni furgon dostawczy · kat. B</div><div class="specs-row"><span>do ~1100 kg</span><span>~6 m³</span><span>3 os.</span></div><div class="price"><span class="od">od</span><span class="v">280</span><span class="u">zł / doba</span></div><div class="tiers-mini"><span>doba od <b>280 zł</b></span><span>mies. od <b>3 600 zł</b></span></div><span class="card-cta">Zobacz szczegóły <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span></div></a>
+      <a class="card" data-seg="xl" data-slug="auto-iveco35" data-tilt="9" href="auto-iveco35.html"><div class="media"><span class="seg-tag"><b>XL</b>Największe</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_100128_0fe9ac42-bd3d-4073-ad6a-64bacdfee490.jpeg" alt="Iveco 35S/MR 2024 — wynajem | Power Rent Radom" loading="lazy"><span class="avail" data-slug="auto-iveco35"><i class="dot"></i><b>Dostępne</b></span></div><div class="body"><h3>Iveco 35S/MR</h3><div class="models">Duży furgon 3,5t · kat. B</div><div class="specs-row"><span>do ~1200 kg</span><span>~12 m³</span><span>3 os.</span></div><div class="price"><span class="od">od</span><span class="v">400</span><span class="u">zł / doba</span></div><div class="tiers-mini"><span>doba od <b>400 zł</b></span><span>mies. od <b>5 500 zł</b></span></div><span class="card-cta">Zobacz szczegóły <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span></div></a>
+      <a class="card" data-seg="xl" data-slug="auto-daily-maxi" data-tilt="9" href="auto-daily-maxi.html"><div class="media"><span class="seg-tag"><b>XL</b>Maxi</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_100134_287bbfa2-bebe-44d3-82eb-f6608cb06ee2.jpeg" alt="Iveco Daily furgon maxi 2025 — wynajem | Power Rent Radom" loading="lazy"><span class="avail" data-slug="auto-daily-maxi"><i class="dot"></i><b>Dostępne</b></span></div><div class="body"><h3>Iveco Daily furgon maxi</h3><div class="models">Największy furgon — wersja maxi · kat. B</div><div class="specs-row"><span>do ~1500 kg</span><span>~18 m³</span><span>3 os.</span></div><div class="price"><span class="od">od</span><span class="v">400</span><span class="u">zł / doba</span></div><div class="tiers-mini"><span>doba od <b>400 zł</b></span><span>mies. od <b>5 500 zł</b></span></div><span class="card-cta">Zobacz szczegóły <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span></div></a>
+      <a class="card" data-seg="xl" data-slug="auto-boxer" data-tilt="9" href="auto-boxer.html"><div class="media"><span class="seg-tag"><b>XL</b>Największe</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_100140_0c7cc935-a8bd-4f37-8996-4f3c4e4897d1.png" alt="Peugeot Boxer 2023 — wynajem | Power Rent Radom" loading="lazy"><span class="avail" data-slug="auto-boxer"><i class="dot"></i><b>Dostępne</b></span></div><div class="body"><h3>Peugeot Boxer</h3><div class="models">Duży furgon dostawczy · kat. B</div><div class="specs-row"><span>do ~1400 kg</span><span>~13 m³</span><span>3 os.</span></div><div class="price"><span class="od">od</span><span class="v">380</span><span class="u">zł / doba</span></div><div class="tiers-mini"><span>doba od <b>380 zł</b></span><span>mies. od <b>5 200 zł</b></span></div><span class="card-cta">Zobacz szczegóły <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span></div></a>
+      <a class="card" data-seg="xl" data-slug="auto-proace-bryg" data-tilt="9" href="auto-proace-bryg.html"><div class="media"><span class="seg-tag"><b>XL</b>Brygadówka</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_100146_6b444b5b-3d07-4bf0-9df8-e0dd5eab07ce.png" alt="Toyota Proace Brygadówka 2024 — wynajem | Power Rent Radom" loading="lazy"><span class="avail" data-slug="auto-proace-bryg"><i class="dot"></i><b>Dostępne</b></span></div><div class="body"><h3>Toyota Proace Brygadówka</h3><div class="models">Brygadówka — podwójna kabina · kat. B</div><div class="specs-row"><span>do ~1000 kg</span><span>~4 m³</span><span>6 os.</span></div><div class="price"><span class="od">od</span><span class="v">320</span><span class="u">zł / doba</span></div><div class="tiers-mini"><span>doba od <b>320 zł</b></span><span>mies. od <b>4 200 zł</b></span></div><span class="card-cta">Zobacz szczegóły <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span></div></a>
+      <a class="card" data-seg="xl" data-slug="auto-proace-max" data-tilt="9" href="auto-proace-max.html"><div class="media"><span class="seg-tag"><b>XL</b>Maxi</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_100152_bdbaee9e-3603-48e7-bdd4-1b85cd542109.jpeg" alt="Toyota Proace Max 2025 — wynajem | Power Rent Radom" loading="lazy"><span class="avail" data-slug="auto-proace-max"><i class="dot"></i><b>Dostępne</b></span></div><div class="body"><h3>Toyota Proace Max</h3><div class="models">Duży furgon — wersja Max · kat. B</div><div class="specs-row"><span>do ~1400 kg</span><span>~13 m³</span><span>3 os.</span></div><div class="price"><span class="od">od</span><span class="v">400</span><span class="u">zł / doba</span></div><div class="tiers-mini"><span>doba od <b>400 zł</b></span><span>mies. od <b>5 500 zł</b></span></div><span class="card-cta">Zobacz szczegóły <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span></div></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="how reveal">
+  <div class="eyebrow">Jak to działa</div>
+  <h2>Wynajem w trzech krokach</h2>
+  <div class="how-grid">
+    <div class="step"><span class="sn">1</span><h3>Zadzwoń lub napisz</h3><p>Jeden telefon na 664 201 202 — powiedz, co i kiedy chcesz przewieźć.</p></div>
+    <div class="step"><span class="sn">2</span><h3>Dobieramy auto</h3><p>Podpowiemy segment dopasowany do Twojego ładunku, trasy i budżetu.</p></div>
+    <div class="step"><span class="sn">3</span><h3>Odbierasz w ~10 min</h3><p>Szybkie wydanie, a w cenie zawsze OC i assistance — w Polsce i za granicą.</p></div>
+  </div>
+</section>
+
+<div class="note reveal">
+  <div class="note-in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v5c0 4.4-3 8.3-7 10-4-1.7-7-5.6-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+    <div>Ceny orientacyjne, brutto, za wynajem auta. Przy dłuższym najmie i stałej współpracy ustalamy indywidualną, korzystniejszą stawkę. W cenę najmu wliczone OC oraz assistance — w Polsce i za granicą. Auta osobowe rozliczamy w pakietach kilometrowych. Szczegóły i dostępność potwierdzamy telefonicznie: <b>664 201 202</b>.</div>
+  </div>
+</div>
+
+<section class="cta" id="rezerwacja">
+  <h2>Nie wiesz, które auto <em>wybrać?</em></h2>
+  <p>Zadzwoń — dobierzemy pojazd do Twojego ładunku i trasy, i podamy najlepszą cenę.</p>
+  <div class="cta-row"><a href="tel:664201202" class="btn btn-red">Zadzwoń: 664 201 202</a><a href="#flota" class="btn btn-ghost">Wróć do floty</a></div>
+</section>
+
+<footer class="foot">© 2026 <b>Power Rent</b> · Radom · 664 201 202 · wynajem aut dostawczych i osobowych</footer>
+
+<button class="totop" data-totop aria-label="Wróć na górę" title="Na górę"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<div class="pr-toast" data-toast aria-live="polite"></div>
+<script>
+/* ===== Power Rent — silnik efektów ===== */
+(function () {
+  'use strict';
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = window.matchMedia && matchMedia('(pointer: fine)').matches;
+  var raf = window.requestAnimationFrame || function (f) { return setTimeout(f, 16); };
+
+  /* ---- premium loader ---- */
+  var loader = document.getElementById('pr-loader');
+  var done = false;
+  function ready() {
+    if (done) return; done = true;
+    document.body.classList.add('ready');
+    if (loader) { loader.classList.add('done'); setTimeout(function () { if (loader.parentNode) loader.parentNode.removeChild(loader); }, 750); }
+  }
+  window.addEventListener('load', function () { setTimeout(ready, 350); });
+  setTimeout(ready, 2600); // bezpiecznik gdyby load nie odpalił
+
+  /* ---- rotating word (kinetic) ---- */
+  var rot = document.getElementById('rotw');
+  if (rot && !reduce) {
+    var words = (rot.getAttribute('data-words') || '').split('|').filter(Boolean);
+    if (words.length > 1) {
+      var ri = 0;
+      rot.style.transition = 'opacity .4s ease, transform .4s ease';
+      setInterval(function () {
+        rot.style.opacity = '0'; rot.style.transform = 'translateY(-8px)';
+        setTimeout(function () {
+          ri = (ri + 1) % words.length; rot.textContent = words[ri];
+          rot.style.opacity = '1'; rot.style.transform = 'none';
+        }, 400);
+      }, 2400);
+    }
+  }
+
+  /* ---- reveal on scroll (sections + cards) ---- */
+  var rev = [].slice.call(document.querySelectorAll('.reveal, .card'));
+  if (!('IntersectionObserver' in window) || reduce) {
+    rev.forEach(function (e) { e.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    rev.forEach(function (e) { io.observe(e); });
+  }
+
+  /* ---- animated counters ---- */
+  var counters = [].slice.call(document.querySelectorAll('[data-count]'));
+  function animCount(el) {
+    var to = parseFloat(el.getAttribute('data-count')) || 0, dur = 1200, st = null;
+    function step(ts) {
+      if (!st) st = ts;
+      var p = Math.min((ts - st) / dur, 1), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(to * e);
+      if (p < 1) raf(step); else { el.textContent = to; el.classList.add('pop'); }
+    }
+    raf(step);
+  }
+  if (counters.length) {
+    if (reduce || !('IntersectionObserver' in window)) {
+      counters.forEach(function (c) { c.textContent = c.getAttribute('data-count'); });
+    } else {
+      var cio = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { animCount(e.target); cio.unobserve(e.target); } });
+      }, { threshold: 0.6 });
+      counters.forEach(function (c) { cio.observe(c); });
+    }
+  }
+
+  /* ---- parallax (mouse + scroll) ---- */
+  if (!reduce) {
+    var pl = [].slice.call(document.querySelectorAll('[data-parallax]'));
+    if (pl.length) {
+      var mx = 0, my = 0, tmx = 0, tmy = 0, sy = window.pageYOffset;
+      window.addEventListener('mousemove', function (e) {
+        tmx = (e.clientX / window.innerWidth - 0.5);
+        tmy = (e.clientY / window.innerHeight - 0.5);
+      }, { passive: true });
+      window.addEventListener('scroll', function () { sy = window.pageYOffset; }, { passive: true });
+      (function loop() {
+        mx += (tmx - mx) * 0.06; my += (tmy - my) * 0.06;
+        for (var i = 0; i < pl.length; i++) {
+          var el = pl[i];
+          var d = parseFloat(el.getAttribute('data-parallax')) || 20;
+          var ys = parseFloat(el.getAttribute('data-py')) || 0;
+          el.style.transform = 'translate3d(' + (mx * d).toFixed(2) + 'px,' + (my * d + sy * ys).toFixed(2) + 'px,0)';
+        }
+        raf(loop);
+      })();
+    }
+  }
+
+  /* ---- 3D tilt + cursor glow ---- */
+  if (!reduce && fine) {
+    [].slice.call(document.querySelectorAll('[data-tilt]')).forEach(function (card) {
+      var max = parseFloat(card.getAttribute('data-tilt')) || 9;
+      card.addEventListener('mouseenter', function () { card.classList.add('is-tilt'); });
+      card.addEventListener('mousemove', function (e) {
+        var b = card.getBoundingClientRect();
+        var px = (e.clientX - b.left) / b.width, py = (e.clientY - b.top) / b.height;
+        card.style.transform = 'perspective(900px) rotateX(' + ((0.5 - py) * max).toFixed(2) + 'deg) rotateY(' + ((px - 0.5) * max).toFixed(2) + 'deg) translateY(-6px)';
+        card.style.setProperty('--mx', (px * 100).toFixed(1) + '%');
+        card.style.setProperty('--my', (py * 100).toFixed(1) + '%');
+      });
+      card.addEventListener('mouseleave', function () {
+        card.classList.remove('is-tilt'); card.style.transform = '';
+      });
+    });
+  }
+
+  /* ---- magnetic buttons ---- */
+  if (!reduce && fine) {
+    [].slice.call(document.querySelectorAll('[data-magnetic]')).forEach(function (btn) {
+      var s = parseFloat(btn.getAttribute('data-magnetic')) || 0.35;
+      btn.addEventListener('mousemove', function (e) {
+        var b = btn.getBoundingClientRect();
+        var x = e.clientX - b.left - b.width / 2, y = e.clientY - b.top - b.height / 2;
+        btn.style.transform = 'translate(' + (x * s).toFixed(1) + 'px,' + (y * s).toFixed(1) + 'px)';
+      });
+      btn.addEventListener('mouseleave', function () { btn.style.transform = ''; });
+    });
+  }
+
+  /* ---- header shadow on scroll ---- */
+  var hd = document.querySelector('.ph-header');
+  if (hd) {
+    var onScroll = function () { hd.classList.toggle('scrolled', window.pageYOffset > 8); };
+    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  }
+
+  /* ---- dostępność floty (kropki + statusy) ---- */
+  var MON = ['stycznia','lutego','marca','kwietnia','maja','czerwca','lipca','sierpnia','września','października','listopada','grudnia'];
+  function fmtDate(iso) {
+    if (!iso) return '';
+    var p = ('' + iso).split('-'); if (p.length !== 3) return iso;
+    var d = new Date(+p[0], +p[1] - 1, +p[2]); if (isNaN(d.getTime())) return iso;
+    return d.getDate() + ' ' + MON[d.getMonth()] + ' ' + d.getFullYear();
+  }
+  function applyAvailability() {
+    var AV = window.PR_AVAILABILITY || {};
+    [].slice.call(document.querySelectorAll('.avail')).forEach(function (el) {
+      var a = AV[el.getAttribute('data-slug')] || { status: 'in' };
+      var out = a.status === 'out', full = el.classList.contains('full');
+      el.classList.remove('is-in', 'is-out'); el.classList.add(out ? 'is-out' : 'is-in');
+      var b = el.querySelector('b'); if (!b) return;
+      if (out) b.textContent = full ? (a.from ? 'Niedostępne · wolne od ' + fmtDate(a.from) : 'Obecnie niedostępne') : 'Zajęte';
+      else b.textContent = full ? 'Dostępne od ręki' : 'Dostępne';
+    });
+  }
+  window.PR = window.PR || {}; window.PR.refreshAvailability = applyAvailability;
+  applyAvailability();
+
+  /* ---- cennik: wybór segmentu (okładki → flota) ---- */
+  (function () {
+    var intro = document.getElementById('segIntro');
+    var fleet = document.getElementById('segFleet');
+    if (!intro || !fleet) return;
+    var cards = [].slice.call(document.querySelectorAll('#segGrid .card'));
+    var chips = [].slice.call(document.querySelectorAll('#segSwitch .fchip'));
+    var title = document.getElementById('segTitle');
+    var sub = document.getElementById('segSub');
+
+    function animateIn(list) {
+      list.forEach(function (c, i) {
+        c.classList.remove('in');
+        c.style.transition = 'none';
+        void c.offsetWidth;
+        c.style.transition = '';
+        c.style.transitionDelay = (i * 0.06) + 's';
+        c.classList.add('in');
+      });
+      setTimeout(function () { list.forEach(function (c) { c.style.transitionDelay = ''; }); }, 800 + list.length * 60);
+    }
+
+    function showSeg(key) {
+      var ref = document.querySelector('#segSwitch [data-f="' + key + '"]');
+      intro.style.display = 'none';
+      fleet.hidden = false;
+      var vis = [];
+      cards.forEach(function (c) {
+        var on = c.getAttribute('data-seg') === key;
+        c.style.display = on ? '' : 'none';
+        if (on) vis.push(c);
+      });
+      chips.forEach(function (c) { c.classList.toggle('active', c === ref); });
+      if (ref) { title.textContent = ref.getAttribute('data-name'); sub.textContent = ref.getAttribute('data-sub'); }
+      animateIn(vis);
+      var y = fleet.getBoundingClientRect().top + window.pageYOffset - 78;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+
+    function showCovers() {
+      fleet.hidden = true;
+      intro.style.display = '';
+      var y = intro.getBoundingClientRect().top + window.pageYOffset - 78;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+
+    [].slice.call(document.querySelectorAll('[data-cover]')).forEach(function (b) {
+      b.addEventListener('click', function () { showSeg(b.getAttribute('data-cover')); });
+    });
+    chips.forEach(function (c) {
+      c.addEventListener('click', function () { showSeg(c.getAttribute('data-f')); });
+    });
+    var bk = document.querySelector('[data-seg-back]');
+    if (bk) bk.addEventListener('click', showCovers);
+  })();
+
+  /* ---- przełącznik najmu krótko/długoterminowego (podstrony) ---- */
+  [].slice.call(document.querySelectorAll('[data-rent-toggle]')).forEach(function (tg) {
+    var wrap = tg.closest('.pwrap'); if (!wrap) return;
+    tg.addEventListener('click', function (e) {
+      var b = e.target.closest ? e.target.closest('.pt-opt') : null; if (!b) return;
+      wrap.setAttribute('data-mode', b.getAttribute('data-mode'));
+      [].forEach.call(tg.querySelectorAll('.pt-opt'), function (o) { o.classList.toggle('active', o === b); });
+    });
+  });
+
+  /* ---- wyjazdy zagraniczne: finder (spotlight + siatka + szukajka) ---- */
+  (function () {
+    var find = document.querySelector('.kfind');
+    if (!find) return;
+    var spot = find.querySelector('[data-kspot]');
+    var tiles = [].slice.call(find.querySelectorAll('.ktile'));
+    var filter = find.querySelector('[data-kfilter]');
+    var empty = find.querySelector('.kempty');
+    var coarse = window.matchMedia && !matchMedia('(pointer: fine)').matches;
+    var norm = function (s) { return (s || '').toString().trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); };
+
+    function select(tile, scroll) {
+      if (!tile || !spot) return;
+      spot.setAttribute('data-empty', '0');
+      spot.querySelector('[data-kspot-flag]').textContent = tile.getAttribute('data-flag');
+      spot.querySelector('[data-kspot-name]').textContent = tile.getAttribute('data-name');
+      spot.querySelector('[data-kspot-dep]').textContent = tile.getAttribute('data-dep');
+      spot.querySelector('[data-kspot-fee]').textContent = tile.getAttribute('data-fee');
+      spot.querySelector('[data-kspot-feewrap]').className = 'kspot-v fee ' + (tile.getAttribute('data-tier') || '');
+      tiles.forEach(function (t) { t.classList.toggle('on', t === tile); });
+      var card = spot.querySelector('.kspot-card');
+      if (card) { card.classList.remove('pop'); void card.offsetWidth; card.classList.add('pop'); }
+      if (scroll) spot.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    tiles.forEach(function (t) {
+      t.addEventListener('click', function () { select(t, coarse); });
+    });
+
+    if (filter) {
+      filter.addEventListener('input', function () {
+        var q = norm(this.value), shown = 0, only = null;
+        tiles.forEach(function (t) {
+          var hit = (t.getAttribute('data-c') || '').indexOf(q) > -1;
+          t.style.display = hit ? '' : 'none';
+          if (hit) { shown++; only = t; }
+        });
+        if (empty) empty.hidden = shown > 0;
+        if (q && shown === 1) select(only, false);
+      });
+    }
+
+    [].slice.call(find.querySelectorAll('[data-kgo]')).forEach(function (c) {
+      c.addEventListener('click', function () {
+        var slug = c.getAttribute('data-kgo'), t = null;
+        tiles.forEach(function (x) { if (x.getAttribute('data-c') === slug) t = x; });
+        if (t) { t.style.display = ''; select(t, true); }
+      });
+    });
+  })();
+
+  /* ---- smaczki: pasek postępu przewijania, wróć na górę, easter egg ---- */
+  (function () {
+    var spi = document.querySelector('.scroll-prog i');
+    var totop = document.querySelector('[data-totop]');
+    var doc = document.documentElement;
+    function prog() {
+      if (!spi) return;
+      var max = (doc.scrollHeight - doc.clientHeight) || 1;
+      var pct = (doc.scrollTop || document.body.scrollTop) / max * 100;
+      spi.style.width = (pct < 0 ? 0 : pct > 100 ? 100 : pct) + '%';
+    }
+    function topbtn() {
+      if (!totop) return;
+      if ((window.scrollY || window.pageYOffset) > 620) totop.classList.add('show');
+      else totop.classList.remove('show');
+    }
+    var ticking = false;
+    function onScroll() {
+      if (!ticking) { raf(function () { prog(); topbtn(); ticking = false; }); ticking = true; }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', prog, { passive: true });
+    prog(); topbtn();
+    if (totop) totop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    });
+
+    function toast(html, ms) {
+      var t = document.querySelector('[data-toast]');
+      if (!t) return;
+      t.innerHTML = html; t.classList.add('show');
+      clearTimeout(t._h); t._h = setTimeout(function () { t.classList.remove('show'); }, ms || 2600);
+    }
+    var seq = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65], pos = 0;
+    document.addEventListener('keydown', function (e) {
+      var k = e.keyCode;
+      pos = (k === seq[pos]) ? pos + 1 : (k === seq[0] ? 1 : 0);
+      if (pos === seq.length) {
+        pos = 0;
+        document.body.classList.add('turbo');
+        toast('🏁 <b>Tryb turbo PowerRent!</b> Brrm brrm 🚐', 3400);
+        setTimeout(function () { document.body.classList.remove('turbo'); }, 9000);
+      }
+    });
+  })();
+})();
+
+</script>
+</body>
+</html>
