@@ -560,6 +560,147 @@ window.PR_AVAILABILITY = {
 };
 
 </script>
+<style>
+.pbot{--fb:'Inter',system-ui,sans-serif;--fd:'Space Grotesk',system-ui,sans-serif;--bg:#fbfbfa;--ink:#0e1014;--ink-soft:#374151;--mut:#5f6877;--surface:#ffffff;--surface2:#f4f5f3;--line:#e9e9e4;--line-h:#deded7;--accent:#e3121a;--accent-d:#b90e15;--accent-l:#ff5a60;--accent-soft:#fdeaea;--on-accent:#ffffff;--accent-glow:0 10px 24px -8px rgba(227,18,26,.5);--accent-glow2:rgba(227,18,26,.35);--maxw:1200px;--hw:700;--hls:-.02em;--h1w:800;--rbtn:12px;--rcard:20px;--shadow:0 8px 24px -12px rgba(13,16,22,.18);--shadow-lg:0 18px 50px -20px rgba(13,16,22,.28);--logo:#0e1014;--nav-tx:#39414f;--head-bg:rgba(255,255,255,.92);--head-line:#e6e8ec;--ghost-bg:rgba(255,255,255,.08);--ghost-bd:rgba(255,255,255,.22);--ghost-tx:#fff;--hero-bg:#f3f4f2;--hero-tx:#0e1014;--hero-sub:#5f6877;--hero-eye:#e4121a;--hero-eye-bg:#ffffff;--hero-eye-bd:#e9e9e4;--hero-sep:#e1e1db;--tex:rgba(0,0,0,.04);--panel:#ffffff;--panel-bd:#e9e9e4;--float-bg:#ffffff;--center-veil:linear-gradient(180deg,rgba(8,9,13,.55),rgba(8,9,13,.8));--soft-panel:#f5f6f8;--dark-panel:linear-gradient(165deg,#14171e,#0d0f14);--abroad-bg:linear-gradient(115deg,#b90e15,#7d0c12);--badge-bg:rgba(14,16,20,.82);--badge-tx:#fff;--chip-tx:#41495a;--gold:#f6b73c;--foot-bg:#0d0f14;--showpad:110px}
+
+/* ===== availability: custom calendars ===== */
+.qf.qdate .ctl{position:relative;cursor:pointer}
+.qf.qdate input{cursor:pointer}
+.cal-pop{position:absolute;top:calc(100% + 11px);left:-3px;z-index:60;width:288px;background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-lg);padding:14px}
+.cal-pop[hidden]{display:none}
+.cal-pop::before{content:"";position:absolute;top:-7px;left:26px;width:13px;height:13px;background:var(--surface);border-left:1px solid var(--line);border-top:1px solid var(--line);transform:rotate(45deg)}
+.cal-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.cal-h span{font-family:var(--fd);font-weight:700;font-size:14.5px;color:var(--ink);text-transform:capitalize}
+.cal-nav{width:30px;height:30px;border-radius:9px;border:1px solid var(--line);background:var(--surface2);color:var(--ink);font-size:18px;line-height:1;cursor:pointer;display:grid;place-items:center;transition:.15s}
+.cal-nav:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.cal-dow{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px}
+.cal-dow span{text-align:center;font-size:11px;font-weight:600;color:var(--mut);padding:4px 0}
+.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cal-g>span{height:34px}
+.cal-d{height:34px;border:0;background:transparent;border-radius:9px;font-family:var(--fb);font-size:13.5px;font-weight:600;color:var(--ink);cursor:pointer;transition:background .14s,color .14s}
+.cal-d:hover:not(:disabled){background:var(--accent-soft);color:var(--accent-d)}
+.cal-d.td{box-shadow:inset 0 0 0 1.5px var(--accent)}
+.cal-d.se{background:var(--accent);color:#fff;box-shadow:var(--accent-glow)}
+.cal-d:disabled{color:#c7ccd4;cursor:not-allowed}
+
+/* ===== availability: results ===== */
+.avail-results{margin-top:16px;background:var(--surface);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:22px;animation:aresIn .4s ease}
+.avail-results[hidden]{display:none}
+@keyframes aresIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.ares-top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.ares-eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);margin-bottom:5px}
+.ares-top h3{font-family:var(--fd);font-size:clamp(18px,2.4vw,24px);font-weight:700;color:var(--ink);line-height:1.15}
+.ares-top .btn{height:44px}
+.ares-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:16px}
+.ares-card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--surface);box-shadow:0 8px 24px -16px rgba(18,20,25,.22);transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,border-color .25s}
+.ares-card:hover{transform:translateY(-5px);box-shadow:0 24px 46px -22px rgba(18,20,25,.34);border-color:var(--line-h)}
+.ares-img{position:relative;aspect-ratio:16/10;overflow:hidden}
+.ares-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.ares-card:hover .ares-img img{transform:scale(1.06)}
+.ares-ok{position:absolute;top:10px;left:10px;display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.94);color:#15803d;font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:30px;box-shadow:0 6px 16px -6px rgba(0,0,0,.3)}
+.ares-ok i{width:7px;height:7px;border-radius:50%;background:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.18)}
+.ares-b{padding:14px 15px 16px;display:flex;flex-direction:column;flex:1}
+.ares-type{font-size:11.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--accent)}
+.ares-b h4{font-family:var(--fd);font-size:17px;font-weight:700;color:var(--ink);margin:3px 0 9px}
+.ares-sp{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:13px}
+.ares-sp span{font-size:11.5px;color:var(--ink-soft);background:var(--surface2);border:1px solid var(--line);border-radius:7px;padding:4px 9px}
+.ares-ft{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.ares-pr{font-size:13.5px;color:var(--mut)}.ares-pr b{font-family:var(--fd);font-size:16px;color:var(--ink)}
+.ares-go{font-size:13px;font-weight:700;color:var(--accent)}
+.ares-note{margin-top:16px;font-size:12.5px;color:var(--mut);background:var(--surface2);border:1px dashed var(--line-h);border-radius:12px;padding:12px 15px}
+
+/* ===== PowerBOT ===== */
+.pbot{position:fixed;right:20px;bottom:20px;z-index:120;font-family:var(--fb)}
+.pbot-tag{position:absolute;right:74px;bottom:15px;background:#fff;color:var(--ink);font-family:var(--fd);font-weight:600;font-size:13.5px;padding:9px 15px;border-radius:30px;box-shadow:0 12px 30px -10px rgba(13,16,22,.35);border:1px solid var(--line);white-space:nowrap;pointer-events:none;animation:pbtagin .5s .9s both}
+.pbot-tag b{color:var(--accent);font-weight:800}
+.pbot-tag::after{content:"";position:absolute;top:50%;right:-6px;width:12px;height:12px;background:#fff;border-right:1px solid var(--line);border-top:1px solid var(--line);transform:translateY(-50%) rotate(45deg)}
+.pbot.open .pbot-tag{opacity:0;visibility:hidden;transform:translateX(6px);transition:.22s}
+@keyframes pbtagin{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:none}}
+.pbot-launch{position:relative;width:62px;height:62px;border-radius:50%;border:2.5px solid var(--accent);cursor:pointer;background:#fff;box-shadow:0 14px 34px -8px var(--accent-glow2),0 6px 16px rgba(0,0,0,.2);display:grid;place-items:center;padding:0;transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,background .25s,border-color .25s}
+.pbot.open .pbot-launch{background:linear-gradient(140deg,var(--accent-l),var(--accent-d));border-color:transparent}
+.pbot-launch:hover{transform:translateY(-3px) scale(1.04)}
+.pbot-launch::after{content:"";position:absolute;inset:0;border-radius:50%;animation:pbpulse 2.6s ease-out infinite;pointer-events:none}
+@keyframes pbpulse{0%{box-shadow:0 0 0 0 rgba(227,18,26,.42)}70%{box-shadow:0 0 0 15px rgba(227,18,26,0)}100%{box-shadow:0 0 0 0 rgba(227,18,26,0)}}
+.pbot-ic{position:absolute;display:grid;place-items:center;color:#fff;transition:opacity .25s,transform .25s}
+.pbot-ic svg{width:30px;height:30px}.pbot-ic-x svg{width:24px;height:24px}
+.pbot-ic-bot{inset:0;border-radius:50%;overflow:hidden}
+.pbot-mascot{width:100%;height:100%;object-fit:cover;display:block}
+.pbot-ic-x{opacity:0;transform:rotate(-90deg) scale(.6)}
+.pbot.open .pbot-ic-bot{opacity:0;transform:rotate(90deg) scale(.6)}
+.pbot.open .pbot-ic-x{opacity:1;transform:none}
+.pbot.open .pbot-launch::after{display:none}
+.pbot-badge{position:absolute;top:-3px;right:-3px;min-width:21px;height:21px;border-radius:11px;background:var(--accent);color:#fff;font-size:11.5px;font-weight:800;display:grid;place-items:center;border:2.5px solid #fff;padding:0 4px;box-shadow:0 3px 8px -2px rgba(0,0,0,.3)}
+.pbot-panel{position:absolute;right:0;bottom:78px;width:374px;max-width:calc(100vw - 32px);height:540px;max-height:calc(100vh - 120px);background:var(--surface);border:1px solid var(--line);border-radius:22px;box-shadow:0 30px 70px -22px rgba(13,16,22,.5);display:flex;flex-direction:column;overflow:hidden;transform-origin:bottom right;animation:pbopen .32s cubic-bezier(.2,.9,.3,1)}
+.pbot-panel[hidden]{display:none}
+@keyframes pbopen{from{opacity:0;transform:translateY(16px) scale(.94)}to{opacity:1;transform:none}}
+.pbot-head{display:flex;align-items:center;gap:11px;padding:14px 14px 13px;background:linear-gradient(135deg,var(--accent-d),var(--accent));color:#fff}
+.pbot-ava{width:44px;height:44px;border-radius:50%;background:#fff;overflow:hidden;flex:none;box-shadow:0 4px 12px -4px rgba(0,0,0,.3)}
+.pbot-ava svg{width:24px;height:24px;color:#fff}
+.pbot-id{flex:1;line-height:1.25}.pbot-id b{font-family:var(--fd);font-size:16px;display:block}
+.pbot-id span{font-size:11.5px;opacity:.92;display:flex;align-items:center;gap:6px}
+.pbot-on{width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 3px rgba(74,222,128,.3)}
+.pbot-x{width:32px;height:32px;border-radius:9px;border:none;background:rgba(255,255,255,.14);color:#fff;cursor:pointer;display:grid;place-items:center;transition:background .15s;flex:none}
+.pbot-x:hover{background:rgba(255,255,255,.28)}.pbot-x svg{width:17px;height:17px}
+.pbot-body{flex:1;overflow-y:auto;padding:16px 14px 8px;background:var(--bg);display:flex;flex-direction:column;gap:11px}
+.pmsg{display:flex;gap:8px;max-width:88%}
+.pmsg.user{align-self:flex-end;flex-direction:row-reverse}
+.pmsg.bot{align-self:flex-start}
+.pmsg.pacts{padding-left:34px;max-width:100%}
+.pacts-in{display:flex;flex-wrap:wrap;gap:7px}
+.pava{width:27px;height:27px;border-radius:50%;background:#fff;overflow:hidden;flex:none;align-self:flex-end;border:1px solid var(--line)}
+.pava-img{width:100%;height:100%;object-fit:cover;display:block}
+.pbub{padding:10px 13px;border-radius:15px;font-size:13.6px;line-height:1.5;box-shadow:0 2px 8px -4px rgba(18,20,25,.2)}
+.pmsg.bot .pbub{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-bottom-left-radius:5px}
+.pmsg.user .pbub{background:linear-gradient(135deg,var(--accent),var(--accent-d));color:#fff;border-bottom-right-radius:5px}
+.pbub a{font-weight:700;text-decoration:underline}
+.pmsg.bot .pbub a{color:var(--accent-d)}.pmsg.user .pbub a{color:#fff}
+.ptyping .pbub{display:flex;gap:4px;align-items:center;padding:13px}
+.pdot{width:7px;height:7px;border-radius:50%;background:var(--mut);opacity:.5;animation:pbdot 1.2s infinite}
+.pdot:nth-child(2){animation-delay:.18s}.pdot:nth-child(3){animation-delay:.36s}
+@keyframes pbdot{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-4px);opacity:1}}
+.pbot-quick{display:flex;flex-wrap:wrap;gap:7px;padding:10px 14px;background:var(--bg);border-top:1px solid var(--line)}
+.pchip{font-family:var(--fb);font-size:12.5px;font-weight:600;color:var(--accent-d);background:var(--surface);border:1px solid var(--accent-soft);border-radius:30px;padding:7px 13px;cursor:pointer;transition:.16s}
+.pchip:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.pchip-act{background:var(--accent-soft);border-color:transparent}
+.pbot-input{display:flex;align-items:center;gap:8px;padding:11px 12px;background:var(--surface);border-top:1px solid var(--line)}
+.pbot-input input{flex:1;border:1.5px solid var(--line);background:var(--surface2);border-radius:24px;padding:11px 15px;font-family:var(--fb);font-size:14px;color:var(--ink);outline:none;transition:border-color .15s,background .15s;min-width:0}
+.pbot-input input:focus{border-color:var(--accent);background:var(--surface)}
+.pbot-input button{width:42px;height:42px;border-radius:50%;border:none;background:linear-gradient(135deg,var(--accent),var(--accent-d));color:#fff;cursor:pointer;display:grid;place-items:center;flex:none;transition:transform .15s;box-shadow:var(--accent-glow)}
+.pbot-input button:hover{transform:scale(1.06)}.pbot-input button svg{width:18px;height:18px}
+.pbot-foot{font-size:11px;color:var(--mut);text-align:center;padding:8px 12px;background:var(--surface);border-top:1px solid var(--line)}
+.pbot-foot a{color:var(--accent-d);font-weight:700;text-decoration:none}
+
+/* highlight a section after PowerBOT scrolls the user to it */
+.pr-flash{position:relative;animation:prflash 2.3s cubic-bezier(.4,0,.2,1)}
+@keyframes prflash{
+ 0%{box-shadow:0 0 0 0 rgba(227,18,26,0)}
+ 8%{box-shadow:0 0 0 6px rgba(227,18,26,.55),0 22px 55px -12px rgba(227,18,26,.5)}
+ 26%{box-shadow:0 0 0 1px rgba(227,18,26,.2)}
+ 42%{box-shadow:0 0 0 6px rgba(227,18,26,.5),0 22px 55px -12px rgba(227,18,26,.42)}
+ 60%{box-shadow:0 0 0 1px rgba(227,18,26,.15)}
+ 76%{box-shadow:0 0 0 5px rgba(227,18,26,.4),0 22px 55px -12px rgba(227,18,26,.34)}
+ 100%{box-shadow:0 0 0 0 rgba(227,18,26,0)}
+}
+.pr-flash::after{content:"PowerBot Cię tu przeniósł ✦";position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--accent),var(--accent-d));color:#fff;font-family:var(--fb);font-size:11.5px;font-weight:700;padding:4px 12px;border-radius:30px;white-space:nowrap;box-shadow:0 8px 20px -6px var(--accent-glow2);z-index:8;animation:prtag 2.3s ease forwards;pointer-events:none}
+@keyframes prtag{0%{opacity:0;transform:translateX(-50%) translateY(6px)}10%{opacity:1;transform:translateX(-50%) translateY(0)}80%{opacity:1;transform:translateX(-50%) translateY(0)}100%{opacity:0;transform:translateX(-50%) translateY(-4px)}}
+@media(prefers-reduced-motion:reduce){.pr-flash{animation:none;box-shadow:0 0 0 3px var(--accent)!important}.pr-flash::after{animation:none}}
+
+/* move FAB to bottom-left so it never clashes with PowerBOT */
+.fab{right:auto;left:16px;bottom:16px}
+
+@media(max-width:680px){
+  .pbot{right:14px;bottom:14px}
+  .pbot-panel{width:calc(100vw - 24px);height:calc(100vh - 128px);right:-2px;bottom:74px}
+  .ares-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .ares-top .btn{width:100%}
+  .cal-pop{width:290px;left:auto;right:-3px}
+  .cal-pop::before{left:auto;right:26px}
+}
+@media(max-width:430px){.ares-grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.pbot-launch::after{animation:none}.avail-results,.pbot-panel{animation:none}}
+
+.totop{right:auto;left:22px}
+</style>
 </head>
 <body>
 <div class="scroll-prog" aria-hidden="true"><i></i></div>
@@ -773,6 +914,7 @@ window.PR_AVAILABILITY = {
 
 <button class="totop" data-totop aria-label="Wróć na górę" title="Na górę"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 <div class="pr-toast" data-toast aria-live="polite"></div>
+<div class="pbot" id="pbot"><span class="pbot-tag" id="pbotTag"><b>Power</b>Bot</span><button class="pbot-launch" id="pbotLaunch" aria-label="Otwórz czat PowerBot"><span class="pbot-ic pbot-ic-bot"><img class="pbot-mascot" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_230728_d01bdf65-7455-4623-96cf-573e9246f76f.png" alt="PowerBot" loading="lazy"></span><span class="pbot-ic pbot-ic-x"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round'><path d='M6 6l12 12M18 6 6 18'/></svg></span><span class="pbot-badge">1</span></button><div class="pbot-panel" id="pbotPanel" role="dialog" aria-label="PowerBot" hidden><div class="pbot-head"><div class="pbot-ava"><img class="pbot-mascot" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_230728_d01bdf65-7455-4623-96cf-573e9246f76f.png" alt="PowerBot" loading="lazy"></div><div class="pbot-id"><b>PowerBot</b><span><i class="pbot-on"></i>Online · zwykle od razu</span></div><button class="pbot-x" id="pbotClose" aria-label="Zamknij"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round'><path d='M6 6l12 12M18 6 6 18'/></svg></button></div><div class="pbot-body" id="pbotBody"></div><div class="pbot-quick" id="pbotQuick"></div><form class="pbot-input" id="pbotForm"><input id="pbotText" placeholder="Napisz wiadomość…" autocomplete="off"><button type="submit" aria-label="Wyślij"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M22 2 11 13M22 2l-7 20-4-9-9-4z'/></svg></button></form><div class="pbot-foot">Demo · pełna AI wkrótce · pilne? <a href="tel:+48664201202">664 201 202</a></div></div></div>
 <script>
 /* ===== Power Rent — silnik efektów ===== */
 (function () {
@@ -1088,6 +1230,126 @@ window.PR_AVAILABILITY = {
       }
     });
   })();
+})();
+
+</script>
+<script>
+var PR_VEH=[{"t": "Mikrobus", "n": "Mikrobus dostawczy", "s": ["705 kg", "2 miejsca", "kat. B"], "p": "200", "per": "doba", "href": "auto-mikrobus.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200336_fd130bf2-48c2-4327-b52d-1a09264d655d.png", "cat": "dostawcze"}, {"t": "Średni", "n": "Auto dostawcze", "s": ["1408 kg", "3 miejsca", "L2H1"], "p": "280", "per": "doba", "href": "auto-male.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200347_633102cd-ed81-4cee-99fb-1768be9f65d8.png", "cat": "dostawcze"}, {"t": "Największe", "n": "Największy furgon", "s": ["8 europalet", "3 miejsca", "kat. B"], "p": "300", "per": "5 h", "href": "auto-najwieksze.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200412_27c8fc18-e150-471e-b9e5-24476c9c92c6.png", "cat": "dostawcze"}, {"t": "Chłodnia", "n": "Chłodnia", "s": ["agregat", "8 europalet", "750 kg"], "p": "350", "per": "5 h", "href": "auto-chlodnia.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200428_833d4bb0-c7df-461a-aedc-fa8f4fbafa9c.png", "cat": "chlodnia"}, {"t": "Laweta", "n": "Auto-laweta", "s": ["najazdy", "1115 kg", "przewóz aut"], "p": "250", "per": "5 h", "href": "auto-laweta.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200434_f9dafa51-b7c5-457a-8df1-887dd70fa351.png", "cat": "laweta"}, {"t": "9 osób", "n": "Bus 9-osobowy", "s": ["9 miejsc", "automat", "kat. B"], "p": "250", "per": "5 h", "href": "auto-bus.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_085325_633d50e0-0993-4247-b51a-bf7ee8c47eaa.png", "cat": "bus9"}, {"t": "Osobowe", "n": "Auto osobowe", "s": ["5 miejsc", "automat", "ekonomiczne"], "p": "200", "per": "5 h", "href": "auto-sedan.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200444_759ee268-7ed4-49cb-b9ef-71d97eb7963f.png", "cat": "osobowe"}, {"t": "Winda", "n": "Kontener z windą", "s": ["winda", "8 europalet", "704 kg"], "p": "300", "per": "5 h", "href": "auto-daily-maxi.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_114843_81fbfccd-beb6-4c88-bee8-234f92ab42e0.png", "cat": "dostawcze"}];
+var PR_AVA='<img class="pava-img" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_230728_d01bdf65-7455-4623-96cf-573e9246f76f.png" alt="">';
+
+(function(){
+  function p2(n){return (n<10?'0':'')+n;}
+  function flash(el){if(!el)return;el.classList.remove('pr-flash');void el.offsetWidth;el.classList.add('pr-flash');setTimeout(function(){el.classList.remove('pr-flash');},2400);}
+  /* ============ availability search + calendars ============ */
+  var qtype=document.getElementById('qtype');
+  if(qtype){
+    var MON=['styczeń','luty','marzec','kwiecień','maj','czerwiec','lipiec','sierpień','wrzesień','październik','listopad','grudzień'];
+    var DOW=['Pn','Wt','Śr','Cz','Pt','So','Nd'];
+    function iso(d){return d.getFullYear()+'-'+p2(d.getMonth()+1)+'-'+p2(d.getDate());}
+    function fmt(d){return p2(d.getDate())+'.'+p2(d.getMonth()+1)+'.'+d.getFullYear();}
+    function fromISO(s){var a=s.split('-');return new Date(+a[0],+a[1]-1,+a[2]);}
+    function today(){var d=new Date();d.setHours(0,0,0,0);return d;}
+    function parse(s){var m=(s||'').trim().match(/^(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{4})$/);if(!m)return null;var d=new Date(+m[3],+m[2]-1,+m[1]);d.setHours(0,0,0,0);return isNaN(d.getTime())?null:d;}
+    var pops=[];
+    function closeAll(except){pops.forEach(function(p){if(p&&p!==except){p.hidden=true;p.parentElement.classList.remove('cal-open');}});}
+    function mkCal(input,getMin,onPick){
+      var ctl=input.parentElement;
+      var pop=document.createElement('div');pop.className='cal-pop';pop.hidden=true;ctl.appendChild(pop);pops.push(pop);
+      var view=today();view.setDate(1);
+      function draw(){
+        var min=getMin&&getMin();var t=today();var y=view.getFullYear(),m=view.getMonth();
+        var start=(new Date(y,m,1).getDay()+6)%7;var n=new Date(y,m+1,0).getDate();var sel=input.dataset.iso||'';
+        var h='<div class="cal-h"><button type="button" class="cal-nav" data-n="-1" aria-label="Poprzedni">‹</button><span>'+MON[m]+' '+y+'</span><button type="button" class="cal-nav" data-n="1" aria-label="Następny">›</button></div>';
+        h+='<div class="cal-dow">';for(var i=0;i<7;i++)h+='<span>'+DOW[i]+'</span>';h+='</div><div class="cal-g">';
+        for(var e=0;e<start;e++)h+='<span></span>';
+        for(var d=1;d<=n;d++){var cur=new Date(y,m,d);var dis=min&&cur<min;var cl='cal-d';if(cur.getTime()===t.getTime())cl+=' td';if(sel===iso(cur))cl+=' se';h+='<button type="button" class="'+cl+'" data-iso="'+iso(cur)+'"'+(dis?' disabled':'')+'>'+d+'</button>';}
+        h+='</div>';pop.innerHTML=h;
+      }
+      function set(d){input.value=fmt(d);input.dataset.iso=iso(d);if(onPick)onPick(d);}
+      function open(){if(!input.dataset.iso)set(today());view=fromISO(input.dataset.iso);view.setDate(1);draw();closeAll(pop);pop.hidden=false;ctl.classList.add('cal-open');}
+      function close(){pop.hidden=true;ctl.classList.remove('cal-open');}
+      input.addEventListener('focus',open);
+      input.addEventListener('click',function(e){e.stopPropagation();open();});
+      pop.addEventListener('click',function(e){e.stopPropagation();var nv=e.target.closest('[data-n]');if(nv){view.setMonth(view.getMonth()+(+nv.getAttribute('data-n')));draw();return;}var dd=e.target.closest('.cal-d');if(dd&&!dd.disabled){set(fromISO(dd.getAttribute('data-iso')));close();}});
+      input.addEventListener('change',function(){var pp=parse(input.value);if(pp)set(pp);});
+      input.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();var pp=parse(input.value);if(pp){set(pp);close();}}});
+      return {set:set,close:close,getISO:function(){return input.dataset.iso||'';}};
+    }
+    var fromInput=document.getElementById('qfrom'),toInput=document.getElementById('qto'),calTo;
+    var calFrom=mkCal(fromInput,function(){return today();},function(d){if(toInput.dataset.iso){var td=fromISO(toInput.dataset.iso);if(td<d)calTo.set(d);}});
+    calTo=mkCal(toInput,function(){return fromInput.dataset.iso?fromISO(fromInput.dataset.iso):today();},null);
+    document.addEventListener('click',function(){closeAll(null);});
+    function plform(n){return n===1?'auto':((n%10>=2&&n%10<=4)&&(n%100<10||n%100>=20)?'auta':'aut');}
+    function search(){
+      if(!fromInput.dataset.iso)calFrom.set(today());
+      if(!toInput.dataset.iso)calTo.set(fromISO(fromInput.dataset.iso));
+      var f=fromInput.dataset.iso,t=toInput.dataset.iso;
+      if(fromISO(t)<fromISO(f)){calTo.set(fromISO(f));t=fromInput.dataset.iso;}
+      var cat=qtype.value;
+      var list=PR_VEH.filter(function(v){return cat==='all'||v.cat===cat;});
+      var cards=list.map(function(v){
+        return '<a class="ares-card" href="'+v.href+'"><div class="ares-img"><img src="'+v.img+'" alt="'+v.n+'" loading="lazy"><span class="ares-ok"><i></i>Dostępne</span></div>'
+          +'<div class="ares-b"><span class="ares-type">'+v.t+'</span><h4>'+v.n+'</h4>'
+          +'<div class="ares-sp">'+v.s.map(function(x){return '<span>'+x+'</span>';}).join('')+'</div>'
+          +'<div class="ares-ft"><span class="ares-pr">od <b>'+v.p+' zł</b> / '+v.per+'</span><span class="ares-go">Szczegóły →</span></div></div></a>';
+      }).join('');
+      var head='<div class="ares-top"><div><span class="ares-eyebrow">Wolne auta</span><h3>'+list.length+' '+plform(list.length)+' w terminie '+fmt(fromISO(f))+' – '+fmt(fromISO(t))+'</h3></div>'
+        +'<a class="btn btn-a" href="tel:+48664201202">Zadzwoń i zarezerwuj</a></div>';
+      var note='<div class="ares-note">To podgląd oferty dla wybranego typu. Realną dostępność w danym terminie potwierdzamy telefonicznie — wkrótce rezerwacja online zintegrowana z systemem.</div>';
+      var res=document.getElementById('availResults');
+      res.innerHTML=head+'<div class="ares-grid">'+cards+'</div>'+note;res.hidden=false;
+      res.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+    document.getElementById('qsearch').addEventListener('click',search);
+    if(location.hash==='#szukaj'){var _c=document.getElementById('availCard');if(_c)setTimeout(function(){flash(_c);},520);}
+  }
+  /* ============ PowerBOT ============ */
+  var pbot=document.getElementById('pbot');
+  if(pbot){
+    var launch=document.getElementById('pbotLaunch'),panel=document.getElementById('pbotPanel'),closeB=document.getElementById('pbotClose'),
+        body=document.getElementById('pbotBody'),quick=document.getElementById('pbotQuick'),form=document.getElementById('pbotForm'),text=document.getElementById('pbotText'),
+        badge=launch.querySelector('.pbot-badge');
+    var started=false, convo=[], AI_URL='/api/chat';
+    var QUICK=['Jakie auto wybrać?','Sprawdź dostępność','Auto na przeprowadzkę','Bus 9-osobowy','Cennik','Wynajem za granicę','Kaucja i warunki','Pomoc drogowa 24/7','Najem długoterminowy','Kontakt'];
+    function esc(s){return s.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+    function linkify(s){s=s.replace(/(https?:\/\/[^\s<]+)/g,function(u){return '<a href="'+u+'" target="_blank" rel="noopener">'+u+'</a>';});s=s.replace(/([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,})/gi,function(m){return '<a href="mailto:'+m+'">'+m+'</a>';});s=s.replace(/(\d{3})[ \-](\d{3})[ \-](\d{3})/g,function(m,a,b,c){return '<a href="tel:+48'+a+b+c+'">'+a+' '+b+' '+c+'</a>';});return s.replace(/\n/g,'<br>');}
+    function strip(h){return h.replace(/<[^>]+>/g,'');}
+    function addUser(t){var m=document.createElement('div');m.className='pmsg user';m.innerHTML='<div class="pbub">'+esc(t)+'</div>';body.appendChild(m);body.scrollTop=body.scrollHeight;}
+    function addBot(html){var m=document.createElement('div');m.className='pmsg bot';m.innerHTML='<span class="pava">'+PR_AVA+'</span><div class="pbub">'+html+'</div>';body.appendChild(m);body.scrollTop=body.scrollHeight;return m;}
+    function addActs(labels){var a=document.createElement('div');a.className='pmsg bot pacts';a.innerHTML='<div class="pacts-in">'+labels.map(function(l){return '<button type="button" class="pchip pchip-act" data-go="'+l+'">'+l+'</button>';}).join('')+'</div>';body.appendChild(a);body.scrollTop=body.scrollHeight;}
+    function typing(){var m=document.createElement('div');m.className='pmsg bot ptyping';m.innerHTML='<span class="pava">'+PR_AVA+'</span><div class="pbub"><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span></div>';body.appendChild(m);body.scrollTop=body.scrollHeight;return m;}
+    function renderQuick(){quick.innerHTML=QUICK.map(function(q){return '<button type="button" class="pchip">'+q+'</button>';}).join('');}
+    function reply(txt){
+      var s=txt.toLowerCase();
+      if(/d[lł]ugotermin|abonament|miesi[ęe]czn|na sta[lł]e|na d[lł]u[żz]ej|flot[aęy] dla firm/.test(s)) return 'Najem długoterminowy (miesięczny) — taniej, ceny netto, faktura VAT, auto serwisowane. Świetne dla firm. Zadzwoń po indywidualną wycenę: <a href="tel:+48664201202">664 201 202</a>.|Cennik';
+      if(/za granic|zagranic|granic|niemc|holandi|w[lł]och|francj|czech|s[lł]owac|europ|wyjazd za/.test(s)) return 'Tak, można wyjechać za granicę — OC i assistance działają też poza Polską. Kaucja i opłata zależą od kraju; szczegóły w cenniku każdego auta lub telefonicznie: <a href="tel:+48664201202">664 201 202</a>.|Cennik';
+      if(/przeprowadzk|mebl|agd|du[żz]e rzeczy|du[żz]e gabaryt|spakowa|kanap|lod[óo]wk|pralk/.test(s)) return 'Na przeprowadzkę najlepszy największy furgon lub kontener z windą — do 8 europalet, spora ładowność, od <b>300 zł</b>. Na drobne rzeczy wystarczy mikrobus (od 200 zł). Sprawdź wolny termin albo dzwoń: 664 201 202.|Sprawdź dostępność|Cennik';
+      if(/9[\- ]?osob|dziewi[ęe][ćc]|busem|ekip|grup[aęy]|wesel|wycieczk|przew[oó]z os[oó]b|9 miejsc/.test(s)) return 'Bus 9-osobowy (Renault Trafic, automat, kat. B) — od <b>250 zł</b>. Idealny na ekipę, grupę albo rodzinę, bez specjalnych uprawnień. Sprawdź dostępność na górze strony.|Sprawdź dostępność';
+      if(/kaucj|warunk|wymag|dokument|prawo jazdy|ile lat|od ilu lat|wiek|umow|co potrzeb/.test(s)) return 'Wynajem od 18 lat z ważnym prawem jazdy (kat. B wystarcza do całej floty, też busa 9-os.). Kaucja w Polsce 1000 zł. W cenie OC + assistance, faktura VAT, auto od ręki — formalności około 10 minut.|Sprawdź dostępność';
+      if(/jakie auto|jaki samoch|dobierz|doradz|co wybra|co polec|pole[cć]|nie wiem jak|przewoz|przewie[źz]|transport|[lł]adun|co najlep|pomó[żz] wybra/.test(s)) return 'Powiedz, co przewozisz i ile tego jest — dobiorę auto. W skrócie: paczki i drobne → mikrobus (od 200 zł), meble i AGD → dostawcze L2H1 (od 280 zł), przeprowadzka → największy furgon lub winda (od 300 zł), świeże i mrożone → chłodnia (od 350 zł), przewóz auta → laweta (od 250 zł).|Sprawdź dostępność|Cennik';
+      if(/dost[ęe]pn|rezerw|woln|kiedy|na jutro|na dzi[śs]|na weekend/.test(s)) return 'Sprawdzisz to w wyszukiwarce na górze strony — wybierz typ auta oraz termin (od/do), a pokażę wolne pojazdy. Rezerwację potwierdzamy telefonicznie: <a href="tel:+48664201202">664 201 202</a>.|Sprawdź dostępność';
+      if(/cennik|cen[aęy]|ile kosztuje|koszt|stawk|p[lł]ac/.test(s)) return 'Krótko z cennika: dostawcze od <b>200 zł/doba</b>, osobowe od <b>200 zł</b>, laweta od <b>250 zł</b>, chłodnia od <b>350 zł</b>. Pełny cennik: <a href="cennik-foto.html">zobacz tutaj</a>.|Cennik';
+      if(/laweta|pomoc drog|awari|holow|zepsu|powerhol|ko[lł]o|paliw/.test(s)) return 'Pomoc drogowa <b>POWERHOL24</b> działa 24/7: <a href="tel:+48664201202">664 201 202</a>. Auto zastępcze, dowóz i wypompowanie paliwa, wymiana koła, transport do 3 aut jednocześnie.';
+      if(/kontakt|telefon|adres|gdzie|mail|dojazd|numer/.test(s)) return 'Power Rent · ul. Mokra 2A, 26-600 Radom.<br>Tel: <a href="tel:+48664201202">664 201 202</a> / <a href="tel:+48692422337">692 422 337</a><br>E-mail: <a href="mailto:bartosz.k@power.radom.pl">bartosz.k@power.radom.pl</a>';
+      if(/godzin|otwar|czynne|robocz/.test(s)) return 'Najszybciej złapiesz nas telefonicznie: <a href="tel:+48664201202">664 201 202</a>. Wydanie auta nawet w 10 minut, formalności do minimum.';
+      if(/dzi[ęe]k|spoko|^ok$|super|dobra|pasuje/.test(s)) return 'Jasne! Gdyby coś jeszcze — jestem tutaj. A najszybciej: <a href="tel:+48664201202">664 201 202</a>. 🚐';
+      if(/cze[śs][ćc]|hej|witam|dzie[ńn] dobry|siema|hello|^hi$/.test(s)) return 'Cześć! 👋 Jestem PowerBot. Pomogę dobrać auto, z cennikiem, dostępnością, pomocą drogową i kontaktem. Co przewozisz albo na kiedy potrzebujesz auta?';
+      return 'Powiedz, co chcesz przewieźć (albo na kiedy potrzebujesz auta), a podpowiem pojazd. Najszybciej i tak potwierdzimy telefonicznie: <a href="tel:+48664201202">664 201 202</a>.|Sprawdź dostępność|Cennik';
+    }
+    function persist(){try{sessionStorage.setItem('pbot_open',pbot.classList.contains('open')?'1':'0');sessionStorage.setItem('pbot_convo',JSON.stringify(convo.slice(-20)));}catch(e){}}
+    function fallback(t){var c=reply(t),parts=c.split('|');addBot(parts[0]);if(parts.length>1)addActs(parts.slice(1));convo.push({role:'assistant',content:strip(parts[0])});persist();}
+    function handle(t){addUser(t);convo.push({role:'user',content:t});persist();var tp=typing();fetch(AI_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:convo})}).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(d){tp.remove();var a=(d&&d.reply)?String(d.reply).trim():'';if(!a)throw 0;convo.push({role:'assistant',content:a});addBot(linkify(esc(a)));persist();}).catch(function(){tp.remove();fallback(t);});}
+    function act(label){if(label==='Sprawdź dostępność'){var q=document.getElementById('szukaj');if(q){if(window.innerWidth<760)closeP();persist();q.scrollIntoView({behavior:'smooth',block:'center'});var card=document.getElementById('availCard'),qt=document.getElementById('qtype');setTimeout(function(){flash(card);if(qt&&window.innerWidth>=760)qt.focus();},430);}else{persist();location.href='index.html#szukaj';}return;}if(label==='Cennik'){persist();location.href='cennik-foto.html';return;}handle(label);}
+    function start(){if(started)return;started=true;renderQuick();addBot('Cześć! 👋 Jestem <b>PowerBot</b> — pomogę dobrać auto i ogarnąć wynajem. Co chcesz przewieźć albo na kiedy potrzebujesz pojazdu?');}
+    function openP(){panel.hidden=false;pbot.classList.add('open');if(badge)badge.style.display='none';start();persist();setTimeout(function(){if(window.innerWidth>=760)text.focus();},140);}
+    function closeP(){panel.hidden=true;pbot.classList.remove('open');persist();}
+    launch.addEventListener('click',function(){panel.hidden?openP():closeP();});
+    closeB.addEventListener('click',closeP);
+    quick.addEventListener('click',function(e){var b=e.target.closest('.pchip');if(b)act(b.textContent);});
+    body.addEventListener('click',function(e){var a=e.target.closest('[data-go]');if(a)act(a.getAttribute('data-go'));});
+    form.addEventListener('submit',function(e){e.preventDefault();var v=text.value.trim();if(!v)return;text.value='';handle(v);});
+    (function(){var sc=[];try{sc=JSON.parse(sessionStorage.getItem('pbot_convo')||'[]');}catch(e){sc=[];}if(sc&&sc.length){started=true;if(badge)badge.style.display='none';renderQuick();sc.forEach(function(m){if(m.role==='user')addUser(m.content);else addBot(linkify(esc(m.content)));});convo=sc.slice();}var op=false;try{op=sessionStorage.getItem('pbot_open')==='1';}catch(e){}if(op)openP();})();
+  }
 })();
 
 </script>
