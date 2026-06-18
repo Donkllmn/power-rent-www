@@ -97,6 +97,13 @@ body.ready .fade-up{opacity:1;transform:none}
 @keyframes scr{0%{transform:scaleY(.3);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}100%{transform:scaleY(.3);transform-origin:bottom}}
 
 /* ===== grid + cards (3D + glow) ===== */
+.cz-head{position:relative;overflow:hidden;background:linear-gradient(180deg,#fff,var(--bg));border-bottom:1px solid var(--line);padding:46px 0 30px}
+.cz-head .cz-glow{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(225,29,42,.10),transparent 70%);filter:blur(26px);top:-260px;right:-120px;pointer-events:none}
+.cz-head .wrap{position:relative;z-index:2}
+.cz-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;font-weight:700;letter-spacing:.04em;color:var(--red);background:#fff;border:1px solid var(--line);padding:7px 14px;border-radius:30px;margin-bottom:18px}
+.cz-eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--red2);box-shadow:0 0 0 4px rgba(255,75,61,.16);animation:plPulse 1.8s ease-in-out infinite}
+.cz-head h1{font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(32px,5vw,56px);line-height:1.02;letter-spacing:-.02em;color:var(--ink)}
+.cz-head p{font-size:17px;color:var(--muted);max-width:620px;margin-top:14px}
 .grid-wrap{margin-top:0;position:relative;z-index:5;padding:40px 0 64px}
 .filter{position:relative;z-index:6;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:0 auto 34px;max-width:1060px}
 .fchip{display:inline-flex;align-items:center;gap:9px;font-family:inherit;font-weight:700;font-size:13.5px;padding:7px 17px 7px 7px;border-radius:30px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;transition:transform .18s,box-shadow .18s,border-color .18s,background .18s,color .18s;box-shadow:0 4px 14px rgba(18,20,25,.06)}
@@ -406,23 +413,45 @@ body.v5 .card:hover{background:rgba(255,255,255,.72);box-shadow:0 30px 72px rgba
 .seg-intro{margin-bottom:6px}
 .seg-intro .eyebrow{margin-bottom:10px}
 .seg-lead{color:var(--muted);font-size:16px;max-width:620px;margin:6px 0 26px}
-.covers{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
-.cover{position:relative;border:none;padding:0;cursor:pointer;border-radius:18px;overflow:hidden;aspect-ratio:4/3;box-shadow:0 12px 30px rgba(18,20,25,.12);font-family:inherit;text-align:left;transition:transform .2s,box-shadow .2s}
-.cover img{width:100%;height:100%;object-fit:cover;transition:transform .55s}
-.cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,9,12,0) 28%,rgba(8,9,12,.5) 60%,rgba(8,9,12,.9));z-index:1}
-.cover:hover{transform:translateY(-5px);box-shadow:0 26px 54px rgba(18,20,25,.22)}
-.cover:hover img{transform:scale(1.08)}
+.covers{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:18px}
+.cover{position:relative;border:1px solid var(--line);padding:0;cursor:pointer;border-radius:var(--radius);overflow:hidden;background:var(--paper);box-shadow:0 10px 30px -16px rgba(18,20,25,.20);font-family:inherit;text-align:left;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s,border-color .3s;transform-style:preserve-3d;will-change:transform}
+.cover.is-tilt{transition:box-shadow .3s}
+.seg-intro:not(.in) .cover{opacity:0;transform:translateY(22px) scale(.985)}
+.seg-intro.in .cover{animation:covin .62s cubic-bezier(.16,1,.3,1) backwards}
+.seg-intro.in .cover:nth-child(1){animation-delay:.05s}
+.seg-intro.in .cover:nth-child(2){animation-delay:.10s}
+.seg-intro.in .cover:nth-child(3){animation-delay:.15s}
+.seg-intro.in .cover:nth-child(4){animation-delay:.20s}
+.seg-intro.in .cover:nth-child(5){animation-delay:.25s}
+.seg-intro.in .cover:nth-child(6){animation-delay:.30s}
+.seg-intro.in .cover:nth-child(7){animation-delay:.35s}
+.seg-intro.in .cover:nth-child(8){animation-delay:.40s}
+.seg-intro.in .cover:nth-child(9){animation-delay:.45s}
+@keyframes covin{from{opacity:0;transform:translateY(22px) scale(.985)}to{opacity:1;transform:none}}
+.cover img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.16,1,.3,1),filter .3s}
+.cover::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(115deg,transparent 33%,rgba(255,255,255,.5) 48%,transparent 63%);transform:translateX(-130%);opacity:0}
+.cover:hover::after{animation:covsheen .85s ease}
+@keyframes covsheen{0%{transform:translateX(-130%);opacity:.85}100%{transform:translateX(130%);opacity:0}}
+.cover::before{content:"";position:absolute;left:0;bottom:0;height:3px;width:100%;z-index:6;background:linear-gradient(90deg,var(--red),var(--red2));transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.16,1,.3,1);pointer-events:none}
+.cover:hover::before{transform:scaleX(1)}
+.cover:hover{box-shadow:0 32px 60px -22px rgba(225,29,42,.32),0 16px 38px -24px rgba(18,20,25,.45);border-color:#f3c9cc}
+.cover:not(.is-tilt):hover{transform:translateY(-9px)}
+.cover:hover img{transform:scale(1.075);filter:saturate(1.08) contrast(1.03)}
 .cover:focus-visible{outline:3px solid var(--red);outline-offset:2px}
-.cov-code{position:absolute;top:12px;left:12px;z-index:2;font-family:'Archivo',sans-serif;font-weight:900;font-size:13px;color:#fff;background:var(--red);padding:4px 11px;border-radius:8px;box-shadow:0 6px 16px rgba(225,29,42,.45);letter-spacing:.02em}
-.cov-ov{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:16px;color:#fff;display:block}
-.cov-nm{font-family:'Archivo',sans-serif;font-weight:800;font-size:19px;line-height:1.1;display:block}
-.cov-sub{font-size:13px;opacity:.86;margin-top:2px;display:block}
-.cov-meta{display:flex;align-items:center;gap:10px;margin-top:11px}
-.cov-fr{font-family:'Archivo',sans-serif;font-weight:900;font-size:14px;background:rgba(255,255,255,.18);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);padding:4px 12px;border-radius:30px;white-space:nowrap}
-.cov-cnt{font-size:12px;opacity:.82}
-.cov-go{margin-left:auto;width:34px;height:34px;border-radius:50%;background:#fff;color:var(--ink);display:flex;align-items:center;justify-content:center;transition:.2s;flex:none}
+.cov-code{position:absolute;top:12px;left:12px;z-index:5;font-family:'Archivo',sans-serif;font-weight:900;font-size:12.5px;color:#fff;background:var(--red);padding:5px 12px;border-radius:9px;box-shadow:0 8px 18px -6px rgba(225,29,42,.55);letter-spacing:.02em;transition:transform .26s cubic-bezier(.2,1.3,.4,1),box-shadow .26s}
+.cover:hover .cov-code{transform:translateY(-2px) scale(1.06);box-shadow:0 12px 24px -6px rgba(225,29,42,.65)}
+.cov-ov{position:static;z-index:2;padding:15px 16px 16px;color:var(--ink);display:block;background:var(--paper)}
+.cov-nm{font-family:'Archivo',sans-serif;font-weight:800;font-size:18px;line-height:1.12;display:block;color:var(--ink);transition:color .2s}
+.cover:hover .cov-nm{color:var(--red)}
+.cov-sub{font-size:13px;color:var(--muted);opacity:1;margin-top:3px;display:block}
+.cov-meta{display:flex;align-items:center;gap:10px;margin-top:14px}
+.cov-fr{font-family:'Archivo',sans-serif;font-weight:900;font-size:13.5px;color:var(--red);background:rgba(225,29,42,.09);padding:6px 13px;border-radius:30px;white-space:nowrap;transition:background .25s,color .25s,transform .25s}
+.cover:hover .cov-fr{background:var(--red);color:#fff;transform:translateY(-1px)}
+.cov-cnt{font-size:12px;color:var(--muted)}
+.cov-go{margin-left:auto;width:36px;height:36px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;transition:transform .25s cubic-bezier(.2,.8,.2,1),background .25s;flex:none}
 .cov-go svg{width:16px;height:16px}
-.cover:hover .cov-go{background:var(--red);color:#fff;transform:translateX(3px)}
+.cover:hover .cov-go{background:var(--red);color:#fff;transform:translateX(5px)}
+@media(prefers-reduced-motion:reduce){.cover{opacity:1!important;transform:none!important;animation:none!important}.cover::after,.cover::before{display:none}}
 .seg-fleet[hidden]{display:none}
 .seg-bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:8px}
 .backbtn{display:inline-flex;align-items:center;gap:6px;font-family:inherit;font-weight:800;font-size:14px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:30px;padding:9px 17px;cursor:pointer;transition:.16s;box-shadow:0 4px 14px rgba(18,20,25,.06);flex:none}
@@ -537,59 +566,30 @@ window.PR_AVAILABILITY = {
 <div id="pr-loader"><div class="pl-logo"></div><div class="pl-bar"><i></i></div><div class="pl-txt">Power Rent</div></div>
 <header class="ph-header"><div class="wrap hd"><div class="hd-left"><a href="index.html" class="hd-logo" aria-label="Power Rent"><span class="hd-logo-img"></span></a></div><div class="hd-right"><a href="tel:664201202" class="hd-phone">664 201 202</a><a href="#rezerwacja" class="btn btn-red" data-magnetic="0.2">Rezerwacja</a></div></div></header>
 
-<section class="hero">
-  <div class="hero-bg"><div class="hero-grid" data-parallax="8"></div><div class="hero-glow g1" data-parallax="34"></div><div class="hero-glow g2" data-parallax="26"></div></div>
+<section class="cz-head">
+  <div class="cz-glow" aria-hidden="true"></div>
   <div class="wrap">
-    <span class="hero-eyebrow fade-up" style="--d:.05s"><span class="dot"></span> Power Rent · Radom · wynajem aut</span>
-    <h1>
-      <span class="kin"><span>Wynajem aut</span></span>
-      <span class="kin k2"><span><span class="rot" id="rotw" data-words="dostawczych|osobowych|z chłodnią|na przeprowadzkę|do każdego zadania">dostawczych</span></span></span>
-    </h1>
-    <p class="hero-lead fade-up" style="--d:.25s">Największa wypożyczalnia aut w Radomiu — 50 sprawdzonych aut od mikrobusa po lawetę i chłodnię. OC i assistance zawsze w cenie, wynajem w 5 minut.</p>
-    <div class="hero-cta fade-up" style="--d:.35s">
-      <a href="#flota" class="btn btn-red" data-magnetic="0.2">Zobacz flotę</a>
-      <a href="tel:664201202" class="btn btn-ghost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-3 2a14 14 0 006 6l2-3 5 2v4a2 2 0 01-2 2A17 17 0 013 6a2 2 0 012-2z"/></svg> 664 201 202</a>
-    </div>
-    <div class="hero-stats">
-      <div class="hstat feat fade-up" style="--d:.42s"><span class="bar"></span><div class="txt"><b><span data-count="50">50</span></b><span>aut w naszej flocie</span></div></div>
-      <div class="hstat fade-up" style="--d:.5s"><span class="bar"></span><div class="txt"><b>od 200<em> zł</em></b><span>za dobę</span></div></div>
-      <div class="hstat fade-up" style="--d:.58s"><span class="bar"></span><div class="txt"><b>Minimum</b><span>formalności</span></div></div>
-      <div class="hstat fade-up" style="--d:.66s"><span class="bar"></span><div class="txt"><b>W cenie</b><span>OC + assistance</span></div></div>
-    </div>
+    <span class="cz-eyebrow"><span class="dot"></span> Cennik · Power Rent Radom</span>
+    <h1>Wynajem aut w Radomiu — pełny cennik</h1>
+    <p>50 sprawdzonych aut: od mikrobusa po lawetę i chłodnię. OC i assistance w cenie, wynajem w 5 minut. Wybierz segment i sprawdź stawki krótko- i długoterminowe.</p>
   </div>
 </section>
-<div class="marquee" aria-hidden="true"><div class="mq-track"><span class="mq-i">50 aut w flocie</span><span class="mq-d">✦</span><span class="mq-i">OC + assistance w cenie</span><span class="mq-d">✦</span><span class="mq-i">Wynajem w 5 minut</span><span class="mq-d">✦</span><span class="mq-i">Laweta</span><span class="mq-d">✦</span><span class="mq-i">Chłodnia</span><span class="mq-d">✦</span><span class="mq-i">Busy 9-osobowe</span><span class="mq-d">✦</span><span class="mq-i">Najem długoterminowy</span><span class="mq-d">✦</span><span class="mq-i">50 aut w flocie</span><span class="mq-d">✦</span><span class="mq-i">OC + assistance w cenie</span><span class="mq-d">✦</span><span class="mq-i">Wynajem w 5 minut</span><span class="mq-d">✦</span><span class="mq-i">Laweta</span><span class="mq-d">✦</span><span class="mq-i">Chłodnia</span><span class="mq-d">✦</span><span class="mq-i">Busy 9-osobowe</span><span class="mq-d">✦</span><span class="mq-i">Najem długoterminowy</span><span class="mq-d">✦</span></div></div>
-
 <section class="grid-wrap" id="flota">
   <div class="wrap">
     <div class="seg-intro reveal" id="segIntro">
       <div class="eyebrow">Krok 1 · wybierz segment</div>
-      <h2>Jakiego auta szukasz?</h2>
-      <p class="seg-lead">Kliknij segment, a pokażemy dopasowane auta do Ciebie — z cenami i dostępnością na żywo. OC i assistance zawsze w cenie.</p>
+      <p class="seg-lead">Kliknij segment, a pokażemy dopasowane auta — z cenami i dostępnością na żywo. OC i assistance zawsze w cenie.</p>
       <div class="covers">
-      <button class="cover" data-cover="s" aria-label="Segment S — Mikro busy"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200336_fd130bf2-48c2-4327-b52d-1a09264d655d.png" alt="Segment S — Mikro busy | Power Rent Radom" loading="lazy"><span class="cov-code">S</span><span class="cov-ov"><span class="cov-nm">Segment S</span><span class="cov-sub">Mikro busy</span><span class="cov-meta"><span class="cov-fr">od 200 zł</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
-      <button class="cover" data-cover="m" aria-label="Segment M — Małe busy"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200347_633102cd-ed81-4cee-99fb-1768be9f65d8.png" alt="Segment M — Małe busy | Power Rent Radom" loading="lazy"><span class="cov-code">M</span><span class="cov-ov"><span class="cov-nm">Segment M</span><span class="cov-sub">Małe busy</span><span class="cov-meta"><span class="cov-fr">od 280 zł</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
-      <button class="cover" data-cover="l" aria-label="Segment L — Średnie busy"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_144108_a532f8c4-ce2b-4655-93e1-c4932296ce79.png" alt="Segment L — Średnie busy | Power Rent Radom" loading="lazy"><span class="cov-code">L</span><span class="cov-ov"><span class="cov-nm">Segment L</span><span class="cov-sub">Średnie busy</span><span class="cov-meta"><span class="cov-fr">od 230 zł</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
-      <button class="cover" data-cover="lp" aria-label="Segment L+ — Duże busy"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200405_1c147392-2dab-4357-815e-824d84a8d847.png" alt="Segment L+ — Duże busy | Power Rent Radom" loading="lazy"><span class="cov-code">L+</span><span class="cov-ov"><span class="cov-nm">Segment L+</span><span class="cov-sub">Duże busy</span><span class="cov-meta"><span class="cov-fr">od 250 zł</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
-      <button class="cover" data-cover="xl" aria-label="Segment XL — Największe busy"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200412_27c8fc18-e150-471e-b9e5-24476c9c92c6.png" alt="Segment XL — Największe busy | Power Rent Radom" loading="lazy"><span class="cov-code">XL</span><span class="cov-ov"><span class="cov-nm">Segment XL</span><span class="cov-sub">Największe busy</span><span class="cov-meta"><span class="cov-fr">od 300 zł</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
-      <button class="cover" data-cover="chl" aria-label="Auta chłodnicze — Furgony chłodnicze"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200428_833d4bb0-c7df-461a-aedc-fa8f4fbafa9c.png" alt="Auta chłodnicze — Furgony chłodnicze | Power Rent Radom" loading="lazy"><span class="cov-code">Chłodnia</span><span class="cov-ov"><span class="cov-nm">Auta chłodnicze</span><span class="cov-sub">Furgony chłodnicze</span><span class="cov-meta"><span class="cov-fr">od 350 zł</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
-      <button class="cover" data-cover="oso" aria-label="Auta osobowe — Sedan i hatchback, automat"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200444_759ee268-7ed4-49cb-b9ef-71d97eb7963f.png" alt="Auta osobowe — Sedan i hatchback, automat | Power Rent Radom" loading="lazy"><span class="cov-code">Osobowe</span><span class="cov-ov"><span class="cov-nm">Auta osobowe</span><span class="cov-sub">Sedan i hatchback, automat</span><span class="cov-meta"><span class="cov-fr">od 200 zł</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
-      <button class="cover" data-cover="law" aria-label="Auto laweta — Pomoc drogowa"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200434_f9dafa51-b7c5-457a-8df1-887dd70fa351.png" alt="Auto laweta — Pomoc drogowa | Power Rent Radom" loading="lazy"><span class="cov-code">Laweta</span><span class="cov-ov"><span class="cov-nm">Auto laweta</span><span class="cov-sub">Pomoc drogowa</span><span class="cov-meta"><span class="cov-fr">od 250 zł</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
-      <button class="cover" data-cover="bus" aria-label="Busy — 8–9 osobowe"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_085325_633d50e0-0993-4247-b51a-bf7ee8c47eaa.png" alt="Busy — 8–9 osobowe | Power Rent Radom" loading="lazy"><span class="cov-code">BUS</span><span class="cov-ov"><span class="cov-nm">Busy</span><span class="cov-sub">8–9 osobowe</span><span class="cov-meta"><span class="cov-fr">od 250 zł</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
+      <button class="cover" data-tilt="8" data-cover="s" aria-label="Segment S — Mikro busy"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200336_fd130bf2-48c2-4327-b52d-1a09264d655d.png" alt="Segment S — Mikro busy | Power Rent Radom" loading="lazy"><span class="cov-code">S</span><span class="cov-ov"><span class="cov-nm">Segment S</span><span class="cov-sub">Mikro busy</span><span class="cov-meta"><span class="cov-fr">od 200 zł</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
+      <button class="cover" data-tilt="8" data-cover="m" aria-label="Segment M — Małe busy"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200347_633102cd-ed81-4cee-99fb-1768be9f65d8.png" alt="Segment M — Małe busy | Power Rent Radom" loading="lazy"><span class="cov-code">M</span><span class="cov-ov"><span class="cov-nm">Segment M</span><span class="cov-sub">Małe busy</span><span class="cov-meta"><span class="cov-fr">od 280 zł</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
+      <button class="cover" data-tilt="8" data-cover="l" aria-label="Segment L — Średnie busy"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_144108_a532f8c4-ce2b-4655-93e1-c4932296ce79.png" alt="Segment L — Średnie busy | Power Rent Radom" loading="lazy"><span class="cov-code">L</span><span class="cov-ov"><span class="cov-nm">Segment L</span><span class="cov-sub">Średnie busy</span><span class="cov-meta"><span class="cov-fr">od 230 zł</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
+      <button class="cover" data-tilt="8" data-cover="lp" aria-label="Segment L+ — Duże busy"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200405_1c147392-2dab-4357-815e-824d84a8d847.png" alt="Segment L+ — Duże busy | Power Rent Radom" loading="lazy"><span class="cov-code">L+</span><span class="cov-ov"><span class="cov-nm">Segment L+</span><span class="cov-sub">Duże busy</span><span class="cov-meta"><span class="cov-fr">od 250 zł</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
+      <button class="cover" data-tilt="8" data-cover="xl" aria-label="Segment XL — Największe busy"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200412_27c8fc18-e150-471e-b9e5-24476c9c92c6.png" alt="Segment XL — Największe busy | Power Rent Radom" loading="lazy"><span class="cov-code">XL</span><span class="cov-ov"><span class="cov-nm">Segment XL</span><span class="cov-sub">Największe busy</span><span class="cov-meta"><span class="cov-fr">od 300 zł</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
+      <button class="cover" data-tilt="8" data-cover="chl" aria-label="Auta chłodnicze — Furgony chłodnicze"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200428_833d4bb0-c7df-461a-aedc-fa8f4fbafa9c.png" alt="Auta chłodnicze — Furgony chłodnicze | Power Rent Radom" loading="lazy"><span class="cov-code">Chłodnia</span><span class="cov-ov"><span class="cov-nm">Auta chłodnicze</span><span class="cov-sub">Furgony chłodnicze</span><span class="cov-meta"><span class="cov-fr">od 350 zł</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
+      <button class="cover" data-tilt="8" data-cover="oso" aria-label="Auta osobowe — Sedan i hatchback, automat"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200444_759ee268-7ed4-49cb-b9ef-71d97eb7963f.png" alt="Auta osobowe — Sedan i hatchback, automat | Power Rent Radom" loading="lazy"><span class="cov-code">Osobowe</span><span class="cov-ov"><span class="cov-nm">Auta osobowe</span><span class="cov-sub">Sedan i hatchback, automat</span><span class="cov-meta"><span class="cov-fr">od 200 zł</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
+      <button class="cover" data-tilt="8" data-cover="law" aria-label="Auto laweta — Pomoc drogowa"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200434_f9dafa51-b7c5-457a-8df1-887dd70fa351.png" alt="Auto laweta — Pomoc drogowa | Power Rent Radom" loading="lazy"><span class="cov-code">Laweta</span><span class="cov-ov"><span class="cov-nm">Auto laweta</span><span class="cov-sub">Pomoc drogowa</span><span class="cov-meta"><span class="cov-fr">od 250 zł</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
+      <button class="cover" data-tilt="8" data-cover="bus" aria-label="Busy — 8–9 osobowe"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_085325_633d50e0-0993-4247-b51a-bf7ee8c47eaa.png" alt="Busy — 8–9 osobowe | Power Rent Radom" loading="lazy"><span class="cov-code">BUS</span><span class="cov-ov"><span class="cov-nm">Busy</span><span class="cov-sub">8–9 osobowe</span><span class="cov-meta"><span class="cov-fr">od 250 zł</span><span class="cov-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></button>
       </div>
-      <section class="fleet-brag reveal">
-  <div class="fb-glow" aria-hidden="true"></div>
-  <div class="wrap fb-wrap">
-    <div class="fb-num"><b><span data-count="50">50</span></b><span class="fb-unit">aut</span></div>
-    <div class="fb-txt">
-      <div class="eyebrow light">Nasza flota</div>
-      <h2>Największa wypożyczalnia aut w Radomiu</h2>
-      <p>Dostawcze każdego rozmiaru — od mikrobusa po największe furgony — a do tego osobowe, laweta, chłodnia i busy 9-osobowe. Wszystko w jednym miejscu, zawsze coś wolnego, OC i assistance w cenie.</p>
-      <div class="fb-chips"><span>Dostawcze S–XL</span><span>Osobowe</span><span>Laweta</span><span>Chłodnia</span><span>Busy 9-os.</span></div>
-    </div>
-  </div>
-</section>
-
     </div>
     <div class="seg-fleet" id="segFleet" hidden>
       <div class="seg-bar">
