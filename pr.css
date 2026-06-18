@@ -485,3 +485,9 @@ body.turbo #rotw{animation-duration:.85s !important}
 @media(max-width:760px){.fb-wrap{grid-template-columns:1fr;gap:14px}.fleet-brag{padding:48px 0;margin-top:36px}}
 
 @media(prefers-reduced-motion:reduce){.mq-track{animation:none}.fb-glow{animation:none}}
+
+/* ===== cennik: etykiety brutto/netto + wiersz niedostępny ===== */
+.tnote{font-size:12px;font-weight:600;color:#878d98;margin:0 0 12px;letter-spacing:.01em}
+.tnote b{color:var(--ink);font-weight:800}
+.tiers .row.nolim{opacity:.6}
+.tiers .row.nolim b{color:#9aa0ac;font-weight:600}

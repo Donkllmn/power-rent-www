@@ -498,6 +498,12 @@ body.turbo #rotw{animation-duration:.85s !important}
 
 @media(prefers-reduced-motion:reduce){.mq-track{animation:none}.fb-glow{animation:none}}
 
+/* ===== cennik: etykiety brutto/netto + wiersz niedostępny ===== */
+.tnote{font-size:12px;font-weight:600;color:#878d98;margin:0 0 12px;letter-spacing:.01em}
+.tnote b{color:var(--ink);font-weight:800}
+.tiers .row.nolim{opacity:.6}
+.tiers .row.nolim b{color:#9aa0ac;font-weight:600}
+
 </style>
 <script>
 /* ===== Power Rent — DOSTĘPNOŚĆ FLOTY =====
@@ -543,11 +549,11 @@ window.PR_AVAILABILITY = {
         <div class="avail full fade-up" data-slug="auto-kangoo" style="--d:.24s"><i class="dot"></i><b>Sprawdzam dostępność…</b></div>
         <p class="lead fade-up" style="--d:.28s">Najmniejszy furgon do miasta — zwrotny, oszczędny i łatwy w parkowaniu. Idealny do kurierki i drobnych dostaw. (opis roboczy)</p>
         <div class="chips fade-up" style="--d:.36s">
-          <div class="chip"><span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 8h10l2 12H5L7 8z"/><circle cx="12" cy="6" r="2"/></svg></span><div><span>Ładowność</span><b>do ~650 kg</b></div></div>
-          <div class="chip"><span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></span><div><span>Kubatura</span><b>~3 m³</b></div></div>
+          <div class="chip"><span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 8h10l2 12H5L7 8z"/><circle cx="12" cy="6" r="2"/></svg></span><div><span>Ładowność</span><b>590 kg</b></div></div>
+          <div class="chip"><span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></span><div><span>Rozmiar</span><b>L1H1</b></div></div>
           <div class="chip"><span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5"/><path d="M16.5 6a3 3 0 010 6"/><path d="M21 20c0-2.2-1.2-3.7-3-4.4"/></svg></span><div><span>Miejsca</span><b>2 os.</b></div></div>
         </div>
-        <div class="dprice fade-up" style="--d:.44s"><span class="od">od</span><span class="v">180</span><span class="u">zł / doba</span></div>
+        <div class="dprice fade-up" style="--d:.44s"><span class="od">od</span><span class="v">200</span><span class="u">zł / doba</span></div>
         <div class="dcta fade-up" style="--d:.5s">
           <a href="#rezerwacja" class="btn btn-red" data-magnetic="0.2">Zarezerwuj ten model</a>
           <a href="tel:664201202" class="btn btn-ghost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-3 2a14 14 0 006 6l2-3 5 2v4a2 2 0 01-2 2A17 17 0 013 6a2 2 0 012-2z"/></svg> 664 201 202</a>
@@ -567,8 +573,8 @@ window.PR_AVAILABILITY = {
     <h2>Najważniejsze parametry</h2>
     <p class="l2">Orientacyjne dane. Dokładną specyfikację egzemplarza i dostępność potwierdzamy telefonicznie.</p>
     <div class="specs">
-        <div class="spec"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 8h10l2 12H5L7 8z"/><circle cx="12" cy="6" r="2"/></svg></div><div><div class="t">Ładowność</div><div class="v">do ~650 kg</div></div></div>
-        <div class="spec"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></div><div><div class="t">Kubatura</div><div class="v">~3 m³</div></div></div>
+        <div class="spec"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 8h10l2 12H5L7 8z"/><circle cx="12" cy="6" r="2"/></svg></div><div><div class="t">Ładowność</div><div class="v">590 kg</div></div></div>
+        <div class="spec"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></div><div><div class="t">Rozmiar</div><div class="v">L1H1</div></div></div>
         <div class="spec"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5"/><path d="M16.5 6a3 3 0 010 6"/><path d="M21 20c0-2.2-1.2-3.7-3-4.4"/></svg></div><div><div class="t">Miejsca</div><div class="v">2 os.</div></div></div>
         <div class="spec"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v5c0 4.4-3 8.3-7 10-4-1.7-7-5.6-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div><div><div class="t">W cenie</div><div class="v">OC + assistance</div></div></div>
         <div class="spec"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><div class="t">Wydanie auta</div><div class="v">~5 min</div></div></div>
@@ -590,22 +596,24 @@ window.PR_AVAILABILITY = {
           <span class="pt-slider"></span>
         </div>
         <div class="tiers" data-panel="short">
-            <div class="row"><span>do 500 km / doba</span><b>180 zł</b></div>
-            <div class="row"><span>do 1000 km / doba</span><b>260 zł</b></div>
-            <div class="row"><span>bez limitu km</span><b>320 zł</b></div>
+            <div class="tnote">Najem krótkoterminowy · ceny <b>brutto</b></div>
+            <div class="row"><span>doba · do 500 km</span><b>200 zł</b></div>
+            <div class="row"><span>doba · do 1000 km</span><b>300 zł</b></div>
+            <div class="row"><span>doba · bez limitu</span><b>380 zł</b></div>
             <div class="depo"><span class="dl"><i class="di"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v5c0 4.4-3 8.3-7 10-4-1.7-7-5.6-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></i>Kaucja na terenie Polski</span><b>1000 zł</b></div>
         </div>
         <div class="tiers" data-panel="long">
-            <div class="row hl"><span>Stawka miesięczna</span><b>2 700 zł</b></div>
-            <div class="row"><span>Średnio za dobę</span><b>~90 zł</b></div>
-            <div class="row"><span>Minimalny okres</span><b>od 1 miesiąca</b></div>
-            <div class="row"><span>Dłuższy najem</span><b>jeszcze taniej</b></div>
+            <div class="tnote">Najem długoterminowy · ceny <b>netto</b></div>
+            <div class="row hl"><span>miesiąc · do 6 000 km</span><b>2 900 zł</b></div>
+            <div class="row"><span>miesiąc · do 11 000 km</span><b>3 500 zł</b></div>
+            <div class="row"><span>miesiąc · do 16 000 km</span><b>4 500 zł</b></div>
+            <div class="row"><span>miesiąc · bez limitu</span><b>5 500 zł</b></div>
             <div class="depo"><span class="dl"><i class="di"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v5c0 4.4-3 8.3-7 10-4-1.7-7-5.6-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></i>Kaucja na terenie Polski</span><b>1000 zł</b></div>
         </div>
       </div>
       <div class="pside">
-        <div data-price="short"><div class="ph">od 180<em>zł</em></div><div class="pl2">doba · najem krótkoterminowy</div></div>
-        <div data-price="long"><div class="ph">od 2 700<em>zł</em></div><div class="pl2">miesiąc · najem długoterminowy</div></div>
+        <div data-price="short"><div class="ph">od 200<em>zł</em></div><div class="pl2">doba · krótkoterminowy · ceny brutto</div></div>
+        <div data-price="long"><div class="ph">od 2 900<em>zł</em></div><div class="pl2">miesiąc · długoterminowy · ceny netto</div></div>
         <a href="tel:664201202" class="btn btn-red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-3 2a14 14 0 006 6l2-3 5 2v4a2 2 0 01-2 2A17 17 0 013 6a2 2 0 012-2z"/></svg> Zadzwoń i zarezerwuj</a>
         <a href="cennik-foto.html" class="btn btn-light">Zobacz pełny cennik</a>
         <div class="fineprint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v5c0 4.4-3 8.3-7 10-4-1.7-7-5.6-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg><span>W cenę wliczone OC i assistance — w Polsce i za granicą. Przy najmie długoterminowym płacisz miesięcznie, taniej w przeliczeniu na dobę; dłuższy okres ustalamy indywidualnie.</span></div>
@@ -694,21 +702,21 @@ window.PR_AVAILABILITY = {
     <div class="fleet">
         <a class="mini" href="auto-mikrobus.html"><div class="ml"><b>S</b></div><div class="mn">Fiat Doblo</div><div class="mp">2016 · od 200 zł</div></a>
         <a class="mini" href="auto-male.html"><div class="ml"><b>M</b></div><div class="mn">Peugeot Expert</div><div class="mp">2023 · od 280 zł</div></a>
-        <a class="mini" href="auto-proace.html"><div class="ml"><b>L</b></div><div class="mn">Toyota Proace</div><div class="mp">2026 · od 280 zł</div></a>
-        <a class="mini" href="auto-przedluzane.html"><div class="ml"><b>L+</b></div><div class="mn">Renault Master</div><div class="mp">2024 · od 350 zł</div></a>
-        <a class="mini" href="auto-najwieksze.html"><div class="ml"><b>XL</b></div><div class="mn">Volkswagen Crafter</div><div class="mp">2025 · od 400 zł</div></a>
-        <a class="mini" href="auto-kontener.html"><div class="ml"><b>XL</b></div><div class="mn">Iveco Daily</div><div class="mp">2025 · od 400 zł</div></a>
-        <a class="mini" href="auto-chlodnia.html"><div class="ml"><b>CHŁ</b></div><div class="mn">Iveco Daily</div><div class="mp">2025 · od 500 zł</div></a>
-        <a class="mini" href="auto-laweta.html"><div class="ml"><b>LAW</b></div><div class="mn">Iveco Daily</div><div class="mp">2023 · od 380 zł</div></a>
-        <a class="mini" href="auto-bus.html"><div class="ml"><b>BUS</b></div><div class="mn">Renault Trafic</div><div class="mp">2023 · od 300 zł</div></a>
+        <a class="mini" href="auto-proace.html"><div class="ml"><b>L</b></div><div class="mn">Toyota Proace</div><div class="mp">2025 · od 230 zł</div></a>
+        <a class="mini" href="auto-przedluzane.html"><div class="ml"><b>L+</b></div><div class="mn">Renault Master</div><div class="mp">2023 · od 250 zł</div></a>
+        <a class="mini" href="auto-najwieksze.html"><div class="ml"><b>XL</b></div><div class="mn">Volkswagen Crafter</div><div class="mp">2025 · od 300 zł</div></a>
+        <a class="mini" href="auto-kontener.html"><div class="ml"><b>XL</b></div><div class="mn">Iveco Daily kontener</div><div class="mp">2024 · od 300 zł</div></a>
+        <a class="mini" href="auto-chlodnia.html"><div class="ml"><b>CHŁ</b></div><div class="mn">Iveco Daily</div><div class="mp">2024 · od 350 zł</div></a>
+        <a class="mini" href="auto-laweta.html"><div class="ml"><b>LAW</b></div><div class="mn">Iveco Daily</div><div class="mp">2023 · od 250 zł</div></a>
+        <a class="mini" href="auto-bus.html"><div class="ml"><b>BUS</b></div><div class="mn">Renault Trafic</div><div class="mp">2023 · od 250 zł</div></a>
         <a class="mini" href="auto-sedan.html"><div class="ml"><b>OSO</b></div><div class="mn">Peugeot 408 GT</div><div class="mp">2025 · od 230 zł</div></a>
-        <a class="mini" href="auto-suv.html"><div class="ml"><b>OSO</b></div><div class="mn">Škoda Scala</div><div class="mp">2025 · od 280 zł</div></a>
+        <a class="mini" href="auto-suv.html"><div class="ml"><b>OSO</b></div><div class="mn">Škoda Scala</div><div class="mp">2025 · od 200 zł</div></a>
         <a class="mini" href="auto-vivaro.html"><div class="ml"><b>M</b></div><div class="mn">Opel Vivaro</div><div class="mp">2022 · od 280 zł</div></a>
-        <a class="mini" href="auto-iveco35.html"><div class="ml"><b>XL</b></div><div class="mn">Iveco 35S/MR</div><div class="mp">2024 · od 400 zł</div></a>
-        <a class="mini" href="auto-daily-maxi.html"><div class="ml"><b>XL</b></div><div class="mn">Iveco Daily z windą</div><div class="mp">2025 · od 400 zł</div></a>
-        <a class="mini" href="auto-boxer.html"><div class="ml"><b>XL</b></div><div class="mn">Peugeot Boxer</div><div class="mp">2023 · od 380 zł</div></a>
-        <a class="mini" href="auto-proace-bryg.html"><div class="ml"><b>XL</b></div><div class="mn">Toyota Proace Brygadówka</div><div class="mp">2024 · od 320 zł</div></a>
-        <a class="mini" href="auto-proace-max.html"><div class="ml"><b>XL</b></div><div class="mn">Toyota Proace</div><div class="mp">2025 · od 400 zł</div></a>
+        <a class="mini" href="auto-iveco35.html"><div class="ml"><b>XL</b></div><div class="mn">Iveco 35S/MR</div><div class="mp">2025 · od 300 zł</div></a>
+        <a class="mini" href="auto-daily-maxi.html"><div class="ml"><b>XL</b></div><div class="mn">Iveco Daily kontener z windą</div><div class="mp">2025 · od 300 zł</div></a>
+        <a class="mini" href="auto-boxer.html"><div class="ml"><b>XL</b></div><div class="mn">Peugeot Boxer</div><div class="mp">2023 · od 300 zł</div></a>
+        <a class="mini" href="auto-proace-bryg.html"><div class="ml"><b>XL</b></div><div class="mn">Toyota Proace Brygadówka</div><div class="mp">2026 · od 300 zł</div></a>
+        <a class="mini" href="auto-proace-max.html"><div class="ml"><b>XL</b></div><div class="mn">Toyota Proace</div><div class="mp">2026 · od 300 zł</div></a>
         <a class="mini all" href="cennik-foto.html"><div class="mn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg> Pełny cennik</div><div class="mp">wszystkie 50 aut</div></a>
     </div>
   </div>
@@ -729,7 +737,7 @@ window.PR_AVAILABILITY = {
 <footer class="foot">© 2026 <b>Power Rent</b> · największa wypożyczalnia aut w Radomiu · 664 201 202</footer>
 
 <div class="scta">
-  <div class="sp"><span class="v">od 180 zł</span><small>S · Małe · doba</small></div>
+  <div class="sp"><span class="v">od 200 zł</span><small>S · Małe · doba</small></div>
   <div class="sb"><a href="tel:664201202" class="btn btn-light"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-3 2a14 14 0 006 6l2-3 5 2v4a2 2 0 01-2 2A17 17 0 013 6a2 2 0 012-2z"/></svg></a><a href="#rezerwacja" class="btn btn-red">Rezerwuj</a></div>
 </div>
 
