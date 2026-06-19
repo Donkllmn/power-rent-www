@@ -229,20 +229,44 @@ header.scrolled .logo-img{height:23px}
 .abroad p{margin-top:12px;color:rgba(255,255,255,.85);font-size:16.5px}
 .abroad .btn{position:relative;background:#fff;color:var(--accent-d)}.abroad .btn:hover{transform:translateY(-2px)}
 
-/* opinie marquee */
-.mwrap{position:relative}
-.mwrap::before,.mwrap::after{content:"";position:absolute;top:0;bottom:0;width:90px;z-index:3;pointer-events:none}
-.mwrap::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
-.mwrap::after{right:0;background:linear-gradient(270deg,var(--bg),transparent)}
-.mtrack{display:flex;gap:18px;width:max-content;animation:marq 48s linear infinite}
-.mwrap:hover .mtrack{animation-play-state:paused}
-@keyframes marq{to{transform:translateX(-50%)}}
-.ocard{flex:0 0 380px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;box-shadow:var(--shadow)}
-.ostars{display:flex;gap:3px;margin-bottom:12px}.ostars svg{width:16px;height:16px;fill:var(--gold)}
-.ocard p{font-size:14.5px;color:var(--ink-soft);line-height:1.6}
-.oauthor{display:flex;align-items:center;gap:11px;margin-top:16px}
-.oavatar{width:38px;height:38px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-family:var(--fd);font-weight:700;font-size:15px}
-.oauthor .nm{font-weight:700;font-size:14.5px}.oauthor .rl{font-size:12px;color:var(--mut)}
+/* opinie — spotlight carousel */
+.opinie2 .op-top{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:30px;flex-wrap:wrap}
+.opinie2 .op-head{max-width:560px}
+.opinie2 .op-head h2{font-size:clamp(28px,3.6vw,42px);margin:14px 0 10px}
+.opinie2 .op-head p{color:var(--mut);font-size:16px}
+.op-score{flex:0 0 auto;text-align:center;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px 32px;box-shadow:var(--shadow);min-width:188px}
+.op-score-top{display:flex;align-items:baseline;justify-content:center;gap:6px}
+.op-score-top b{font-family:var(--fd);font-weight:800;font-size:46px;line-height:1;background:linear-gradient(120deg,var(--accent),var(--accent-l));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.op-score-top span{font-size:15px;color:var(--mut);font-weight:600}
+.op-score-cap{font-size:12.5px;color:var(--mut)}
+.op-score-cap b{color:var(--ink);font-weight:700}
+.ostars{display:flex;gap:3px}
+.ostars svg{width:16px;height:16px;fill:var(--gold)}
+.op-score .ostars{justify-content:center;margin:9px 0 7px}
+.op-stage{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:46px 50px 42px;box-shadow:var(--shadow-lg);overflow:hidden}
+.op-stage::before{content:"";position:absolute;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,var(--accent-glow2),transparent 65%);top:-120px;right:-90px;filter:blur(34px);animation:usglow 7s ease-in-out infinite;pointer-events:none}
+.op-mark{position:absolute;top:4px;left:30px;font-family:Georgia,'Times New Roman',serif;font-size:150px;line-height:1;color:var(--accent);opacity:.1;pointer-events:none;user-select:none}
+.op-slides{display:grid;position:relative;z-index:1}
+.op-slide{grid-area:1/1;opacity:0;visibility:hidden;transform:translateY(16px) scale(.992);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.8,.2,1)}
+.op-slide.active{opacity:1;visibility:visible;transform:none}
+.op-st{display:flex;gap:4px;margin-bottom:18px}
+.op-st svg{width:21px;height:21px;fill:var(--gold);opacity:0;transform:scale(.4) rotate(-25deg)}
+.op-slide.active .op-st svg{animation:opstar .55s cubic-bezier(.2,1.5,.4,1) forwards;animation-delay:var(--d)}
+@keyframes opstar{to{opacity:1;transform:none}}
+.op-text{font-family:var(--fd);font-weight:500;font-size:clamp(19px,2.25vw,26px);line-height:1.5;color:var(--ink);letter-spacing:-.01em;min-height:3.1em}
+.op-by{display:flex;align-items:center;gap:14px;margin-top:26px}
+.op-av{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;color:#fff;font-family:var(--fd);font-weight:700;font-size:20px;flex-shrink:0;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+.op-meta{display:flex;flex-direction:column;line-height:1.3}
+.op-meta b{font-weight:700;font-size:16px}
+.op-meta i{font-style:normal;font-size:13px;color:var(--mut)}
+.op-nav{display:flex;gap:10px;margin-top:30px;position:relative;z-index:1;flex-wrap:wrap}
+.op-dot{width:42px;height:42px;border-radius:50%;border:0;color:#fff;font-family:var(--fd);font-weight:700;font-size:15px;cursor:pointer;opacity:.42;filter:grayscale(.25);transform:scale(.86);transition:all .3s cubic-bezier(.2,.8,.2,1);box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.op-dot:hover{opacity:.82;transform:scale(.96)}
+.op-dot.on{opacity:1;filter:none;transform:scale(1.06);box-shadow:0 6px 18px var(--accent-glow2),0 0 0 3px var(--accent-soft)}
+.op-prog{position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--line)}
+.op-prog span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-l))}
+@media(prefers-reduced-motion:reduce){.op-slide{transition:none}.op-st svg{animation:none;opacity:1;transform:none}.op-stage::before{animation:none}.op-prog span{transition:none!important}}
+@media(max-width:760px){.op-stage{padding:34px 24px 32px}.op-mark{font-size:108px;top:2px;left:22px}.op-text{font-size:19px;min-height:0}.op-score{width:100%}.op-top{align-items:flex-start}}
 
 /* faq */
 .faqwrap{max-width:820px;margin:0 auto}
@@ -629,7 +653,6 @@ const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.tar
  e.target.querySelectorAll&&e.target.querySelectorAll('[data-c]').forEach(c=>{const t=+c.dataset.c;let s=0,st=Math.max(1,t/38);const tk=()=>{s+=st;if(s<t){c.textContent=Math.round(s);requestAnimationFrame(tk)}else c.textContent=t};tk()});
  io.unobserve(e.target)}})},{threshold:.15});
 document.querySelectorAll('.rv,.hmini').forEach(el=>io.observe(el));
-(function(){const t=document.getElementById('mtrack');if(t)t.innerHTML+=t.innerHTML;})();
 function goReserve(e){e.preventDefault();const map={busy:'auto-male.html',duze:'auto-najwieksze.html',chlodnia:'auto-chlodnia.html',laweta:'auto-laweta.html',bus9:'auto-bus.html',osobowe:'auto-sedan.html',dlugo:'cennik-foto.html'};window.location.href=map[document.getElementById('qtype').value]||'cennik-foto.html';return false;}
 function sendMail(e){e.preventDefault();const n=document.getElementById('m_name').value,t=document.getElementById('m_tel').value,em=document.getElementById('m_email').value,m=document.getElementById('m_msg').value;const body=encodeURIComponent('Imię: '+n+'\nTelefon: '+t+'\nE-mail: '+em+'\n\n'+m);window.location.href='mailto:bartosz.k@power.radom.pl?subject='+encodeURIComponent('Zapytanie ze strony — '+n)+'&body='+body;return false;}
 const ftabs=document.getElementById('ftabs');
