@@ -53,6 +53,14 @@ img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
 .ph-header.scrolled .hd{height:54px;background:rgba(255,255,255,.8);box-shadow:0 16px 44px -14px rgba(18,20,25,.26),inset 0 1px 0 rgba(255,255,255,.95)}
 .hd-left{display:flex;align-items:center;gap:16px}
 .hd-logo-img{display:block;width:202px;height:26px;background:var(--logo) no-repeat left center/contain}
+.hd-nav{display:flex;align-items:center;gap:3px;font-weight:500;font-size:15px}
+.hd-nav a{color:var(--muted);position:relative;z-index:1;padding:9px 14px;border-radius:11px;transition:color .22s,transform .28s cubic-bezier(.2,1.2,.4,1)}
+.hd-nav a::before{content:"";position:absolute;inset:0;border-radius:inherit;background:rgba(225,29,42,.1);opacity:0;transform:scale(.78);transition:opacity .25s,transform .42s cubic-bezier(.2,1.35,.4,1);z-index:-1}
+.hd-nav a:hover{color:var(--red);transform:translateY(-2px)}
+.hd-nav a:hover::before,.hd-nav a.on::before{opacity:1;transform:scale(1)}
+.hd-nav a.on{color:var(--red)}
+.hd-burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
+.hd-burger span{width:24px;height:2.4px;background:var(--ink);border-radius:2px;transition:.25s}
 .hd-back{font-size:13px;font-weight:600;color:var(--muted);display:inline-flex;align-items:center;gap:6px;border-left:1px solid var(--line);padding-left:16px;transition:color .15s}
 .hd-back:hover{color:var(--ink)}.hd-back svg{width:15px;height:15px}
 .hd-right{display:flex;align-items:center;gap:18px}
@@ -253,6 +261,11 @@ body.ready .fade-up{opacity:1;transform:none}
 
 /* ===== responsive ===== */
 @media(max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}.dgrid{grid-template-columns:1fr;gap:30px}.ghost{font-size:200px;top:-48px;right:0}.pwrap{grid-template-columns:1fr}.uses{grid-template-columns:1fr}}
+@media(max-width:920px){
+  .hd-nav{display:none}.hd-burger{display:flex}
+  .hd-nav.open{display:flex;position:absolute;top:calc(100% + 8px);left:0;right:0;flex-direction:column;align-items:stretch;gap:3px;padding:12px;border-radius:18px;background:rgba(255,255,255,.92);-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);border:1px solid rgba(255,255,255,.6);box-shadow:0 22px 50px -16px rgba(18,20,25,.32)}
+  .hd-nav.open a{padding:12px 14px;width:100%;color:var(--ink);font-size:16px;border-radius:11px}
+}
 @media(max-width:760px){.how-grid{grid-template-columns:1fr}}
 @media(max-width:680px){
   .hero{padding:60px 0 40px}.grid{grid-template-columns:1fr;max-width:430px;margin:0 auto}
@@ -605,9 +618,12 @@ window.PR_AVAILABILITY = {
 .ares-b h4{font-family:var(--fd);font-size:17px;font-weight:700;color:var(--ink);margin:3px 0 9px}
 .ares-sp{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:13px}
 .ares-sp span{font-size:11.5px;color:var(--ink-soft);background:var(--surface2);border:1px solid var(--line);border-radius:7px;padding:4px 9px}
-.ares-ft{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:8px}
-.ares-pr{font-size:13.5px;color:var(--mut)}.ares-pr b{font-family:var(--fd);font-size:16px;color:var(--ink)}
-.ares-go{font-size:13px;font-weight:700;color:var(--accent)}
+.ares-ft{margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;gap:8px}
+.ares-pr{display:flex;flex-direction:column;gap:1px;line-height:1.25}
+.ares-calc{font-size:11px;color:var(--mut);font-weight:600}
+.ares-total{font-family:var(--fd);font-weight:800;font-size:19px;color:var(--accent);margin-top:1px}
+.ares-kauc{font-size:10.5px;color:var(--mut)}
+.ares-go{font-size:13px;font-weight:700;color:var(--accent);white-space:nowrap;flex:none}
 .ares-note{margin-top:16px;font-size:12.5px;color:var(--mut);background:var(--surface2);border:1px dashed var(--line-h);border-radius:12px;padding:12px 15px}
 
 /* ===== PowerBOT ===== */
@@ -706,7 +722,7 @@ window.PR_AVAILABILITY = {
 <body class="v4">
 <div class="scroll-prog" aria-hidden="true"><i></i></div>
 <div id="pr-loader"><div class="pl-logo"></div><div class="pl-bar"><i></i></div><div class="pl-txt">Power Rent</div></div>
-<header class="ph-header"><div class="wrap hd"><div class="hd-left"><a href="index.html" class="hd-logo" aria-label="Power Rent"><span class="hd-logo-img"></span></a></div><div class="hd-right"><a href="tel:664201202" class="hd-phone">664 201 202</a><a href="#rezerwacja" class="btn btn-red" data-magnetic="0.2">Rezerwacja</a></div></div></header>
+<header class="ph-header"><div class="wrap hd"><a href="index.html" class="hd-logo" aria-label="PowerRent"><span class="hd-logo-img"></span></a><nav class="hd-nav" id="cmenu"><a href="o-nas.html">O nas</a><a href="oferta.html">Oferta</a><a href="uslugi.html">Usługi</a><a href="cennik-foto.html" class="on">Cennik</a><a href="index.html#kontakt">Kontakt</a></nav><div class="hd-right"><a href="tel:664201202" class="hd-phone">664 201 202</a><a href="#rezerwacja" class="btn btn-red" data-magnetic="0.2">Rezerwacja</a><button class="hd-burger" id="cburger" aria-label="Menu"><span></span><span></span><span></span></button></div></div></header>
 
 <section class="cz-head">
   <div class="cz-glow" aria-hidden="true"></div>
@@ -1119,7 +1135,7 @@ window.PR_AVAILABILITY = {
 
 </script>
 <script>
-var PR_VEH=[{"t": "Mikrobus", "n": "Mikrobus dostawczy", "s": ["705 kg", "2 miejsca", "kat. B"], "p": "200", "per": "doba", "href": "auto-mikrobus.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200336_fd130bf2-48c2-4327-b52d-1a09264d655d.png", "cat": "dostawcze"}, {"t": "Średni", "n": "Auto dostawcze", "s": ["1408 kg", "3 miejsca", "L2H1"], "p": "280", "per": "doba", "href": "auto-male.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200347_633102cd-ed81-4cee-99fb-1768be9f65d8.png", "cat": "dostawcze"}, {"t": "Największe", "n": "Największy furgon", "s": ["8 europalet", "3 miejsca", "kat. B"], "p": "300", "per": "5 h", "href": "auto-najwieksze.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200412_27c8fc18-e150-471e-b9e5-24476c9c92c6.png", "cat": "dostawcze"}, {"t": "Chłodnia", "n": "Chłodnia", "s": ["agregat", "8 europalet", "750 kg"], "p": "350", "per": "5 h", "href": "auto-chlodnia.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200428_833d4bb0-c7df-461a-aedc-fa8f4fbafa9c.png", "cat": "chlodnia"}, {"t": "Laweta", "n": "Auto-laweta", "s": ["najazdy", "1115 kg", "przewóz aut"], "p": "250", "per": "5 h", "href": "auto-laweta.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200434_f9dafa51-b7c5-457a-8df1-887dd70fa351.png", "cat": "laweta"}, {"t": "9 osób", "n": "Bus 9-osobowy", "s": ["9 miejsc", "automat", "kat. B"], "p": "250", "per": "5 h", "href": "auto-bus.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_085325_633d50e0-0993-4247-b51a-bf7ee8c47eaa.png", "cat": "bus9"}, {"t": "Osobowe", "n": "Auto osobowe", "s": ["5 miejsc", "automat", "ekonomiczne"], "p": "200", "per": "5 h", "href": "auto-sedan.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200444_759ee268-7ed4-49cb-b9ef-71d97eb7963f.png", "cat": "osobowe"}, {"t": "Winda", "n": "Kontener z windą", "s": ["winda", "8 europalet", "704 kg"], "p": "300", "per": "5 h", "href": "auto-daily-maxi.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_114843_81fbfccd-beb6-4c88-bee8-234f92ab42e0.png", "cat": "dostawcze"}];
+var PR_VEH=[{"t": "Mikrobus", "n": "Mikrobus dostawczy", "s": ["705 kg", "2 miejsca", "kat. B"], "p": "200", "per": "doba", "href": "auto-mikrobus.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200336_fd130bf2-48c2-4327-b52d-1a09264d655d.png", "cat": "dostawcze", "d": 200}, {"t": "Średni", "n": "Auto dostawcze", "s": ["1408 kg", "3 miejsca", "L2H1"], "p": "280", "per": "doba", "href": "auto-male.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200347_633102cd-ed81-4cee-99fb-1768be9f65d8.png", "cat": "dostawcze", "d": 280}, {"t": "Największe", "n": "Największy furgon", "s": ["8 europalet", "3 miejsca", "kat. B"], "p": "300", "per": "5 h", "href": "auto-najwieksze.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200412_27c8fc18-e150-471e-b9e5-24476c9c92c6.png", "cat": "dostawcze", "d": 300}, {"t": "Chłodnia", "n": "Chłodnia", "s": ["agregat", "8 europalet", "750 kg"], "p": "350", "per": "5 h", "href": "auto-chlodnia.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200428_833d4bb0-c7df-461a-aedc-fa8f4fbafa9c.png", "cat": "chlodnia", "d": 350}, {"t": "Laweta", "n": "Auto-laweta", "s": ["najazdy", "1115 kg", "przewóz aut"], "p": "250", "per": "5 h", "href": "auto-laweta.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200434_f9dafa51-b7c5-457a-8df1-887dd70fa351.png", "cat": "laweta", "d": 250}, {"t": "9 osób", "n": "Bus 9-osobowy", "s": ["9 miejsc", "automat", "kat. B"], "p": "250", "per": "5 h", "href": "auto-bus.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_085325_633d50e0-0993-4247-b51a-bf7ee8c47eaa.png", "cat": "bus9", "d": 300}, {"t": "Osobowe", "n": "Auto osobowe", "s": ["5 miejsc", "automat", "ekonomiczne"], "p": "200", "per": "5 h", "href": "auto-sedan.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200444_759ee268-7ed4-49cb-b9ef-71d97eb7963f.png", "cat": "osobowe", "d": 200}, {"t": "Winda", "n": "Kontener z windą", "s": ["winda", "8 europalet", "704 kg"], "p": "300", "per": "5 h", "href": "auto-daily-maxi.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_114843_81fbfccd-beb6-4c88-bee8-234f92ab42e0.png", "cat": "dostawcze", "d": 300}];
 var PR_AVA='<img class="pava-img" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_230728_d01bdf65-7455-4623-96cf-573e9246f76f.png" alt="">';
 
 (function(){
@@ -1161,31 +1177,38 @@ var PR_AVA='<img class="pava-img" src="https://d8j0ntlcm91z4.cloudfront.net/user
       return {set:set,close:close,getISO:function(){return input.dataset.iso||'';}};
     }
     var fromInput=document.getElementById('qfrom'),toInput=document.getElementById('qto'),calTo;
-    var calFrom=mkCal(fromInput,function(){return today();},function(d){if(toInput.dataset.iso){var td=fromISO(toInput.dataset.iso);if(td<d)calTo.set(d);}});
-    calTo=mkCal(toInput,function(){return fromInput.dataset.iso?fromISO(fromInput.dataset.iso):today();},null);
+    function dobaWord(n){return n===1?'doba':((n%10>=2&&n%10<=4)&&(n%100<10||n%100>=20)?'doby':'dób');}
+    function zl(n){return n.toLocaleString('pl-PL');}
+    function nights(){var f=fromInput.dataset.iso,t=toInput.dataset.iso;if(!f||!t)return 1;var d=Math.round((fromISO(t)-fromISO(f))/86400000);return Math.max(1,d);}
+    function autorun(){if(fromInput.dataset.iso&&toInput.dataset.iso)search(false);}
+    var calFrom=mkCal(fromInput,function(){return today();},function(d){if(toInput.dataset.iso){var td=fromISO(toInput.dataset.iso);if(td<d)calTo.set(d);}autorun();});
+    calTo=mkCal(toInput,function(){return fromInput.dataset.iso?fromISO(fromInput.dataset.iso):today();},function(){autorun();});
     document.addEventListener('click',function(){closeAll(null);});
     function plform(n){return n===1?'auto':((n%10>=2&&n%10<=4)&&(n%100<10||n%100>=20)?'auta':'aut');}
-    function search(){
+    function search(scroll){
       if(!fromInput.dataset.iso)calFrom.set(today());
       if(!toInput.dataset.iso)calTo.set(fromISO(fromInput.dataset.iso));
       var f=fromInput.dataset.iso,t=toInput.dataset.iso;
       if(fromISO(t)<fromISO(f)){calTo.set(fromISO(f));t=fromInput.dataset.iso;}
+      var doby=nights();
       var cat=qtype.value;
       var list=PR_VEH.filter(function(v){return cat==='all'||v.cat===cat;});
       var cards=list.map(function(v){
+        var tot=doby*(+v.d);
         return '<a class="ares-card" href="'+v.href+'"><div class="ares-img"><img src="'+v.img+'" alt="'+v.n+'" loading="lazy"><span class="ares-ok"><i></i>Dostępne</span></div>'
           +'<div class="ares-b"><span class="ares-type">'+v.t+'</span><h4>'+v.n+'</h4>'
           +'<div class="ares-sp">'+v.s.map(function(x){return '<span>'+x+'</span>';}).join('')+'</div>'
-          +'<div class="ares-ft"><span class="ares-pr">od <b>'+v.p+' zł</b> / '+v.per+'</span><span class="ares-go">Szczegóły →</span></div></div></a>';
+          +'<div class="ares-ft"><div class="ares-pr"><span class="ares-calc">'+doby+' '+dobaWord(doby)+' × '+v.d+' zł</span><span class="ares-total">od '+zl(tot)+' zł</span><span class="ares-kauc">+ kaucja 1000 zł (zwrotna)</span></div><span class="ares-go">Rezerwuj →</span></div></div></a>';
       }).join('');
-      var head='<div class="ares-top"><div><span class="ares-eyebrow">Wolne auta</span><h3>'+list.length+' '+plform(list.length)+' w terminie '+fmt(fromISO(f))+' – '+fmt(fromISO(t))+'</h3></div>'
+      var head='<div class="ares-top"><div><span class="ares-eyebrow">Wolne auta · '+doby+' '+dobaWord(doby)+'</span><h3>'+list.length+' '+plform(list.length)+' w terminie '+fmt(fromISO(f))+' – '+fmt(fromISO(t))+'</h3></div>'
         +'<a class="btn btn-a" href="tel:+48664201202">Zadzwoń i zarezerwuj</a></div>';
-      var note='<div class="ares-note">To podgląd oferty dla wybranego typu. Realną dostępność w danym terminie potwierdzamy telefonicznie — wkrótce rezerwacja online zintegrowana z systemem.</div>';
+      var note='<div class="ares-note">Cena orientacyjna = liczba dób × stawka dobowa (do 500 km/doba). Kaucja zwrotna <b>1000 zł</b> na terenie Polski. Realną dostępność i ostateczną cenę potwierdzamy telefonicznie — wkrótce rezerwacja online.</div>';
       var res=document.getElementById('availResults');
       res.innerHTML=head+'<div class="ares-grid">'+cards+'</div>'+note;res.hidden=false;
-      res.scrollIntoView({behavior:'smooth',block:'nearest'});
+      if(scroll!==false)res.scrollIntoView({behavior:'smooth',block:'nearest'});
     }
-    document.getElementById('qsearch').addEventListener('click',search);
+    document.getElementById('qsearch').addEventListener('click',function(){search(true);});
+    qtype.addEventListener('change',autorun);
     if(location.hash==='#szukaj'){var _c=document.getElementById('availCard');if(_c)setTimeout(function(){flash(_c);},520);}
   }
   /* ============ PowerBOT ============ */
@@ -1238,5 +1261,6 @@ var PR_AVA='<img class="pava-img" src="https://d8j0ntlcm91z4.cloudfront.net/user
 })();
 
 </script>
+<script>(function(){var b=document.getElementById("cburger"),m=document.getElementById("cmenu");if(b&&m){b.addEventListener("click",function(){m.classList.toggle("open")});m.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){m.classList.remove("open")})});}})();</script>
 </body>
 </html>

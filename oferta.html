@@ -142,22 +142,37 @@ header.scrolled .logo-img{height:23px}
 .ftab{font-weight:600;font-size:13.5px;border:1.5px solid var(--line);background:var(--surface);color:var(--mut);border-radius:30px;padding:9px 16px;cursor:pointer;transition:.2s}
 .ftab.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .fgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.vcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--rcard,18px);overflow:hidden;transition:transform .3s,box-shadow .3s,border-color .3s;display:flex;flex-direction:column}
-.vcard:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--line-h)}
+.fgrid .vcard,.rail .vcard{transition:opacity .55s ease,transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .4s,border-color .4s}
+.vcard{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--rcard,18px);overflow:hidden;display:flex;flex-direction:column;will-change:transform}
+.vcard::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent-l));transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.2,.9,.2,1);z-index:4}
+.vcard:hover{transform:translateY(-10px) scale(1.015);box-shadow:0 32px 60px -24px rgba(13,16,22,.42),0 0 0 1px var(--accent-soft);border-color:transparent}
+.vcard:hover::after{transform:scaleX(1)}
+.vcard.vtilt{transition:box-shadow .3s,border-color .3s}
 .vthumb{position:relative;aspect-ratio:16/11;overflow:hidden;background:var(--surface2)}
-.vthumb img{width:100%;height:100%;object-fit:cover;transition:transform .55s cubic-bezier(.2,.7,.3,1)}
-.vcard:hover .vthumb img{transform:scale(1.07)}
-.vbadge{position:absolute;top:12px;left:12px;background:var(--badge-bg);color:var(--badge-tx);font-family:var(--fd);font-weight:700;font-size:11.5px;letter-spacing:.04em;padding:5px 10px;border-radius:7px;backdrop-filter:blur(4px)}
+.vthumb::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,transparent 52%,rgba(13,16,22,.16));opacity:.55;transition:opacity .4s}
+.vcard:hover .vthumb::before{opacity:1}
+.vthumb .vsheen{position:absolute;top:-12%;bottom:-12%;left:-65%;width:45%;z-index:2;background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);transform:skewX(-16deg);opacity:0;pointer-events:none}
+.vcard:hover .vthumb .vsheen{animation:vsheen .95s cubic-bezier(.3,.7,.3,1) .04s}
+@keyframes vsheen{0%{left:-65%;opacity:0}12%{opacity:.95}100%{left:135%;opacity:0}}
+.vthumb img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.3,1),filter .5s}
+.vcard:hover .vthumb img{transform:scale(1.09);filter:saturate(1.12) brightness(1.04)}
+.vbadge{position:absolute;top:12px;left:12px;z-index:3;background:var(--badge-bg);color:var(--badge-tx);font-family:var(--fd);font-weight:700;font-size:11.5px;letter-spacing:.04em;padding:6px 11px;border-radius:8px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.16);box-shadow:0 4px 12px -4px rgba(0,0,0,.32);transition:transform .35s}
+.vcard:hover .vbadge{transform:translateY(-3px)}
 .vbody{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1}
-.vbody h3{font-size:19px;font-weight:700}
+.vbody h3{font-size:19px;font-weight:700;letter-spacing:-.01em;transition:color .25s}
+.vcard:hover .vbody h3{color:var(--accent)}
 .vspecs{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 16px}
-.vspecs span{font-size:12px;font-weight:600;color:var(--chip-tx);background:var(--surface2);border:1px solid var(--line);border-radius:7px;padding:5px 9px}
-.vfoot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--line)}
+.vspecs span{font-size:12px;font-weight:600;color:var(--chip-tx);background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:5px 9px;transition:background .25s,border-color .25s,color .25s}
+.vcard:hover .vspecs span{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.vfoot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:14px;border-top:1px solid var(--line)}
 .vprice .od{font-size:11.5px;color:var(--mut);font-weight:600}
-.vprice .v{font-family:var(--fd);font-weight:800;font-size:21px}.vprice .v em{font-style:normal;color:var(--accent)}
+.vprice .v{font-family:var(--fd);font-weight:800;font-size:21px;transition:transform .3s}.vprice .v em{font-style:normal;color:var(--accent)}
+.vcard:hover .vprice .v{transform:scale(1.06)}
 .vprice .per{font-size:11.5px;color:var(--mut);font-weight:500}
-.vlink{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:13.5px;color:var(--accent)}
-.vlink svg{width:16px;height:16px;stroke:var(--accent);transition:transform .2s}.vcard:hover .vlink svg{transform:translateX(3px)}
+.vlink{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:13px;color:var(--accent);background:var(--accent-soft);padding:8px 14px;border-radius:30px;white-space:nowrap;transition:gap .25s,box-shadow .3s,background .3s,color .3s}
+.vcard:hover .vlink{box-shadow:0 10px 20px -7px var(--accent-glow2);gap:9px}
+.vlink svg{width:15px;height:15px;stroke:var(--accent);transition:transform .3s}.vcard:hover .vlink svg{transform:translateX(4px)}
+@media(prefers-reduced-motion:reduce){.vcard,.vcard:hover{transform:none!important}.vthumb .vsheen{display:none}}
 
 /* fleet rail */
 .rail{display:flex;gap:18px;overflow-x:auto;padding:4px 22px 22px;scroll-snap-type:x mandatory;scrollbar-width:none}
@@ -417,9 +432,12 @@ footer .fcon{font-size:14.5px;line-height:1.7}footer .fcon a{color:#cbd2dc}foote
 .ares-b h4{font-family:var(--fd);font-size:17px;font-weight:700;color:var(--ink);margin:3px 0 9px}
 .ares-sp{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:13px}
 .ares-sp span{font-size:11.5px;color:var(--ink-soft);background:var(--surface2);border:1px solid var(--line);border-radius:7px;padding:4px 9px}
-.ares-ft{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:8px}
-.ares-pr{font-size:13.5px;color:var(--mut)}.ares-pr b{font-family:var(--fd);font-size:16px;color:var(--ink)}
-.ares-go{font-size:13px;font-weight:700;color:var(--accent)}
+.ares-ft{margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;gap:8px}
+.ares-pr{display:flex;flex-direction:column;gap:1px;line-height:1.25}
+.ares-calc{font-size:11px;color:var(--mut);font-weight:600}
+.ares-total{font-family:var(--fd);font-weight:800;font-size:19px;color:var(--accent);margin-top:1px}
+.ares-kauc{font-size:10.5px;color:var(--mut)}
+.ares-go{font-size:13px;font-weight:700;color:var(--accent);white-space:nowrap;flex:none}
 .ares-note{margin-top:16px;font-size:12.5px;color:var(--mut);background:var(--surface2);border:1px dashed var(--line-h);border-radius:12px;padding:12px 15px}
 
 /* ===== PowerBOT ===== */
@@ -521,7 +539,6 @@ footer .fcon{font-size:14.5px;line-height:1.7}footer .fcon a{color:#cbd2dc}foote
     <a href="index.html#kontakt">Kontakt</a>
   </nav>
   <div class="nright">
-    <a href="https://wa.me/48664201202" class="iconbtn" aria-label="WhatsApp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d='M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.6.2-.2.3-.7.9-.8 1-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.6-1.5-.9-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1.1 2.7c.1.2 1.8 2.7 4.3 3.8 2.5 1.1 2.5.7 3 .7.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.2-.6-.4M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2'/></svg></a>
     <a href="tel:+48664201202" class="hphone"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2'/></svg>664 201 202</a>
     <a href="index.html#kontakt" class="btn btn-a" style="padding:11px 18px">Rezerwuj</a>
     <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -531,35 +548,35 @@ footer .fcon{font-size:14.5px;line-height:1.7}footer .fcon a{color:#cbd2dc}foote
     <div class="fleet-top"><div class="sec-head" style="margin-bottom:0"><span class="tag">Nasza flota</span><h2>Pojazd na każde zadanie</h2><p>Wybierz auto — w cenniku znajdziesz realne specyfikacje, ceny brutto/netto i limity km.</p></div>
     <a href="cennik-foto.html" class="btn btn-d">Pełny cennik <svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M5 12h14M13 6l6 6-6 6'/></svg></a></div>
     <div class="ftabs" id="ftabs"><button class="ftab on" data-f="all">Wszystkie</button><button class="ftab" data-f="dost">Dostawcze</button><button class="ftab" data-f="spec">Specjalne</button><button class="ftab" data-f="oso">Osobowe</button></div><div class="fgrid"><a class="vcard rv" data-cat="dost" href="auto-mikrobus.html">
-      <div class="vthumb"><span class="vbadge">Mikrobus</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200336_fd130bf2-48c2-4327-b52d-1a09264d655d.png" alt="Mikrobus dostawczy"></div>
+      <div class="vthumb"><span class="vbadge">Mikrobus</span><span class="vsheen"></span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200336_fd130bf2-48c2-4327-b52d-1a09264d655d.png" alt="Mikrobus dostawczy"></div>
       <div class="vbody"><h3>Mikrobus dostawczy</h3><div class="vspecs"><span>705 kg</span><span>2 miejsca</span><span>kat. B</span></div>
         <div class="vfoot"><div class="vprice"><div class="od">od</div><div class="v"><em>200</em> zł<span class="per"> / doba</span></div></div>
         <span class="vlink">Szczegóły<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M5 12h14M13 6l6 6-6 6'/></svg></span></div></div></a><a class="vcard rv d1" data-cat="dost" href="auto-male.html">
-      <div class="vthumb"><span class="vbadge">Średni</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200347_633102cd-ed81-4cee-99fb-1768be9f65d8.png" alt="Auto dostawcze"></div>
+      <div class="vthumb"><span class="vbadge">Średni</span><span class="vsheen"></span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200347_633102cd-ed81-4cee-99fb-1768be9f65d8.png" alt="Auto dostawcze"></div>
       <div class="vbody"><h3>Auto dostawcze</h3><div class="vspecs"><span>1408 kg</span><span>3 miejsca</span><span>L2H1</span></div>
         <div class="vfoot"><div class="vprice"><div class="od">od</div><div class="v"><em>280</em> zł<span class="per"> / doba</span></div></div>
         <span class="vlink">Szczegóły<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M5 12h14M13 6l6 6-6 6'/></svg></span></div></div></a><a class="vcard rv d2" data-cat="dost" href="auto-najwieksze.html">
-      <div class="vthumb"><span class="vbadge">Największe</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200412_27c8fc18-e150-471e-b9e5-24476c9c92c6.png" alt="Największy furgon"></div>
+      <div class="vthumb"><span class="vbadge">Największe</span><span class="vsheen"></span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200412_27c8fc18-e150-471e-b9e5-24476c9c92c6.png" alt="Największy furgon"></div>
       <div class="vbody"><h3>Największy furgon</h3><div class="vspecs"><span>8 europalet</span><span>3 miejsca</span><span>kat. B</span></div>
         <div class="vfoot"><div class="vprice"><div class="od">od</div><div class="v"><em>300</em> zł<span class="per"> / 5 h</span></div></div>
         <span class="vlink">Szczegóły<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M5 12h14M13 6l6 6-6 6'/></svg></span></div></div></a><a class="vcard rv d3" data-cat="spec" href="auto-chlodnia.html">
-      <div class="vthumb"><span class="vbadge">Chłodnia</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200428_833d4bb0-c7df-461a-aedc-fa8f4fbafa9c.png" alt="Chłodnia"></div>
+      <div class="vthumb"><span class="vbadge">Chłodnia</span><span class="vsheen"></span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200428_833d4bb0-c7df-461a-aedc-fa8f4fbafa9c.png" alt="Chłodnia"></div>
       <div class="vbody"><h3>Chłodnia</h3><div class="vspecs"><span>agregat</span><span>8 europalet</span><span>750 kg</span></div>
         <div class="vfoot"><div class="vprice"><div class="od">od</div><div class="v"><em>350</em> zł<span class="per"> / 5 h</span></div></div>
         <span class="vlink">Szczegóły<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M5 12h14M13 6l6 6-6 6'/></svg></span></div></div></a><a class="vcard rv" data-cat="spec" href="auto-laweta.html">
-      <div class="vthumb"><span class="vbadge">Laweta</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200434_f9dafa51-b7c5-457a-8df1-887dd70fa351.png" alt="Auto-laweta"></div>
+      <div class="vthumb"><span class="vbadge">Laweta</span><span class="vsheen"></span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200434_f9dafa51-b7c5-457a-8df1-887dd70fa351.png" alt="Auto-laweta"></div>
       <div class="vbody"><h3>Auto-laweta</h3><div class="vspecs"><span>najazdy</span><span>1115 kg</span><span>przewóz aut</span></div>
         <div class="vfoot"><div class="vprice"><div class="od">od</div><div class="v"><em>250</em> zł<span class="per"> / 5 h</span></div></div>
         <span class="vlink">Szczegóły<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M5 12h14M13 6l6 6-6 6'/></svg></span></div></div></a><a class="vcard rv d1" data-cat="oso" href="auto-bus.html">
-      <div class="vthumb"><span class="vbadge">9 osób</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_085325_633d50e0-0993-4247-b51a-bf7ee8c47eaa.png" alt="Bus 9-osobowy"></div>
+      <div class="vthumb"><span class="vbadge">9 osób</span><span class="vsheen"></span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_085325_633d50e0-0993-4247-b51a-bf7ee8c47eaa.png" alt="Bus 9-osobowy"></div>
       <div class="vbody"><h3>Bus 9-osobowy</h3><div class="vspecs"><span>9 miejsc</span><span>automat</span><span>kat. B</span></div>
         <div class="vfoot"><div class="vprice"><div class="od">od</div><div class="v"><em>250</em> zł<span class="per"> / 5 h</span></div></div>
         <span class="vlink">Szczegóły<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M5 12h14M13 6l6 6-6 6'/></svg></span></div></div></a><a class="vcard rv d2" data-cat="oso" href="auto-sedan.html">
-      <div class="vthumb"><span class="vbadge">Osobowe</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200444_759ee268-7ed4-49cb-b9ef-71d97eb7963f.png" alt="Auto osobowe"></div>
+      <div class="vthumb"><span class="vbadge">Osobowe</span><span class="vsheen"></span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200444_759ee268-7ed4-49cb-b9ef-71d97eb7963f.png" alt="Auto osobowe"></div>
       <div class="vbody"><h3>Auto osobowe</h3><div class="vspecs"><span>5 miejsc</span><span>automat</span><span>ekonomiczne</span></div>
         <div class="vfoot"><div class="vprice"><div class="od">od</div><div class="v"><em>200</em> zł<span class="per"> / 5 h</span></div></div>
         <span class="vlink">Szczegóły<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M5 12h14M13 6l6 6-6 6'/></svg></span></div></div></a><a class="vcard rv d3" data-cat="spec" href="auto-daily-maxi.html">
-      <div class="vthumb"><span class="vbadge">Winda</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_114843_81fbfccd-beb6-4c88-bee8-234f92ab42e0.png" alt="Kontener z windą"></div>
+      <div class="vthumb"><span class="vbadge">Winda</span><span class="vsheen"></span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_114843_81fbfccd-beb6-4c88-bee8-234f92ab42e0.png" alt="Kontener z windą"></div>
       <div class="vbody"><h3>Kontener z windą</h3><div class="vspecs"><span>winda</span><span>8 europalet</span><span>704 kg</span></div>
         <div class="vfoot"><div class="vprice"><div class="od">od</div><div class="v"><em>300</em> zł<span class="per"> / 5 h</span></div></div>
         <span class="vlink">Szczegóły<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M5 12h14M13 6l6 6-6 6'/></svg></span></div></div></a></div></div></section><section class="sec" id="dlugo" style="padding-top:18px"><div class="wrap"><div class="lt rv">
@@ -598,7 +615,8 @@ function goReserve(e){e.preventDefault();const map={busy:'auto-male.html',duze:'
 function sendMail(e){e.preventDefault();const n=document.getElementById('m_name').value,t=document.getElementById('m_tel').value,em=document.getElementById('m_email').value,m=document.getElementById('m_msg').value;const body=encodeURIComponent('Imię: '+n+'\nTelefon: '+t+'\nE-mail: '+em+'\n\n'+m);window.location.href='mailto:bartosz.k@power.radom.pl?subject='+encodeURIComponent('Zapytanie ze strony — '+n)+'&body='+body;return false;}
 const ftabs=document.getElementById('ftabs');
 if(ftabs){ftabs.addEventListener('click',ev=>{const b=ev.target.closest('.ftab');if(!b)return;ftabs.querySelectorAll('.ftab').forEach(x=>x.classList.remove('on'));b.classList.add('on');const f=b.dataset.f;document.querySelectorAll('.fgrid .vcard').forEach(c=>{c.style.display=(f==='all'||c.dataset.cat===f)?'':'none'});});}
-</script><script>var PR_VEH=[{"t": "Mikrobus", "n": "Mikrobus dostawczy", "s": ["705 kg", "2 miejsca", "kat. B"], "p": "200", "per": "doba", "href": "auto-mikrobus.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200336_fd130bf2-48c2-4327-b52d-1a09264d655d.png", "cat": "dostawcze"}, {"t": "Średni", "n": "Auto dostawcze", "s": ["1408 kg", "3 miejsca", "L2H1"], "p": "280", "per": "doba", "href": "auto-male.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200347_633102cd-ed81-4cee-99fb-1768be9f65d8.png", "cat": "dostawcze"}, {"t": "Największe", "n": "Największy furgon", "s": ["8 europalet", "3 miejsca", "kat. B"], "p": "300", "per": "5 h", "href": "auto-najwieksze.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200412_27c8fc18-e150-471e-b9e5-24476c9c92c6.png", "cat": "dostawcze"}, {"t": "Chłodnia", "n": "Chłodnia", "s": ["agregat", "8 europalet", "750 kg"], "p": "350", "per": "5 h", "href": "auto-chlodnia.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200428_833d4bb0-c7df-461a-aedc-fa8f4fbafa9c.png", "cat": "chlodnia"}, {"t": "Laweta", "n": "Auto-laweta", "s": ["najazdy", "1115 kg", "przewóz aut"], "p": "250", "per": "5 h", "href": "auto-laweta.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200434_f9dafa51-b7c5-457a-8df1-887dd70fa351.png", "cat": "laweta"}, {"t": "9 osób", "n": "Bus 9-osobowy", "s": ["9 miejsc", "automat", "kat. B"], "p": "250", "per": "5 h", "href": "auto-bus.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_085325_633d50e0-0993-4247-b51a-bf7ee8c47eaa.png", "cat": "bus9"}, {"t": "Osobowe", "n": "Auto osobowe", "s": ["5 miejsc", "automat", "ekonomiczne"], "p": "200", "per": "5 h", "href": "auto-sedan.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200444_759ee268-7ed4-49cb-b9ef-71d97eb7963f.png", "cat": "osobowe"}, {"t": "Winda", "n": "Kontener z windą", "s": ["winda", "8 europalet", "704 kg"], "p": "300", "per": "5 h", "href": "auto-daily-maxi.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_114843_81fbfccd-beb6-4c88-bee8-234f92ab42e0.png", "cat": "dostawcze"}];
+if(matchMedia('(hover:hover) and (pointer:fine)').matches){document.querySelectorAll('.vcard').forEach(function(c){c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.classList.add('vtilt');c.style.transform='perspective(950px) rotateX('+(-y*5).toFixed(2)+'deg) rotateY('+(x*5.5).toFixed(2)+'deg) translateY(-10px) scale(1.02)';});c.addEventListener('mouseleave',function(){c.classList.remove('vtilt');c.style.transform='';});});}
+</script><script>var PR_VEH=[{"t": "Mikrobus", "n": "Mikrobus dostawczy", "s": ["705 kg", "2 miejsca", "kat. B"], "p": "200", "per": "doba", "href": "auto-mikrobus.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200336_fd130bf2-48c2-4327-b52d-1a09264d655d.png", "cat": "dostawcze", "d": 200}, {"t": "Średni", "n": "Auto dostawcze", "s": ["1408 kg", "3 miejsca", "L2H1"], "p": "280", "per": "doba", "href": "auto-male.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200347_633102cd-ed81-4cee-99fb-1768be9f65d8.png", "cat": "dostawcze", "d": 280}, {"t": "Największe", "n": "Największy furgon", "s": ["8 europalet", "3 miejsca", "kat. B"], "p": "300", "per": "5 h", "href": "auto-najwieksze.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200412_27c8fc18-e150-471e-b9e5-24476c9c92c6.png", "cat": "dostawcze", "d": 300}, {"t": "Chłodnia", "n": "Chłodnia", "s": ["agregat", "8 europalet", "750 kg"], "p": "350", "per": "5 h", "href": "auto-chlodnia.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200428_833d4bb0-c7df-461a-aedc-fa8f4fbafa9c.png", "cat": "chlodnia", "d": 350}, {"t": "Laweta", "n": "Auto-laweta", "s": ["najazdy", "1115 kg", "przewóz aut"], "p": "250", "per": "5 h", "href": "auto-laweta.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200434_f9dafa51-b7c5-457a-8df1-887dd70fa351.png", "cat": "laweta", "d": 250}, {"t": "9 osób", "n": "Bus 9-osobowy", "s": ["9 miejsc", "automat", "kat. B"], "p": "250", "per": "5 h", "href": "auto-bus.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_085325_633d50e0-0993-4247-b51a-bf7ee8c47eaa.png", "cat": "bus9", "d": 300}, {"t": "Osobowe", "n": "Auto osobowe", "s": ["5 miejsc", "automat", "ekonomiczne"], "p": "200", "per": "5 h", "href": "auto-sedan.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200444_759ee268-7ed4-49cb-b9ef-71d97eb7963f.png", "cat": "osobowe", "d": 200}, {"t": "Winda", "n": "Kontener z windą", "s": ["winda", "8 europalet", "704 kg"], "p": "300", "per": "5 h", "href": "auto-daily-maxi.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_114843_81fbfccd-beb6-4c88-bee8-234f92ab42e0.png", "cat": "dostawcze", "d": 300}];
 var PR_AVA='<img class="pava-img" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_230728_d01bdf65-7455-4623-96cf-573e9246f76f.png" alt="">';
 
 (function(){
@@ -640,31 +658,38 @@ var PR_AVA='<img class="pava-img" src="https://d8j0ntlcm91z4.cloudfront.net/user
       return {set:set,close:close,getISO:function(){return input.dataset.iso||'';}};
     }
     var fromInput=document.getElementById('qfrom'),toInput=document.getElementById('qto'),calTo;
-    var calFrom=mkCal(fromInput,function(){return today();},function(d){if(toInput.dataset.iso){var td=fromISO(toInput.dataset.iso);if(td<d)calTo.set(d);}});
-    calTo=mkCal(toInput,function(){return fromInput.dataset.iso?fromISO(fromInput.dataset.iso):today();},null);
+    function dobaWord(n){return n===1?'doba':((n%10>=2&&n%10<=4)&&(n%100<10||n%100>=20)?'doby':'dób');}
+    function zl(n){return n.toLocaleString('pl-PL');}
+    function nights(){var f=fromInput.dataset.iso,t=toInput.dataset.iso;if(!f||!t)return 1;var d=Math.round((fromISO(t)-fromISO(f))/86400000);return Math.max(1,d);}
+    function autorun(){if(fromInput.dataset.iso&&toInput.dataset.iso)search(false);}
+    var calFrom=mkCal(fromInput,function(){return today();},function(d){if(toInput.dataset.iso){var td=fromISO(toInput.dataset.iso);if(td<d)calTo.set(d);}autorun();});
+    calTo=mkCal(toInput,function(){return fromInput.dataset.iso?fromISO(fromInput.dataset.iso):today();},function(){autorun();});
     document.addEventListener('click',function(){closeAll(null);});
     function plform(n){return n===1?'auto':((n%10>=2&&n%10<=4)&&(n%100<10||n%100>=20)?'auta':'aut');}
-    function search(){
+    function search(scroll){
       if(!fromInput.dataset.iso)calFrom.set(today());
       if(!toInput.dataset.iso)calTo.set(fromISO(fromInput.dataset.iso));
       var f=fromInput.dataset.iso,t=toInput.dataset.iso;
       if(fromISO(t)<fromISO(f)){calTo.set(fromISO(f));t=fromInput.dataset.iso;}
+      var doby=nights();
       var cat=qtype.value;
       var list=PR_VEH.filter(function(v){return cat==='all'||v.cat===cat;});
       var cards=list.map(function(v){
+        var tot=doby*(+v.d);
         return '<a class="ares-card" href="'+v.href+'"><div class="ares-img"><img src="'+v.img+'" alt="'+v.n+'" loading="lazy"><span class="ares-ok"><i></i>Dostępne</span></div>'
           +'<div class="ares-b"><span class="ares-type">'+v.t+'</span><h4>'+v.n+'</h4>'
           +'<div class="ares-sp">'+v.s.map(function(x){return '<span>'+x+'</span>';}).join('')+'</div>'
-          +'<div class="ares-ft"><span class="ares-pr">od <b>'+v.p+' zł</b> / '+v.per+'</span><span class="ares-go">Szczegóły →</span></div></div></a>';
+          +'<div class="ares-ft"><div class="ares-pr"><span class="ares-calc">'+doby+' '+dobaWord(doby)+' × '+v.d+' zł</span><span class="ares-total">od '+zl(tot)+' zł</span><span class="ares-kauc">+ kaucja 1000 zł (zwrotna)</span></div><span class="ares-go">Rezerwuj →</span></div></div></a>';
       }).join('');
-      var head='<div class="ares-top"><div><span class="ares-eyebrow">Wolne auta</span><h3>'+list.length+' '+plform(list.length)+' w terminie '+fmt(fromISO(f))+' – '+fmt(fromISO(t))+'</h3></div>'
+      var head='<div class="ares-top"><div><span class="ares-eyebrow">Wolne auta · '+doby+' '+dobaWord(doby)+'</span><h3>'+list.length+' '+plform(list.length)+' w terminie '+fmt(fromISO(f))+' – '+fmt(fromISO(t))+'</h3></div>'
         +'<a class="btn btn-a" href="tel:+48664201202">Zadzwoń i zarezerwuj</a></div>';
-      var note='<div class="ares-note">To podgląd oferty dla wybranego typu. Realną dostępność w danym terminie potwierdzamy telefonicznie — wkrótce rezerwacja online zintegrowana z systemem.</div>';
+      var note='<div class="ares-note">Cena orientacyjna = liczba dób × stawka dobowa (do 500 km/doba). Kaucja zwrotna <b>1000 zł</b> na terenie Polski. Realną dostępność i ostateczną cenę potwierdzamy telefonicznie — wkrótce rezerwacja online.</div>';
       var res=document.getElementById('availResults');
       res.innerHTML=head+'<div class="ares-grid">'+cards+'</div>'+note;res.hidden=false;
-      res.scrollIntoView({behavior:'smooth',block:'nearest'});
+      if(scroll!==false)res.scrollIntoView({behavior:'smooth',block:'nearest'});
     }
-    document.getElementById('qsearch').addEventListener('click',search);
+    document.getElementById('qsearch').addEventListener('click',function(){search(true);});
+    qtype.addEventListener('change',autorun);
     if(location.hash==='#szukaj'){var _c=document.getElementById('availCard');if(_c)setTimeout(function(){flash(_c);},520);}
   }
   /* ============ PowerBOT ============ */
