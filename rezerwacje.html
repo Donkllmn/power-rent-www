@@ -83,6 +83,19 @@
 .car-badges{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
 .car-bdg{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:6px;background:var(--bg2);color:var(--ink)}
 .car.sel .car-bdg{background:rgba(225,29,42,.1);color:var(--red)}
+.wizard{position:relative}
+.cars-more{margin-top:22px}
+.cars-more-h{display:flex;align-items:center;gap:8px;font-weight:800;font-family:'Archivo';font-size:15.5px;color:var(--ink);margin-bottom:13px;padding-top:18px;border-top:1px dashed var(--line)}
+.cars-more-h span{font-size:18px}
+.cars-grid-sm{grid-template-columns:repeat(auto-fill,minmax(188px,1fr))}
+.cars-grid-sm .car-photo{height:102px}
+.cfetti{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:6}
+.cfetti i{position:absolute;top:-16px;width:9px;height:15px;border-radius:2px;opacity:.95;animation:cfall linear forwards}
+@keyframes cfall{0%{transform:translateY(0) rotate(0)}100%{transform:translateY(680px) rotate(560deg);opacity:.12}}
+.mini-toast{position:absolute;bottom:84px;left:50%;transform:translateX(-50%) translateY(12px);background:var(--ink);color:#fff;font-weight:700;font-size:13.5px;padding:11px 20px;border-radius:13px;box-shadow:0 14px 34px rgba(0,0,0,.28);opacity:0;transition:opacity .25s,transform .25s;z-index:7;pointer-events:none;white-space:nowrap}
+.mini-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.rcpt-trust{display:flex;align-items:center;gap:9px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:11px 16px;margin-bottom:16px}
+.rcpt-trust b{color:#1F9D55}
 .car-photo{position:relative;height:128px;border-radius:11px;overflow:hidden;margin-bottom:12px;background:var(--bg2)}
 .car-illus{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#F2F4F8,#E5E9F0)}
 .car-illus svg{width:60px;height:60px;color:#AAB2BF}
@@ -97,6 +110,47 @@
 .kaucja-amt{font-size:15px;color:var(--ink)}
 .kaucja-amt b{font-family:'Archivo';font-size:21px;color:var(--red)}
 .kaucja-sub{font-size:12.5px;color:var(--muted);margin-top:4px}
+.cal-times{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:392px;margin:16px auto 0}
+.cal-times select{width:100%;padding:13px 14px;border:2px solid var(--line);border-radius:13px;font-family:inherit;font-size:15px;color:var(--ink);background:var(--paper);transition:border-color .18s,box-shadow .18s}
+.cal-times select:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 4px rgba(225,29,42,.1)}
+.rcpt{border-radius:22px;overflow:hidden;border:1px solid var(--line);box-shadow:0 24px 60px rgba(18,20,25,.15);background:var(--paper);animation:wzIn .5s}
+.rcpt-hero{position:relative;height:212px;overflow:hidden;background:#0e1014}
+.rcpt-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:rcptZoom 9s ease-out forwards}
+@keyframes rcptZoom{from{transform:scale(1.09)}to{transform:scale(1)}}
+.rcpt-illus{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(140deg,#1b1f27,#0d0f14)}
+.rcpt-illus svg{width:108px;height:108px;color:rgba(255,255,255,.42)}
+.rcpt-hero-ov{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:20px 22px;background:linear-gradient(to top,rgba(8,9,13,.86) 0%,rgba(8,9,13,.3) 52%,rgba(8,9,13,.04) 100%)}
+.rcpt-avail{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:rgba(31,157,85,.95);padding:6px 12px;border-radius:8px;margin-bottom:auto;box-shadow:0 6px 18px rgba(31,157,85,.45);animation:rcptPop .5s .25s both}
+@keyframes rcptPop{from{opacity:0;transform:translateY(-6px) scale(.85)}to{opacity:1;transform:none}}
+.rcpt-car{font-family:'Archivo';font-weight:900;font-size:27px;color:#fff;line-height:1.05;text-shadow:0 2px 14px rgba(0,0,0,.45)}
+.rcpt-carsub{color:rgba(255,255,255,.88);font-size:13.5px;font-weight:600;margin-top:5px}
+.rcpt-body{padding:22px}
+.rcpt-dates{display:flex;align-items:center;gap:13px;flex-wrap:wrap;padding:15px 18px;background:var(--bg);border:1px solid var(--line);border-radius:14px;margin-bottom:16px}
+.rcpt-dates>div:first-child,.rcpt-dates>div:nth-child(3){flex:1;min-width:90px}
+.rcpt-lbl{display:block;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:4px}
+.rcpt-dates b{font-family:'Archivo';font-size:16px;color:var(--ink);display:block;line-height:1.1}
+.rcpt-dates>div>span:last-child{font-size:12.5px;color:var(--muted)}
+.rcpt-arrow{flex:0 0 auto;color:var(--red);font-size:17px;font-weight:800}
+.rcpt-len{flex:0 0 auto;background:var(--grad-red);color:#fff;font-family:'Archivo';font-weight:800;font-size:13.5px;padding:8px 13px;border-radius:11px;box-shadow:0 6px 16px rgba(225,29,42,.34)}
+.rcpt-price{background:linear-gradient(165deg,#181b22,#0d0f14);border-radius:16px;padding:6px 20px;margin-bottom:18px;box-shadow:0 14px 34px rgba(13,15,20,.3)}
+.rcpt-pr-row{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.09)}
+.rcpt-pr-k{color:#99a2b2;font-size:13.5px}
+.rcpt-pr-v{color:#fff;font-weight:700;font-size:14px;white-space:nowrap}
+.rcpt-pr-row.disc .rcpt-pr-v{color:#5fd08a}
+.rcpt-total{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:15px 0 13px}
+.rcpt-total-k{color:#fff;font-family:'Archivo';font-weight:800;font-size:15.5px}
+.rcpt-total-n{color:#fff;font-family:'Archivo';font-weight:900;font-size:25px;letter-spacing:-.01em;white-space:nowrap}
+.rcpt-sec{font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:2px 0 6px}
+.rcpt-data{margin-bottom:4px}
+.sum-car{display:flex;gap:16px;align-items:center;background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:16px}
+.sum-car .car-photo{height:90px;width:138px;flex:0 0 138px;margin:0}
+.sum-car-mod{font-family:'Archivo';font-weight:800;font-size:18px;color:var(--ink)}
+.sum-car-sub{color:var(--muted);font-size:13.5px;margin-top:4px}
+.sum-car-tag{display:inline-block;margin-top:8px;font-size:11px;font-weight:800;letter-spacing:.05em;color:#2563B6;background:#EAF1FD;border:1px solid #D2E2FB;padding:3px 9px;border-radius:6px}
+.sum-sec-h{font-size:11.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:18px 0 8px}
+.sum-alt{background:#F0F6FF;border:1px solid #D6E4FB;border-radius:13px;padding:13px 16px;margin-bottom:16px}
+.sum-alt-h{font-weight:800;font-size:12px;letter-spacing:.04em;color:#2563B6;margin-bottom:4px;text-transform:uppercase}
+.sum-alt-list{font-size:13.5px;color:var(--ink);line-height:1.5}
 .sum-price{background:var(--ink);color:#fff;border-radius:14px;padding:4px 22px;margin:-6px 0 18px}
 .sum-price .wz-sum-row{border-bottom:1px solid rgba(255,255,255,.12)}
 .sum-price .wz-sum-k{color:#AEB6C4}
@@ -222,10 +276,15 @@
             <div class="cal-grid" id="calGrid"></div>
             <div class="cal-range" id="calRange">Wybierz dzień odbioru.</div>
           </div>
+          <div class="cal-times">
+            <div class="wz-field"><label for="r-hOd">Godzina odbioru</label><select id="r-hOd"></select></div>
+            <div class="wz-field"><label for="r-hDo">Godzina zwrotu</label><select id="r-hDo"></select></div>
+          </div>
           <div class="cars-sec" id="carsSec" style="display:none">
             <div class="cars-h">Wolne auta w tym terminie</div>
             <div class="cars-hint" id="carsHint">Wybierz pojazd, który Cię interesuje.</div>
             <div id="carsBox"></div>
+            <div class="cars-more" id="carsMore" style="display:none"></div>
           </div>
           <div class="trip-sec" id="tripSec" style="display:none">
             <div class="cars-h">Wyjazd i kaucja zwrotna</div>
@@ -281,8 +340,7 @@
         <div class="wz-panel" data-panel="4">
           <div class="wz-ttl">Sprawdź i potwierdź</div>
           <div class="wz-sub">Wszystko się zgadza? Wyślij rezerwację — odezwiemy się telefonicznie z potwierdzeniem i ceną.</div>
-          <div class="sum-price" id="wzSumPrice"></div>
-          <div class="wz-sum" id="wzSum"></div>
+          <div id="wzReceipt"></div>
           <div class="wz-info"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.6h.01"/></svg><span>Rezerwacja jest wstępna — dostępność i cenę potwierdzamy telefonicznie. Cena ustalana jest indywidualnie, zależnie od terminu i długości najmu.</span></div>
         </div>
 
@@ -322,17 +380,18 @@
   var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVncWNid2J6bGtjdHlkbGtsbmpqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE5MTA3NzQsImV4cCI6MjA5NzQ4Njc3NH0.k7N0CAR63Qbi9hLG3rkPg51PBbBmPqjKJHAZaaYiAUs';
   var HDR={'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY};
   var STEPS=4, step=1, maxStep=1, sending=false;
-  var sel={seg:'',segCode:'',carId:'',carLabel:'',carSeg:'',typ:'ind',proceedNoCar:false,zagranica:false,kraj:'',kaucja:1000};
+  var sel={seg:'',segCode:'',carId:'',carLabel:'',carSeg:'',car:null,typ:'ind',proceedNoCar:false,zagranica:false,kraj:'',kaucja:1000,oplata:0};
+  var loadedCars=[];
   var calFrom=null,calTo=null,calY,calM;
 
   var IC={
-    van:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7h10v9h-10z"/><path d="M12.5 10h4l3.5 3.5V16h-7.5"/><circle cx="6.5" cy="17.5" r="1.6"/><circle cx="16.5" cy="17.5" r="1.6"/></svg>',
-    bus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="11" rx="2.4"/><path d="M3.5 10.5h17"/><path d="M8 4.5v6M12 4.5v6M16 4.5v6"/><circle cx="7.5" cy="18" r="1.5"/><circle cx="16.5" cy="18" r="1.5"/></svg>',
-    tow:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/><path d="M2.5 16.5V9.5h6l3 3v4"/><path d="M11.5 16.5h4"/><path d="M14.5 12.5l4-4h2.5"/></svg>',
-    fridge:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5v19M2.8 12h18.4M5.2 5.2l13.6 13.6M18.8 5.2L5.2 18.8"/></svg>',
-    tarp:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 15.5V10c0-2.2 2.2-3.5 5.5-3.5S13.5 7.8 13.5 10v5.5"/><path d="M1.5 15.5h12.5"/><path d="M13.5 10.5h3.5l3.5 3.5v2h-7"/><circle cx="6.5" cy="17.5" r="1.5"/><circle cx="17" cy="17.5" r="1.5"/></svg>',
-    car:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13.5l1.8-5.2A2.2 2.2 0 0 1 6.9 6.7h10.2a2.2 2.2 0 0 1 2.1 1.6l1.8 5.2"/><path d="M3 13.5h18v3.5H3z"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg>',
-    q:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.3 9.4a2.8 2.8 0 0 1 5.4 1c0 1.9-2.7 2.2-2.7 3.8"/><circle cx="12" cy="17" r=".7" fill="currentColor" stroke="none"/></svg>'
+    van:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8.5C2 7.7 2.6 7 3.4 7H12v7H2V8.5Z" fill="currentColor" fill-opacity=".13" stroke="none"/><path d="M12 8.5h4.4l3.3 3.4c.2.2.3.5.3.8V14H12V8.5Z" fill="currentColor" fill-opacity=".13" stroke="none"/><path d="M2 14.5V8.4C2 7.6 2.6 7 3.4 7H12v7.5M12 7h4.4l3.3 3.4c.2.2.3.5.3.8v3.3"/><path d="M2 15h2.3m12.4 0H20"/><circle cx="6.6" cy="15.2" r="1.8" fill="var(--paper)"/><circle cx="16.8" cy="15.2" r="1.8" fill="var(--paper)"/></svg>',
+    bus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="11" rx="2.4" fill="currentColor" fill-opacity=".13" stroke="none"/><rect x="3.5" y="4.5" width="17" height="11" rx="2.4"/><path d="M3.5 11h17M8 4.5v6M12 4.5v6M16 4.5v6"/><circle cx="7.5" cy="18" r="1.6" fill="var(--paper)"/><circle cx="16.5" cy="18" r="1.6" fill="var(--paper)"/></svg>',
+    tow:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 16V9.8c0-.5.4-.8.9-.8H9l3 3v4H2.5Z" fill="currentColor" fill-opacity=".13" stroke="none"/><path d="M2.5 16V9.8c0-.5.4-.8.9-.8H9l3 3v4M11.5 16h3.3M14.8 12.2l4-4.2H21"/><circle cx="6.5" cy="17.5" r="1.7" fill="var(--paper)"/><circle cx="17" cy="17.5" r="1.7" fill="var(--paper)"/></svg>',
+    fridge:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="3" width="15" height="18" rx="2.4" fill="currentColor" fill-opacity=".13" stroke="none"/><rect x="4.5" y="3" width="15" height="18" rx="2.4"/><path d="M4.5 11h15M8 6v2.5M8 14v2.5M12 15v5M10.6 16.4l1.4-.8 1.4.8"/></svg>',
+    tarp:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 15.5V10c0-2 2-3.3 5.5-3.3S13 8 13 10v5.5H2Z" fill="currentColor" fill-opacity=".13" stroke="none"/><path d="M2 15.5V10c0-2 2-3.3 5.5-3.3S13 8 13 10v5.5M1.5 15.5H13M13 11h4.3l3.4 3.4c.2.2.3.5.3.8v.3H13"/><circle cx="6.5" cy="17.5" r="1.7" fill="var(--paper)"/><circle cx="17" cy="17.5" r="1.7" fill="var(--paper)"/></svg>',
+    car:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13.5l1.7-4.8C5 8 5.6 7.5 6.4 7.5h11.2c.8 0 1.4.5 1.7 1.2L21 13.5v3.3a.7.7 0 0 1-.7.7H3.7a.7.7 0 0 1-.7-.7V13.5Z" fill="currentColor" fill-opacity=".13" stroke="none"/><path d="M3 13.5h18M5 13.5l1.6-4.6c.2-.6.7-1 1.3-1h8.2c.6 0 1.1.4 1.3 1L19 13.5M3 13.8v3a.7.7 0 0 0 .7.7H5a.7.7 0 0 0 .7-.7V16M21 13.8v3a.7.7 0 0 1-.7.7H19a.7.7 0 0 1-.7-.7V16"/><circle cx="7" cy="14" r="1" fill="currentColor" stroke="none"/><circle cx="17" cy="14" r="1" fill="currentColor" stroke="none"/></svg>',
+    q:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.2" fill="currentColor" fill-opacity=".13" stroke="none"/><circle cx="12" cy="12" r="9.2"/><path d="M9.3 9.4a2.8 2.8 0 0 1 5.4 1c0 1.9-2.7 2.2-2.7 3.8"/><circle cx="12" cy="17.2" r=".7" fill="currentColor" stroke="none"/></svg>'
   };
   var CATS=[
     {seg:'Mikrobus (segment S)',sc:'S',t:'Mikrobus',d:'Kompaktowy, zwrotny w mieście',ic:'van'},
@@ -350,14 +409,33 @@
   var SEGLBL={S:'Mikrobus',M:'Dostawczy mały',L:'Dostawczy duży','L+':'Dostawczy L+',XL:'Dostawczy XL',BUS:'Bus osobowy',LAW:'Auto-laweta',OSO:'Osobowe','CHŁ':'Chłodnia'};
   /* === STAWKI DZIENNE (zł/doba) — takie same jak w panelu. Zmień tu, jeśli zmienisz w panelu. === */
   var RATES={'S':150,'M':200,'L':230,'L+':260,'XL':300,'LAW':280,'BUS':320,'OSO':170,'CHŁ':380};
-  /* === KAUCJE === krajowa stała 1000 zł; zagraniczne per kraj (USTAW WŁASNE KWOTY). === */
+  /* === KAUCJE i OPŁATY ZAGRANICZNE (z cennika Power Rent). dep=kaucja zwrotna, fee=opłata jednorazowa za wyjazd. === */
   var KAUCJA_KRAJOWA=1000;
-  var KAUCJE_ZAGRANICA={'Niemcy':2000,'Czechy':1500,'Słowacja':1500,'Austria':2000,'Holandia':2500,'Belgia':2500,'Francja':2500,'Włochy':2500,'Litwa':1500,'Łotwa':1500,'Estonia':1500,'Węgry':1500,'Dania':2500,'Szwajcaria':3000,'Inny kraj UE':2500};
-  /* === ZDJĘCIA per segment (opcjonalnie wpisz link URL; auto z własnym zdjęciem w panelu ma pierwszeństwo). === */
-  var SEG_PHOTO={'S':'','M':'','L':'','L+':'','XL':'','BUS':'','LAW':'','OSO':'','CHŁ':''};
+  var KAUCJE={
+    'Niemcy':{dep:1500,fee:200},'Austria':{dep:1500,fee:400},'Czechy':{dep:1500,fee:200},'Słowacja':{dep:1500,fee:200},
+    'Szwajcaria':{dep:2000,fee:400},'Luksemburg':{dep:2000,fee:400},'Holandia':{dep:2000,fee:400},'Belgia':{dep:2000,fee:400},'Litwa':{dep:2000,fee:400},'Łotwa':{dep:2000,fee:400},'Estonia':{dep:2000,fee:500},'Węgry':{dep:2000,fee:400},'Chorwacja':{dep:2000,fee:500},'Włochy':{dep:2000,fee:500},
+    'Francja':{dep:3000,fee:500},'Hiszpania':{dep:3000,fee:700},'Portugalia':{dep:3000,fee:700},'Słowenia':{dep:3000,fee:500},'Norwegia':{dep:3000,fee:500},'Dania':{dep:3000,fee:400},'Szwecja':{dep:3000,fee:500},
+    'Wielka Brytania':{dep:4000,fee:700},'Irlandia':{dep:4000,fee:700},'Rumunia':{dep:4000,fee:700},'Bułgaria':{dep:4000,fee:700},'Grecja':{dep:4000,fee:700}
+  };
+  /* === ZDJĘCIA per segment (z Waszej oferty na Vercelu). Auto z własnym zdjęciem w panelu ma pierwszeństwo. === */
+  var CF='https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/';
+  var SEG_PHOTO={
+    'S':CF+'hf_20260617_200336_fd130bf2-48c2-4327-b52d-1a09264d655d.png',
+    'M':CF+'hf_20260617_200347_633102cd-ed81-4cee-99fb-1768be9f65d8.png',
+    'L':CF+'hf_20260617_200412_27c8fc18-e150-471e-b9e5-24476c9c92c6.png',
+    'L+':CF+'hf_20260618_114843_81fbfccd-beb6-4c88-bee8-234f92ab42e0.png',
+    'XL':CF+'hf_20260617_200412_27c8fc18-e150-471e-b9e5-24476c9c92c6.png',
+    'BUS':CF+'hf_20260618_085325_633d50e0-0993-4247-b51a-bf7ee8c47eaa.png',
+    'LAW':CF+'hf_20260617_200434_f9dafa51-b7c5-457a-8df1-887dd70fa351.png',
+    'OSO':CF+'hf_20260617_200444_759ee268-7ed4-49cb-b9ef-71d97eb7963f.png',
+    'CHŁ':CF+'hf_20260617_200428_833d4bb0-c7df-461a-aedc-fa8f4fbafa9c.png'
+  };
   function segRate(sg){return RATES[sg]||200;}
   function autoDiscount(d){if(d>=30)return 15;if(d>=14)return 10;if(d>=7)return 5;return 0;}
-  function rentDaysN(){if(!calFrom||!calTo)return 0;var d=Math.round((new Date(calTo)-new Date(calFrom))/86400000)+1;return d>0?d:0;}
+  function hm(s){var m=/^(\d{1,2}):(\d{2})$/.exec(s||'');return m?((+m[1])*60+(+m[2])):0;}
+  function rangeHours(){if(!calFrom||!calTo)return 0;var t0=new Date(calFrom).getTime()+hm(val('r-hOd'))*60000,t1=new Date(calTo).getTime()+hm(val('r-hDo'))*60000;return (t1-t0)/3600000;}
+  function dobyCount(){var h=rangeHours();return h>0?Math.max(1,Math.ceil(h/24)):0;}
+  function rentDaysN(){return dobyCount();}
   function calcPrice(sg){var days=rentDaysN();if(!days||!sg||!RATES[sg])return null;var rate=segRate(sg),base=days*rate,disc=autoDiscount(days),total=Math.max(0,Math.round(base*(1-disc/100)));return{days:days,rate:rate,base:base,disc:disc,total:total};}
   function illusKey(sg){if(sg==='BUS')return'bus';if(sg==='LAW')return'tow';if(sg==='CHŁ')return'fridge';if(sg==='OSO')return'car';return'van';}
   function carPhoto(v){var url=v.photo||SEG_PHOTO[v.seg]||'';return '<div class="car-photo"><div class="car-illus">'+IC[illusKey(v.seg)]+'</div>'+(url?'<img src="'+esc(url)+'" alt="'+esc(v.model||'')+'" loading="lazy" onerror="this.remove()">':'')+'</div>';}
@@ -384,6 +462,9 @@
 
   // ----- calendar -----
   (function(){var t=new Date();calY=t.getFullYear();calM=t.getMonth();})();
+  (function(){var o='';for(var hh=6;hh<=22;hh++){for(var mm=0;mm<60;mm+=30){var v=(hh<10?'0'+hh:hh)+':'+(mm===0?'00':'30');o+='<option value="'+v+'"'+(v==='08:00'?' selected':'')+'>'+v+'</option>';}}el('r-hOd').innerHTML=o;el('r-hDo').innerHTML=o;})();
+  el('r-hOd').addEventListener('change',function(){calRangeTxt();});
+  el('r-hDo').addEventListener('change',function(){calRangeTxt();});
   function calRender(){
     el('calMon').textContent=MN[calM]+' '+calY;
     var first=new Date(calY,calM,1);var off=(first.getDay()+6)%7;var dim=new Date(calY,calM+1,0).getDate();
@@ -408,63 +489,70 @@
     if(!calFrom||(calFrom&&calTo)){calFrom=ds;calTo=null;}
     else{if(ds<calFrom){calFrom=ds;}else{calTo=ds;}}
     calRender();calRangeTxt();hideWarn();
-    if(calFrom&&calTo){sel.carId='';sel.proceedNoCar=false;loadCars(false);el('tripSec').style.display='block';updateKaucja();}
+    if(calFrom&&calTo){sel.carId='';sel.proceedNoCar=false;loadCars();el('tripSec').style.display='block';updateKaucja();}
     else{el('carsSec').style.display='none';el('tripSec').style.display='none';}
   });
   el('calPrev').addEventListener('click',function(){var t=new Date();if(calY<t.getFullYear()||(calY===t.getFullYear()&&calM<=t.getMonth()))return;calM--;if(calM<0){calM=11;calY--;}calRender();});
   el('calNext').addEventListener('click',function(){calM++;if(calM>11){calM=0;calY++;}calRender();});
 
   // ----- availability -----
-  function loadCars(all){
-    el('carsSec').style.display='block';
-    var seg=(!all&&sel.segCode)?sel.segCode:'';
-    el('carsHint').textContent='Sprawdzam dostępność…';
-    el('carsBox').innerHTML='<div class="cars-load"><span class="cars-spin"></span> Szukam wolnych aut…</div>';
-    var url=SB_URL+'/functions/v1/web-fleet?from='+calFrom+'&to='+calTo+(seg?'&seg='+encodeURIComponent(seg):'');
-    fetch(url,{headers:HDR}).then(function(r){return r.ok?r.json():Promise.reject(r);}).then(function(d){
-      renderCars(d.cars||[],all);
-    }).catch(function(){
-      el('carsHint').textContent='';
-      el('carsBox').innerHTML='<div class="cars-empty">Nie udało się pobrać dostępności. <button type="button" class="btn btn-outline" id="carsRetry">Spróbuj ponownie</button></div>';
-      var rb=el('carsRetry');if(rb)rb.addEventListener('click',function(){loadCars(all);});
+  function carCardHtml(v,i){var lbl=SEGLBL[v.seg]||v.seg||'';var badges='';
+    if(lbl)badges+='<span class="car-bdg">'+esc(lbl)+'</span>';
+    if(v.gb)badges+='<span class="car-bdg">'+(v.gb==='A'?'Automat':'Manual')+'</span>';
+    if(v.fuel)badges+='<span class="car-bdg">'+esc(v.fuel)+'</span>';
+    return '<button type="button" class="car" data-id="'+esc(v.id)+'" data-seg="'+esc(v.seg||'')+'" data-lbl="'+esc((v.model||'')+(v.plate?' \u00b7 '+v.plate:''))+'" style="animation-delay:'+(i*0.04)+'s"><span class="car-check">\u2713</span>'+carPhoto(v)+'<div class="car-mod">'+esc(v.model||'Pojazd')+'</div><div class="car-meta">'+esc(v.plate||'')+'</div><div class="car-badges">'+badges+'</div><div class="car-price">'+segRate(v.seg).toLocaleString('pl-PL')+' z\u0142<span> / doba</span></div></button>';
+  }
+  function loadCars(){
+    el('carsSec').style.display='block';el('carsMore').style.display='none';
+    el('carsHint').textContent='Sprawdzam dost\u0119pno\u015b\u0107\u2026';
+    el('carsBox').innerHTML='<div class="cars-load"><span class="cars-spin"></span> Szukam wolnych aut\u2026</div>';
+    fetch(SB_URL+'/functions/v1/web-fleet?from='+calFrom+'&to='+calTo,{headers:HDR}).then(function(r){return r.ok?r.json():Promise.reject(r);}).then(function(d){renderAvail(d.cars||[]);}).catch(function(){
+      el('carsHint').textContent='';el('carsBox').innerHTML='<div class="cars-empty">Nie uda\u0142o si\u0119 pobra\u0107 dost\u0119pno\u015bci. <button type="button" class="btn btn-outline" id="carsRetry">Spr\u00f3buj ponownie</button></div>';
+      var rb=el('carsRetry');if(rb)rb.addEventListener('click',function(){loadCars();});
     });
   }
-  function renderCars(cars,all){
-    if(!cars.length){
-      if(!all&&sel.segCode){
-        el('carsHint').textContent='';
-        el('carsBox').innerHTML='<div class="cars-empty">Brak wolnych aut w wybranym segmencie w tym terminie.<br><button type="button" class="btn btn-red" id="carsAll">Pokaż wszystkie wolne auta</button></div>';
-        var ab=el('carsAll');if(ab)ab.addEventListener('click',function(){loadCars(true);});
-      }else{
-        el('carsHint').textContent='';
-        el('carsBox').innerHTML='<div class="cars-empty">Brak wolnych aut w tym terminie. Zadzwoń pod <a href="tel:664201202" style="color:var(--red);font-weight:800">664 201 202</a> — podpowiemy alternatywę.<br><button type="button" class="btn btn-outline" id="carsNoneOk">Wyślij zapytanie mimo to</button></div>';
-        var nb=el('carsNoneOk');if(nb)nb.addEventListener('click',function(){sel.proceedNoCar=true;sel.carId='';sel.carLabel='';el('carsBox').innerHTML='<div class="cars-empty">Zapytanie zostanie wysłane bez wskazania auta — dobierzemy je telefonicznie. Kliknij „Dalej".</div>';});
-      }
-      return;
-    }
-    el('carsHint').textContent='Wybierz pojazd, który Cię interesuje ('+cars.length+' '+(cars.length===1?'wolne auto':(cars.length<5?'wolne auta':'wolnych aut'))+').';
-    var h='';
-    for(var i=0;i<cars.length;i++){var v=cars[i];var lbl=SEGLBL[v.seg]||v.seg||'';
-      var badges='';if(lbl)badges+='<span class="car-bdg">'+esc(lbl)+'</span>';
-      if(v.gb)badges+='<span class="car-bdg">'+(v.gb==='A'?'Automat':'Manual')+'</span>';
-      if(v.fuel)badges+='<span class="car-bdg">'+esc(v.fuel)+'</span>';
-      h+='<button type="button" class="car" data-id="'+esc(v.id)+'" data-seg="'+esc(v.seg||'')+'" data-lbl="'+esc((v.model||'')+(v.plate?' · '+v.plate:''))+'" style="animation-delay:'+(i*0.04)+'s"><span class="car-check">\u2713</span>'+carPhoto(v)+'<div class="car-mod">'+esc(v.model||'Pojazd')+'</div><div class="car-meta">'+esc(v.plate||'')+'</div><div class="car-badges">'+badges+'</div><div class="car-price">'+segRate(v.seg).toLocaleString('pl-PL')+' zł<span> / doba</span></div></button>';
-    }
-    el('carsBox').innerHTML='<div class="cars-grid">'+h+'</div>';
+  function scarcity(n){return n<=2?' <b style="color:var(--red)">Zosta\u0142y tylko '+n+'!</b>':'';}
+  function markSelected(){if(!sel.carId)return;var cs=el('carsSec').querySelectorAll('.car');for(var i=0;i<cs.length;i++)cs[i].classList.toggle('sel',cs[i].getAttribute('data-id')===String(sel.carId));}
+  function renderMore(list){var box=el('carsMore');if(!list.length){box.style.display='none';box.innerHTML='';return;}
+    box.style.display='block';
+    box.innerHTML='<div class="cars-more-h"><span>\uD83D\uDC40</span> Zobacz, co mamy jeszcze w tym terminie:</div><div class="cars-grid cars-grid-sm">'+list.map(function(v,i){return carCardHtml(v,i);}).join('')+'</div>';
   }
-  el('carsBox').addEventListener('click',function(e){var b=e.target.closest('.car');if(!b)return;
-    var cars=el('carsBox').querySelectorAll('.car');for(var i=0;i<cars.length;i++)cars[i].classList.remove('sel');
-    b.classList.add('sel');sel.carId=b.getAttribute('data-id');sel.carLabel=b.getAttribute('data-lbl');sel.carSeg=b.getAttribute('data-seg');sel.proceedNoCar=false;hideWarn();
+  function renderAvail(all){
+    loadedCars=all||[];
+    var sc=sel.segCode;
+    var main=sc?all.filter(function(c){return c.seg===sc;}):all;
+    var others=sc?all.filter(function(c){return c.seg!==sc;}):[];
+    if(!all.length){
+      el('carsHint').textContent='';
+      el('carsBox').innerHTML='<div class="cars-empty">Brak wolnych aut w tym terminie. Zadzwo\u0144 pod <a href="tel:664201202" style="color:var(--red);font-weight:800">664 201 202</a> \u2014 podpowiemy alternatyw\u0119.<br><button type="button" class="btn btn-outline" id="carsNoneOk">Wy\u015blij zapytanie mimo to</button></div>';
+      var nb=el('carsNoneOk');if(nb)nb.addEventListener('click',function(){sel.proceedNoCar=true;sel.car=null;sel.carId='';sel.carLabel='';el('carsBox').innerHTML='<div class="cars-empty">Zapytanie zostanie wys\u0142ane bez wskazania auta \u2014 dobierzemy je telefonicznie. Kliknij \u201eDalej\u201d.</div>';});
+      el('carsMore').style.display='none';return;
+    }
+    if(!main.length){
+      el('carsHint').innerHTML='W wybranym segmencie nie ma wolnych aut w tym terminie \u2014 zobacz, co mamy poni\u017cej \uD83D\uDC47';
+      el('carsBox').innerHTML='';renderMore(all);
+    }else{
+      el('carsHint').innerHTML='Wybierz pojazd ('+main.length+' '+(main.length===1?'wolne auto':(main.length<5?'wolne auta':'wolnych aut'))+').'+scarcity(main.length);
+      el('carsBox').innerHTML='<div class="cars-grid">'+main.map(function(v,i){return carCardHtml(v,i);}).join('')+'</div>';
+      renderMore(others);
+    }
+    markSelected();
+    setTimeout(function(){var cs=el('carsSec');if(cs)cs.scrollIntoView({behavior:'smooth',block:'nearest'});},90);
+  }
+  el('carsSec').addEventListener('click',function(e){var b=e.target.closest('.car');if(!b)return;
+    var cars=el('carsSec').querySelectorAll('.car');for(var i=0;i<cars.length;i++)cars[i].classList.remove('sel');
+    b.classList.add('sel');sel.carId=b.getAttribute('data-id');sel.carLabel=b.getAttribute('data-lbl');sel.carSeg=b.getAttribute('data-seg');sel.car=loadedCars.filter(function(c){return String(c.id)===String(sel.carId);})[0]||null;sel.proceedNoCar=false;hideWarn();miniToast('\u015awietny wyb\u00f3r \uD83D\uDC4D');
   });
 
   // ----- wyjazd / kaucja -----
-  (function(){var o='';for(var k in KAUCJE_ZAGRANICA)o+='<option value="'+esc(k)+'">'+esc(k)+'</option>';el('r-kraj').innerHTML=o;})();
+  (function(){var o='';for(var k in KAUCJE)o+='<option value="'+esc(k)+'">'+esc(k)+'</option>';el('r-kraj').innerHTML=o;})();
   function updateKaucja(){
-    var dep;
-    if(sel.zagranica){sel.kraj=val('r-kraj');dep=KAUCJE_ZAGRANICA[sel.kraj]||KAUCJA_KRAJOWA;}
-    else{sel.kraj='';dep=KAUCJA_KRAJOWA;}
-    sel.kaucja=dep;
-    el('kaucjaBox').innerHTML='<div class="kaucja-amt">Kaucja zwrotna: <b>'+dep.toLocaleString('pl-PL')+' zł</b></div><div class="kaucja-sub">'+(sel.zagranica?('Wyjazd do: '+esc(sel.kraj||'—')+'. Kaucję pobieramy przy odbiorze i zwracamy po oddaniu auta.'):'Wyjazd krajowy — standardowa kaucja zwrotna, oddawana po zwrocie auta.')+'</div>';
+    if(sel.zagranica){sel.kraj=val('r-kraj');var k=KAUCJE[sel.kraj]||{dep:KAUCJA_KRAJOWA,fee:0};sel.kaucja=k.dep;sel.oplata=k.fee;}
+    else{sel.kraj='';sel.kaucja=KAUCJA_KRAJOWA;sel.oplata=0;}
+    var h='<div class="kaucja-amt">Kaucja zwrotna: <b>'+sel.kaucja.toLocaleString('pl-PL')+' zł</b></div>';
+    if(sel.zagranica&&sel.oplata)h+='<div class="kaucja-amt" style="margin-top:7px">Opłata za wyjazd zagraniczny: <b>'+sel.oplata.toLocaleString('pl-PL')+' zł</b></div>';
+    h+='<div class="kaucja-sub">'+(sel.zagranica?('Wyjazd do: '+esc(sel.kraj||'—')+'. Kaucja zwracana po oddaniu auta; opłata zagraniczna jest jednorazowa, za cały najem.'):'Wyjazd krajowy — kaucja zwrotna 1000 zł, oddawana po zwrocie auta.')+'</div>';
+    el('kaucjaBox').innerHTML=h;
   }
   el('tripToggle').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;sel.zagranica=b.getAttribute('data-z')==='1';var bs=el('tripToggle').querySelectorAll('button');for(var i=0;i<bs.length;i++)bs[i].classList.toggle('on',bs[i]===b);el('krajWrap').style.display=sel.zagranica?'block':'none';updateKaucja();});
   el('r-kraj').addEventListener('change',updateKaucja);
@@ -498,6 +586,8 @@
   // ----- warnings -----
   function warn(msg){var w=el('wzWarn');w.textContent=msg;w.classList.remove('show');void w.offsetWidth;w.classList.add('show');}
   function hideWarn(){el('wzWarn').classList.remove('show');}
+  function miniToast(msg){var t=document.createElement('div');t.className='mini-toast';t.textContent=msg;el('wizard').appendChild(t);requestAnimationFrame(function(){t.classList.add('show');});setTimeout(function(){t.classList.remove('show');setTimeout(function(){if(t.parentNode)t.remove();},300);},1400);}
+  function confetti(){var cols=['#E11D2A','#FF3B30','#1F9D55','#2D7DF6','#F6B73C','#ffffff'];var box=document.createElement('div');box.className='cfetti';for(var i=0;i<64;i++){var sp=document.createElement('i');sp.style.left=(Math.random()*100)+'%';sp.style.background=cols[i%cols.length];sp.style.animationDelay=(Math.random()*0.35)+'s';sp.style.animationDuration=(1.7+Math.random()*1.3)+'s';if(Math.random()>0.6)sp.style.borderRadius='50%';box.appendChild(sp);}el('wizard').appendChild(box);setTimeout(function(){if(box.parentNode)box.remove();},3400);}
 
   // ----- steps -----
   function setStep(n){
@@ -512,42 +602,44 @@
   function clientName(){return sel.typ==='firma'?val('r-firma').trim():val('r-name').trim();}
   function validate(n){
     if(n===1){if(!sel.seg){warn('Wybierz rodzaj pojazdu.');return false;}return true;}
-    if(n===2){if(!calFrom||!calTo){warn('Wybierz termin odbioru i zwrotu w kalendarzu.');return false;}if(!sel.carId&&!sel.proceedNoCar){warn('Wybierz auto z listy dostępnych (albo „Wyślij zapytanie mimo to", jeśli brak wolnych).');return false;}return true;}
+    if(n===2){if(!calFrom||!calTo){warn('Wybierz termin odbioru i zwrotu w kalendarzu.');return false;}if(rangeHours()<=0){warn('Godzina/data zwrotu musi być późniejsza niż odbioru.');return false;}if(!sel.carId&&!sel.proceedNoCar){warn('Wybierz auto z listy dostępnych (albo „Wyślij zapytanie mimo to", jeśli brak wolnych).');return false;}return true;}
     if(n===3){if(!clientName()){warn(sel.typ==='firma'?'Podaj nazwę firmy.':'Podaj imię i nazwisko.');return false;}var ph=nipDigits(val('r-phone'));if(ph.length<7){warn('Podaj poprawny numer telefonu.');return false;}return true;}
     return true;
   }
   function priceSeg(){return sel.carSeg||sel.segCode||'';}
+  function carHeroImg(v){var url=(v&&v.photo)||(v&&SEG_PHOTO[v.seg])||(sel.segCode?SEG_PHOTO[sel.segCode]:'')||'';return url?'<img class="rcpt-img" src="'+esc(url)+'" alt="" onerror="this.remove()">':'';}
+  function countUp(elm,to){var dur=750,t0=null;function st(ts){if(!t0)t0=ts;var p=Math.min(1,(ts-t0)/dur),e=1-Math.pow(1-p,3);elm.textContent=Math.round(to*e).toLocaleString('pl-PL')+' zł';if(p<1)requestAnimationFrame(st);}requestAnimationFrame(st);}
   function renderSum(){
-    var pr=calcPrice(priceSeg());
-    var ph='';
-    ph+='<div class="wz-sum-row"><span class="wz-sum-k">Termin</span><span class="wz-sum-v">'+fmtDate(calFrom)+' → '+fmtDate(calTo)+'</span></div>';
-    ph+='<div class="wz-sum-row"><span class="wz-sum-k">Długość najmu</span><span class="wz-sum-v">'+durTxt()+'</span></div>';
-    if(pr){
-      ph+='<div class="wz-sum-row"><span class="wz-sum-k">Stawka</span><span class="wz-sum-v">'+pr.rate.toLocaleString('pl-PL')+' zł / doba</span></div>';
-      if(pr.disc>0)ph+='<div class="wz-sum-row"><span class="wz-sum-k">Rabat za długi najem</span><span class="wz-sum-v">−'+pr.disc+'%</span></div>';
-      ph+='<div class="wz-sum-row"><span class="wz-sum-k">Cena najmu</span><span class="wz-sum-v">'+pr.total.toLocaleString('pl-PL')+' zł</span></div>';
-    }else{
-      ph+='<div class="wz-sum-row"><span class="wz-sum-k">Cena najmu</span><span class="wz-sum-v">ustalimy indywidualnie</span></div>';
-    }
-    ph+='<div class="wz-sum-row"><span class="wz-sum-k">Kaucja zwrotna'+(sel.zagranica&&sel.kraj?' ('+esc(sel.kraj)+')':'')+'</span><span class="wz-sum-v">'+sel.kaucja.toLocaleString('pl-PL')+' zł</span></div>';
-    if(pr)ph+='<div class="wz-sum-row sp-total"><span class="wz-sum-k">Przy odbiorze razem</span><span class="wz-sum-v">'+(pr.total+sel.kaucja).toLocaleString('pl-PL')+' zł</span></div>';
-    el('wzSumPrice').innerHTML=ph;
-    var rows=[
-      ['Pojazd',sel.carLabel||sel.seg||'—'],
-      ['Wyjazd',sel.zagranica?('Zagraniczny'+(sel.kraj?' · '+sel.kraj:'')):'Krajowy (Polska)'],
-      ['Typ klienta',sel.typ==='firma'?'Firma':'Osoba prywatna'],
-      [sel.typ==='firma'?'Nazwa firmy':'Imię i nazwisko',clientName()||'—'],
-      ['Telefon',val('r-phone').trim()||'—']
-    ];
+    var pr=calcPrice(priceSeg()),rentT=pr?pr.total:0,oplata=sel.oplata||0,atPickup=rentT+oplata+sel.kaucja;
+    var carName=sel.car?(sel.car.model||'Pojazd'):(sel.seg||'Pojazd');
+    var carSub=sel.car?(((sel.car.plate?esc(sel.car.plate):'')+(SEGLBL[sel.car.seg]?' \u00b7 '+SEGLBL[sel.car.seg]:''))||'Auto z naszej floty'):'Konkretne auto dobierzemy telefonicznie';
+    var h='<div class="rcpt"><div class="rcpt-hero"><div class="rcpt-illus">'+IC[illusKey(priceSeg())]+'</div>'+carHeroImg(sel.car)+'<div class="rcpt-hero-ov"><span class="rcpt-avail"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg> Dost\u0119pne w Twoim terminie</span><div class="rcpt-car">'+esc(carName)+'</div><div class="rcpt-carsub">'+carSub+'</div></div></div><div class="rcpt-body">';
+    h+='<div class="rcpt-dates"><div><span class="rcpt-lbl">Odbi\u00f3r</span><b>'+fmtDate(calFrom)+'</b><span>'+esc(val('r-hOd'))+'</span></div><div class="rcpt-arrow">\u2192</div><div><span class="rcpt-lbl">Zwrot</span><b>'+fmtDate(calTo)+'</b><span>'+esc(val('r-hDo'))+'</span></div><div class="rcpt-len">'+durTxt()+'</div></div>';
+    h+='<div class="rcpt-price">';
+    if(pr){h+='<div class="rcpt-pr-row"><span class="rcpt-pr-k">Najem ('+pr.days+' \u00d7 '+pr.rate.toLocaleString('pl-PL')+' z\u0142)</span><span class="rcpt-pr-v">'+(pr.days*pr.rate).toLocaleString('pl-PL')+' z\u0142</span></div>';
+      if(pr.disc>0)h+='<div class="rcpt-pr-row disc"><span class="rcpt-pr-k">Rabat za d\u0142ugi najem</span><span class="rcpt-pr-v">\u2212'+pr.disc+'%</span></div>';
+      h+='<div class="rcpt-pr-row"><span class="rcpt-pr-k">Cena najmu</span><span class="rcpt-pr-v">'+rentT.toLocaleString('pl-PL')+' z\u0142</span></div>';
+    }else{h+='<div class="rcpt-pr-row"><span class="rcpt-pr-k">Cena najmu</span><span class="rcpt-pr-v">ustalimy indywidualnie</span></div>';}
+    if(sel.zagranica&&oplata)h+='<div class="rcpt-pr-row"><span class="rcpt-pr-k">Op\u0142ata za wyjazd ('+esc(sel.kraj)+')</span><span class="rcpt-pr-v">'+oplata.toLocaleString('pl-PL')+' z\u0142</span></div>';
+    h+='<div class="rcpt-pr-row"><span class="rcpt-pr-k">Kaucja zwrotna'+(sel.zagranica&&sel.kraj?' ('+esc(sel.kraj)+')':'')+'</span><span class="rcpt-pr-v">'+sel.kaucja.toLocaleString('pl-PL')+' z\u0142</span></div>';
+    h+='<div class="rcpt-total"><span class="rcpt-total-k">Przy odbiorze razem</span><span class="rcpt-total-n" data-val="'+atPickup+'">0 z\u0142</span></div></div>';
+    h+='<div class="rcpt-trust"><span>\u2713 <b>OC + assistance</b> w cenie</span><span>\u00b7</span><span>faktura VAT</span><span>\u00b7</span><span>do 500 km/doba</span></div>';
+    h+='<div class="rcpt-sec">Dane do rezerwacji</div><div class="rcpt-data">';
+    var rows=[['Wyjazd',sel.zagranica?('Zagraniczny'+(sel.kraj?' \u00b7 '+sel.kraj:'')):'Krajowy (Polska)'],['Typ klienta',sel.typ==='firma'?'Firma':'Osoba prywatna'],[sel.typ==='firma'?'Nazwa firmy':'Imi\u0119 i nazwisko',clientName()||'\u2014'],['Telefon',val('r-phone').trim()||'\u2014']];
     if(sel.typ==='firma'&&val('r-nip').trim())rows.push(['NIP',val('r-nip').trim()]);
     if(sel.typ==='ind'&&val('r-pesel').trim())rows.push(['PESEL',val('r-pesel').trim()]);
     if(sel.typ==='ind'&&val('r-prawo').trim())rows.push(['Nr prawa jazdy',val('r-prawo').trim()]);
+    if(sel.typ==='ind'&&val('r-dowod').trim())rows.push(['Nr dowodu',val('r-dowod').trim()]);
     if(val('r-email').trim())rows.push(['E-mail',val('r-email').trim()]);
-    var adr=[val('r-adres').trim(),((val('r-kod').trim()+' '+val('r-miasto').trim()).trim())].filter(Boolean).join(', ');
-    if(adr)rows.push(['Adres',adr]);
+    var adr=[val('r-adres').trim(),((val('r-kod').trim()+' '+val('r-miasto').trim()).trim())].filter(Boolean).join(', ');if(adr)rows.push(['Adres',adr]);
     if(val('r-msg').trim())rows.push(['Uwagi',val('r-msg').trim()]);
-    var h='';for(var i=0;i<rows.length;i++)h+='<div class="wz-sum-row"><span class="wz-sum-k">'+rows[i][0]+'</span><span class="wz-sum-v">'+esc(rows[i][1])+'</span></div>';
-    el('wzSum').innerHTML=h;
+    for(var i=0;i<rows.length;i++)h+='<div class="wz-sum-row"><span class="wz-sum-k">'+rows[i][0]+'</span><span class="wz-sum-v">'+esc(rows[i][1])+'</span></div>';
+    h+='</div>';
+    if(sel.car&&loadedCars.length>1){var others=loadedCars.filter(function(c){return String(c.id)!==String(sel.car.id);});
+      if(others.length)h+='<div class="sum-alt"><div class="sum-alt-h">W tym terminie wolne s\u0105 r\u00f3wnie\u017c</div><div class="sum-alt-list">'+others.slice(0,8).map(function(c){return esc(c.model||'')+(c.plate?' ('+esc(c.plate)+')':'');}).join(', ')+(others.length>8?' i inne\u2026':'')+'</div></div>';}
+    h+='</div></div>';
+    el('wzReceipt').innerHTML=h;
+    var tn=el('wzReceipt').querySelector('.rcpt-total-n');if(tn)countUp(tn,+tn.getAttribute('data-val')||0);
   }
 
   el('wzNext').addEventListener('click',function(){if(sending)return;if(!validate(step))return;if(step<STEPS){if(step+1===STEPS)renderSum();setStep(step+1);}else submit();});
@@ -559,8 +651,8 @@
     var pr=calcPrice(priceSeg());
     var data={
       vehicleId:sel.carId||'',segWanted:sel.carLabel?(sel.seg+' — '+sel.carLabel):sel.seg,
-      from:calFrom,to:calTo,typ:sel.typ,
-      zagranica:sel.zagranica,kraj:sel.kraj,kaucja:sel.kaucja,price:pr?pr.total:'',rabat:pr?pr.disc:'',
+      from:calFrom,to:calTo,godzOd:val('r-hOd'),godzDo:val('r-hDo'),typ:sel.typ,
+      zagranica:sel.zagranica,kraj:sel.kraj,kaucja:sel.kaucja,oplata:sel.oplata,price:pr?pr.total:'',rabat:pr?pr.disc:'',
       name:clientName(),phone:val('r-phone').trim(),email:val('r-email').trim(),
       pesel:sel.typ==='ind'?val('r-pesel').trim():'',nip:sel.typ==='firma'?val('r-nip').trim():'',
       prawojazdy:sel.typ==='ind'?val('r-prawo').trim():'',dowod:sel.typ==='ind'?val('r-dowod').trim():'',
@@ -569,14 +661,15 @@
     };
     fetch(SB_URL+'/functions/v1/web-booking',{method:'POST',headers:HDR,body:JSON.stringify(data)})
       .then(function(r){return r.ok?r.json():Promise.reject(r);})
-      .then(function(){sending=false;btn.disabled=false;el('wzBody').style.display='none';document.querySelector('.wz-nav').style.display='none';el('wzSteps').parentNode.style.display='none';el('wzOk').classList.add('show');el('wizard').scrollIntoView({behavior:'smooth',block:'start'});})
+      .then(function(){sending=false;btn.disabled=false;el('wzBody').style.display='none';document.querySelector('.wz-nav').style.display='none';el('wzSteps').parentNode.style.display='none';el('wzOk').classList.add('show');confetti();el('wizard').scrollIntoView({behavior:'smooth',block:'start'});})
       .catch(function(){sending=false;btn.disabled=false;btn.innerHTML='Wyślij rezerwację';warn('Nie udało się wysłać. Zadzwoń pod 664 201 202 albo spróbuj ponownie za chwilę.');});
   }
 
   el('wzReset').addEventListener('click',function(){
-    sel={seg:'',segCode:'',carId:'',carLabel:'',carSeg:'',typ:'ind',proceedNoCar:false,zagranica:false,kraj:'',kaucja:1000};maxStep=1;calFrom=null;calTo=null;
+    sel={seg:'',segCode:'',carId:'',carLabel:'',carSeg:'',car:null,typ:'ind',proceedNoCar:false,zagranica:false,kraj:'',kaucja:1000,oplata:0};maxStep=1;calFrom=null;calTo=null;
     ['r-name','r-pesel','r-prawo','r-dowod','r-firma','r-nip','r-phone','r-email','r-adres','r-kod','r-miasto','r-msg'].forEach(function(id){var e=el(id);if(e)e.value='';});
     el('nipStatus').textContent='';el('nipStatus').className='nip-status';
+    if(el('r-hOd').options.length){el('r-hOd').value='08:00';el('r-hDo').value='08:00';}loadedCars=[];if(el('wzSumAlt'))el('wzSumAlt').style.display='none';
     var cards=el('wzVeh').querySelectorAll('.wz-veh');for(var i=0;i<cards.length;i++)cards[i].classList.remove('sel');
     el('carsSec').style.display='none';el('tripSec').style.display='none';
     var tt=el('tripToggle').querySelectorAll('button');for(var z=0;z<tt.length;z++)tt[z].classList.toggle('on',tt[z].getAttribute('data-z')==='0');
@@ -587,6 +680,7 @@
     el('wzOk').classList.remove('show');el('wzBody').style.display='';document.querySelector('.wz-nav').style.display='';el('wzSteps').parentNode.style.display='';setStep(1);
   });
 
+  el('wizard').addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.tagName!=='TEXTAREA'&&e.target.tagName!=='SELECT'&&!sending&&!el('wzOk').classList.contains('show')){e.preventDefault();el('wzNext').click();}});
   calRender();calRangeTxt();setStep(1);
 })();
 </script>
