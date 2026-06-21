@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cennik — wynajem aut Power Rent Radom</title>
-<meta name="description" content="Cennik wynajmu Power Rent: mikrobusy, auta dostawcze, busy 9-osobowe, lawety, chłodnie, plandeki i auta osobowe. Stawki dobowe i miesięczne, kaucje i opłaty zagraniczne. Ceny już od 90 zł.">
+<meta name="description" content="Cennik wynajmu Power Rent: mikrobusy, auta dostawcze, busy 9-osobowe, lawety, chłodnie, plandeki i auta osobowe. Stawki dobowe i miesięczne, kaucje i opłaty zagraniczne. ">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -65,6 +65,71 @@ td.amt.cb-counting,.from b.cb-counting{color:var(--red)!important}
   .price-nav a,.pseg .ptable,.pseg .ptable table.price tbody tr,.pseg::before,.pseg-head::after,.pseg-head .from{animation:none!important;transition:none!important;opacity:1!important;transform:none!important}
 }
 
+/* ===== Zdjęcia aut przy segmentach ===== */
+.pseg.has-photo{display:grid;grid-template-columns:minmax(0,1fr) clamp(230px,30%,340px);grid-template-areas:"head head" "tables photo";column-gap:26px;row-gap:18px;align-items:center}
+.pseg.has-photo>.pseg-head{grid-area:head;margin-bottom:0}
+.pseg.has-photo>.ptables{grid-area:tables}
+.pseg.has-photo>.pseg-photo{grid-area:photo}
+.pseg-photo{position:relative;margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:radial-gradient(120% 120% at 50% 0%,#fff 0%,#EEF1F6 100%);display:flex;align-items:center;justify-content:center;padding:12px;min-height:160px;opacity:0;transform:translateX(26px) scale(.97);transition:opacity .6s var(--cbz),transform .6s var(--cbz),box-shadow .25s}
+.pseg.cb-in>.pseg-photo{opacity:1;transform:none;transition-delay:.12s}
+.pseg-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.4) 50%,transparent 70%);transform:translateX(-120%);pointer-events:none}
+.pseg.cb-in>.pseg-photo::after{animation:cbShine 1.1s ease .35s 1}
+@keyframes cbShine{to{transform:translateX(120%)}}
+.pseg-photo img{width:100%;height:auto;max-height:200px;object-fit:contain;display:block;filter:drop-shadow(0 12px 18px rgba(18,20,25,.16));transition:transform .55s var(--cbz)}
+.pseg.has-photo:hover>.pseg-photo{box-shadow:0 18px 40px rgba(18,20,25,.12)}
+.pseg.has-photo:hover .pseg-photo img{transform:scale(1.06) translateY(-2px)}
+@media(max-width:1000px){
+  .pseg.has-photo{display:block}
+  .pseg.has-photo>.pseg-head{margin-bottom:20px}
+  .pseg-photo{margin-bottom:18px;min-height:150px}
+  .pseg-photo img{max-height:220px}
+}
+@media(prefers-reduced-motion:reduce){
+  .pseg-photo{opacity:1!important;transform:none!important}
+  .pseg-photo::after{display:none}
+}
+
+/* ===== HERO (band) cennika — premium + animacje, spójne ze stroną główną ===== */
+.band{padding:74px 0 80px}
+.band::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(820px 400px at 88% -22%,rgba(225,29,42,.26),transparent 60%)}
+.band::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:repeating-linear-gradient(116deg,rgba(255,255,255,.04) 0 1px,transparent 1px 30px);animation:slide 22s linear infinite}
+.band .glow-blob.band-orb{width:480px;height:480px;top:-200px;right:-100px;opacity:.42}
+.band .crumb,.band h1,.band p,.band .accent{opacity:0;transform:translateY(14px);animation:cbUp .7s var(--cbz) forwards}
+.band .crumb{animation-delay:.06s}
+.band h1{animation-delay:.16s}
+.band p{animation-delay:.30s}
+.band .accent{width:0;transform-origin:left;animation:cbUp .7s var(--cbz) .42s forwards,cbGrow .8s var(--cbz) .42s forwards}
+@keyframes cbUp{to{opacity:1;transform:none}}
+@keyframes cbGrow{to{width:64px}}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .band h1{display:inline-block;background:linear-gradient(100deg,#fff 0%,#fff 42%,#FFCFCF 50%,#fff 58%,#fff 100%);background-size:230% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:cbUp .7s var(--cbz) .16s forwards,cbTitleShine 2.8s ease .55s 1}
+}
+@keyframes cbTitleShine{0%{background-position:130% 0}100%{background-position:-30% 0}}
+@media(prefers-reduced-motion:reduce){
+  .band::after,.band .glow-blob.band-orb{animation:none!important}
+  .band .crumb,.band h1,.band p,.band .accent{animation:none!important;opacity:1!important;transform:none!important}
+  .band .accent{width:64px!important}
+  .band h1{-webkit-text-fill-color:#fff!important;background:none!important}
+}
+
+/* ===== Hero cennika: wyśrodkowanie + CTA pod spodem ===== */
+.band .wrap{text-align:center}
+.band p{margin-left:auto;margin-right:auto}
+.band .accent{margin-left:auto;margin-right:auto}
+.band-cta{margin-top:26px;opacity:0;transform:translateY(14px);animation:cbUp .7s var(--cbz) .54s forwards}
+.band-cta-lead{color:#E7EAF0;font-size:16.5px;font-weight:600;max-width:620px;margin:0 auto 18px}
+.band-cta-btns{display:flex;gap:13px;justify-content:center;flex-wrap:wrap}
+@media(prefers-reduced-motion:reduce){.band-cta{animation:none!important;opacity:1!important;transform:none!important}}
+
+/* ===== Etykiety brutto/netto + nota ===== */
+.ptable h4 .pt-tax{font-weight:600;color:var(--muted);text-transform:none;letter-spacing:0;font-size:11.5px;margin-left:3px}
+.ptable:last-child h4 .pt-tax{color:var(--red)}
+table.price td.amt.amt-na{color:var(--muted);font-weight:600;font-variant-numeric:normal}
+.price-taxnote{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;margin:-16px 0 30px;color:var(--muted);font-size:13.5px}
+.price-taxnote b{color:var(--ink);font-weight:700}
+.price-taxnote .neto{color:var(--red)}
+.price-taxnote .dot{width:7px;height:7px;border-radius:50%;background:var(--grad-red);display:inline-block;margin-right:8px;vertical-align:middle}
+
 </style>
 </head>
 <body>
@@ -87,11 +152,16 @@ td.amt.cb-counting,.from b.cb-counting{color:var(--red)!important}
 </header>
 
 <section class="band">
+  <span class="glow-blob band-orb" aria-hidden="true"></span>
   <div class="wrap">
     <div class="crumb"><a href="index.html">Strona główna</a><span class="sep">/</span>Cennik</div>
     <h1>Cennik</h1>
-    <p>Przejrzyste stawki dobowe i miesięczne dla każdego segmentu. Ceny już od 90 zł. Inny okres najmu? Zadzwoń — ustalimy indywidualnie.</p>
+    <p>Przejrzyste stawki dobowe i miesięczne dla każdego segmentu. Inny okres najmu? Zadzwoń — ustalimy indywidualnie.</p>
     <span class="accent"></span>
+    <div class="band-cta">
+      <p class="band-cta-lead">Zobacz, jak wygląda cennik naszej całej floty! Zarezerwuj online bądź zadzwoń do nas.</p>
+      <div class="band-cta-btns"><a class="btn btn-red" href="rezerwacje.html">Zarezerwuj online</a><a class="btn btn-ghost" href="tel:+48664201202">Zadzwoń: 664 201 202</a></div>
+    </div>
   </div>
 </section>
 
@@ -113,108 +183,91 @@ td.amt.cb-counting,.from b.cb-counting{color:var(--red)!important}
       <a href="#suv">Osobowe — SUV</a>
     </div>
 
-    <div class="pseg rv" id="mikrobusy">
-      <div class="pseg-head"><h3>Segment S — Mikrobusy</h3><div class="from">już od <b>200 zł</b>/doba</div></div>
-      <div class="ptables">
-        <div class="ptable"><h4>Wynajem dobowy</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">150 zł</td><td>300 km</td></tr><tr><td>1 doba</td><td class="amt">200 zł</td><td>500 km</td></tr><tr><td>1 doba</td><td class="amt">300 zł</td><td>1000 km</td></tr><tr><td>1 doba</td><td class="amt">380 zł</td><td>bez limitu</td></tr></tbody></table></div>
-        <div class="ptable"><h4>Wynajem miesięczny</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">2900 zł</td><td>6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">3500 zł</td><td>11 000 km</td></tr><tr><td>1 mies.</td><td class="amt">4500 zł</td><td>16 000 km</td></tr><tr><td>1 mies.</td><td class="amt">5500 zł</td><td>bez limitu</td></tr></tbody></table></div>
-      </div>
+    <div class="price-taxnote rv"><span><span class="dot"></span><b>Najem krótkoterminowy</b> — ceny brutto</span><span><span class="dot"></span><b>Najem długoterminowy</b> (miesięczny) — ceny <b class="neto">netto</b></span></div>
+
+    <div class="pseg rv has-photo" id="mikrobusy">
+      <div class="pseg-head"><h3>Segment S — Mikrobusy</h3><div class="from">już od <b>200 zł</b> / doba</div></div>
+      <figure class="pseg-photo"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200336_fd130bf2-48c2-4327-b52d-1a09264d655d.png" alt="Segment S — Mikrobusy — Power Rent" loading="lazy"></figure>
+      <div class="ptables"><div class="ptable"><h4>Wynajem krótkoterminowy <span class="pt-tax">ceny brutto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 doba</td><td class="amt">200 zł</td><td>do 500 km</td></tr><tr><td>1 doba</td><td class="amt">300 zł</td><td>do 1000 km</td></tr><tr><td>1 doba</td><td class="amt">380 zł</td><td>bez limitu</td></tr></tbody></table></div><div class="ptable"><h4>Wynajem długoterminowy <span class="pt-tax">ceny netto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">2 900 zł</td><td>do 6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">3 500 zł</td><td>do 11 000 km</td></tr><tr><td>1 mies.</td><td class="amt">4 500 zł</td><td>do 16 000 km</td></tr><tr><td>1 mies.</td><td class="amt">5 500 zł</td><td>bez limitu</td></tr></tbody></table></div></div>
     </div>
 
-    <div class="pseg rv" id="male">
-      <div class="pseg-head"><h3>Segment M — Małe auta dostawcze</h3><div class="from">już od <b>280 zł</b>/doba</div></div>
-      <div class="ptables">
-        <div class="ptable"><h4>Wynajem dobowy</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">200 zł</td><td>300 km</td></tr><tr><td>1 doba</td><td class="amt">280 zł</td><td>500 km</td></tr><tr><td>1 doba</td><td class="amt">350 zł</td><td>1000 km</td></tr><tr><td>1 doba</td><td class="amt">400 zł</td><td>bez limitu</td></tr></tbody></table></div>
-        <div class="ptable"><h4>Wynajem miesięczny</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">3600 zł</td><td>6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">4300 zł</td><td>11 000 km</td></tr><tr><td>1 mies.</td><td class="amt">5300 zł</td><td>16 000 km</td></tr><tr><td>1 mies.</td><td class="amt">6800 zł</td><td>bez limitu</td></tr></tbody></table></div>
-      </div>
+    <div class="pseg rv has-photo" id="male">
+      <div class="pseg-head"><h3>Segment M — Małe auta dostawcze</h3><div class="from">już od <b>280 zł</b> / doba</div></div>
+      <figure class="pseg-photo"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200347_633102cd-ed81-4cee-99fb-1768be9f65d8.png" alt="Segment M — Małe auta dostawcze — Power Rent" loading="lazy"></figure>
+      <div class="ptables"><div class="ptable"><h4>Wynajem krótkoterminowy <span class="pt-tax">ceny brutto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 doba</td><td class="amt">280 zł</td><td>do 500 km</td></tr><tr><td>1 doba</td><td class="amt">350 zł</td><td>do 1000 km</td></tr><tr><td>1 doba</td><td class="amt">400 zł</td><td>bez limitu</td></tr></tbody></table></div><div class="ptable"><h4>Wynajem długoterminowy <span class="pt-tax">ceny netto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">3 600 zł</td><td>do 6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">4 300 zł</td><td>do 11 000 km</td></tr><tr><td>1 mies.</td><td class="amt">5 300 zł</td><td>do 16 000 km</td></tr><tr><td>1 mies.</td><td class="amt">6 800 zł</td><td>bez limitu</td></tr></tbody></table></div></div>
     </div>
 
-    <div class="pseg rv" id="duze">
-      <div class="pseg-head"><h3>Segment L — Duże auta dostawcze</h3><div class="from">już od <b>300 zł</b>/doba</div></div>
-      <div class="ptables">
-        <div class="ptable"><h4>Wynajem dobowy</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">200 zł</td><td>300 km</td></tr><tr><td>1 doba</td><td class="amt">300 zł</td><td>500 km</td></tr><tr><td>1 doba</td><td class="amt">380 zł</td><td>1000 km</td></tr><tr><td>1 doba</td><td class="amt">450 zł</td><td>bez limitu</td></tr></tbody></table></div>
-        <div class="ptable"><h4>Wynajem miesięczny</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">3900 zł</td><td>6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">4900 zł</td><td>11 000 km</td></tr><tr><td>1 mies.</td><td class="amt">5900 zł</td><td>16 000 km</td></tr><tr><td>1 mies.</td><td class="amt">7000 zł</td><td>bez limitu</td></tr></tbody></table></div>
-      </div>
+    <div class="pseg rv has-photo" id="duze">
+      <div class="pseg-head"><h3>Segment L — Duże auta dostawcze</h3><div class="from">już od <b>230 zł</b> / 5 h</div></div>
+      <figure class="pseg-photo"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_144108_a532f8c4-ce2b-4655-93e1-c4932296ce79.png" alt="Segment L — Duże auta dostawcze — Power Rent" loading="lazy"></figure>
+      <div class="ptables"><div class="ptable"><h4>Wynajem krótkoterminowy <span class="pt-tax">ceny brutto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">230 zł</td><td>do 300 km</td></tr><tr><td>1 doba</td><td class="amt">300 zł</td><td>do 500 km</td></tr><tr><td>1 doba</td><td class="amt">380 zł</td><td>do 1000 km</td></tr><tr><td>1 doba</td><td class="amt">450 zł</td><td>bez limitu</td></tr></tbody></table></div><div class="ptable"><h4>Wynajem długoterminowy <span class="pt-tax">ceny netto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">4 400 zł</td><td>do 6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">5 000 zł</td><td>do 10 000 km</td></tr><tr><td>1 mies.</td><td class="amt">5 800 zł</td><td>do 15 000 km</td></tr><tr><td>1 mies.</td><td class="amt amt-na">niedostępny</td><td>bez limitu</td></tr></tbody></table></div></div>
     </div>
 
-    <div class="pseg rv" id="przedluzane">
-      <div class="pseg-head"><h3>Segment L+ — Przedłużane auta dostawcze</h3><div class="from">już od <b>350 zł</b>/doba</div></div>
-      <div class="ptables">
-        <div class="ptable"><h4>Wynajem dobowy</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">250 zł</td><td>300 km</td></tr><tr><td>1 doba</td><td class="amt">350 zł</td><td>500 km</td></tr><tr><td>1 doba</td><td class="amt">450 zł</td><td>1000 km</td></tr><tr><td>1 doba</td><td class="amt">500 zł</td><td>bez limitu</td></tr></tbody></table></div>
-        <div class="ptable"><h4>Wynajem miesięczny</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">4900 zł</td><td>6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">5900 zł</td><td>11 000 km</td></tr><tr><td>1 mies.</td><td class="amt">6900 zł</td><td>16 000 km</td></tr><tr><td>1 mies.</td><td class="amt">8000 zł</td><td>bez limitu</td></tr></tbody></table></div>
-      </div>
+    <div class="pseg rv has-photo" id="przedluzane">
+      <div class="pseg-head"><h3>Segment L+ — Przedłużane auta dostawcze</h3><div class="from">już od <b>250 zł</b> / 5 h</div></div>
+      <figure class="pseg-photo"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200405_1c147392-2dab-4357-815e-824d84a8d847.png" alt="Segment L+ — Przedłużane auta dostawcze — Power Rent" loading="lazy"></figure>
+      <div class="ptables"><div class="ptable"><h4>Wynajem krótkoterminowy <span class="pt-tax">ceny brutto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">250 zł</td><td>do 300 km</td></tr><tr><td>1 doba</td><td class="amt">350 zł</td><td>do 500 km</td></tr><tr><td>1 doba</td><td class="amt">450 zł</td><td>do 1000 km</td></tr><tr><td>1 doba</td><td class="amt">500 zł</td><td>bez limitu</td></tr></tbody></table></div><div class="ptable"><h4>Wynajem długoterminowy <span class="pt-tax">ceny netto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">5 400 zł</td><td>do 6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">6 400 zł</td><td>do 10 000 km</td></tr><tr><td>1 mies.</td><td class="amt">7 500 zł</td><td>do 15 000 km</td></tr><tr><td>1 mies.</td><td class="amt amt-na">niedostępny</td><td>bez limitu</td></tr></tbody></table></div></div>
     </div>
 
-    <div class="pseg rv" id="najwieksze">
-      <div class="pseg-head"><h3>Segment XL — Największe auta dostawcze</h3><div class="from">już od <b>400 zł</b>/doba</div></div>
-      <div class="ptables">
-        <div class="ptable"><h4>Wynajem dobowy</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">300 zł</td><td>300 km</td></tr><tr><td>1 doba</td><td class="amt">400 zł</td><td>500 km</td></tr><tr><td>1 doba</td><td class="amt">480 zł</td><td>1000 km</td></tr><tr><td>1 doba</td><td class="amt">550 zł</td><td>bez limitu</td></tr></tbody></table></div>
-        <div class="ptable"><h4>Wynajem miesięczny</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">5500 zł</td><td>6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">6500 zł</td><td>11 000 km</td></tr><tr><td>1 mies.</td><td class="amt">7500 zł</td><td>16 000 km</td></tr><tr><td>1 mies.</td><td class="amt">9000 zł</td><td>bez limitu</td></tr></tbody></table></div>
-      </div>
+    <div class="pseg rv has-photo" id="najwieksze">
+      <div class="pseg-head"><h3>Segment XL — Największe auta dostawcze</h3><div class="from">już od <b>300 zł</b> / 5 h</div></div>
+      <figure class="pseg-photo"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200412_27c8fc18-e150-471e-b9e5-24476c9c92c6.png" alt="Segment XL — Największe auta dostawcze — Power Rent" loading="lazy"></figure>
+      <div class="ptables"><div class="ptable"><h4>Wynajem krótkoterminowy <span class="pt-tax">ceny brutto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">300 zł</td><td>do 300 km</td></tr><tr><td>1 doba</td><td class="amt">400 zł</td><td>do 500 km</td></tr><tr><td>1 doba</td><td class="amt">500 zł</td><td>do 1000 km</td></tr><tr><td>1 doba</td><td class="amt">600 zł</td><td>bez limitu</td></tr></tbody></table></div><div class="ptable"><h4>Wynajem długoterminowy <span class="pt-tax">ceny netto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">6 000 zł</td><td>do 6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">7 000 zł</td><td>do 10 000 km</td></tr><tr><td>1 mies.</td><td class="amt">8 000 zł</td><td>do 15 000 km</td></tr><tr><td>1 mies.</td><td class="amt amt-na">niedostępny</td><td>bez limitu</td></tr></tbody></table></div></div>
     </div>
 
-    <div class="pseg rv" id="busy">
-      <div class="pseg-head"><h3>Busy 8 i 9-osobowe</h3><div class="from">już od <b>300 zł</b>/doba</div></div>
-      <div class="ptables">
-        <div class="ptable"><h4>Wynajem dobowy</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">200 zł</td><td>300 km</td></tr><tr><td>1 doba</td><td class="amt">300 zł</td><td>500 km</td></tr><tr><td>1 doba</td><td class="amt">380 zł</td><td>1000 km</td></tr><tr><td>1 doba</td><td class="amt">450 zł</td><td>bez limitu</td></tr></tbody></table></div>
-        <div class="ptable"><h4>Wynajem miesięczny</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">4900 zł</td><td>6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">5900 zł</td><td>11 000 km</td></tr><tr><td>1 mies.</td><td class="amt">6900 zł</td><td>16 000 km</td></tr><tr><td>1 mies.</td><td class="amt">8000 zł</td><td>bez limitu</td></tr></tbody></table></div>
-      </div>
+    <div class="pseg rv has-photo" id="busy">
+      <div class="pseg-head"><h3>Busy 8 i 9-osobowe</h3><div class="from">już od <b>250 zł</b> / 5 h</div></div>
+      <figure class="pseg-photo"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_085325_633d50e0-0993-4247-b51a-bf7ee8c47eaa.png" alt="Busy 8 i 9-osobowe — Power Rent" loading="lazy"></figure>
+      <div class="ptables"><div class="ptable"><h4>Wynajem krótkoterminowy <span class="pt-tax">ceny brutto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">250 zł</td><td>do 300 km</td></tr><tr><td>1 doba</td><td class="amt">300 zł</td><td>do 500 km</td></tr><tr><td>1 doba</td><td class="amt">380 zł</td><td>do 1000 km</td></tr><tr><td>1 doba</td><td class="amt">450 zł</td><td>bez limitu</td></tr></tbody></table></div><div class="ptable"><h4>Wynajem długoterminowy <span class="pt-tax">ceny netto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">4 900 zł</td><td>do 6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">5 900 zł</td><td>do 11 000 km</td></tr><tr><td>1 mies.</td><td class="amt">6 900 zł</td><td>do 16 000 km</td></tr><tr><td>1 mies.</td><td class="amt">8 000 zł</td><td>bez limitu</td></tr></tbody></table></div></div>
     </div>
 
-    <div class="pseg rv" id="lawety">
-      <div class="pseg-head"><h3>Auto-lawety</h3><div class="from">już od <b>380 zł</b>/doba</div></div>
-      <div class="ptables">
-        <div class="ptable"><h4>Wynajem dobowy</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">250 zł</td><td>300 km</td></tr><tr><td>1 doba</td><td class="amt">380 zł</td><td>500 km</td></tr><tr><td>1 doba</td><td class="amt">450 zł</td><td>1000 km</td></tr><tr><td>1 doba</td><td class="amt">550 zł</td><td>bez limitu</td></tr></tbody></table></div>
-        <div class="ptable"><h4>Wynajem miesięczny</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">6500 zł</td><td>6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">7500 zł</td><td>11 000 km</td></tr><tr><td>1 mies.</td><td class="amt">8500 zł</td><td>16 000 km</td></tr><tr><td>1 mies.</td><td class="amt">9500 zł</td><td>bez limitu</td></tr></tbody></table></div>
-      </div>
+    <div class="pseg rv has-photo" id="lawety">
+      <div class="pseg-head"><h3>Auto-lawety</h3><div class="from">już od <b>250 zł</b> / 5 h</div></div>
+      <figure class="pseg-photo"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200434_f9dafa51-b7c5-457a-8df1-887dd70fa351.png" alt="Auto-lawety — Power Rent" loading="lazy"></figure>
+      <div class="ptables"><div class="ptable"><h4>Wynajem krótkoterminowy <span class="pt-tax">ceny brutto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">250 zł</td><td>do 300 km</td></tr><tr><td>1 doba</td><td class="amt">380 zł</td><td>do 500 km</td></tr><tr><td>1 doba</td><td class="amt">450 zł</td><td>do 1000 km</td></tr><tr><td>1 doba</td><td class="amt">550 zł</td><td>bez limitu</td></tr></tbody></table></div><div class="ptable"><h4>Wynajem długoterminowy <span class="pt-tax">ceny netto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">6 500 zł</td><td>do 6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">7 500 zł</td><td>do 11 000 km</td></tr><tr><td>1 mies.</td><td class="amt">8 500 zł</td><td>do 16 000 km</td></tr><tr><td>1 mies.</td><td class="amt">9 500 zł</td><td>bez limitu</td></tr></tbody></table></div></div>
     </div>
 
-    <div class="pseg rv" id="chlodnie-furgon">
-      <div class="pseg-head"><h3>Auta chłodnicze — furgony</h3><div class="from">już od <b>500 zł</b>/doba</div></div>
-      <div class="ptables">
-        <div class="ptable"><h4>Wynajem dobowy</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">350 zł</td><td>300 km</td></tr><tr><td>1 doba</td><td class="amt">500 zł</td><td>500 km</td></tr><tr><td>1 doba</td><td class="amt">580 zł</td><td>1000 km</td></tr><tr><td>1 doba</td><td class="amt">650 zł</td><td>bez limitu</td></tr></tbody></table></div>
-        <div class="ptable"><h4>Wynajem miesięczny</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">5900 zł</td><td>6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">6900 zł</td><td>11 000 km</td></tr><tr><td>1 mies.</td><td class="amt">7900 zł</td><td>16 000 km</td></tr><tr><td>1 mies.</td><td class="amt">9000 zł</td><td>bez limitu</td></tr></tbody></table></div>
-      </div>
+    <div class="pseg rv has-photo" id="chlodnie-furgon">
+      <div class="pseg-head"><h3>Auta chłodnicze — furgony</h3><div class="from">już od <b>350 zł</b> / 5 h</div></div>
+      <figure class="pseg-photo"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200428_833d4bb0-c7df-461a-aedc-fa8f4fbafa9c.png" alt="Auta chłodnicze — furgony — Power Rent" loading="lazy"></figure>
+      <div class="ptables"><div class="ptable"><h4>Wynajem krótkoterminowy <span class="pt-tax">ceny brutto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">350 zł</td><td>do 300 km</td></tr><tr><td>1 doba</td><td class="amt">500 zł</td><td>do 500 km</td></tr><tr><td>1 doba</td><td class="amt">580 zł</td><td>do 1000 km</td></tr><tr><td>1 doba</td><td class="amt">650 zł</td><td>bez limitu</td></tr></tbody></table></div><div class="ptable"><h4>Wynajem długoterminowy <span class="pt-tax">ceny netto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">6 300 zł</td><td>do 6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">7 300 zł</td><td>do 10 000 km</td></tr><tr><td>1 mies.</td><td class="amt">8 300 zł</td><td>do 15 000 km</td></tr><tr><td>1 mies.</td><td class="amt amt-na">niedostępny</td><td>bez limitu</td></tr></tbody></table></div></div>
     </div>
 
-    <div class="pseg rv" id="chlodnie-kontener">
+    <div class="pseg rv has-photo" id="chlodnie-kontener">
       <div class="pseg-head"><h3>Auta chłodnicze — kontenery</h3><div class="from">już od <b>500 zł</b>/doba</div></div>
+      <figure class="pseg-photo"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200417_8419eb41-b939-4a30-99b7-ebe79c4036de.png" alt="Auta chłodnicze — kontenery — Power Rent" loading="lazy"></figure>
       <div class="ptables">
-        <div class="ptable"><h4>Wynajem dobowy</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">350 zł</td><td>300 km</td></tr><tr><td>1 doba</td><td class="amt">500 zł</td><td>500 km</td></tr><tr><td>1 doba</td><td class="amt">580 zł</td><td>1000 km</td></tr><tr><td>1 doba</td><td class="amt">650 zł</td><td>bez limitu</td></tr></tbody></table></div>
-        <div class="ptable"><h4>Wynajem miesięczny</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">6500 zł</td><td>6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">7500 zł</td><td>11 000 km</td></tr><tr><td>1 mies.</td><td class="amt">8500 zł</td><td>16 000 km</td></tr><tr><td>1 mies.</td><td class="amt">9500 zł</td><td>bez limitu</td></tr></tbody></table></div>
+        <div class="ptable"><h4>Wynajem krótkoterminowy <span class="pt-tax">ceny brutto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">350 zł</td><td>300 km</td></tr><tr><td>1 doba</td><td class="amt">500 zł</td><td>500 km</td></tr><tr><td>1 doba</td><td class="amt">580 zł</td><td>1000 km</td></tr><tr><td>1 doba</td><td class="amt">650 zł</td><td>bez limitu</td></tr></tbody></table></div>
+        <div class="ptable"><h4>Wynajem długoterminowy <span class="pt-tax">ceny netto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">6500 zł</td><td>6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">7500 zł</td><td>11 000 km</td></tr><tr><td>1 mies.</td><td class="amt">8500 zł</td><td>16 000 km</td></tr><tr><td>1 mies.</td><td class="amt">9500 zł</td><td>bez limitu</td></tr></tbody></table></div>
       </div>
     </div>
 
     <div class="pseg rv" id="plandeka">
       <div class="pseg-head"><h3>Auta dostawcze z plandeką</h3><div class="from">już od <b>380 zł</b>/doba</div></div>
       <div class="ptables">
-        <div class="ptable"><h4>Wynajem dobowy</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">280 zł</td><td>300 km</td></tr><tr><td>1 doba</td><td class="amt">380 zł</td><td>500 km</td></tr><tr><td>1 doba</td><td class="amt">450 zł</td><td>1000 km</td></tr><tr><td>1 doba</td><td class="amt">500 zł</td><td>bez limitu</td></tr></tbody></table></div>
-        <div class="ptable"><h4>Wynajem miesięczny</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">5500 zł</td><td>6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">6500 zł</td><td>11 000 km</td></tr><tr><td>1 mies.</td><td class="amt">7500 zł</td><td>16 000 km</td></tr><tr><td>1 mies.</td><td class="amt">9000 zł</td><td>bez limitu</td></tr></tbody></table></div>
+        <div class="ptable"><h4>Wynajem krótkoterminowy <span class="pt-tax">ceny brutto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">280 zł</td><td>300 km</td></tr><tr><td>1 doba</td><td class="amt">380 zł</td><td>500 km</td></tr><tr><td>1 doba</td><td class="amt">450 zł</td><td>1000 km</td></tr><tr><td>1 doba</td><td class="amt">500 zł</td><td>bez limitu</td></tr></tbody></table></div>
+        <div class="ptable"><h4>Wynajem długoterminowy <span class="pt-tax">ceny netto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">5500 zł</td><td>6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">6500 zł</td><td>11 000 km</td></tr><tr><td>1 mies.</td><td class="amt">7500 zł</td><td>16 000 km</td></tr><tr><td>1 mies.</td><td class="amt">9000 zł</td><td>bez limitu</td></tr></tbody></table></div>
       </div>
     </div>
 
-    <div class="pseg rv" id="sedan">
-      <div class="pseg-head"><h3>Auto osobowe — sedan</h3><div class="from">już od <b>160 zł</b>/doba</div></div>
-      <div class="ptables">
-        <div class="ptable"><h4>Wynajem dobowy</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">100 zł</td><td>100 km</td></tr><tr><td>1 doba</td><td class="amt">160 zł</td><td>300 km</td></tr><tr><td>1 doba</td><td class="amt">240 zł</td><td>600 km</td></tr><tr><td>1 doba</td><td class="amt">350 zł</td><td>bez limitu</td></tr></tbody></table></div>
-        <div class="ptable"><h4>Wynajem miesięczny</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">2200 zł</td><td>3 000 km</td></tr><tr><td>1 mies.</td><td class="amt">2700 zł</td><td>6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">3500 zł</td><td>9 000 km</td></tr><tr><td>1 mies.</td><td class="amt">4500 zł</td><td>bez limitu</td></tr></tbody></table></div>
-      </div>
+    <div class="pseg rv has-photo" id="sedan">
+      <div class="pseg-head"><h3>Auto osobowe — sedan</h3><div class="from">już od <b>230 zł</b> / 5 h</div></div>
+      <figure class="pseg-photo"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200444_759ee268-7ed4-49cb-b9ef-71d97eb7963f.png" alt="Auto osobowe — sedan — Power Rent" loading="lazy"></figure>
+      <div class="ptables"><div class="ptable"><h4>Wynajem krótkoterminowy <span class="pt-tax">ceny brutto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">230 zł</td><td>do 100 km</td></tr><tr><td>1 doba</td><td class="amt">280 zł</td><td>do 300 km</td></tr><tr><td>1 doba</td><td class="amt">350 zł</td><td>do 600 km</td></tr><tr><td>1 doba</td><td class="amt">500 zł</td><td>bez limitu</td></tr></tbody></table></div><div class="ptable"><h4>Wynajem długoterminowy <span class="pt-tax">ceny netto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">3 500 zł</td><td>do 3 000 km</td></tr><tr><td>1 mies.</td><td class="amt">4 500 zł</td><td>do 6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">5 500 zł</td><td>do 9 000 km</td></tr><tr><td>1 mies.</td><td class="amt">7 000 zł</td><td>bez limitu</td></tr></tbody></table></div></div>
     </div>
 
-    <div class="pseg rv" id="kombi">
+    <div class="pseg rv has-photo" id="kombi">
       <div class="pseg-head"><h3>Auto osobowe — kombi automat</h3><div class="from">już od <b>250 zł</b>/doba</div></div>
+      <figure class="pseg-photo"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200449_c11bbded-d5e2-4ae1-b8a6-6a78073b9905.png" alt="Auto osobowe — kombi automat — Power Rent" loading="lazy"></figure>
       <div class="ptables">
-        <div class="ptable"><h4>Wynajem dobowy</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">200 zł</td><td>100 km</td></tr><tr><td>1 doba</td><td class="amt">250 zł</td><td>300 km</td></tr><tr><td>1 doba</td><td class="amt">330 zł</td><td>600 km</td></tr><tr><td>1 doba</td><td class="amt">500 zł</td><td>bez limitu</td></tr></tbody></table></div>
-        <div class="ptable"><h4>Wynajem miesięczny</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">3000 zł</td><td>3 000 km</td></tr><tr><td>1 mies.</td><td class="amt">4000 zł</td><td>6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">5000 zł</td><td>9 000 km</td></tr><tr><td>1 mies.</td><td class="amt">7000 zł</td><td>bez limitu</td></tr></tbody></table></div>
+        <div class="ptable"><h4>Wynajem krótkoterminowy <span class="pt-tax">ceny brutto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">200 zł</td><td>100 km</td></tr><tr><td>1 doba</td><td class="amt">250 zł</td><td>300 km</td></tr><tr><td>1 doba</td><td class="amt">330 zł</td><td>600 km</td></tr><tr><td>1 doba</td><td class="amt">500 zł</td><td>bez limitu</td></tr></tbody></table></div>
+        <div class="ptable"><h4>Wynajem długoterminowy <span class="pt-tax">ceny netto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">3000 zł</td><td>3 000 km</td></tr><tr><td>1 mies.</td><td class="amt">4000 zł</td><td>6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">5000 zł</td><td>9 000 km</td></tr><tr><td>1 mies.</td><td class="amt">7000 zł</td><td>bez limitu</td></tr></tbody></table></div>
       </div>
     </div>
 
     <div class="pseg rv" id="suv">
-      <div class="pseg-head"><h3>Auto osobowe — SUV automat</h3><div class="from">już od <b>300 zł</b>/doba</div></div>
-      <div class="ptables">
-        <div class="ptable"><h4>Wynajem dobowy</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">200 zł</td><td>100 km</td></tr><tr><td>1 doba</td><td class="amt">300 zł</td><td>300 km</td></tr><tr><td>1 doba</td><td class="amt">380 zł</td><td>600 km</td></tr><tr><td>1 doba</td><td class="amt">500 zł</td><td>bez limitu</td></tr></tbody></table></div>
-        <div class="ptable"><h4>Wynajem miesięczny</h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">3500 zł</td><td>3 000 km</td></tr><tr><td>1 mies.</td><td class="amt">4500 zł</td><td>6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">5500 zł</td><td>9 000 km</td></tr><tr><td>1 mies.</td><td class="amt">7000 zł</td><td>bez limitu</td></tr></tbody></table></div>
-      </div>
+      <div class="pseg-head"><h3>Auto osobowe — SUV automat</h3><div class="from">już od <b>200 zł</b> / 5 h</div></div>
+      <div class="ptables"><div class="ptable"><h4>Wynajem krótkoterminowy <span class="pt-tax">ceny brutto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">200 zł</td><td>do 100 km</td></tr><tr><td>1 doba</td><td class="amt">230 zł</td><td>do 300 km</td></tr><tr><td>1 doba</td><td class="amt">280 zł</td><td>do 600 km</td></tr><tr><td>1 doba</td><td class="amt">430 zł</td><td>bez limitu</td></tr></tbody></table></div><div class="ptable"><h4>Wynajem długoterminowy <span class="pt-tax">ceny netto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">3 000 zł</td><td>do 3 000 km</td></tr><tr><td>1 mies.</td><td class="amt">4 000 zł</td><td>do 6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">5 000 zł</td><td>do 9 000 km</td></tr><tr><td>1 mies.</td><td class="amt">7 000 zł</td><td>bez limitu</td></tr></tbody></table></div></div>
     </div>
 
     <div class="grid-2" style="margin-top:8px">
@@ -281,7 +334,8 @@ td.amt.cb-counting,.from b.cb-counting{color:var(--red)!important}
     var prefix = raw.slice(0,i), suffix = raw.slice(i+numStr.length);
     var dur = 850, t0 = null;
     el.classList.add('cb-counting');
-    function render(n){ el.textContent = prefix + n + suffix; }
+    function fmt(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'\u00A0'); }
+    function render(n){ el.textContent = prefix + fmt(n) + suffix; }
     function step(ts){
       if(!t0) t0 = ts;
       var p = Math.min(1,(ts-t0)/dur), e = 1-Math.pow(1-p,3);
