@@ -9,6 +9,63 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>
+/* ===== Cennik — warstwa premium (animacje + polish) · Power Rent ===== */
+:root{--cbz:cubic-bezier(.2,.7,.2,1)}
+
+/* --- sticky pasek chipów + scrollspy --- */
+.price-nav{position:sticky;top:84px;z-index:40;background:rgba(245,246,249,.82);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);padding:11px 12px;border-radius:16px;border:1px solid transparent;margin-bottom:34px;transition:border-color .25s,box-shadow .25s}
+.price-nav.cb-stuck{border-color:var(--line);box-shadow:0 12px 30px rgba(18,20,25,.09)}
+.price-nav a{position:relative;opacity:0;transform:translateY(8px);animation:cbChip .5s var(--cbz) forwards}
+.price-nav a:nth-child(1){animation-delay:.03s}.price-nav a:nth-child(2){animation-delay:.06s}.price-nav a:nth-child(3){animation-delay:.09s}.price-nav a:nth-child(4){animation-delay:.12s}.price-nav a:nth-child(5){animation-delay:.15s}.price-nav a:nth-child(6){animation-delay:.18s}.price-nav a:nth-child(7){animation-delay:.21s}.price-nav a:nth-child(8){animation-delay:.24s}.price-nav a:nth-child(9){animation-delay:.27s}.price-nav a:nth-child(10){animation-delay:.30s}.price-nav a:nth-child(11){animation-delay:.33s}.price-nav a:nth-child(12){animation-delay:.36s}.price-nav a:nth-child(13){animation-delay:.39s}
+.price-nav a.active{color:#fff !important;background:var(--grad-red);border-color:transparent;box-shadow:0 8px 20px rgba(225,29,42,.32)}
+.price-nav a.active:hover{color:#fff !important;transform:translateY(-2px)}
+@keyframes cbChip{to{opacity:1;transform:none}}
+
+/* --- segment: lewy akcent, hover lift --- */
+.pseg{position:relative;overflow:hidden;transition:box-shadow .2s,border-color .2s,transform .28s var(--cbz)}
+.pseg::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--grad-red);transform:scaleY(0);transform-origin:top;transition:transform .55s var(--cbz)}
+.pseg.cb-in::before{transform:scaleY(1)}
+.pseg:hover{transform:translateY(-3px)}
+
+/* --- badge "już od X zł" --- */
+.pseg-head .from{position:relative;background:linear-gradient(180deg,#fff,#FFF3F3);border:1px solid rgba(225,29,42,.2);padding:7px 14px;border-radius:30px;box-shadow:0 6px 16px rgba(225,29,42,.1)}
+.pseg.cb-in .pseg-head .from{animation:cbPop .5s var(--cbz) both}
+@keyframes cbPop{0%{transform:scale(.9);opacity:0}100%{transform:scale(1);opacity:1}}
+
+/* --- sheen pod nagłówkiem segmentu --- */
+.pseg-head{position:relative}
+.pseg-head::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:linear-gradient(90deg,transparent,var(--red),transparent);opacity:0}
+.pseg.cb-in .pseg-head::after{animation:cbSheen 1.15s ease .15s both}
+@keyframes cbSheen{0%{opacity:0;transform:translateX(-45%)}45%{opacity:.9}100%{opacity:0;transform:translateX(45%)}}
+
+/* --- stagger tabel + wierszy --- */
+.pseg .ptable{opacity:0;transform:translateY(10px);transition:opacity .5s var(--cbz),transform .5s var(--cbz)}
+.pseg.cb-in .ptable{opacity:1;transform:none}
+.pseg.cb-in .ptable:nth-child(2){transition-delay:.08s}
+.pseg .ptable table.price tbody tr{opacity:0;transform:translateY(7px);transition:opacity .45s var(--cbz),transform .45s var(--cbz)}
+.pseg.cb-in .ptable table.price tbody tr{opacity:1;transform:none}
+.pseg.cb-in .ptable table.price tbody tr:nth-child(1){transition-delay:.10s}
+.pseg.cb-in .ptable table.price tbody tr:nth-child(2){transition-delay:.17s}
+.pseg.cb-in .ptable table.price tbody tr:nth-child(3){transition-delay:.24s}
+.pseg.cb-in .ptable table.price tbody tr:nth-child(4){transition-delay:.31s}
+
+/* --- ceny: hover czerwień + stan liczenia --- */
+table.price td.amt{transition:color .15s}
+table.price tbody tr:hover td.amt{color:var(--red)}
+td.amt.cb-counting,.from b.cb-counting{color:var(--red)!important}
+
+/* --- mobile: chipy poziomo --- */
+@media(max-width:640px){
+  .price-nav{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;top:70px}
+  .price-nav::-webkit-scrollbar{display:none}
+  .price-nav a{flex:0 0 auto}
+}
+@media(prefers-reduced-motion:reduce){
+  .price-nav a,.pseg .ptable,.pseg .ptable table.price tbody tr,.pseg::before,.pseg-head::after,.pseg-head .from{animation:none!important;transition:none!important;opacity:1!important;transform:none!important}
+}
+
+</style>
 </head>
 <body>
 
@@ -204,6 +261,80 @@
 </footer>
 
 <script src="script.js" defer></script>
-  <script src="rezerwuj.js" defer></script>
+<script src="rezerwuj.js" defer></script>
+<script>
+/* Cennik premium — scrollspy chipów, reveal wierszy, licznik cen w górę */
+(function(){
+  var segs = Array.prototype.slice.call(document.querySelectorAll('.pseg[id]'));
+  var nav  = document.querySelector('.price-nav');
+  var links = nav ? Array.prototype.slice.call(nav.querySelectorAll('a')) : [];
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  function countUp(el){
+    var raw = el.textContent;
+    var m = raw.match(/\d[\d ]*\d|\d/);
+    if(!m) return;
+    var numStr = m[0];
+    var target = parseInt(numStr.replace(/\s/g,''),10);
+    if(!isFinite(target)) return;
+    var i = raw.indexOf(numStr);
+    var prefix = raw.slice(0,i), suffix = raw.slice(i+numStr.length);
+    var dur = 850, t0 = null;
+    el.classList.add('cb-counting');
+    function render(n){ el.textContent = prefix + n + suffix; }
+    function step(ts){
+      if(!t0) t0 = ts;
+      var p = Math.min(1,(ts-t0)/dur), e = 1-Math.pow(1-p,3);
+      render(Math.round(target*e));
+      if(p<1){ requestAnimationFrame(step); }
+      else { render(target); el.classList.remove('cb-counting'); }
+    }
+    render(0); requestAnimationFrame(step);
+  }
+
+  function revealSeg(seg){
+    if(seg.classList.contains('cb-in')) return;
+    seg.classList.add('cb-in');
+    if(reduce) return;
+    var nums = seg.querySelectorAll('td.amt, .pseg-head .from b');
+    Array.prototype.forEach.call(nums, countUp);
+  }
+
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ revealSeg(en.target); io.unobserve(en.target); } });
+    }, { rootMargin:'0px 0px -12% 0px', threshold:0.18 });
+    segs.forEach(function(s){ io.observe(s); });
+  } else {
+    segs.forEach(revealSeg);
+  }
+
+  function onScroll(){
+    if(nav){
+      var topPx = parseInt(window.getComputedStyle(nav).top,10) || 84;
+      var r = nav.getBoundingClientRect();
+      nav.classList.toggle('cb-stuck', r.top <= topPx + 1 && window.scrollY > 130);
+    }
+    var y = window.scrollY + 150, cur = null;
+    for(var i=0;i<segs.length;i++){ if(segs[i].offsetTop <= y) cur = segs[i].id; }
+    for(var j=0;j<links.length;j++){
+      links[j].classList.toggle('active', !!cur && links[j].getAttribute('href') === '#'+cur);
+    }
+  }
+  links.forEach(function(a){
+    a.addEventListener('click', function(e){
+      var id = a.getAttribute('href');
+      if(id && id.charAt(0)==='#'){
+        var t = document.querySelector(id);
+        if(t){ e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 110, behavior:'smooth' }); }
+      }
+    });
+  });
+  window.addEventListener('scroll', onScroll, { passive:true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+})();
+
+</script>
 </body>
 </html>
