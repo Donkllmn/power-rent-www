@@ -83,6 +83,26 @@
 .car-badges{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
 .car-bdg{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:6px;background:var(--bg2);color:var(--ink)}
 .car.sel .car-bdg{background:rgba(225,29,42,.1);color:var(--red)}
+.car-photo{position:relative;height:128px;border-radius:11px;overflow:hidden;margin-bottom:12px;background:var(--bg2)}
+.car-illus{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#F2F4F8,#E5E9F0)}
+.car-illus svg{width:60px;height:60px;color:#AAB2BF}
+.car-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.car-price{margin-top:9px;font-family:'Archivo';font-weight:800;font-size:14.5px;color:var(--ink)}
+.car-price span{font-weight:600;font-size:12px;color:var(--muted)}
+.trip-sec{margin-top:24px;border-top:1px solid var(--line);padding-top:22px}
+.trip-toggle{display:inline-flex;background:var(--bg);border:1px solid var(--line);border-radius:13px;padding:4px;gap:4px;margin:6px 0 14px}
+.trip-toggle button{border:0;background:transparent;padding:10px 18px;border-radius:10px;font-family:inherit;font-weight:700;font-size:14px;color:var(--muted);cursor:pointer;transition:background .18s,color .18s,box-shadow .18s}
+.trip-toggle button.on{background:var(--paper);color:var(--ink);box-shadow:0 3px 10px rgba(18,20,25,.1)}
+.kaucja-box{margin-top:6px;padding:15px 18px;background:linear-gradient(100deg,rgba(225,29,42,.06),rgba(225,29,42,.02));border:1px solid rgba(225,29,42,.2);border-radius:14px}
+.kaucja-amt{font-size:15px;color:var(--ink)}
+.kaucja-amt b{font-family:'Archivo';font-size:21px;color:var(--red)}
+.kaucja-sub{font-size:12.5px;color:var(--muted);margin-top:4px}
+.sum-price{background:var(--ink);color:#fff;border-radius:14px;padding:4px 22px;margin:-6px 0 18px}
+.sum-price .wz-sum-row{border-bottom:1px solid rgba(255,255,255,.12)}
+.sum-price .wz-sum-k{color:#AEB6C4}
+.sum-price .wz-sum-v{color:#fff}
+.sum-price .sp-total .wz-sum-k,.sum-price .sp-total .wz-sum-v{color:#fff;font-size:16px;font-family:'Archivo';font-weight:800}
+.sum-price .sp-total{border-bottom:0}
 .cars-empty{padding:20px;background:var(--bg);border:1px solid var(--line);border-radius:14px;text-align:center;color:var(--muted);font-size:14px}
 .cars-empty .btn{margin-top:13px}
 /* fields */
@@ -207,6 +227,16 @@
             <div class="cars-hint" id="carsHint">Wybierz pojazd, który Cię interesuje.</div>
             <div id="carsBox"></div>
           </div>
+          <div class="trip-sec" id="tripSec" style="display:none">
+            <div class="cars-h">Wyjazd i kaucja zwrotna</div>
+            <div class="cars-hint">Wyjazd za granicę wymaga wyższej kaucji — wybierz kraj, a podpowiemy kwotę.</div>
+            <div class="trip-toggle" id="tripToggle">
+              <button type="button" data-z="0" class="on">Krajowy (Polska)</button>
+              <button type="button" data-z="1">Zagraniczny</button>
+            </div>
+            <div class="wz-field" id="krajWrap" style="display:none;max-width:340px"><label for="r-kraj">Kraj wyjazdu</label><select id="r-kraj"></select></div>
+            <div class="kaucja-box" id="kaucjaBox"></div>
+          </div>
         </div>
         <!-- KROK 3 -->
         <div class="wz-panel" data-panel="3">
@@ -251,6 +281,7 @@
         <div class="wz-panel" data-panel="4">
           <div class="wz-ttl">Sprawdź i potwierdź</div>
           <div class="wz-sub">Wszystko się zgadza? Wyślij rezerwację — odezwiemy się telefonicznie z potwierdzeniem i ceną.</div>
+          <div class="sum-price" id="wzSumPrice"></div>
           <div class="wz-sum" id="wzSum"></div>
           <div class="wz-info"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.6h.01"/></svg><span>Rezerwacja jest wstępna — dostępność i cenę potwierdzamy telefonicznie. Cena ustalana jest indywidualnie, zależnie od terminu i długości najmu.</span></div>
         </div>
@@ -291,7 +322,7 @@
   var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVncWNid2J6bGtjdHlkbGtsbmpqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE5MTA3NzQsImV4cCI6MjA5NzQ4Njc3NH0.k7N0CAR63Qbi9hLG3rkPg51PBbBmPqjKJHAZaaYiAUs';
   var HDR={'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY};
   var STEPS=4, step=1, maxStep=1, sending=false;
-  var sel={seg:'',segCode:'',carId:'',carLabel:'',typ:'ind',proceedNoCar:false};
+  var sel={seg:'',segCode:'',carId:'',carLabel:'',carSeg:'',typ:'ind',proceedNoCar:false,zagranica:false,kraj:'',kaucja:1000};
   var calFrom=null,calTo=null,calY,calM;
 
   var IC={
@@ -317,6 +348,19 @@
     {seg:'Nie wiem — proszę o doradztwo',sc:'',t:'Nie wiem',d:'Pomożemy dobrać auto',ic:'q'}
   ];
   var SEGLBL={S:'Mikrobus',M:'Dostawczy mały',L:'Dostawczy duży','L+':'Dostawczy L+',XL:'Dostawczy XL',BUS:'Bus osobowy',LAW:'Auto-laweta',OSO:'Osobowe','CHŁ':'Chłodnia'};
+  /* === STAWKI DZIENNE (zł/doba) — takie same jak w panelu. Zmień tu, jeśli zmienisz w panelu. === */
+  var RATES={'S':150,'M':200,'L':230,'L+':260,'XL':300,'LAW':280,'BUS':320,'OSO':170,'CHŁ':380};
+  /* === KAUCJE === krajowa stała 1000 zł; zagraniczne per kraj (USTAW WŁASNE KWOTY). === */
+  var KAUCJA_KRAJOWA=1000;
+  var KAUCJE_ZAGRANICA={'Niemcy':2000,'Czechy':1500,'Słowacja':1500,'Austria':2000,'Holandia':2500,'Belgia':2500,'Francja':2500,'Włochy':2500,'Litwa':1500,'Łotwa':1500,'Estonia':1500,'Węgry':1500,'Dania':2500,'Szwajcaria':3000,'Inny kraj UE':2500};
+  /* === ZDJĘCIA per segment (opcjonalnie wpisz link URL; auto z własnym zdjęciem w panelu ma pierwszeństwo). === */
+  var SEG_PHOTO={'S':'','M':'','L':'','L+':'','XL':'','BUS':'','LAW':'','OSO':'','CHŁ':''};
+  function segRate(sg){return RATES[sg]||200;}
+  function autoDiscount(d){if(d>=30)return 15;if(d>=14)return 10;if(d>=7)return 5;return 0;}
+  function rentDaysN(){if(!calFrom||!calTo)return 0;var d=Math.round((new Date(calTo)-new Date(calFrom))/86400000)+1;return d>0?d:0;}
+  function calcPrice(sg){var days=rentDaysN();if(!days||!sg||!RATES[sg])return null;var rate=segRate(sg),base=days*rate,disc=autoDiscount(days),total=Math.max(0,Math.round(base*(1-disc/100)));return{days:days,rate:rate,base:base,disc:disc,total:total};}
+  function illusKey(sg){if(sg==='BUS')return'bus';if(sg==='LAW')return'tow';if(sg==='CHŁ')return'fridge';if(sg==='OSO')return'car';return'van';}
+  function carPhoto(v){var url=v.photo||SEG_PHOTO[v.seg]||'';return '<div class="car-photo"><div class="car-illus">'+IC[illusKey(v.seg)]+'</div>'+(url?'<img src="'+esc(url)+'" alt="'+esc(v.model||'')+'" loading="lazy" onerror="this.remove()">':'')+'</div>';}
   var MN=['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'];
   var MS=['sty','lut','mar','kwi','maj','cze','lip','sie','wrz','paź','lis','gru'];
 
@@ -326,7 +370,7 @@
   function ymd(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
   function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
   function fmtDate(s){if(!s)return'—';var p=s.split('-');if(p.length!==3)return s;return (+p[2])+' '+MS[(+p[1])-1]+' '+p[0];}
-  function durDays(){if(!calFrom||!calTo)return 0;return Math.round((new Date(calTo)-new Date(calFrom))/86400000);}
+  function durDays(){return rentDaysN();}
   function durTxt(){var d=durDays();var n=d===0?1:d;return n+(n===1?' doba':(n>1&&n<5?' doby':' dób'));}
 
   // ----- vehicle category cards -----
@@ -364,8 +408,8 @@
     if(!calFrom||(calFrom&&calTo)){calFrom=ds;calTo=null;}
     else{if(ds<calFrom){calFrom=ds;}else{calTo=ds;}}
     calRender();calRangeTxt();hideWarn();
-    if(calFrom&&calTo){sel.carId='';sel.proceedNoCar=false;loadCars(false);}
-    else{el('carsSec').style.display='none';}
+    if(calFrom&&calTo){sel.carId='';sel.proceedNoCar=false;loadCars(false);el('tripSec').style.display='block';updateKaucja();}
+    else{el('carsSec').style.display='none';el('tripSec').style.display='none';}
   });
   el('calPrev').addEventListener('click',function(){var t=new Date();if(calY<t.getFullYear()||(calY===t.getFullYear()&&calM<=t.getMonth()))return;calM--;if(calM<0){calM=11;calY--;}calRender();});
   el('calNext').addEventListener('click',function(){calM++;if(calM>11){calM=0;calY++;}calRender();});
@@ -404,14 +448,26 @@
       var badges='';if(lbl)badges+='<span class="car-bdg">'+esc(lbl)+'</span>';
       if(v.gb)badges+='<span class="car-bdg">'+(v.gb==='A'?'Automat':'Manual')+'</span>';
       if(v.fuel)badges+='<span class="car-bdg">'+esc(v.fuel)+'</span>';
-      h+='<button type="button" class="car" data-id="'+esc(v.id)+'" data-lbl="'+esc((v.model||'')+(v.plate?' · '+v.plate:''))+'" style="animation-delay:'+(i*0.04)+'s"><span class="car-check">\u2713</span><div class="car-mod">'+esc(v.model||'Pojazd')+'</div><div class="car-meta">'+esc(v.plate||'')+'</div><div class="car-badges">'+badges+'</div></button>';
+      h+='<button type="button" class="car" data-id="'+esc(v.id)+'" data-seg="'+esc(v.seg||'')+'" data-lbl="'+esc((v.model||'')+(v.plate?' · '+v.plate:''))+'" style="animation-delay:'+(i*0.04)+'s"><span class="car-check">\u2713</span>'+carPhoto(v)+'<div class="car-mod">'+esc(v.model||'Pojazd')+'</div><div class="car-meta">'+esc(v.plate||'')+'</div><div class="car-badges">'+badges+'</div><div class="car-price">'+segRate(v.seg).toLocaleString('pl-PL')+' zł<span> / doba</span></div></button>';
     }
     el('carsBox').innerHTML='<div class="cars-grid">'+h+'</div>';
   }
   el('carsBox').addEventListener('click',function(e){var b=e.target.closest('.car');if(!b)return;
     var cars=el('carsBox').querySelectorAll('.car');for(var i=0;i<cars.length;i++)cars[i].classList.remove('sel');
-    b.classList.add('sel');sel.carId=b.getAttribute('data-id');sel.carLabel=b.getAttribute('data-lbl');sel.proceedNoCar=false;hideWarn();
+    b.classList.add('sel');sel.carId=b.getAttribute('data-id');sel.carLabel=b.getAttribute('data-lbl');sel.carSeg=b.getAttribute('data-seg');sel.proceedNoCar=false;hideWarn();
   });
+
+  // ----- wyjazd / kaucja -----
+  (function(){var o='';for(var k in KAUCJE_ZAGRANICA)o+='<option value="'+esc(k)+'">'+esc(k)+'</option>';el('r-kraj').innerHTML=o;})();
+  function updateKaucja(){
+    var dep;
+    if(sel.zagranica){sel.kraj=val('r-kraj');dep=KAUCJE_ZAGRANICA[sel.kraj]||KAUCJA_KRAJOWA;}
+    else{sel.kraj='';dep=KAUCJA_KRAJOWA;}
+    sel.kaucja=dep;
+    el('kaucjaBox').innerHTML='<div class="kaucja-amt">Kaucja zwrotna: <b>'+dep.toLocaleString('pl-PL')+' zł</b></div><div class="kaucja-sub">'+(sel.zagranica?('Wyjazd do: '+esc(sel.kraj||'—')+'. Kaucję pobieramy przy odbiorze i zwracamy po oddaniu auta.'):'Wyjazd krajowy — standardowa kaucja zwrotna, oddawana po zwrocie auta.')+'</div>';
+  }
+  el('tripToggle').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;sel.zagranica=b.getAttribute('data-z')==='1';var bs=el('tripToggle').querySelectorAll('button');for(var i=0;i<bs.length;i++)bs[i].classList.toggle('on',bs[i]===b);el('krajWrap').style.display=sel.zagranica?'block':'none';updateKaucja();});
+  el('r-kraj').addEventListener('change',updateKaucja);
 
   // ----- typ toggle -----
   el('typToggle').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
@@ -460,17 +516,32 @@
     if(n===3){if(!clientName()){warn(sel.typ==='firma'?'Podaj nazwę firmy.':'Podaj imię i nazwisko.');return false;}var ph=nipDigits(val('r-phone'));if(ph.length<7){warn('Podaj poprawny numer telefonu.');return false;}return true;}
     return true;
   }
+  function priceSeg(){return sel.carSeg||sel.segCode||'';}
   function renderSum(){
+    var pr=calcPrice(priceSeg());
+    var ph='';
+    ph+='<div class="wz-sum-row"><span class="wz-sum-k">Termin</span><span class="wz-sum-v">'+fmtDate(calFrom)+' → '+fmtDate(calTo)+'</span></div>';
+    ph+='<div class="wz-sum-row"><span class="wz-sum-k">Długość najmu</span><span class="wz-sum-v">'+durTxt()+'</span></div>';
+    if(pr){
+      ph+='<div class="wz-sum-row"><span class="wz-sum-k">Stawka</span><span class="wz-sum-v">'+pr.rate.toLocaleString('pl-PL')+' zł / doba</span></div>';
+      if(pr.disc>0)ph+='<div class="wz-sum-row"><span class="wz-sum-k">Rabat za długi najem</span><span class="wz-sum-v">−'+pr.disc+'%</span></div>';
+      ph+='<div class="wz-sum-row"><span class="wz-sum-k">Cena najmu</span><span class="wz-sum-v">'+pr.total.toLocaleString('pl-PL')+' zł</span></div>';
+    }else{
+      ph+='<div class="wz-sum-row"><span class="wz-sum-k">Cena najmu</span><span class="wz-sum-v">ustalimy indywidualnie</span></div>';
+    }
+    ph+='<div class="wz-sum-row"><span class="wz-sum-k">Kaucja zwrotna'+(sel.zagranica&&sel.kraj?' ('+esc(sel.kraj)+')':'')+'</span><span class="wz-sum-v">'+sel.kaucja.toLocaleString('pl-PL')+' zł</span></div>';
+    if(pr)ph+='<div class="wz-sum-row sp-total"><span class="wz-sum-k">Przy odbiorze razem</span><span class="wz-sum-v">'+(pr.total+sel.kaucja).toLocaleString('pl-PL')+' zł</span></div>';
+    el('wzSumPrice').innerHTML=ph;
     var rows=[
       ['Pojazd',sel.carLabel||sel.seg||'—'],
-      ['Termin',fmtDate(calFrom)+'  →  '+fmtDate(calTo)],
-      ['Długość',durTxt()],
+      ['Wyjazd',sel.zagranica?('Zagraniczny'+(sel.kraj?' · '+sel.kraj:'')):'Krajowy (Polska)'],
       ['Typ klienta',sel.typ==='firma'?'Firma':'Osoba prywatna'],
       [sel.typ==='firma'?'Nazwa firmy':'Imię i nazwisko',clientName()||'—'],
       ['Telefon',val('r-phone').trim()||'—']
     ];
     if(sel.typ==='firma'&&val('r-nip').trim())rows.push(['NIP',val('r-nip').trim()]);
     if(sel.typ==='ind'&&val('r-pesel').trim())rows.push(['PESEL',val('r-pesel').trim()]);
+    if(sel.typ==='ind'&&val('r-prawo').trim())rows.push(['Nr prawa jazdy',val('r-prawo').trim()]);
     if(val('r-email').trim())rows.push(['E-mail',val('r-email').trim()]);
     var adr=[val('r-adres').trim(),((val('r-kod').trim()+' '+val('r-miasto').trim()).trim())].filter(Boolean).join(', ');
     if(adr)rows.push(['Adres',adr]);
@@ -485,9 +556,11 @@
 
   function submit(){
     sending=true;var btn=el('wzNext');btn.disabled=true;btn.innerHTML='<span class="wz-spin"></span> Wysyłam…';
+    var pr=calcPrice(priceSeg());
     var data={
       vehicleId:sel.carId||'',segWanted:sel.carLabel?(sel.seg+' — '+sel.carLabel):sel.seg,
       from:calFrom,to:calTo,typ:sel.typ,
+      zagranica:sel.zagranica,kraj:sel.kraj,kaucja:sel.kaucja,price:pr?pr.total:'',rabat:pr?pr.disc:'',
       name:clientName(),phone:val('r-phone').trim(),email:val('r-email').trim(),
       pesel:sel.typ==='ind'?val('r-pesel').trim():'',nip:sel.typ==='firma'?val('r-nip').trim():'',
       prawojazdy:sel.typ==='ind'?val('r-prawo').trim():'',dowod:sel.typ==='ind'?val('r-dowod').trim():'',
@@ -501,11 +574,14 @@
   }
 
   el('wzReset').addEventListener('click',function(){
-    sel={seg:'',segCode:'',carId:'',carLabel:'',typ:'ind',proceedNoCar:false};maxStep=1;calFrom=null;calTo=null;
+    sel={seg:'',segCode:'',carId:'',carLabel:'',carSeg:'',typ:'ind',proceedNoCar:false,zagranica:false,kraj:'',kaucja:1000};maxStep=1;calFrom=null;calTo=null;
     ['r-name','r-pesel','r-prawo','r-dowod','r-firma','r-nip','r-phone','r-email','r-adres','r-kod','r-miasto','r-msg'].forEach(function(id){var e=el(id);if(e)e.value='';});
     el('nipStatus').textContent='';el('nipStatus').className='nip-status';
     var cards=el('wzVeh').querySelectorAll('.wz-veh');for(var i=0;i<cards.length;i++)cards[i].classList.remove('sel');
-    el('carsSec').style.display='none';calRender();calRangeTxt();
+    el('carsSec').style.display='none';el('tripSec').style.display='none';
+    var tt=el('tripToggle').querySelectorAll('button');for(var z=0;z<tt.length;z++)tt[z].classList.toggle('on',tt[z].getAttribute('data-z')==='0');
+    el('krajWrap').style.display='none';if(el('r-kraj').options.length)el('r-kraj').selectedIndex=0;
+    calRender();calRangeTxt();
     var tb=el('typToggle').querySelectorAll('button');for(var k=0;k<tb.length;k++)tb[k].classList.toggle('on',tb[k].getAttribute('data-typ')==='ind');
     var grps=document.querySelectorAll('.typ-grp');for(var m=0;m<grps.length;m++)grps[m].classList.toggle('on',grps[m].getAttribute('data-grp')==='ind');
     el('wzOk').classList.remove('show');el('wzBody').style.display='';document.querySelector('.wz-nav').style.display='';el('wzSteps').parentNode.style.display='';setStep(1);
