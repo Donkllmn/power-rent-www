@@ -460,6 +460,26 @@
     b.classList.add('sel');var c=CATS[+b.getAttribute('data-i')];sel.seg=c.seg;sel.segCode=c.sc;hideWarn();
   });
 
+  // ----- pre-wybór segmentu z adresu (?seg=KOD) — wejście z podstrony auta -----
+  (function(){
+    try{
+      var qs=new URLSearchParams(location.search);
+      var want=(qs.get('seg')||'').trim();
+      if(!want)return;
+      var idx=-1;for(var i=0;i<CATS.length;i++){if(CATS[i].sc===want){idx=i;break;}}
+      if(idx<0)return;
+      var btn=el('wzVeh').querySelector('.wz-veh[data-i="'+idx+'"]');
+      if(!btn)return;
+      var cards=el('wzVeh').querySelectorAll('.wz-veh');for(var j=0;j<cards.length;j++)cards[j].classList.remove('sel');
+      btn.classList.add('sel');sel.seg=CATS[idx].seg;sel.segCode=CATS[idx].sc;
+      if(typeof hideWarn==='function')hideWarn();
+      setTimeout(function(){
+        try{btn.scrollIntoView({behavior:'smooth',block:'center'});}catch(e){}
+        if(typeof miniToast==='function')miniToast('Zaznaczyłem segment: '+CATS[idx].t);
+      },200);
+    }catch(e){}
+  })();
+
   // ----- calendar -----
   (function(){var t=new Date();calY=t.getFullYear();calM=t.getMonth();})();
   (function(){var o='';for(var hh=6;hh<=22;hh++){for(var mm=0;mm<60;mm+=30){var v=(hh<10?'0'+hh:hh)+':'+(mm===0?'00':'30');o+='<option value="'+v+'"'+(v==='08:00'?' selected':'')+'>'+v+'</option>';}}el('r-hOd').innerHTML=o;el('r-hDo').innerHTML=o;})();

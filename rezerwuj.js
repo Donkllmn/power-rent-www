@@ -1,16 +1,18 @@
 /* =====================================================================
-   Power Rent — przyciski rezerwacji (telefon + online) na KAŻDEJ stronie.
+   Power Rent — rezerwacja na KAŻDEJ stronie (navbar + treść).
    ---------------------------------------------------------------------
-   JAK UŻYĆ:
-   1) Wgraj ten plik do katalogu strony (tam gdzie oferta.html, cennik-foto.html itd.).
-   2) Na KAŻDEJ podstronie (oferta, cennik-foto, o-nas, uslugi, index ORAZ wszystkie
-      auto-*.html) dodaj tuż przed </body>:
-         <script src="rezerwuj.js" defer></script>
-   3) (Opcjonalnie) Tam, gdzie chcesz przyciski DOKŁADNIE w treści (np. pod ceną auta),
-      wstaw pusty znacznik:
-         <div id="rezerwuj-cta"></div>
-      Jeśli go nie wstawisz, skrypt sam dołoży ładną sekcję przed stopką.
+   CO ROBI:
+   1) Naprawia przycisk w NAVBARZE na każdej podstronie → "Rezerwuj online"
+      kierujący do kreatora (rezerwacje.html). Działa na index, oferta,
+      cennik, o-nas, uslugi ORAZ wszystkich auto-*.html.
+   2) Na podstronie KONKRETNEGO auta dokleja do wszystkich linków rezerwacji
+      ?seg=KOD — kreator otwiera się z już zaznaczonym segmentem.
+   3) Dokłada w treści (przed stopką) sekcję "Rezerwuj online / telefonicznie"
+      + przyklejony pasek na telefonie.
    ---------------------------------------------------------------------
+   JAK UŻYĆ: na każdej podstronie tuż przed </body>:
+        <script src="rezerwuj.js" defer></script>
+   (Opcjonalnie miejsce w treści: <div id="rezerwuj-cta"></div>.)
    Zmiana numeru / adresu kreatora — patrz CFG poniżej.
    ===================================================================== */
 (function () {
@@ -19,20 +21,44 @@
     phoneTel: '+48664201202',         // numer do dzwonienia (tel:)
     bookUrl: 'rezerwacje.html',       // adres kreatora rezerwacji online
     sticky: true,                     // przyklejony pasek na dole (telefon)
-    fallback: true                    // dołóż sekcję przed stopką, gdy brak <div id="rezerwuj-cta">
+    fallback: true,                   // dołóż sekcję przed stopką, gdy brak <div id="rezerwuj-cta">
+    fixNav: true                      // popraw przycisk w navbarze
   };
   if (window.__przLoaded) return;
   window.__przLoaded = true;
+
+  /* slug podstrony auta -> KOD segmentu w kreatorze (S,M,L,L+,XL,BUS,LAW,CHŁ,OSO) */
+  var SLUG_SEG = {
+    'auto-mikrobus':'S','auto-kangoo':'S',
+    'auto-male':'M','auto-vivaro':'M',
+    'auto-proace':'L',
+    'auto-przedluzane':'L+',
+    'auto-najwieksze':'XL','auto-kontener':'XL','auto-iveco35':'XL',
+    'auto-daily-maxi':'XL','auto-boxer':'XL','auto-proace-bryg':'XL','auto-proace-max':'XL',
+    'auto-chlodnia':'CHŁ',
+    'auto-laweta':'LAW',
+    'auto-bus':'BUS',
+    'auto-sedan':'OSO','auto-suv':'OSO'
+  };
+
+  function currentSeg() {
+    var slug = (location.pathname.split('/').pop() || '').replace(/\.html?$/i, '').toLowerCase();
+    return SLUG_SEG[slug] || '';
+  }
+  var SEG = currentSeg();
+  function bookHref() {
+    return CFG.bookUrl + (SEG ? '?seg=' + encodeURIComponent(SEG) : '');
+  }
 
   var ICON_CAL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4M8.5 14l2.5 2.5 4.5-5"/></svg>';
   var ICON_TEL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2"/></svg>';
 
   function pairHtml() {
-    return '<a class="prz-btn prz-online" href="' + CFG.bookUrl + '">' + ICON_CAL + '<span>Zarezerwuj online</span></a>' +
+    return '<a class="prz-btn prz-online" href="' + bookHref() + '">' + ICON_CAL + '<span>Zarezerwuj online</span></a>' +
            '<a class="prz-btn prz-call" href="tel:' + CFG.phoneTel + '">' + ICON_TEL + '<span>Zarezerwuj telefonicznie · ' + CFG.phoneDisplay + '</span></a>';
   }
   function barHtml() {
-    return '<a class="prz-btn prz-online" href="' + CFG.bookUrl + '">' + ICON_CAL + '<span>Rezerwuj online</span></a>' +
+    return '<a class="prz-btn prz-online" href="' + bookHref() + '">' + ICON_CAL + '<span>Rezerwuj online</span></a>' +
            '<a class="prz-btn prz-call" href="tel:' + CFG.phoneTel + '">' + ICON_TEL + '<span>Zadzwoń</span></a>';
   }
 
@@ -67,8 +93,71 @@
     document.head.appendChild(s);
   }
 
+  /* ---- NAVBAR: znajdź przycisk rezerwacji w nagłówku i ustaw "Rezerwuj online" ---- */
+  function fixNav() {
+    if (!CFG.fixNav) return;
+    var heads = document.querySelectorAll('header, nav, .hd, .site-header, .navbar');
+    var seen = [], found = false;
+    Array.prototype.forEach.call(heads, function (h) {
+      if (h.closest && h.closest('footer')) return;
+      var links = h.querySelectorAll('a');
+      Array.prototype.forEach.call(links, function (a) {
+        if (seen.indexOf(a) !== -1) return;
+        var t = (a.textContent || '').trim();
+        var href = (a.getAttribute('href') || '');
+        var looksLikeBook = /rezerw/i.test(t) ||
+                            /rezerwacje\.html/i.test(href) ||
+                            (/#rezerwacj/i.test(href) && /rezerw/i.test(t));
+        // pomiń telefon
+        if (/tel:/i.test(href) || /\d{3}\s?\d{3}\s?\d{3}/.test(t)) return;
+        if (!looksLikeBook) return;
+        seen.push(a);
+        a.setAttribute('href', bookHref());
+        // nie kasuj ikon — ustaw tekst tylko gdy nie ma elementów-dzieci
+        if (!a.querySelector('*')) a.textContent = 'Rezerwuj online';
+        a.setAttribute('data-prz-nav', '1');
+        found = true;
+      });
+    });
+    // awaryjnie: gdy w nagłówku nie ma żadnego przycisku rezerwacji — dołóż
+    if (!found) {
+      var host = document.querySelector('.nav-actions') ||
+                 document.querySelector('header .wrap') ||
+                 document.querySelector('header');
+      if (host) {
+        var a = document.createElement('a');
+        a.className = 'btn btn-red prz-nav-add';
+        a.setAttribute('href', bookHref());
+        a.setAttribute('data-prz-nav', '1');
+        a.textContent = 'Rezerwuj online';
+        a.style.cssText = 'display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:11px;background:var(--grad-red,linear-gradient(135deg,#E11D2A,#C20E1B));color:#fff;font-weight:800;text-decoration:none;margin-left:auto';
+        host.appendChild(a);
+      }
+    }
+  }
+
+  /* ---- dołóż "Rezerwuj online" obok istniejących przycisków "Zadzwoń i zarezerwuj" ---- */
+  function upgradePhoneCTAs() {
+    var cands = document.querySelectorAll('a[href^="tel:"]');
+    Array.prototype.forEach.call(cands, function (a) {
+      var t = (a.textContent || '').toLowerCase();
+      if (!/zarezerwuj|rezerwacj/.test(t)) return;                 // tylko CTA mówiące o rezerwacji
+      if (a.closest('.prz-bar') || a.closest('.prz-band') || a.closest('.prz-cta')) return; // pomiń nasze
+      var p = a.parentNode; if (!p) return;
+      if (p.querySelector('[data-prz-inline]')) return;            // już dołożone
+      var on = document.createElement('a');
+      on.setAttribute('href', bookHref());
+      on.setAttribute('data-prz-inline', '1');
+      on.className = a.className;                                   // dziedzicz wygląd istniejącego przycisku
+      on.textContent = 'Rezerwuj online';
+      p.insertBefore(on, a);                                       // "online" jako pierwszy
+    });
+  }
+
   function run() {
     injectCSS();
+    fixNav();
+    upgradePhoneCTAs();
 
     // 1) miejsca wskazane ręcznie w treści
     var slots = document.querySelectorAll('#rezerwuj-cta,.rezerwuj-cta,[data-rezerwuj]');
