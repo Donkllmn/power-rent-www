@@ -722,7 +722,7 @@ window.PR_AVAILABILITY = {
 <body class="v4">
 <div class="scroll-prog" aria-hidden="true"><i></i></div>
 <div id="pr-loader"><div class="pl-logo"></div><div class="pl-bar"><i></i></div><div class="pl-txt">Power Rent</div></div>
-<header class="ph-header"><div class="wrap hd"><a href="index.html" class="hd-logo" aria-label="PowerRent"><span class="hd-logo-img"></span></a><nav class="hd-nav" id="cmenu"><a href="o-nas.html">O nas</a><a href="oferta.html">Oferta</a><a href="uslugi.html">Usługi</a><a href="cennik-foto.html" class="on">Cennik</a><a href="index.html#kontakt">Kontakt</a></nav><div class="hd-right"><a href="tel:664201202" class="hd-phone">664 201 202</a><a href="#rezerwacja" class="btn btn-red" data-magnetic="0.2">Rezerwacja</a><button class="hd-burger" id="cburger" aria-label="Menu"><span></span><span></span><span></span></button></div></div></header>
+<header class="ph-header"><div class="wrap hd"><a href="index.html" class="hd-logo" aria-label="PowerRent"><span class="hd-logo-img"></span></a><nav class="hd-nav" id="cmenu"><a href="o-nas.html">O nas</a><a href="oferta.html">Oferta</a><a href="uslugi.html">Usługi</a><a href="cennik-foto.html" class="on">Cennik</a><a href="index.html#kontakt">Kontakt</a></nav><div class="hd-right"><a href="tel:664201202" class="hd-phone">664 201 202</a><a href="rezerwacje.html" class="btn btn-red" data-magnetic="0.2">Rezerwuj online</a><button class="hd-burger" id="cburger" aria-label="Menu"><span></span><span></span><span></span></button></div></div></header>
 
 <section class="cz-head">
   <div class="cz-glow" aria-hidden="true"></div>
@@ -1201,8 +1201,8 @@ var PR_AVA='<img class="pava-img" src="https://d8j0ntlcm91z4.cloudfront.net/user
           +'<div class="ares-ft"><div class="ares-pr"><span class="ares-calc">'+doby+' '+dobaWord(doby)+' × '+v.d+' zł</span><span class="ares-total">od '+zl(tot)+' zł</span><span class="ares-kauc">+ kaucja 1000 zł (zwrotna)</span></div><span class="ares-go">Rezerwuj →</span></div></div></a>';
       }).join('');
       var head='<div class="ares-top"><div><span class="ares-eyebrow">Wolne auta · '+doby+' '+dobaWord(doby)+'</span><h3>'+list.length+' '+plform(list.length)+' w terminie '+fmt(fromISO(f))+' – '+fmt(fromISO(t))+'</h3></div>'
-        +'<a class="btn btn-a" href="tel:+48664201202">Zadzwoń i zarezerwuj</a></div>';
-      var note='<div class="ares-note">Cena orientacyjna = liczba dób × stawka dobowa (do 500 km/doba). Kaucja zwrotna <b>1000 zł</b> na terenie Polski. Realną dostępność i ostateczną cenę potwierdzamy telefonicznie — wkrótce rezerwacja online.</div>';
+        +'<a class="btn btn-red" href="rezerwacje.html" style="margin-right:8px">Zarezerwuj online</a><a class="btn btn-a" href="tel:+48664201202">Zadzwoń: 664 201 202</a></div>';
+      var note='<div class="ares-note">Cena orientacyjna = liczba dób × stawka dobowa (do 500 km/doba). Kaucja zwrotna <b>1000 zł</b> na terenie Polski. Realną dostępność i ostateczną cenę potwierdzamy telefonicznie — możesz też zarezerwować online.</div>';
       var res=document.getElementById('availResults');
       res.innerHTML=head+'<div class="ares-grid">'+cards+'</div>'+note;res.hidden=false;
       if(scroll!==false)res.scrollIntoView({behavior:'smooth',block:'nearest'});
@@ -1262,5 +1262,6 @@ var PR_AVA='<img class="pava-img" src="https://d8j0ntlcm91z4.cloudfront.net/user
 
 </script>
 <script>(function(){var b=document.getElementById("cburger"),m=document.getElementById("cmenu");if(b&&m){b.addEventListener("click",function(){m.classList.toggle("open")});m.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){m.classList.remove("open")})});}})();</script>
+<script src="rezerwuj.js" defer></script>
 </body>
 </html>
