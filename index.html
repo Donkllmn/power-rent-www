@@ -727,7 +727,7 @@ footer .fcon{font-size:14.5px;line-height:1.7}footer .fcon a{color:#cbd2dc}foote
     <a href="tel:+48664201202" class="hphone"><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2'/></svg>664 201 202</a>
     <a href="#kontakt" class="btn btn-a" style="padding:11px 18px">Rezerwuj</a>
     <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
-  </div></div></header><main id="top"><section class="hero hero-showcase"><div class="grid-tex"></div><div class="glow"></div>
+  </div></div></header><main id="top"><section class="hero hero-showcase"><div class="grid-tex"></div><div class="glow"></div><div class="hero-skyline"><svg viewBox='0 0 700 260' preserveAspectRatio='xMinYMax slice' xmlns='http://www.w3.org/2000/svg'><g fill='#5d646e'><rect x='44' y='72' width='30' height='188'/><polygon points='44,72 59,26 74,72'/><rect x='95' y='118' width='20' height='142'/><polygon points='95,118 105,96 115,118'/><rect x='126' y='150' width='38' height='110'/><rect x='168' y='112' width='32' height='148'/><rect x='205' y='162' width='44' height='98'/><rect x='254' y='96' width='28' height='164'/><rect x='288' y='142' width='42' height='118'/><rect x='335' y='122' width='34' height='138'/><rect x='374' y='168' width='48' height='92'/><rect x='427' y='132' width='32' height='128'/><rect x='464' y='150' width='42' height='110'/><rect x='511' y='102' width='28' height='158'/><rect x='544' y='156' width='46' height='104'/><rect x='595' y='136' width='32' height='124'/><rect x='632' y='160' width='44' height='100'/></g><g fill='#474e57'><rect x='52' y='96' width='12' height='20' rx='6'/><rect x='176' y='126' width='5' height='8'/><rect x='186' y='126' width='5' height='8'/><rect x='262' y='110' width='5' height='8'/><rect x='262' y='128' width='5' height='8'/><rect x='344' y='136' width='5' height='8'/><rect x='519' y='116' width='5' height='8'/><rect x='519' y='134' width='5' height='8'/></g></svg></div><div class="hero-streaks"><i style="bottom:13%;left:1%;width:62%;background:linear-gradient(90deg,transparent,rgba(227,18,26,.5),rgba(227,18,26,.15),transparent);box-shadow:0 0 13px rgba(227,18,26,.4);transform:rotate(-4deg)"></i><i style="bottom:23%;left:9%;width:46%;background:linear-gradient(90deg,transparent,rgba(255,86,76,.42),transparent);box-shadow:0 0 11px rgba(227,18,26,.32);transform:rotate(-7deg)"></i><i style="bottom:5%;left:0;width:50%;background:linear-gradient(90deg,rgba(227,18,26,.32),transparent);box-shadow:0 0 15px rgba(227,18,26,.32);transform:rotate(2deg)"></i></div><div class="hero-right"><div class="hr-mesh"></div><div class="hr-dots"></div><div class="hr-beam" style="right:5%"></div><div class="hr-beam" style="right:17%;opacity:.65"></div><div class="hr-beam" style="right:29%;opacity:.45"></div></div>
   <div class="wrap"><div class="hgrid">
     <div><span class="heyebrow"><span class="dot"></span>Radom · ul. Mokra 2A, 26-600 Radom · ponad 10 lat na rynku</span>
       <h1>Wynajem busów i&nbsp;aut <span class="hl">dostawczych</span> w&nbsp;Radomiu</h1>
@@ -1048,5 +1048,16 @@ html{scroll-behavior:smooth}
 @keyframes hphoneRing{0%,100%{transform:rotate(0)}15%{transform:rotate(-15deg)}30%{transform:rotate(12deg)}45%{transform:rotate(-9deg)}60%{transform:rotate(6deg)}75%{transform:rotate(-3deg)}}
 @keyframes hphonePulse{0%,100%{box-shadow:0 0 0 0 rgba(227,18,26,0)}50%{box-shadow:0 0 0 4px rgba(227,18,26,.10)}}
 @media (prefers-reduced-motion:reduce){.qcta-online,.fbrag-num b,.wow-head{animation:none}}
+</style>
+
+<style id="pr-hero-bg">
+.hero-skyline{position:absolute;left:-1%;bottom:0;width:52%;height:82%;z-index:0;pointer-events:none;opacity:.11;-webkit-mask-image:linear-gradient(to top,#000 35%,transparent 96%);mask-image:linear-gradient(to top,#000 35%,transparent 96%)}
+.hero-skyline svg{position:absolute;left:0;bottom:0;width:100%;height:100%}
+.hero-streaks{position:absolute;left:0;bottom:0;width:48%;height:46%;z-index:0;pointer-events:none}
+.hero-streaks i{position:absolute;height:3px;border-radius:4px;filter:blur(2.5px);transform-origin:left center}
+.hero-right{position:absolute;right:0;top:0;width:48%;height:100%;z-index:0;pointer-events:none;overflow:hidden}
+.hr-mesh{position:absolute;inset:0;background:radial-gradient(80% 120% at 120% 42%,rgba(227,18,26,.26),rgba(227,18,26,.07) 36%,transparent 62%)}
+.hr-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(227,18,26,.5) 1.1px,transparent 1.7px);background-size:14px 14px;-webkit-mask-image:radial-gradient(130% 130% at 128% 44%,#000 0%,#000 22%,transparent 52%);mask-image:radial-gradient(130% 130% at 128% 44%,#000 0%,#000 22%,transparent 52%);opacity:.85}
+.hr-beam{position:absolute;top:-15%;height:130%;width:130px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);filter:blur(16px);transform:rotate(20deg)}
 </style>
 </body></html>
