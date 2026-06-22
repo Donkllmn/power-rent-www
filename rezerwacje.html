@@ -207,24 +207,48 @@
 .wz-spin,.cars-spin{width:17px;height:17px;border:2px solid rgba(225,29,42,.25);border-top-color:var(--red);border-radius:50%;display:inline-block;animation:wzSpin .7s linear infinite;vertical-align:-3px}
 .wz-spin{border-color:rgba(255,255,255,.4);border-top-color:#fff}
 @keyframes wzSpin{to{transform:rotate(360deg)}}
+
+/* ===================== NAVBAR — identyczny jak na stronie głównej ===================== */
+#hdr{position:sticky;top:0;z-index:90;background:transparent;padding-top:14px;transition:padding .3s;--accent:#e3121a;--on-accent:#fff;--accent-glow:0 10px 24px -8px rgba(227,18,26,.5);--logo:#0e1014;--nav-tx:#39414f;--ink:#0e1014;--fd:'Space Grotesk',system-ui,sans-serif}
+#hdr .nav{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;height:62px;max-width:1180px;margin:0 auto;padding:0 14px 0 22px;border-radius:20px;background:rgba(255,255,255,.52);-webkit-backdrop-filter:blur(22px) saturate(185%);backdrop-filter:blur(22px) saturate(185%);border:1px solid rgba(255,255,255,.62);box-shadow:0 14px 40px -14px rgba(13,16,22,.28),0 1px 0 inset rgba(255,255,255,.9);transition:height .3s,background .3s,box-shadow .3s}
+#hdr.scrolled .nav{height:54px;background:rgba(255,255,255,.74);box-shadow:0 16px 44px -14px rgba(13,16,22,.34),0 1px 0 inset rgba(255,255,255,.95)}
+#hdr .logo{font-family:var(--fd);font-weight:800;font-size:23px;letter-spacing:-.03em;display:flex;align-items:center;gap:0;color:var(--logo);text-decoration:none}
+#hdr .logo-img{height:26px;width:auto;display:block;transition:height .3s}
+#hdr.scrolled .logo-img{height:23px}
+#hdr .nlinks{display:flex;align-items:center;gap:3px;font-weight:500;font-size:15px}
+#hdr .nlinks a{color:var(--nav-tx);position:relative;z-index:1;padding:9px 14px;border-radius:11px;text-decoration:none;transition:color .22s,transform .28s cubic-bezier(.2,1.2,.4,1)}
+#hdr .nlinks a::before{content:"";position:absolute;inset:0;border-radius:inherit;background:rgba(227,18,26,.1);opacity:0;transform:scale(.78);transition:opacity .25s,transform .42s cubic-bezier(.2,1.35,.4,1);z-index:-1}
+#hdr .nlinks a:hover{color:var(--accent);transform:translateY(-2px)}
+#hdr .nlinks a:hover::before{opacity:1;transform:scale(1)}
+#hdr .nlinks a.on{color:var(--accent)}
+#hdr .nlinks a.on::before{opacity:1;transform:scale(1)}
+#hdr .nright{display:flex;align-items:center;gap:11px}
+#hdr .hphone{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;color:var(--logo);white-space:nowrap;text-decoration:none}
+#hdr .hphone svg{width:17px;height:17px;stroke:var(--accent)}
+#hdr .btn-a{background:var(--accent);color:var(--on-accent);box-shadow:var(--accent-glow);border:0;border-radius:12px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;transition:transform .25s,filter .25s}
+#hdr .btn-a:hover{transform:translateY(-2px);filter:brightness(1.05)}
+#hdr .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
+#hdr .burger span{width:24px;height:2.4px;background:var(--logo);border-radius:2px;transition:.25s}
+@media(max-width:680px){#hdr .nlinks,#hdr .hphone{display:none}#hdr .burger{display:flex}#hdr .nlinks.open{display:flex;position:absolute;top:calc(100% + 8px);left:0;right:0;flex-direction:column;align-items:stretch;gap:3px;padding:12px;border-radius:18px;background:rgba(255,255,255,.95);-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);border:1px solid rgba(255,255,255,.6);box-shadow:0 22px 50px -16px rgba(13,16,22,.32)}#hdr .nlinks.open a{padding:12px 14px;width:100%;color:var(--ink);font-size:16px;border-radius:11px}}
 </style>
 </head>
 <body>
 
-<header class="site-header">
+<header id="hdr">
   <div class="wrap nav">
-    <a href="index.html" class="logo" aria-label="Power Rent — strona główna"><span class="logo-badge">P</span><span class="logo-text"><span class="lr">Power</span><span class="lk">Rent</span></span></a>
-    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
-    <nav class="nav-links" id="navLinks">
+    <a href="index.html" class="logo" aria-label="Power Rent — strona główna"><img class="logo-img" src="https://power-rent-www.vercel.app/powerrent-logo.png" alt="PowerRent"></a>
+    <nav class="nlinks" id="rmenu">
       <a href="o-nas.html">O nas</a>
-      <a href="oferta.html">Nasza oferta</a>
-      <a href="uslugi.html">Usługi dodatkowe</a>
-      <a href="faq.html">FAQ</a>
-      <a href="cennik.html">Cennik</a>
-      <a href="kontakt.html">Kontakt</a>
-      <a href="rezerwacje.html" class="nav-cta btn btn-red active" style="padding:9px 16px;font-size:14px">Rezerwacja</a>
+      <a href="oferta.html">Oferta</a>
+      <a href="uslugi.html">Usługi</a>
+      <a href="cennik-foto.html">Cennik</a>
+      <a href="index.html#kontakt">Kontakt</a>
     </nav>
-    <div class="nav-actions"><a href="tel:664201202" class="nav-phone"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .7-.2 1l-2.3 2.2Z"/></svg>664 201 202</a></div>
+    <div class="nright">
+      <a href="tel:+48664201202" class="hphone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2"></path></svg>664 201 202</a>
+      <a href="rezerwacje.html" class="btn btn-a" style="padding:11px 18px">Rezerwuj</a>
+      <button class="burger" id="rburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
   </div>
 </header>
 
@@ -374,6 +398,13 @@
 </footer>
 
 <script src="script.js" defer></script>
+<script>
+/* Navbar — burger + scroll jak na stronie głównej (osobne id, nie koliduje ze script.js) */
+(function(){var hdr=document.getElementById('hdr'),b=document.getElementById('rburger'),m=document.getElementById('rmenu');
+ if(b&&m){b.addEventListener('click',function(){m.classList.toggle('open');});m.addEventListener('click',function(e){if(e.target&&e.target.closest('a'))m.classList.remove('open');});}
+ if(hdr){var f=function(){hdr.classList.toggle('scrolled',(window.pageYOffset||document.documentElement.scrollTop||0)>8);};window.addEventListener('scroll',f,{passive:true});f();}
+})();
+</script>
 <script>
 (function(){
   var SB_URL='https://egqcbwbzlkctydlklnjj.supabase.co';
