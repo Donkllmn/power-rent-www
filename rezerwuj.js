@@ -245,7 +245,7 @@
       if(/godzin|otwar|czynne|robocz/.test(s)) return 'Najszybciej złapiesz nas telefonicznie: <a href="tel:+48664201202">664 201 202</a>. Wydanie auta nawet w 10 minut, formalności do minimum.';
       if(/dzi[ęe]k|spoko|^ok$|super|dobra|pasuje/.test(s)) return 'Jasne! Gdyby coś jeszcze — jestem tutaj. A najszybciej: <a href="tel:+48664201202">664 201 202</a>. 🚐';
       if(/cze[śs][ćc]|hej|witam|dzie[ńn] dobry|siema|hello|^hi$/.test(s)) return 'Cześć! 👋 Jestem PowerBot. Pomogę dobrać auto, z cennikiem, dostępnością, pomocą drogową i kontaktem. Co przewozisz albo na kiedy potrzebujesz auta?';
-      return 'Powiedz, co chcesz przewieźć (albo na kiedy potrzebujesz auta), a podpowiem pojazd. Najszybciej i tak potwierdzimy telefonicznie: <a href="tel:+48664201202">664 201 202</a>.|Sprawdź dostępność|Cennik';
+      return 'Przepraszam, nie jestem w stanie odpowiedzieć na wszystkie pytania. Skontaktuj się z naszym biurem pod numerem telefonu: <a href="tel:+48664201202">664 201 202</a>. Chętnie pomożemy.|Sprawdź dostępność|Cennik';
     }
     function persist(){try{sessionStorage.setItem('pbot_open',pbot.classList.contains('open')?'1':'0');sessionStorage.setItem('pbot_convo',JSON.stringify(convo.slice(-20)));}catch(e){}}
     function fallback(t){var c=reply(t),parts=c.split('|');addBot(parts[0]);if(parts.length>1)addActs(parts.slice(1));convo.push({role:'assistant',content:strip(parts[0])});persist();}
