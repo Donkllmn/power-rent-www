@@ -832,6 +832,15 @@ if(ftabs){ftabs.addEventListener('click',ev=>{const b=ev.target.closest('.ftab')
 if(matchMedia('(hover:hover) and (pointer:fine)').matches){document.querySelectorAll('.vcard').forEach(function(c){c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.classList.add('vtilt');c.style.transform='perspective(950px) rotateX('+(-y*5).toFixed(2)+'deg) rotateY('+(x*5.5).toFixed(2)+'deg) translateY(-10px) scale(1.02)';});c.addEventListener('mouseleave',function(){c.classList.remove('vtilt');c.style.transform='';});});}
 </script><script>var PR_VEH=[{"t": "Mikrobus", "n": "Mikrobus dostawczy", "s": ["705 kg", "2 miejsca", "kat. B"], "p": "200", "per": "doba", "href": "auto-mikrobus.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200336_fd130bf2-48c2-4327-b52d-1a09264d655d.png", "cat": "dostawcze", "d": 200}, {"t": "Średni", "n": "Auto dostawcze", "s": ["1408 kg", "3 miejsca", "L2H1"], "p": "280", "per": "doba", "href": "auto-male.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200347_633102cd-ed81-4cee-99fb-1768be9f65d8.png", "cat": "dostawcze", "d": 280}, {"t": "Największe", "n": "Największy furgon", "s": ["8 europalet", "3 miejsca", "kat. B"], "p": "300", "per": "5 h", "href": "auto-najwieksze.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200412_27c8fc18-e150-471e-b9e5-24476c9c92c6.png", "cat": "dostawcze", "d": 300}, {"t": "Chłodnia", "n": "Chłodnia", "s": ["agregat", "8 europalet", "750 kg"], "p": "350", "per": "5 h", "href": "auto-chlodnia.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200428_833d4bb0-c7df-461a-aedc-fa8f4fbafa9c.png", "cat": "chlodnia", "d": 350}, {"t": "Laweta", "n": "Auto-laweta", "s": ["najazdy", "1115 kg", "przewóz aut"], "p": "250", "per": "5 h", "href": "auto-laweta.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200434_f9dafa51-b7c5-457a-8df1-887dd70fa351.png", "cat": "laweta", "d": 250}, {"t": "9 osób", "n": "Bus 9-osobowy", "s": ["9 miejsc", "automat", "kat. B"], "p": "250", "per": "5 h", "href": "auto-bus.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_085325_633d50e0-0993-4247-b51a-bf7ee8c47eaa.png", "cat": "bus9", "d": 300}, {"t": "Osobowe", "n": "Auto osobowe", "s": ["5 miejsc", "automat", "ekonomiczne"], "p": "200", "per": "5 h", "href": "auto-sedan.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200444_759ee268-7ed4-49cb-b9ef-71d97eb7963f.png", "cat": "osobowe", "d": 200}, {"t": "Winda", "n": "Kontener z windą", "s": ["winda", "8 europalet", "704 kg"], "p": "300", "per": "5 h", "href": "auto-daily-maxi.html", "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_114843_81fbfccd-beb6-4c88-bee8-234f92ab42e0.png", "cat": "dostawcze", "d": 300}];
 var PR_AVA='<img class="pava-img" src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260618_230728_d01bdf65-7455-4623-96cf-573e9246f76f.png" alt="">';
+/* === dostęp do bazy (klucz publiczny anon — RLS chroni dane) === */
+var SB_URL='https://egqcbwbzlkctydlklnjj.supabase.co';
+var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVncWNid2J6bGtjdHlkbGtsbmpqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE5MTA3NzQsImV4cCI6MjA5NzQ4Njc3NH0.k7N0CAR63Qbi9hLG3rkPg51PBbBmPqjKJHAZaaYiAUs';
+var HDR={'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY};
+var CFI='https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/';
+var SEG_RATE={'S':200,'M':280,'L':300,'L+':350,'XL':400,'LAW':380,'BUS':300,'OSO':250,'CHŁ':500};
+var SEG_LBL={'S':'Mikrobus','M':'Auto dostawcze','L':'Dostawczy L','L+':'Dostawczy L+','XL':'Największy furgon','BUS':'Bus 9-osobowy','LAW':'Auto-laweta','OSO':'Auto osobowe','CHŁ':'Chłodnia'};
+var SEG_PHOTO={'S':CFI+'hf_20260617_200336_fd130bf2-48c2-4327-b52d-1a09264d655d.png','M':CFI+'hf_20260617_200347_633102cd-ed81-4cee-99fb-1768be9f65d8.png','L':CFI+'hf_20260617_200412_27c8fc18-e150-471e-b9e5-24476c9c92c6.png','L+':CFI+'hf_20260618_114843_81fbfccd-beb6-4c88-bee8-234f92ab42e0.png','XL':CFI+'hf_20260617_200412_27c8fc18-e150-471e-b9e5-24476c9c92c6.png','BUS':CFI+'hf_20260618_085325_633d50e0-0993-4247-b51a-bf7ee8c47eaa.png','LAW':CFI+'hf_20260617_200434_f9dafa51-b7c5-457a-8df1-887dd70fa351.png','OSO':CFI+'hf_20260617_200444_759ee268-7ed4-49cb-b9ef-71d97eb7963f.png','CHŁ':CFI+'hf_20260617_200428_833d4bb0-c7df-461a-aedc-fa8f4fbafa9c.png'};
+var CAT2SEG={dostawcze:['S','M','L','L+','XL'],chlodnia:['CHŁ'],laweta:['LAW'],bus9:['BUS'],osobowe:['OSO']};
 
 (function(){
   function p2(n){return (n<10?'0':'')+n;}
@@ -880,27 +889,56 @@ var PR_AVA='<img class="pava-img" src="https://d8j0ntlcm91z4.cloudfront.net/user
     calTo=mkCal(toInput,function(){return fromInput.dataset.iso?fromISO(fromInput.dataset.iso):today();},function(){autorun();});
     document.addEventListener('click',function(){closeAll(null);});
     function plform(n){return n===1?'auto':((n%10>=2&&n%10<=4)&&(n%100<10||n%100>=20)?'auta':'aut');}
+    function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+    function carCard(v,doby){
+      var seg=v.seg||'',rate=SEG_RATE[seg]||200,img=v.photo||SEG_PHOTO[seg]||'',tot=doby*rate;
+      return '<a class="ares-card" href="rezerwacje.html"><div class="ares-img">'+(img?'<img src="'+esc(img)+'" alt="'+esc(v.model||SEG_LBL[seg]||'')+'" loading="lazy" onerror="this.style.display=\'none\'">':'')+'<span class="ares-ok"><i></i>Wolne</span></div>'
+        +'<div class="ares-b"><span class="ares-type">'+esc(SEG_LBL[seg]||'Pojazd')+'</span><h4>'+esc(v.model||SEG_LBL[seg]||'Pojazd')+'</h4>'
+        +(v.plate?'<div class="ares-plate">'+esc(v.plate)+'</div>':'')
+        +'<div class="ares-ft"><div class="ares-pr"><span class="ares-calc">'+doby+' '+dobaWord(doby)+' × '+rate+' zł</span><span class="ares-total">od '+zl(tot)+' zł</span><span class="ares-kauc">+ kaucja 1000 zł (zwrotna)</span></div><span class="ares-go">Rezerwuj →</span></div></div></a>';
+    }
+    function renderAvail(all,cat,doby,f,t){
+      var res=document.getElementById('availResults');
+      var segs=CAT2SEG[cat]||null;
+      var main=segs?all.filter(function(c){return segs.indexOf(c.seg)>=0;}):all;
+      var others=segs?all.filter(function(c){return segs.indexOf(c.seg)<0;}):[];
+      var dl=fmt(fromISO(f))+' – '+fmt(fromISO(t)),eye='Dostępność na żywo · '+doby+' '+dobaWord(doby);
+      var html='';
+      if(!all.length){
+        html='<div class="ares-top"><div><span class="ares-eyebrow">'+eye+'</span><h3>Brak wolnych aut w tym terminie</h3><div class="ares-sub">'+dl+'</div></div><a class="btn btn-a" href="tel:+48664201202">Zadzwoń: 664 201 202</a></div>'
+          +'<div class="ares-empty">W podanym terminie nie mamy wolnego pojazdu. Zadzwoń — często coś zwalnia się w międzyczasie albo dobierzemy inny termin: <a href="tel:+48664201202">664 201 202</a>.</div>';
+      }else if(segs&&!main.length){
+        html='<div class="ares-top"><div><span class="ares-eyebrow">'+eye+'</span><h3>Brak wolnego auta z tej sekcji w podanym terminie</h3><div class="ares-sub">'+dl+'</div></div><a class="btn btn-a" href="tel:+48664201202">Zadzwoń: 664 201 202</a></div>'
+          +'<div class="ares-alert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg><span>W wybranej kategorii nie ma teraz wolnego auta — ale zobacz, co innego możemy zaoferować w tym terminie:</span></div>'
+          +'<div class="ares-grid">'+others.map(function(v){return carCard(v,doby);}).join('')+'</div>';
+      }else{
+        var n=main.length;
+        html='<div class="ares-top"><div><span class="ares-eyebrow">'+eye+'</span><h3>'+n+' '+plform(n)+' wolne · '+dl+'</h3></div><a class="btn btn-a" href="tel:+48664201202">Zadzwoń i zarezerwuj</a></div>'
+          +'<div class="ares-grid">'+main.map(function(v){return carCard(v,doby);}).join('')+'</div>';
+        if(others.length)html+='<div class="ares-more-h"><span>👀</span> Inne wolne auta w tym terminie:</div><div class="ares-grid ares-grid-sm">'+others.slice(0,6).map(function(v){return carCard(v,doby);}).join('')+'</div>';
+      }
+      html+='<div class="ares-note">Cena orientacyjna = liczba dób × stawka dobowa (do 500 km/doba). Kaucja zwrotna <b>1000 zł</b> na terenie Polski. Dostępność pobierana na żywo z naszej bazy — ostateczne potwierdzenie telefonicznie: 664 201 202.</div>';
+      res.innerHTML=html;
+    }
+    function renderErr(){
+      var res=document.getElementById('availResults');
+      res.innerHTML='<div class="ares-empty">Nie udało się teraz sprawdzić dostępności. Spróbuj ponownie albo zadzwoń: <a href="tel:+48664201202">664 201 202</a>.<br><button type="button" class="btn btn-o" id="aretry" style="margin-top:12px">Spróbuj ponownie</button></div>';
+      var rb=document.getElementById('aretry');if(rb)rb.addEventListener('click',function(){search(true);});
+    }
     function search(scroll){
       if(!fromInput.dataset.iso)calFrom.set(today());
       if(!toInput.dataset.iso)calTo.set(fromISO(fromInput.dataset.iso));
       var f=fromInput.dataset.iso,t=toInput.dataset.iso;
       if(fromISO(t)<fromISO(f)){calTo.set(fromISO(f));t=fromInput.dataset.iso;}
-      var doby=nights();
-      var cat=qtype.value;
-      var list=PR_VEH.filter(function(v){return cat==='all'||v.cat===cat;});
-      var cards=list.map(function(v){
-        var tot=doby*(+v.d);
-        return '<a class="ares-card" href="'+v.href+'"><div class="ares-img"><img src="'+v.img+'" alt="'+v.n+'" loading="lazy"><span class="ares-ok"><i></i>W ofercie</span></div>'
-          +'<div class="ares-b"><span class="ares-type">'+v.t+'</span><h4>'+v.n+'</h4>'
-          +'<div class="ares-sp">'+v.s.map(function(x){return '<span>'+x+'</span>';}).join('')+'</div>'
-          +'<div class="ares-ft"><div class="ares-pr"><span class="ares-calc">'+doby+' '+dobaWord(doby)+' × '+v.d+' zł</span><span class="ares-total">od '+zl(tot)+' zł</span><span class="ares-kauc">+ kaucja 1000 zł (zwrotna)</span></div><span class="ares-go">Rezerwuj →</span></div></div></a>';
-      }).join('');
-      var head='<div class="ares-top"><div><span class="ares-eyebrow">Dobór aut · '+doby+' '+dobaWord(doby)+'</span><h3>'+list.length+' '+plform(list.length)+' do wyboru · '+fmt(fromISO(f))+' – '+fmt(fromISO(t))+'</h3></div>'
-        +'<a class="btn btn-a" href="tel:+48664201202">Zadzwoń i zarezerwuj</a></div>';
-      var note='<div class="ares-note">Cena orientacyjna = liczba dób × stawka dobowa (do 500 km/doba). Kaucja zwrotna <b>1000 zł</b> na terenie Polski. Realną dostępność i ostateczną cenę potwierdzamy telefonicznie — wkrótce rezerwacja online.</div>';
-      var res=document.getElementById('availResults');
-      res.innerHTML=head+'<div class="ares-grid">'+cards+'</div>'+note;res.hidden=false;
+      var doby=nights(),cat=qtype.value;
+      var res=document.getElementById('availResults');res.hidden=false;
+      res.innerHTML='<div class="ares-load"><span class="ares-spin"></span> Sprawdzam dostępność w naszej bazie…</div>';
       if(scroll!==false)res.scrollIntoView({behavior:'smooth',block:'nearest'});
+      var rid=(window.__avq=(window.__avq||0)+1);
+      fetch(SB_URL+'/functions/v1/web-fleet?from='+encodeURIComponent(f)+'&to='+encodeURIComponent(t),{headers:HDR})
+        .then(function(r){return r.ok?r.json():Promise.reject(r);})
+        .then(function(d){if(rid!==window.__avq)return;renderAvail(d.cars||[],cat,doby,f,t);})
+        .catch(function(){if(rid!==window.__avq)return;renderErr();});
     }
     document.getElementById('qsearch').addEventListener('click',function(){search(true);});
     qtype.addEventListener('change',autorun);
@@ -955,4 +993,42 @@ var PR_AVA='<img class="pava-img" src="https://d8j0ntlcm91z4.cloudfront.net/user
   }
 })();
 </script>  <script src="rezerwuj.js" defer></script>
+<style id="pr-boost">
+/* ===== Wyniki dostępności (nowe klasy) ===== */
+.ares-load{display:flex;align-items:center;justify-content:center;gap:12px;padding:34px 16px;color:#5f6877;font-weight:600}
+.ares-spin{width:20px;height:20px;border:3px solid #e7e7ea;border-top-color:var(--accent,#e3121a);border-radius:50%;animation:aspin .7s linear infinite}
+@keyframes aspin{to{transform:rotate(360deg)}}
+.ares-sub{color:#8a8f98;font-size:14px;margin-top:3px}
+.ares-empty{padding:22px;background:var(--surface,#fff);border:1px solid var(--line,#ececec);border-radius:14px;color:#444;line-height:1.6;text-align:center}
+.ares-empty a{color:var(--accent,#e3121a);font-weight:800}
+.ares-alert{display:flex;align-items:flex-start;gap:10px;background:linear-gradient(180deg,#fff5f5,#ffecec);border:1px solid #ffd0d0;border-left:4px solid var(--accent,#e3121a);border-radius:12px;padding:14px 16px;margin:2px 0 14px;color:#7a1318;font-weight:600;line-height:1.5}
+.ares-alert svg{width:22px;height:22px;flex:0 0 auto;color:var(--accent,#e3121a);margin-top:1px}
+.ares-plate{display:inline-block;margin-top:3px;font-size:12px;font-weight:800;letter-spacing:.6px;color:#5f6877;background:#f1f2f4;border-radius:6px;padding:2px 8px}
+.ares-more-h{display:flex;align-items:center;gap:8px;margin:24px 0 12px;font-weight:800;color:#0e1014;font-size:15px}
+.ares-grid-sm{grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}
+.ares-grid-sm .ares-img{height:118px}
+/* ===== Hero: więcej czerwieni i ruchu (układ bez zmian) ===== */
+.hero-showcase .glow{animation:heroBreath 7.5s ease-in-out infinite}
+@keyframes heroBreath{0%,100%{opacity:.42}50%{opacity:.82}}
+h1 .hl::after{background:linear-gradient(90deg,var(--accent,#e3121a),#ff5b62,var(--accent,#e3121a));background-size:200% 100%;animation:hlShimmer 3s linear infinite}
+@keyframes hlShimmer{to{background-position:-200% 0}}
+h1 .hl{animation:hlGlow 3s ease-in-out infinite}
+@keyframes hlGlow{0%,100%{text-shadow:0 1px 0 rgba(227,18,26,0)}50%{text-shadow:0 3px 22px rgba(227,18,26,.28)}}
+.heyebrow .dot{position:relative}
+.heyebrow .dot::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--accent,#e3121a);opacity:.55;animation:dotPulse 2.1s ease-out infinite;pointer-events:none}
+@keyframes dotPulse{0%{transform:scale(.5);opacity:.7}100%{transform:scale(2);opacity:0}}
+.hmedia .panel{animation:panelGlow 5.5s ease-in-out infinite alternate}
+@keyframes panelGlow{0%{box-shadow:0 18px 50px -24px rgba(18,20,25,.30),0 0 0 1px rgba(227,18,26,.10)}100%{box-shadow:0 26px 64px -20px rgba(18,20,25,.34),0 16px 50px -22px rgba(227,18,26,.50)}}
+/* ===== Kafelki statystyk: animacje na hover ===== */
+.acard{position:relative;overflow:hidden;transition:transform .38s cubic-bezier(.2,.85,.25,1),box-shadow .38s,border-color .38s,opacity .5s}
+.acard::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 32%,rgba(227,18,26,.10) 50%,transparent 68%);transform:translateX(-130%);transition:transform .65s ease;pointer-events:none}
+.acard:hover::before{transform:translateX(130%)}
+.acard:hover{transform:translateY(-9px) scale(1.025);box-shadow:0 26px 56px -20px rgba(227,18,26,.42);border-color:rgba(227,18,26,.45)}
+.acard .ic{transition:transform .4s cubic-bezier(.2,.85,.25,1),background .35s}
+.acard:hover .ic{transform:scale(1.14) rotate(-7deg);background:var(--accent,#e3121a)}
+.acard .ic svg{transition:stroke .35s}
+.acard:hover .ic svg{stroke:#fff}
+.acard .n,.acard h3{transition:color .35s}
+.acard:hover .n,.acard:hover .n em,.acard:hover h3{color:var(--accent,#e3121a)}
+</style>
 </body></html>
