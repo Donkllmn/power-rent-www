@@ -477,5 +477,14 @@
   }
 })();
 </script>
+<style id="pr-nav-fix">
+.hphone{color:var(--accent,#e3121a);font-weight:800;border-radius:999px;padding:5px 11px;transition:transform .2s ease,background .2s,box-shadow .2s;animation:hphonePulse 2.6s ease-in-out infinite}
+.hphone:hover{transform:translateY(-1px) scale(1.04);background:rgba(227,18,26,.08);box-shadow:0 7px 18px -5px rgba(227,18,26,.5)}
+.hphone svg{stroke:var(--accent,#e3121a);transition:transform .3s}
+.hphone:hover svg{animation:hphoneRing .7s ease}
+@keyframes hphoneRing{0%,100%{transform:rotate(0)}15%{transform:rotate(-15deg)}30%{transform:rotate(12deg)}45%{transform:rotate(-9deg)}60%{transform:rotate(6deg)}75%{transform:rotate(-3deg)}}
+@keyframes hphonePulse{0%,100%{box-shadow:0 0 0 0 rgba(227,18,26,0)}50%{box-shadow:0 0 0 4px rgba(227,18,26,.10)}}
+@media (prefers-reduced-motion:reduce){.hphone,.hphone svg{animation:none}}
+</style>
 </body>
 </html>

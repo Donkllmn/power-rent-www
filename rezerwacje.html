@@ -45,12 +45,12 @@
 .wz-veh-check,.car-check{position:absolute;top:12px;right:12px;width:22px;height:22px;border-radius:50%;background:var(--grad-red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;opacity:0;transform:scale(.4);transition:opacity .25s,transform .25s}
 .wz-veh.sel .wz-veh-check,.car.sel .car-check{opacity:1;transform:scale(1)}
 /* zegar real-time (krok 2) */
-.pr-clock{position:relative;max-width:392px;margin:2px auto 16px;border-radius:16px;background:linear-gradient(135deg,#0e1014,#161b24);border:1px solid rgba(31,157,85,.4);box-shadow:0 14px 34px -16px rgba(0,0,0,.55),0 0 26px -10px rgba(31,157,85,.5),inset 0 1px 0 rgba(255,255,255,.04);padding:15px 18px;overflow:hidden}
-.prc-glow{position:absolute;inset:0;background:radial-gradient(120% 80% at 30% -10%,rgba(31,157,85,.22),transparent 60%);pointer-events:none}
+.pr-clock{position:relative;max-width:392px;margin:2px auto 16px;border-radius:16px;background:linear-gradient(135deg,#170a0d,#1d1218);border:1px solid rgba(227,18,26,.45);box-shadow:0 14px 34px -16px rgba(0,0,0,.6),0 0 30px -10px rgba(227,18,26,.5),inset 0 1px 0 rgba(255,255,255,.05);padding:15px 18px;overflow:hidden}
+.prc-glow{position:absolute;inset:0;background:radial-gradient(120% 80% at 30% -10%,rgba(227,18,26,.26),transparent 60%);pointer-events:none}
 .prc-face{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
-.prc-date{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#7fe3ab;font-weight:700}
-.prc-time{font-family:'Space Grotesk',ui-monospace,monospace;font-weight:800;font-size:clamp(28px,7vw,38px);line-height:1;color:#fff;display:flex;align-items:baseline;gap:7px;text-shadow:0 0 20px rgba(31,157,85,.45)}
-.prc-time .prc-sec{font-size:.52em;color:#2ee27f;font-weight:700;min-width:2.2ch;text-align:left;text-shadow:0 0 14px rgba(46,226,127,.65);animation:prcBlink 1s steps(1) infinite}
+.prc-date{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#ff8f96;font-weight:700}
+.prc-time{font-family:'Space Grotesk',ui-monospace,monospace;font-weight:800;font-size:clamp(28px,7vw,38px);line-height:1;color:#fff;display:flex;align-items:baseline;gap:7px;text-shadow:0 0 22px rgba(227,18,26,.5)}
+.prc-time .prc-sec{font-size:.52em;color:#ff5460;font-weight:700;min-width:2.2ch;text-align:left;text-shadow:0 0 14px rgba(227,18,26,.7);animation:prcBlink 1s steps(1) infinite}
 @keyframes prcBlink{50%{opacity:.5}}
 @media (prefers-reduced-motion:reduce){.prc-time .prc-sec{animation:none}}
 /* calendar */
@@ -746,5 +746,14 @@
 })();
 </script>
 <script>(function(){var d=document.getElementById('prcDate'),hm=document.getElementById('prcHM'),sc=document.getElementById('prcSec');if(!d||!hm||!sc)return;var WD=['niedziela','poniedziałek','wtorek','środa','czwartek','piątek','sobota'],MO=['stycznia','lutego','marca','kwietnia','maja','czerwca','lipca','sierpnia','września','października','listopada','grudnia'];function p(n){return(n<10?'0':'')+n;}function t(){var n=new Date();d.textContent=WD[n.getDay()]+', '+n.getDate()+' '+MO[n.getMonth()]+' '+n.getFullYear();hm.textContent=p(n.getHours())+':'+p(n.getMinutes());sc.textContent=p(n.getSeconds());}t();setInterval(t,1000);})();</script>
+<style id="pr-nav-fix">
+.hphone{color:var(--accent,#e3121a);font-weight:800;border-radius:999px;padding:5px 11px;transition:transform .2s ease,background .2s,box-shadow .2s;animation:hphonePulse 2.6s ease-in-out infinite}
+.hphone:hover{transform:translateY(-1px) scale(1.04);background:rgba(227,18,26,.08);box-shadow:0 7px 18px -5px rgba(227,18,26,.5)}
+.hphone svg{stroke:var(--accent,#e3121a);transition:transform .3s}
+.hphone:hover svg{animation:hphoneRing .7s ease}
+@keyframes hphoneRing{0%,100%{transform:rotate(0)}15%{transform:rotate(-15deg)}30%{transform:rotate(12deg)}45%{transform:rotate(-9deg)}60%{transform:rotate(6deg)}75%{transform:rotate(-3deg)}}
+@keyframes hphonePulse{0%,100%{box-shadow:0 0 0 0 rgba(227,18,26,0)}50%{box-shadow:0 0 0 4px rgba(227,18,26,.10)}}
+@media (prefers-reduced-motion:reduce){.hphone,.hphone svg{animation:none}}
+</style>
 </body>
 </html>

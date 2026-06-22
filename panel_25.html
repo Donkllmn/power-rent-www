@@ -149,7 +149,7 @@ html[data-theme="dark"] .logo{background:#fff;border-radius:7px;padding:3px 8px}
 .track{position:relative;display:flex}
 .daycell{width:var(--colw);flex:0 0 var(--colw);border-right:1px solid #DFE3E9;cursor:pointer;transition:background .12s}
 .daycell.we{background:#FAFBFC}
-.daycell.today{position:relative}.daycell.today::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:rgba(31,157,85,.15);box-shadow:inset 3px 0 0 var(--green),inset -3px 0 0 var(--green)}
+.daycell.today{position:relative}.daycell.today::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:rgba(31,157,85,.18);box-shadow:inset 4px 0 0 var(--green),inset -4px 0 0 var(--green)}
 .daycell:hover{background:rgba(225,29,42,.09)}
 /* --- pojazd wynajęty / niedostępny: na czerwono --- */
 .g-row.gbusy .vcell,.g-row.gunavail .vcell{box-shadow:inset 4px 0 0 var(--red)}
@@ -408,7 +408,7 @@ button:not(:disabled):active{transform:scale(.97)}
 .vf-del:hover{background:var(--red-soft);color:var(--red)}
 .vault-msg,.vault-empty{font-size:12.5px;color:var(--muted);padding:8px 2px}
 .vault-err{color:#C77700}
-.bar{position:absolute;top:50%;transform:translateY(-50%);height:36px;border-radius:8px;padding:0 8px;display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;cursor:pointer;overflow:hidden;white-space:nowrap;z-index:3;background:var(--paper);transition:transform .15s ease,box-shadow .18s ease;box-shadow:0 1px 2px rgba(16,20,30,.07)}
+.bar{position:absolute;top:50%;transform:translateY(-50%);height:36px;border-radius:8px;padding:0 8px;display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;cursor:pointer;overflow:hidden;white-space:nowrap;z-index:2;background:var(--paper);transition:transform .15s ease,box-shadow .18s ease;box-shadow:0 1px 2px rgba(16,20,30,.07)}
 .bar::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:9px 0 0 9px}
 .bar:hover{transform:translateY(calc(-50% - 1px));box-shadow:0 7px 18px -5px rgba(16,20,30,.25);z-index:5}
 .bar .nm{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;padding-left:4px;font-weight:700}
