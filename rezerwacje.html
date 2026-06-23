@@ -558,10 +558,9 @@
 
   // ----- availability -----
   function carCardHtml(v,i){var lbl=SEGLBL[v.seg]||v.seg||'';var badges='';
-    if(lbl)badges+='<span class="car-bdg">'+esc(lbl)+'</span>';
     if(v.gb)badges+='<span class="car-bdg">'+(v.gb==='A'?'Automat':'Manual')+'</span>';
     if(v.fuel)badges+='<span class="car-bdg">'+esc(v.fuel)+'</span>';
-    return '<button type="button" class="car" data-id="'+esc(v.id)+'" data-seg="'+esc(v.seg||'')+'" data-lbl="'+esc((v.model||'')+(v.plate?' \u00b7 '+v.plate:''))+'" style="animation-delay:'+(i*0.04)+'s"><span class="car-check">\u2713</span>'+carPhoto(v)+'<div class="car-mod">'+esc(v.model||'Pojazd')+'</div><div class="car-meta">'+esc(v.plate||'')+'</div><div class="car-badges">'+badges+'</div><div class="car-price">'+segRate(v.seg).toLocaleString('pl-PL')+' z\u0142<span> / doba</span></div></button>';
+    return '<button type="button" class="car" data-id="'+esc(v.id)+'" data-seg="'+esc(v.seg||'')+'" data-lbl="'+esc((v.model||'')+(v.plate?' \u00b7 '+v.plate:''))+'" style="animation-delay:'+(i*0.04)+'s"><span class="car-check">\u2713</span>'+carPhoto(v)+'<div class="car-mod">'+esc(lbl||v.model||'Pojazd')+'</div><div class="car-meta">'+esc((v.model?v.model:'')+(v.plate?((v.model?' \u00b7 ':'')+v.plate):''))+'</div><div class="car-badges">'+badges+'</div><div class="car-price">'+segRate(v.seg).toLocaleString('pl-PL')+' z\u0142<span> / doba</span></div></button>';
   }
   function loadCars(){
     el('carsSec').style.display='block';el('carsMore').style.display='none';
