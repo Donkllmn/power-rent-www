@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regulamin wynajmu — Power Rent Radom</title>
+<meta name="description" content="Regulamin wynajmu pojazdów Power Rent Sp. z o.o. w Radomiu — warunki najmu, opłaty, kaucja, wyjazdy zagraniczne i tabele opłat.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ===================== O NAS — wersja „na maxa" ===================== */
+:root{--abz:cubic-bezier(.2,.7,.2,1);--abink:#0C0E12}
+.ab-progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--grad-red);z-index:9999;transition:width .1s linear}
+.ab-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--red)}
+.ab-eyebrow::before{content:"";width:26px;height:2px;background:var(--grad-red);border-radius:2px}
+.ab-eyebrow.light{color:var(--red)}
+.ab-h2{font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(28px,4.2vw,48px);line-height:1.04;letter-spacing:-.02em;color:var(--ink);margin:14px 0 0}
+.ab-sub{color:var(--muted);font-size:clamp(15px,1.4vw,17.5px);line-height:1.7;max-width:620px;margin:16px 0 0}
+.ab-center{text-align:center;max-width:760px;margin:0 auto 44px}
+.ab-center .ab-sub{margin-left:auto;margin-right:auto}
+
+/* reveal */
+.ab-rev{opacity:0;transform:translateY(24px);transition:opacity .7s var(--abz),transform .7s var(--abz)}
+.ab-rev.in{opacity:1;transform:none}
+.ab-rev[data-d="1"]{transition-delay:.09s}.ab-rev[data-d="2"]{transition-delay:.18s}.ab-rev[data-d="3"]{transition-delay:.27s}.ab-rev[data-d="4"]{transition-delay:.36s}.ab-rev[data-d="5"]{transition-delay:.45s}
+
+/* ===== HERO ===== */
+.ab-hero{position:relative;overflow:hidden;isolation:isolate;color:var(--ink);padding:clamp(120px,16vh,190px) 0 0;background:radial-gradient(125% 115% at 88% -12%,#FFF1F0 0,#FFFFFF 44%,#F6F7FB 100%)}
+.ab-hero .wrap{position:relative;z-index:3}
+.ab-hero-orb{position:absolute;z-index:0;width:820px;height:820px;top:-360px;right:-260px;border-radius:50%;background:conic-gradient(from 0deg,rgba(255,74,61,.26),rgba(225,29,42,.09),rgba(183,20,32,0),rgba(255,74,61,.26));filter:blur(82px);animation:abSpin 36s linear infinite}
+.ab-hero-streaks{position:absolute;inset:-25%;z-index:0;background:repeating-linear-gradient(115deg,transparent 0 40px,rgba(18,20,25,.024) 40px 41px);animation:abStreak 20s linear infinite}
+@keyframes abSpin{to{transform:rotate(360deg)}}
+@keyframes abStreak{to{transform:translateX(-41px)}}
+.ab-hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:54px;align-items:center}
+.ab-hero h1{font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(40px,6.6vw,88px);line-height:.97;letter-spacing:-.025em;margin:20px 0 0}
+.ab-hero h1 .grad{background:linear-gradient(100deg,#FF6A5D,#E11D2A 52%,#FF4A3D);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:220% auto;animation:abShine 6s linear infinite}
+@keyframes abShine{to{background-position:220% center}}
+.ab-hero .ab-lead{color:var(--muted);font-size:clamp(15px,1.45vw,18px);line-height:1.72;max-width:560px;margin:24px 0 0}
+.ab-hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+.ab-hero .btn-ghost{border-color:var(--ink);color:var(--ink);background:transparent}
+.ab-hero .btn-ghost:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.ab-chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}
+.ab-chip{display:inline-flex;align-items:center;gap:9px;padding:9px 15px;border-radius:40px;background:#fff;border:1px solid var(--line);box-shadow:0 2px 10px -4px rgba(18,20,25,.12);font-size:13.5px;font-weight:600;color:var(--ink)}
+.ab-chip b{color:var(--ink);font-weight:800}
+.ab-chip .d{width:7px;height:7px;border-radius:50%;background:var(--grad-red)}
+/* hero van card */
+.ab-hero-art{position:relative;justify-self:center;z-index:3}
+.ab-hero-art .glow{position:absolute;inset:-14% -10%;background:radial-gradient(circle at 50% 46%,rgba(225,29,42,.5),transparent 62%);filter:blur(32px);z-index:0}
+.ab-vancard{position:relative;z-index:1;border-radius:24px;overflow:hidden;border:1px solid var(--line);box-shadow:0 40px 80px -34px rgba(18,20,25,.45);background:linear-gradient(160deg,#fff,#EEF1F6);transform:rotate(-3deg);animation:abFloat 7s ease-in-out infinite}
+.ab-vancard img{display:block;width:min(440px,78vw);height:auto}
+.ab-vancard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 64%,rgba(18,20,25,.05))}
+@keyframes abFloat{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(-3deg) translateY(-15px)}}
+.ab-fbadge{position:absolute;z-index:2;background:rgba(14,17,22,.86);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(8px);color:#fff;border-radius:16px;padding:12px 16px;box-shadow:0 18px 32px -12px rgba(0,0,0,.6)}
+.ab-fbadge .n{font-family:'Archivo',sans-serif;font-weight:900;font-size:27px;line-height:1;display:block}
+.ab-fbadge .n em{color:var(--red);font-style:normal}
+.ab-fbadge .l{font-size:10.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#AEB4BF;margin-top:3px}
+.ab-fbadge.f1{top:-20px;left:-28px;animation:abBob 6s ease-in-out infinite}
+.ab-fbadge.f2{bottom:-22px;right:-24px;animation:abBob 6s ease-in-out infinite .9s}
+@keyframes abBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+/* scroll cue */
+.ab-cue{display:flex;justify-content:center;margin-top:50px;padding-bottom:8px}
+.ab-cue span{width:26px;height:42px;border:2px solid rgba(18,20,25,.28);border-radius:16px;position:relative}
+.ab-cue span::after{content:"";position:absolute;left:50%;top:8px;width:4px;height:8px;border-radius:3px;background:var(--ink);transform:translateX(-50%);animation:abCue 1.6s ease-in-out infinite}
+@keyframes abCue{0%{opacity:0;transform:translate(-50%,0)}40%{opacity:1}100%{opacity:0;transform:translate(-50%,12px)}}
+/* marquee */
+.ab-marquee{margin-top:60px;border-top:1px solid rgba(18,20,25,.1);border-bottom:1px solid rgba(18,20,25,.1);background:var(--bg);padding:17px 0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.ab-mq-track{display:flex;width:max-content;white-space:nowrap;animation:abMarquee 28s linear infinite}
+.ab-mq-track span{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(16px,1.9vw,23px);color:var(--ink);opacity:.82;padding:0 28px;display:inline-flex;align-items:center;gap:28px}
+.ab-mq-track span::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--red)}
+@keyframes abMarquee{to{transform:translateX(-50%)}}
+
+/* ===== ODOMETR / LICZBY ===== */
+.ab-odo-sec{padding:64px 0}
+.ab-odo{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--paper);box-shadow:var(--shadow)}
+.ab-odo .cell{padding:34px 28px 30px;border-right:1px solid var(--line);position:relative}
+.ab-odo .cell:last-child{border-right:0}
+.ab-odo .n{font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(38px,5vw,62px);line-height:1;color:var(--ink);letter-spacing:-.02em}
+.ab-odo .n em{color:var(--red);font-style:normal}
+.ab-odo .l{margin-top:11px;color:var(--muted);font-weight:600;font-size:14.5px}
+.ab-odo .uline{margin-top:16px;height:3px;width:46px;background:var(--grad-red);border-radius:3px;transform-origin:left;transform:scaleX(.3);opacity:.4;transition:transform .9s var(--abz),opacity .9s}
+.ab-odo .cell.in .uline{transform:scaleX(1);opacity:1}
+
+/* ===== HISTORIA ===== */
+.ab-story-sec{padding:36px 0 84px}
+.ab-story-grid{display:grid;grid-template-columns:1fr 1.12fr;gap:58px;align-items:center}
+.ab-story-copy p{color:var(--muted);font-size:16.5px;line-height:1.78;margin:0 0 15px}
+.ab-story-copy p b{color:var(--ink);font-weight:700}
+.ab-story-facts{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.ab-fact{display:inline-flex;align-items:center;gap:9px;background:var(--bg);border:1px solid var(--line);border-radius:40px;padding:9px 15px;font-weight:700;font-size:13.5px;color:var(--ink)}
+.ab-fact svg{width:16px;height:16px;color:var(--red)}
+.ab-photo{position:relative;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid var(--line)}
+.ab-photo img{display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:16/11;transition:transform 1.3s var(--abz)}
+.ab-photo:hover img{transform:scale(1.045)}
+.ab-photo .since{position:absolute;top:18px;left:18px;background:var(--grad-red);color:#fff;font-family:'Archivo',sans-serif;font-weight:900;font-size:22px;line-height:1;padding:12px 15px;border-radius:15px;box-shadow:0 16px 28px -10px rgba(225,29,42,.6)}
+.ab-photo .since em{display:block;font-style:normal;font-size:10.5px;letter-spacing:.13em;font-weight:800;opacity:.92;margin-top:4px}
+.ab-photo .cap{position:absolute;left:0;right:0;bottom:0;padding:30px 22px 18px;background:linear-gradient(transparent,rgba(8,10,14,.8));color:#fff;display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px}
+.ab-photo .cap svg{width:17px;height:17px;color:#FF8079;flex:none}
+
+/* ===== DLACZEGO MY ===== */
+.ab-why-feat{position:relative;overflow:hidden;background:linear-gradient(155deg,#171B23,#0C0E12);color:#fff;border-radius:24px;padding:clamp(28px,3.4vw,42px);display:grid;grid-template-columns:1.25fr 1fr;gap:38px;align-items:center;box-shadow:var(--shadow-lg)}
+.ab-why-feat .orb{position:absolute;width:360px;height:360px;right:-90px;top:-130px;border-radius:50%;background:radial-gradient(circle,rgba(225,29,42,.38),transparent 64%);filter:blur(42px);pointer-events:none}
+.ab-why-feat>div{position:relative;z-index:1}
+.ab-why-feat .ic{width:60px;height:60px;border-radius:16px;background:var(--grad-red);color:#fff;display:grid;place-items:center;box-shadow:0 16px 30px -12px rgba(225,29,42,.7);margin-bottom:18px}
+.ab-why-feat .ic svg{width:28px;height:28px}
+.ab-why-feat h3{font-family:'Archivo',sans-serif;font-size:clamp(22px,2.6vw,30px);line-height:1.12;margin:0 0 11px}
+.ab-why-feat .ftxt{color:#C2C7D0;font-size:15.5px;line-height:1.7;margin:0 0 22px}
+.ab-why-feat .fcta{display:inline-flex;align-items:center;gap:8px;color:#fff;font-weight:700;font-size:14.5px;text-decoration:none}
+.ab-why-feat .fcta svg{width:18px;height:18px;color:#FF6A5D;transition:transform .3s}
+.ab-why-feat .fcta:hover svg{transform:translateX(4px)}
+.ab-why-feat .pts{display:flex;flex-direction:column;gap:15px}
+.ab-why-feat .pt{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;font-weight:600;color:#E8EAEE}
+.ab-why-feat .pt svg{width:22px;height:22px;color:#FF6A5D;flex:none}
+.ab-why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+.ab-wc{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:28px 26px;box-shadow:var(--shadow);transition:transform .4s var(--abz),box-shadow .4s var(--abz),border-color .4s}
+.ab-wc::before{content:"";position:absolute;left:0;top:0;height:3px;width:0;background:var(--grad-red);transition:width .5s var(--abz)}
+.ab-wc:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:#F3C3C7}
+.ab-wc:hover::before{width:100%}
+.ab-wc .ic{width:50px;height:50px;border-radius:14px;background:linear-gradient(150deg,rgba(225,29,42,.13),rgba(225,29,42,.05));color:var(--red);display:grid;place-items:center;margin-bottom:15px}
+.ab-wc .ic svg{width:24px;height:24px}
+.ab-wc h3{font-family:'Archivo',sans-serif;font-size:18px;margin:0 0 7px}
+.ab-wc p{color:var(--muted);font-size:14.5px;line-height:1.62;margin:0}
+@media(max-width:980px){.ab-why-feat{grid-template-columns:1fr;gap:26px}.ab-why-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.ab-why-grid{grid-template-columns:1fr}.ab-wc{padding:22px}}
+/* ===== FLOTA ===== */
+.ab-fleet-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.ab-fc{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--paper);box-shadow:var(--shadow);text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:transform .4s var(--abz),box-shadow .4s}
+.ab-fc:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.ab-fc-img{position:relative;aspect-ratio:4/3;overflow:hidden;background:radial-gradient(120% 120% at 50% 0,#fff,#EEF1F6)}
+.ab-fc-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--abz)}
+.ab-fc:hover .ab-fc-img img{transform:scale(1.07)}
+.ab-fc .seg{position:absolute;top:12px;left:12px;background:rgba(14,17,22,.85);color:#fff;font-weight:800;font-size:11.5px;letter-spacing:.04em;padding:5px 11px;border-radius:30px;backdrop-filter:blur(6px)}
+.ab-fc .od{position:absolute;bottom:12px;right:12px;background:var(--grad-red);color:#fff;font-weight:800;font-size:12.5px;padding:6px 11px;border-radius:30px;box-shadow:0 10px 18px -8px rgba(225,29,42,.6)}
+.ab-fc-body{padding:15px 16px 17px}
+.ab-fc-body h3{font-family:'Archivo',sans-serif;font-size:16.5px;margin:0 0 3px}
+.ab-fc-body .car{color:var(--muted);font-size:13px}
+.ab-fc-body .go{margin-top:11px;color:var(--red);font-weight:700;font-size:13.5px;display:inline-flex;gap:6px;align-items:center}
+.ab-fc-body .go svg{width:15px;height:15px;transition:transform .3s}
+.ab-fc:hover .go svg{transform:translateX(4px)}
+
+/* ===== 3 KROKI ===== */
+.ab-steps{position:relative}
+.ab-steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative}
+.ab-steps-grid::before{content:"";position:absolute;top:46px;left:16%;right:16%;height:2px;background:repeating-linear-gradient(90deg,var(--line) 0 10px,transparent 10px 18px);z-index:0}
+.ab-step{position:relative;z-index:1;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:var(--shadow);transition:transform .4s var(--abz),box-shadow .4s}
+.ab-step:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.ab-step .num{display:inline-grid;place-items:center;width:58px;height:58px;border-radius:50%;background:var(--paper);border:2px solid var(--red);font-family:'Archivo',sans-serif;font-weight:900;font-size:24px;color:var(--red);margin-bottom:16px}
+.ab-step h3{font-family:'Archivo',sans-serif;font-size:19px;margin:0 0 7px}
+.ab-step p{color:var(--muted);font-size:14.5px;line-height:1.62;margin:0}
+
+/* ===== KONTAKT ===== */
+.ab-contact-grid{display:grid;grid-template-columns:.92fr 1.08fr;border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);background:var(--paper)}
+.ab-ci{padding:42px}
+.ab-ci h3{font-family:'Archivo',sans-serif;font-size:clamp(22px,2.4vw,28px);margin:0 0 6px}
+.ab-ci .lead{color:var(--muted);font-size:15px;line-height:1.65;margin:0 0 24px}
+.ab-ci-row{display:flex;gap:14px;align-items:flex-start;padding:15px 0;border-top:1px solid var(--line)}
+.ab-ci-row:first-of-type{border-top:0}
+.ab-ci-row .ci-ic{width:40px;height:40px;border-radius:11px;background:linear-gradient(150deg,rgba(225,29,42,.13),rgba(225,29,42,.05));color:var(--red);display:grid;place-items:center;flex:none}
+.ab-ci-row .ci-ic svg{width:19px;height:19px}
+.ab-ci-row .k{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ab-ci-row .v{font-size:17px;font-weight:700;color:var(--ink);margin-top:2px}
+.ab-ci-row .v a{color:inherit;text-decoration:none}
+.ab-ci-row .v a:hover{color:var(--red)}
+.ab-ci-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.ab-map{min-height:420px;position:relative}
+.ab-map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+
+@media(max-width:980px){
+  .ab-hero-grid,.ab-story-grid,.ab-contact-grid{grid-template-columns:1fr;gap:36px}
+  .ab-hero-art{order:-1}
+  .ab-bento{grid-template-columns:1fr 1fr}
+  .ab-bt,.ab-bt.wide,.ab-bt.feat{grid-column:auto;grid-row:auto}
+  .ab-fleet-grid{grid-template-columns:1fr 1fr}
+  .ab-odo{grid-template-columns:1fr 1fr}.ab-odo .cell:nth-child(2){border-right:0}.ab-odo .cell:nth-child(1),.ab-odo .cell:nth-child(2){border-bottom:1px solid var(--line)}
+  .ab-steps-grid{grid-template-columns:1fr}.ab-steps-grid::before{display:none}
+  .ab-map{min-height:320px}
+}
+@media(max-width:560px){
+  .ab-bento,.ab-fleet-grid{grid-template-columns:1fr}
+  .ab-odo{grid-template-columns:1fr}.ab-odo .cell{border-right:0;border-bottom:1px solid var(--line)}.ab-odo .cell:last-child{border-bottom:0}
+  .ab-ci,.ab-bt,.ab-step{padding:22px}
+  .ab-fbadge.f1{left:-10px}.ab-fbadge.f2{right:-10px}
+}
+@media (prefers-reduced-motion:reduce){
+  .ab-hero-orb,.ab-hero-streaks,.ab-vancard,.ab-fbadge,.ab-mq-track,.ab-hero h1 .grad,.ab-cue span::after{animation:none!important}
+  .ab-rev{transition:none}.ab-vancard{transform:rotate(-3deg)}
+}
+
+/* ===================== NAVBAR — identyczny jak na stronie głównej ===================== */
+#hdr{position:sticky;top:0;z-index:90;background:transparent;padding-top:14px;transition:padding .3s;--accent:#e3121a;--on-accent:#fff;--accent-glow:0 10px 24px -8px rgba(227,18,26,.5);--logo:#0e1014;--nav-tx:#39414f;--ink:#0e1014;--fd:'Space Grotesk',system-ui,sans-serif}
+#hdr .nav{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;height:62px;max-width:1180px;margin:0 auto;padding:0 14px 0 22px;border-radius:20px;background:rgba(255,255,255,.52);-webkit-backdrop-filter:blur(22px) saturate(185%);backdrop-filter:blur(22px) saturate(185%);border:1px solid rgba(255,255,255,.62);box-shadow:0 14px 40px -14px rgba(13,16,22,.28),0 1px 0 inset rgba(255,255,255,.9);transition:height .3s,background .3s,box-shadow .3s}
+#hdr.scrolled .nav{height:54px;background:rgba(255,255,255,.74);box-shadow:0 16px 44px -14px rgba(13,16,22,.34),0 1px 0 inset rgba(255,255,255,.95)}
+#hdr .logo{font-family:var(--fd);font-weight:800;font-size:23px;letter-spacing:-.03em;display:flex;align-items:center;gap:0;color:var(--logo);text-decoration:none}
+#hdr .logo-img{height:26px;width:auto;display:block;transition:height .3s}
+#hdr.scrolled .logo-img{height:23px}
+#hdr .nlinks{display:flex;align-items:center;gap:3px;font-weight:500;font-size:15px}
+#hdr .nlinks a{color:var(--nav-tx);position:relative;z-index:1;padding:9px 14px;border-radius:11px;text-decoration:none;transition:color .22s,transform .28s cubic-bezier(.2,1.2,.4,1)}
+#hdr .nlinks a::before{content:"";position:absolute;inset:0;border-radius:inherit;background:rgba(227,18,26,.1);opacity:0;transform:scale(.78);transition:opacity .25s,transform .42s cubic-bezier(.2,1.35,.4,1);z-index:-1}
+#hdr .nlinks a:hover{color:var(--accent);transform:translateY(-2px)}
+#hdr .nlinks a:hover::before{opacity:1;transform:scale(1)}
+#hdr .nlinks a.on{color:var(--accent)}
+#hdr .nlinks a.on::before{opacity:1;transform:scale(1)}
+#hdr .nright{display:flex;align-items:center;gap:11px}
+#hdr .hphone{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;color:var(--logo);white-space:nowrap;text-decoration:none}
+#hdr .hphone svg{width:17px;height:17px;stroke:var(--accent)}
+#hdr .btn-a{background:var(--accent);color:var(--on-accent);box-shadow:var(--accent-glow);border:0;border-radius:12px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;transition:transform .25s,filter .25s}
+#hdr .btn-a:hover{transform:translateY(-2px);filter:brightness(1.05)}
+#hdr .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
+#hdr .burger span{width:24px;height:2.4px;background:var(--logo);border-radius:2px;transition:.25s}
+@media(max-width:680px){#hdr .nlinks,#hdr .hphone{display:none}#hdr .burger{display:flex}#hdr .nlinks.open{display:flex;position:absolute;top:calc(100% + 8px);left:0;right:0;flex-direction:column;align-items:stretch;gap:3px;padding:12px;border-radius:18px;background:rgba(255,255,255,.95);-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);border:1px solid rgba(255,255,255,.6);box-shadow:0 22px 50px -16px rgba(13,16,22,.32)}#hdr .nlinks.open a{padding:12px 14px;width:100%;color:var(--ink);font-size:16px;border-radius:11px}}
+</style>
+</head>
+<body>
+
+<div class="ab-progress" id="abProg" aria-hidden="true"></div>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="index.html" class="logo" aria-label="Power Rent — strona główna"><img class="logo-img" src="https://power-rent-www.vercel.app/powerrent-logo.png" alt="PowerRent"></a>
+    <nav class="nlinks" id="menu">
+      <a href="o-nas.html">O nas</a>
+      <a href="oferta.html">Oferta</a>
+      <a href="uslugi.html">Usługi</a>
+      <a href="cennik.html">Cennik</a>
+      <a href="index.html#kontakt">Kontakt</a>
+    </nav>
+    <div class="nright">
+      <a href="tel:+48664201202" class="hphone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2"></path></svg>664 201 202</a>
+      <a href="rezerwacje.html" class="btn btn-a" style="padding:11px 18px">Rezerwuj</a>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<style>
+.reg-hero{background:linear-gradient(180deg,#fff,#f6f7f8);border-bottom:1px solid rgba(0,0,0,.06);padding:56px 0 34px;position:relative;overflow:hidden}
+.reg-hero::after{content:"";position:absolute;top:-30%;right:-6%;width:480px;height:480px;background:radial-gradient(circle,rgba(227,18,26,.10),transparent 64%);pointer-events:none}
+.reg-wrap{max-width:920px;margin:0 auto;padding:0 22px}
+.reg-ey{font-size:13px;font-weight:800;letter-spacing:.16em;color:#e3121a;text-transform:uppercase}
+.reg-hero h1{font-size:clamp(30px,4.4vw,46px);font-weight:800;letter-spacing:-.02em;margin:10px 0 10px;color:#0e1014;line-height:1.05}
+.reg-hero p.lead{color:#5f6877;font-size:16.5px;max-width:680px;line-height:1.6;margin:0}
+.reg-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.reg-meta span{font-size:13px;font-weight:600;color:#3a3e44;background:#fff;border:1px solid rgba(0,0,0,.09);border-radius:999px;padding:8px 15px}
+.reg-dl{display:inline-flex;align-items:center;gap:9px;margin-top:22px;background:#e3121a;color:#fff;font-weight:700;font-size:14.5px;padding:12px 20px;border-radius:12px;text-decoration:none;box-shadow:0 14px 30px -12px rgba(227,18,26,.5);transition:transform .2s,box-shadow .2s}
+.reg-dl:hover{transform:translateY(-2px);box-shadow:0 20px 38px -12px rgba(227,18,26,.55)}
+.reg-dl svg{width:18px;height:18px}
+.reg-toc{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:20px;padding:24px 28px;margin:38px auto;box-shadow:0 16px 40px -24px rgba(18,20,25,.2)}
+.reg-toc h2{font-size:13px;text-transform:uppercase;letter-spacing:.12em;color:#e3121a;margin:0 0 16px;font-weight:800}
+.reg-toc ol{columns:2;column-gap:34px;margin:0;padding:0;list-style:none;counter-reset:toc}
+.reg-toc li{counter-increment:toc;margin:0 0 11px;break-inside:avoid;font-size:14.5px}
+.reg-toc a{color:#1a1d22;text-decoration:none;display:flex;gap:9px;align-items:baseline}
+.reg-toc a::before{content:"§ " counter(toc);color:#e3121a;font-weight:800;font-size:12.5px;min-width:30px}
+.reg-toc a:hover{color:#e3121a}
+.reg-body{padding:8px 0 54px}
+.reg-sec{margin:0 auto 36px;scroll-margin-top:88px}
+.reg-sec h2{font-size:20px;font-weight:800;color:#0e1014;margin:0 0 16px;padding-bottom:11px;border-bottom:2px solid rgba(227,18,26,.2);display:flex;align-items:baseline;gap:10px}
+.reg-sec h2 b{color:#e3121a;font-weight:800}
+.reg-sec p{font-size:15px;line-height:1.72;color:#33373d;margin:0 0 12px}
+.reg-ol{padding-left:24px;margin:0 0 12px;counter-reset:none}
+.reg-ol>li{font-size:15px;line-height:1.72;color:#33373d;margin:0 0 11px;padding-left:4px}
+.reg-ol>li::marker{color:#0e1014;font-weight:700}
+.reg-sub{list-style:lower-latin;margin:9px 0 9px;padding-left:22px}
+.reg-sub>li{font-size:14.5px;line-height:1.65;color:#4a4e55;margin:0 0 7px}
+.reg-sub>li::marker{color:#9aa0a8;font-weight:600}
+.reg-table-wrap{overflow-x:auto;margin:16px 0 6px;border:1px solid rgba(0,0,0,.08);border-radius:14px}
+.reg-table{width:100%;border-collapse:collapse;font-size:14px;min-width:440px}
+.reg-table caption{caption-side:top;text-align:left;font-weight:800;color:#0e1014;font-size:15px;padding:14px 16px 4px}
+.reg-table th{background:#f4f5f6;text-align:left;padding:12px 16px;font-weight:700;color:#1a1d22;border-bottom:2px solid rgba(0,0,0,.1)}
+.reg-table td{padding:11px 16px;border-top:1px solid rgba(0,0,0,.06);color:#33373d;vertical-align:top;line-height:1.5}
+.reg-table td.amt{font-weight:700;white-space:nowrap;color:#0e1014;text-align:right}
+.reg-table tr:nth-child(even) td{background:#fafbfb}
+.reg-note{font-size:12.5px;color:#6b7280;font-style:italic;margin:8px 0 0}
+.reg-back{display:inline-flex;align-items:center;gap:8px;margin:8px 0 0;font-weight:700;color:#e3121a;text-decoration:none;font-size:14.5px}
+.reg-back:hover{text-decoration:underline}
+.reg-foothint{background:#f6f7f8;border:1px solid rgba(0,0,0,.07);border-radius:16px;padding:22px 26px;margin:30px auto 0}
+.reg-foothint p{margin:0;font-size:14.5px;color:#4a4e55;line-height:1.6}
+@media(max-width:640px){.reg-toc ol{columns:1}.reg-table{font-size:13px}.reg-table th,.reg-table td{padding:9px 11px}.reg-sec h2{font-size:18px}}
+</style>
+
+<section class="reg-hero">
+  <div class="reg-wrap">
+    <div class="reg-ey">Dokumenty</div>
+    <h1>Regulamin wynajmu</h1>
+    <p class="lead">Warunki najmu pojazdów obowiązujące w wypożyczalni Power Rent Sp. z o.o. w Radomiu — zasady rezerwacji, realizacji usługi, opłaty, kaucja, wyjazdy zagraniczne i tabele opłat.</p>
+    <div class="reg-meta">
+      <span>Wersja 1.6</span>
+      <span>Obowiązuje od 01.03.2025</span>
+      <span>Power Rent Sp. z o.o.</span>
+    </div>
+    <a class="reg-dl" href="regulamin.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>Pobierz wersję PDF</a>
+  </div>
+</section>
+
+<div class="reg-wrap">
+  <nav class="reg-toc" aria-label="Spis treści">
+    <h2>Spis treści</h2>
+    <ol>
+      <li><a href="#par-1">Zasady ogólne</a></li>
+      <li><a href="#par-2">Najemca</a></li>
+      <li><a href="#par-3">Zamawianie i rezerwacja usług</a></li>
+      <li><a href="#par-4">Realizacja usług</a></li>
+      <li><a href="#par-5">Wyjazdy zagraniczne</a></li>
+      <li><a href="#par-6">Zakazy</a></li>
+      <li><a href="#par-7">Opłaty za najem</a></li>
+      <li><a href="#par-8">Odwołanie rezerwacji</a></li>
+      <li><a href="#par-9">Eksploatacja i naprawy</a></li>
+      <li><a href="#par-10">Obowiązki wynajmującego</a></li>
+      <li><a href="#par-11">Ubezpieczenie pojazdu</a></li>
+      <li><a href="#par-12">Odpowiedzialność za najem</a></li>
+      <li><a href="#par-13">Kaucja zabezpieczająca</a></li>
+      <li><a href="#par-14">Reklamacje</a></li>
+      <li><a href="#par-15">Dane osobowe</a></li>
+      <li><a href="#par-16">Postanowienia końcowe</a></li>
+      <li><a href="#par-17">Tabele opłat</a></li>
+    </ol>
+  </nav>
+</div>
+
+<div class="reg-wrap reg-body">
+
+  <section class="reg-sec" id="par-1">
+    <h2><b>§ 1</b> Zasady ogólne</h2>
+    <ol class="reg-ol">
+      <li>Niniejszy regulamin (zwany dalej „Regulaminem") został wydany przez Power Rent Sp. z o.o. z siedzibą w Radomiu, ul. Mokra 2a, 26-600 Radom, wpisaną do rejestru przedsiębiorców Krajowego Rejestru Sądowego prowadzonego przez Sąd Rejonowy dla m. st. Warszawy w Warszawie, XIV Wydział Gospodarczy Krajowego Rejestru Sądowego, pod numerem KRS: 0000539597, NIP: 9482602652, REGON: 360508580, o kapitale zakładowym 750 tys. zł, zwanym dalej Wynajmującym.</li>
+      <li>Regulamin określa w szczególności warunki najmu pojazdów, które są zawierane przez Wynajmującego z Najemcą w ramach łączącej strony umowy ramowej, chyba że odrębna umowa zawarta z Najemcą (klient ramowy) stanowi inaczej. Jeżeli zachodzi sprzeczność między Regulaminem a umową ramową, strony są związane warunkami umowy ramowej.</li>
+      <li>Szczegółowy zakres usług świadczonych przez Wynajmującego uzależniony jest od wybranego przez Najemcę pakietu usług dostępnych w ramach oferty najmu pojazdów.</li>
+      <li>Ilekroć w Regulaminie jest mowa o:
+        <ol class="reg-sub">
+          <li>Najemcy – należy przez to rozumieć klienta ramowego składającego zamówienie pojazdu (zawierającego poszczególne umowę najmu pojazdu);</li>
+          <li>Użytkowniku – należy przez to rozumieć osobę fizyczną wskazaną przez Najemcę w zamówieniu jako osobę upoważnioną do odbioru i prowadzenia pojazdu. Najemca wskazując w zamówieniu samego siebie staje się automatycznie Użytkownikiem;</li>
+          <li>formie dokumentowej – należy przez to rozumieć formę dokumentową w rozumieniu przepisów Kodeksu cywilnego (art. 77²–77³ k.c.), w tym zwłaszcza SMS, email lub nagrane rozmowy telefoniczne;</li>
+          <li>Tabeli Opłat – należy przez to rozumieć zestawienie kar i opłat stanowiące integralną część niniejszego Regulaminu;</li>
+          <li>dzień roboczy – dzień inny niż sobota, niedziela i inny niż dzień ustawowo wolny od pracy;</li>
+          <li>kaucja – określona indywidualnie na etapie ofertowania kwota, która płatna jest w formie przelewu wykonanego przed wydaniem pojazdu, którego dotyczy zamówienie, stanowiąca zabezpieczenie roszczeń Wynajmującego;</li>
+          <li>Umowa Ramowa – umowa pomiędzy Wynajmującym a klientem ramowym stanowiąca podstawę współpracy stron w zakresie najmu pojazdów.</li>
+        </ol>
+      </li>
+    </ol>
+  </section>
+
+  <section class="reg-sec" id="par-2">
+    <h2><b>§ 2</b> Najemca</h2>
+    <ol class="reg-ol">
+      <li>Pojazd będący przedmiotem najmu może być prowadzony wyłącznie przez Najemcę lub Użytkownika wskazanego przez Najemcę, który przedstawi Wynajmującemu ważny dowód osobisty lub paszport oraz prawo jazdy (dokumenty te muszą być w formie „fizycznej"). Forma elektroniczna dokumentu akceptowalna jest wyłącznie w odniesieniu do polskich dokumentów tożsamości i w sytuacji możliwości ich zweryfikowania za pomocą narzędzi udostępnionych przez organy administracji publicznej (np. za pomocą aplikacji mWeryfikator umożliwiającej potwierdzenie danych osoby korzystającej z aplikacji mObywatel), w tym możliwości technicznych przeprowadzenia tej weryfikacji w danym przypadku. Najemca odpowiedzialny jest jak za własne działania lub zaniechania, za działania i zaniechania innych kierowców użytkujących (prowadzących) samochód będący przedmiotem najmu.</li>
+      <li>Kierujący samochodem Najemca lub Użytkownik musi mieć ukończone 18 lat i posiadać uprawnienia do kierowania pojazdami.</li>
+      <li>W czasie użytkowania samochodu będącego przedmiotem najmu Najemca oraz Użytkownik są zobowiązani do:
+        <ol class="reg-sub">
+          <li>zabezpieczenia samochodu i wyposażenia przed kradzieżą z zachowaniem szczególnej staranności (każdorazowe zamykanie samochodu, staranne zabezpieczenie poza pojazdem dokumentów: dowodu rejestracyjnego oraz polisy OC, jeżeli zostały wydane, i kluczyków);</li>
+          <li>wykonywania własnym kosztem i staraniem codziennej obsługi samochodu (sprawdzanie i uzupełnianie oleju silnikowego, płynu chłodniczego, płynu hamulcowego, płynu do spryskiwaczy, płynu AdBlue, sprawdzanie stanu oraz ciśnienia w oponach, prawidłowego działania świateł);</li>
+          <li>stosowania w samochodach rodzaju paliwa zgodnie ze specyfikacją silnika, podaną w dowodzie rejestracyjnym / dokumentacji samochodu / na korku paliwa;</li>
+          <li>utrzymywania samochodu w należytej czystości, a także korzystania z samochodu zgodnie z zasadami prawidłowej eksploatacji;</li>
+          <li>przestrzegania przepisów ruchu drogowego;</li>
+          <li>nieprzewożenia w wypożyczonym pojeździe zwierząt;</li>
+          <li>niepalenia tytoniu, innych substancji oraz elektronicznych inhalatorów nikotyny (tzw. e-papieros).</li>
+        </ol>
+      </li>
+      <li>W razie odwołania przez Najemcę upoważnienia dla Użytkownika, obowiązany jest on do niezwłocznego poinformowania Wynajmującego o tej zmianie. Odwołanie jest skuteczne względem Wynajmującego z chwilą poinformowania go o tej okoliczności.</li>
+    </ol>
+  </section>
+
+  <section class="reg-sec" id="par-3">
+    <h2><b>§ 3</b> Zamawianie i rezerwacja usług</h2>
+    <ol class="reg-ol">
+      <li>Wynajmujący zapewnia Najemcy możliwość dokonania rezerwacji pojazdu za pośrednictwem kontaktu: osobistego w siedzibie Wypożyczalni, telefonicznego oraz e-mail. Potwierdzenie rezerwacji następuje taką samą drogą, jaka została zlecona. Potwierdzenie następuje w godzinach 8:00 – 17:00.</li>
+      <li>Zawarcie umowy następuje po spełnieniu wszystkich przesłanek formalnych określonych w § 4 pkt 1 i wymaga osobistego stawiennictwa Najemcy w biurze Wynajmującego, w godzinach pracy biura, tj. od 8:00 do 17:00 w dni powszednie oraz od 8:00 do 14:00 w soboty. Dopuszcza się możliwość zawarcia umowy poza godzinami pracy biura, pod warunkiem że Najemca korzystał wcześniej z usług Wynajmującego.</li>
+      <li>Zamówienie uwzględnia stawki opłat za najem w poszczególnych segmentach pojazdów i usługi dodatkowe ustalone na dzień złożenia zamówienia.</li>
+      <li>Zamówienie na pojazd zostaje zawarte z określonym limitem przebiegu lub bez limitu oraz na określony czas. Jeżeli zostanie przekroczony limit kilometrów lub czasu, Najemca zobowiązany jest do zapłaty Wynajmującemu opłaty za wyższy pakiet limitu, zgodnie z Cennikiem (Załącznik nr 1 do Regulaminu). Limity rozliczane są na koniec okresu najmu.</li>
+    </ol>
+  </section>
+
+  <section class="reg-sec" id="par-4">
+    <h2><b>§ 4</b> Realizacja usług</h2>
+    <ol class="reg-ol">
+      <li>Warunkiem przystąpienia przez Wynajmującego do realizacji Usługi najmu pojazdu jest łączne spełnienie przez Najemcę poniższych przesłanek:
+        <ol class="reg-sub">
+          <li>okazanie ważnego dokumentu tożsamości oraz prawa jazdy uprawniającego do kierowania wynajmowanym pojazdem;</li>
+          <li>zapoznanie się i akceptacja treści Regulaminu, dostępnego w siedzibie Wypożyczalni Power Rent przy ul. Mokrej 2a w Radomiu oraz na stronie internetowej www.power-rent.pl;</li>
+          <li>dokonanie wszystkich wymaganych płatności związanych z wynajmem pojazdu;</li>
+          <li>zaksięgowanie wpłaconych środków na rachunku bankowym Wynajmującego.</li>
+        </ol>
+      </li>
+      <li>Wynajmujący zastrzega sobie prawo odmowy realizacji Usługi w przypadku, gdy Najemca posiada wobec Wynajmującego wymagalne zobowiązania finansowe lub nie spełnia wymagań formalnych określonych w niniejszym Regulaminie.</li>
+      <li>Najemca jest zobowiązany do odbioru oraz zwrotu pojazdu będącego przedmiotem najmu w siedzibie Wypożyczalni Power Rent, przy ul. Mokrej 2a w Radomiu, chyba że Strony uzgodniły inne miejsce zwrotu w treści zamówienia.</li>
+      <li>Odbiór lub zwrot pojazdu w innym miejscu może nastąpić wyłącznie po wcześniejszym uzgodnieniu z Wynajmującym oraz z naliczeniem dodatkowej opłaty zgodnie z obowiązującym cennikiem (załącznik nr 1 do Regulaminu).</li>
+      <li>Odbiór i zwrot pojazdu możliwy jest wyłącznie w godzinach od 6:00 do 20:00 przez 7 dni w tygodniu, chyba że Strony postanowią inaczej w formie pisemnej lub elektronicznej. Zwrot poza wyznaczonymi godzinami jest niemożliwy.</li>
+      <li>Najemca jest zobowiązany do osobistego odbioru i zwrotu pojazdu, bądź zapewnienia odbioru przez wskazanego w Umowie Użytkownika.</li>
+      <li>Przy odbiorze pojazdu Najemca lub upoważniony Użytkownik zobowiązany jest do okazania ważnego dokumentu tożsamości (dowodu osobistego lub paszportu) oraz ważnego prawa jazdy.</li>
+      <li>Najemca otrzymuje pojazd czysty, zatankowany, sprawny technicznie, z kompletnym wyposażeniem obejmującym w szczególności: kluczyki, dowód rejestracyjny, potwierdzenie zawarcia polisy OC (w przypadku wyjazdów zagranicznych) oraz komplet obowiązkowego wyposażenia pojazdu, zgodnie z przepisami obowiązującymi na terytorium Rzeczypospolitej Polskiej.</li>
+      <li>W celu skutecznego przedłużenia Umowy Najmu Najemca zobowiązany jest:
+        <ol class="reg-sub">
+          <li>poinformować Wynajmującego o zamiarze przedłużenia najmu najpóźniej przed upływem opłaconego okresu najmu,</li>
+          <li>dokonać z góry płatności za cały planowany okres przedłużenia,</li>
+          <li>wskazać Wynajmującemu, w formie telefonicznej lub SMS, datę i godzinę zwrotu pojazdu.</li>
+        </ol>
+        Przedłużenie najmu wymaga każdorazowo akceptacji Wynajmującego.</li>
+      <li>Przedłużenie najmu odbywa się na warunkach handlowych aktualnych w chwili podpisania umowy.</li>
+      <li>Najemca zobowiązany jest zwrócić pojazd w stanie niepogorszonym, z uwzględnieniem normalnego zużycia eksploatacyjnego, z takim samym poziomem paliwa oraz płynu AdBlue (jeżeli dotyczy), a także w takim samym stanie czystości, w jakim pojazd został wydany oraz z takim samym kompletem obowiązkowego wyposażenia pojazdu.
+        <ol class="reg-sub">
+          <li>Zwrot pojazdu z niepełnym bakiem skutkuje obciążeniem Najemcy kosztami brakującego paliwa oraz opłatą manipulacyjną zgodnie z Tabelą Opłat.</li>
+          <li>Zwrot pojazdu w stanie zabrudzonym lub zanieczyszczonym skutkuje naliczeniem opłaty dodatkowej zgodnie z Tabelą Opłat, a w przypadku zapachu tytoniu, sierści zwierząt lub innych zanieczyszczeń – opłaty za czyszczenie specjalistyczne.</li>
+          <li>Zwrot pojazdu z niekompletnym wyposażeniem skutkuje obciążeniem Najemcy kosztami brakujących elementów wyposażenia, zgodnie z obowiązującym cennikiem.</li>
+        </ol>
+      </li>
+      <li>Z czynności wydania oraz zwrotu pojazdu sporządza się protokół, podpisany przez przedstawiciela Wynajmującego oraz Najemcę lub Użytkownika, a także dokumentację w postaci nagrania wideo pojazdu.
+        <ol class="reg-sub">
+          <li>W przypadku odmowy podpisania protokołu przez Najemcę, przedstawiciel Wynajmującego sporządza go jednostronnie, z adnotacją o odmowie podpisu.</li>
+          <li>W przypadku zwrotu pojazdu poza godzinami pracy, protokół sporządzany jest jednostronnie przez Wynajmującego. Najemca, który zamierza uczestniczyć w czynności przyjęcia pojazdu, jest zobowiązany poinformować o tym Wynajmującego oraz stawić się w siedzibie Wypożyczalni Power Rent o godzinie 8:00 w dniu następującym po dokonaniu zwrotu pojazdu.</li>
+        </ol>
+      </li>
+      <li>Brak zwrotu pojazdu w terminie 12 godzin od zakończenia okresu najmu, połączony z brakiem kontaktu ze strony Najemcy, będzie traktowany jako przywłaszczenie pojazdu, stanowiące czyn zabroniony zgodnie z art. 284 Kodeksu karnego. W takim przypadku Wynajmujący zastrzega sobie prawo do niezwłocznego zgłoszenia sprawy odpowiednim organom ścigania.</li>
+      <li>Wynajmujący zastrzega sobie prawo do zablokowania pojazdu w przypadku braku zwrotu pojazdu po zakończeniu okresu najmu zgodnie z postanowieniami Umowy lub w razie opóźnienia w zapłacie należności przysługujących Wynajmującemu od Najemcy.</li>
+      <li>Wynajmujący informuje, że wynajmowane pojazdy są wyposażone w urządzenia monitorujące GPS oraz w urządzenie umożliwiające jego zdalne unieruchomienie. Najemca przyjmuje tę informację do wiadomości i wyraża zgodę na ich stosowanie.</li>
+      <li>Najemca przyjmuje do wiadomości i akceptuje, że Wynajmujący zapewnia pojazd należący do określonego segmentu, a nie konkretny model. Dostarczony pojazd może różnić się od oczekiwanego w szczególności kolorem, wyposażeniem lub rodzajem skrzyni biegów. Różnice w kolorze pojazdu lub rodzaju skrzyni biegów względem pierwotnie zamówionego modelu nie stanowią podstawy do podstawienia innego pojazdu ani do roszczeń wobec Wynajmującego.</li>
+      <li>Nie stanowi podstawy do podstawienia pojazdu zastępczego wystąpienie wad nieistotnych, tj. niewpływających na właściwości jezdne i bezpieczeństwo pojazdu. Za wady nieistotne uznaje się w szczególności: niesprawne radio, nieotwierające się tylne szyby, niedziałającą zapalniczkę, brak napełnionej klimatyzacji itp.</li>
+      <li>W przypadku braku możliwości dostarczenia pojazdu z zamówionego segmentu, Wynajmujący może dostarczyć pojazd tej samej lub wyższej klasy. W takim przypadku stosuje się stawkę wynajmu zgodną z pierwotnym zamówieniem, a działanie to nie stanowi nienależytego wykonania Umowy.</li>
+    </ol>
+  </section>
+
+  <section class="reg-sec" id="par-5">
+    <h2><b>§ 5</b> Wyjazdy zagraniczne</h2>
+    <ol class="reg-ol">
+      <li>Przemieszczanie się pojazdem poza granicami Rzeczypospolitej Polskiej jest dopuszczalne wyłącznie po uzyskaniu uprzedniej zgody Wynajmującego, wyrażonej w formie dokumentowej, i wyłącznie na terytorium państw Unii Europejskiej lub strefy Schengen wskazanych w załączniku do Regulaminu (załącznik nr 2).
+        <ol class="reg-sub">
+          <li>Najemca ponosi pełną odpowiedzialność i koszty związane z użytkowaniem pojazdu poza granicami Polski, w tym koszty opisane w § 4 pkt 9.</li>
+          <li>W przypadku wyjazdu pojazdem poza granice Rzeczypospolitej Polskiej bez uprzedniej zgody Wynajmującego, Najemca zobowiązany jest do zapłaty kary umownej w wysokości określonej w Tabeli Opłat stanowiącej załącznik do niniejszego Regulaminu.</li>
+          <li>Udzielenie zgody na wyjazd zagraniczny wymaga uiszczenia opłaty zgodnej z Tabelą Opłat stanowiącą § 17 niniejszego Regulaminu.</li>
+        </ol>
+      </li>
+      <li>Jeżeli przepisy państw, na których terytorium porusza się pojazd, wymagają dodatkowego wyposażenia lub dostosowania technicznego, wszelkie koszty z tym związane ponosi Najemca.</li>
+      <li>Zabrania się przemieszczania pojazdem na terytorium: Rosji, Białorusi, Ukrainy, Mołdawii, Kosowa, Macedonii, Serbii, Turcji oraz innych krajów objętych działaniami wojennymi.</li>
+    </ol>
+  </section>
+
+  <section class="reg-sec" id="par-6">
+    <h2><b>§ 6</b> Zakazy</h2>
+    <ol class="reg-ol">
+      <li>Najemcy zabrania się korzystania z pojazdu w sposób sprzeczny z jego przeznaczeniem, w szczególności zabronione jest:
+        <ol class="reg-sub">
+          <li>palenie tytoniu, używanie elektronicznych inhalatorów nikotyny (e-papierosów), spożywanie alkoholu oraz używanie innych substancji psychoaktywnych w pojeździe,</li>
+          <li>holowanie pojazdem innych pojazdów lub przedmiotów,</li>
+          <li>dokonywanie jakichkolwiek przeróbek, modyfikacji lub tuningu pojazdu,</li>
+          <li>udział pojazdem w wyścigach, rajdach, jazdach torowych lub korzystanie z torów wyścigowych,</li>
+          <li>wykorzystywanie pojazdu do odpłatnego przewozu osób lub towarów,</li>
+          <li>wykorzystywanie pojazdu do popełnienia czynów zabronionych pod groźbą kary.</li>
+        </ol>
+      </li>
+      <li>Zabrania się przekazywania pojazdu osobom trzecim do korzystania, w jakiejkolwiek formie, w szczególności odpłatnie lub nieodpłatnie, bez uprzedniej zgody Wynajmującego.</li>
+      <li>Naruszenie zakazu, o którym mowa w ust. 2, skutkuje obowiązkiem zapłaty przez Najemcę kary umownej w wysokości 5 000 zł (pięć tysięcy złotych) netto.</li>
+    </ol>
+  </section>
+
+  <section class="reg-sec" id="par-7">
+    <h2><b>§ 7</b> Opłaty za najem</h2>
+    <ol class="reg-ol">
+      <li>Opłaty należne za najem pojazdu rozliczane są w jednym z trzech wariantów: pięciogodzinnym, dobowym albo miesięcznym, zgodnie ze złożonym zamówieniem. Najem pojazdu zawierany jest na czas określony wskazany w zamówieniu.</li>
+      <li>Opłaty za najem pojazdu naliczane są na podstawie aktualnego Cennika oraz Tabeli Opłat, stanowiących Załącznik nr 1 do niniejszego Regulaminu.
+        <ol class="reg-sub">
+          <li>W przypadku najmu dobowego dopuszcza się tolerancję opóźnienia w zwrocie pojazdu do 40 minut, bez naliczania dodatkowych opłat.</li>
+          <li>W przypadku najmu krótkoterminowego (do 5 godzin), przekroczenie zadeklarowanego czasu zwrotu skutkuje automatycznym przeliczeniem najmu na pełną dobę i naliczeniem opłaty zgodnie z cennikiem dobowym. W tego rodzaju najmie nie przewiduje się okresu tolerowanego spóźnienia.</li>
+          <li>W przypadku opóźnienia w zwrocie pojazdu, za które Wynajmujący nie ponosi odpowiedzialności, Najemca zobowiązany jest do zapłaty opłaty określonej w Tabeli Opłat, o której mowa w § 17 Regulaminu.</li>
+        </ol>
+      </li>
+      <li>Opłaty za najem pojazdu oraz usługi dodatkowe pobierane są z góry, przed rozpoczęciem świadczenia usługi.</li>
+      <li>Przedłużenie najmu odbywa się na warunkach handlowych aktualnych w chwili podpisania umowy.</li>
+      <li>Jeżeli po zwrocie pojazdu Najemcę obciążają opłaty lub kary określone w Tabeli Opłat, Wynajmujący dokumentuje obciążenie odpowiednim dokumentem księgowym. W przypadku rozliczenia należności z kaucją dokument zawiera stosowną adnotację.</li>
+      <li>W przypadku stwierdzenia szkód, braków w wyposażeniu lub usterek pojazdu Wynajmujący sporządza dokumentację fotograficzną oraz kosztorys naprawy, stanowiące podstawę rozliczenia szkody i potrącenia należności z kaucji.</li>
+      <li>Za datę dokonania płatności uważa się dzień uznania rachunku bankowego Wynajmującego lub dzień sporządzenia Umowy Najmu w przypadku płatności gotówkowej.</li>
+      <li>W przypadku najmu miesięcznego opłata płatna jest z góry, w równych ratach, za kolejne pełne okresy najmu, na podstawie faktury VAT wystawionej przez Wynajmującego, zgodnie z terminem płatności wskazanym na fakturze.
+        <ol class="reg-sub">
+          <li>Faktura VAT za każdy kolejny miesiąc przedłużenia najmu wystawiana jest z terminem płatności przypadającym najpóźniej na 1 dobę przed rozpoczęciem kolejnego okresu rozliczeniowego.</li>
+        </ol>
+      </li>
+      <li>W przypadku powstania po stronie Najemcy opóźnienia w zapłacie jakiejkolwiek należności, Wynajmujący, poza uprawnieniami przewidzianymi w niniejszym Regulaminie, jest uprawniony do wstrzymania świadczenia jakichkolwiek usług na rzecz Najemcy, w tym do odmowy przedłużenia Umowy Najmu lub wydania kolejnego pojazdu.</li>
+      <li>Wynajmujący ma prawo do potrącenia wszelkich należności wobec Najemcy, w tym kar umownych, kosztów napraw i opłat dodatkowych, z wpłaconej kaucji Najemcy.
+        <ol class="reg-sub">
+          <li>W przypadku, gdy potrącenia przekroczą wysokość kaucji, Najemca zobowiązany jest do uregulowania różnicy w terminie 12 godzin od dnia otrzymania wezwania do zapłaty.</li>
+        </ol>
+      </li>
+      <li>Wynajmujący wystawia paragon lub fakturę VAT dokumentujące usługę najmu oraz wszelkie inne opłaty, zgodnie z obowiązującymi przepisami prawa.</li>
+      <li>Najemca wyraża zgodę na otrzymywanie faktur w formie elektronicznej na adres e-mail wskazany w Umowie.</li>
+      <li>Wynajmujący ma prawo obciążyć Najemcę kosztami podstawienia pojazdu, jeżeli:
+        <ol class="reg-sub">
+          <li>zgłoszona przez Najemcę wada była nieistotna;</li>
+          <li>pojazd jest sprawny, a zgłoszenie wynika z nieznajomości zasad obsługi lub instrukcji użytkowania;</li>
+          <li>brak możliwości korzystania z pojazdu jest następstwem działania lub zaniechania Najemcy, w szczególności: zatankowania niewłaściwego rodzaju paliwa, braku uzupełnienia płynów eksploatacyjnych (oleju silnikowego, płynu hamulcowego, AdBlue itp.).</li>
+        </ol>
+      </li>
+      <li>Najemca ponosi we własnym zakresie koszty paliwa, płynów eksploatacyjnych, żarówek, napraw lub wymiany ogumienia, parkowania, przejazdów płatnymi odcinkami dróg, mandatów, kar administracyjnych oraz innych zobowiązań powstałych w okresie trwania najmu. Wynajmujący może udostępnić dane Najemcy właściwym organom publicznym w związku z ww. zobowiązaniami.</li>
+      <li>W przypadku wcześniejszego zwrotu pojazdu przez Najemcę, przed upływem okresu obowiązywania Umowy Najmu, Wynajmujący nie dokonuje zwrotu niewykorzystanej części opłaty za najem.</li>
+    </ol>
+  </section>
+
+  <section class="reg-sec" id="par-8">
+    <h2><b>§ 8</b> Odwołanie rezerwacji</h2>
+    <ol class="reg-ol">
+      <li>Najemca ma prawo do odwołania rezerwacji w każdym czasie przed rozpoczęciem Usługi, bez obowiązku podawania przyczyny.</li>
+      <li>Odwołanie rezerwacji wymaga poinformowania Wynajmującego:
+        <ol class="reg-sub">
+          <li>telefonicznie lub za pośrednictwem wiadomości SMS pod numerem +48 664 202 120, albo</li>
+          <li>poprzez wiadomość e-mail wysłaną na adres: Bartosz.k@power.radom.pl, z podaniem imienia i nazwiska Najemcy oraz daty, na którą dokonano rezerwacji. Wynajmujący niezwłocznie prześle Najemcy, na podany przez niego adres e-mail lub numer telefonu, potwierdzenie otrzymania oświadczenia o odwołaniu rezerwacji.</li>
+        </ol>
+      </li>
+      <li>W przypadku odwołania rezerwacji na mniej niż 24 godziny przed planowanym terminem rozpoczęcia Usługi:
+        <ol class="reg-sub">
+          <li>jeżeli Usługa została opłacona w całości, Wynajmujący jest uprawniony do zatrzymania 10% wartości najmu tytułem rekompensaty za zablokowanie dostępności pojazdu,</li>
+          <li>jeżeli Najemca wpłacił zadatek, zadatek ten nie podlega zwrotowi, zgodnie z art. 394 Kodeksu cywilnego.</li>
+        </ol>
+      </li>
+      <li>W przypadku nieodwołania rezerwacji oraz niepodjęcia pojazdu przez Najemcę w uzgodnionym terminie rozpoczęcia Usługi, Wynajmujący, pozostając w gotowości do wykonania Umowy Najmu, jest uprawniony do zatrzymania całości wpłaconej kwoty lub zadatku tytułem rekompensaty za blokadę pojazdu.</li>
+      <li>W przypadku wielokrotnego odwoływania rezerwacji przez tego samego Najemcę Wynajmujący może uzależnić potwierdzenie kolejnych rezerwacji od wpłaty zadatku w wysokości do 50% wartości planowanego najmu.</li>
+      <li>Wynajmujący zastrzega sobie prawo do anulowania rezerwacji w sytuacjach nadzwyczajnych, niezależnych od jego woli, w szczególności w przypadku:
+        <ol class="reg-sub">
+          <li>awarii, uszkodzenia lub kradzieży pojazdu,</li>
+          <li>opóźnionego zwrotu pojazdu przez poprzedniego Najemcę,</li>
+          <li>zdarzeń losowych lub wystąpienia siły wyższej.</li>
+        </ol>
+        W takim przypadku Wynajmujący niezwłocznie poinformuje Najemcę o anulowaniu rezerwacji oraz dokona zwrotu wszystkich otrzymanych płatności. Najemcy nie przysługują z tego tytułu dalsze roszczenia odszkodowawcze.</li>
+      <li>Zmiana terminu rezerwacji przez Najemcę jest możliwa wyłącznie za uprzednią zgodą Wynajmującego oraz uzależniona jest od dostępności pojazdu w nowym terminie.</li>
+    </ol>
+  </section>
+
+  <section class="reg-sec" id="par-9">
+    <h2><b>§ 9</b> Eksploatacja i naprawy</h2>
+    <ol class="reg-ol">
+      <li>W przypadku awarii pojazdu, konieczności wykonania czynności serwisowych, zatrzymania dowodu rejestracyjnego (w tym wirtualnego), kolizji drogowej, wypadku lub zauważenia nowego uszkodzenia pojazdu, Najemca lub Użytkownik pojazdu, niezależnie od wykupionego pakietu, zobowiązany jest do niezwłocznego poinformowania Wynajmującego telefonicznie pod numerem +48 664 201 202.</li>
+      <li>Po zgłoszeniu zdarzenia Najemca zobowiązany jest do ścisłego stosowania się do instrukcji przekazanych przez uprawnionego pracownika Wynajmującego. Najemca nie jest uprawniony do samodzielnego kontaktu z warsztatami naprawczymi, zlecania napraw, czynności serwisowych ani podpisywania lub odbioru faktur bez uprzedniej zgody Wynajmującego.</li>
+      <li>Najemca ponosi odpowiedzialność wobec Wynajmującego za wszelkie szkody w pojeździe, w tym za jego utratę, zniszczenie, uszkodzenie, kradzież lub przywłaszczenie, chyba że szkoda powstała bez winy Najemcy, a sprawca szkody został jednoznacznie wskazany i przyznał się do jej wyrządzenia w pisemnym oświadczeniu albo została sporządzona notatka Policji wskazująca osobę trzecią jako sprawcę.</li>
+      <li>Wyłączenie odpowiedzialności Najemcy, o którym mowa w ust. 3, nie ma zastosowania, jeżeli szkoda została wyrządzona przez Użytkownika pojazdu lub inną osobę, której pojazd został powierzony przez Najemcę lub Użytkownika. Najemca ponosi pełną odpowiedzialność za działania i zaniechania tych osób.</li>
+      <li>Najemca ponosi odpowiedzialność w szczególności za szkody wynikające z niewłaściwej eksploatacji pojazdu, w tym spowodowane:
+        <ol class="reg-sub">
+          <li>niewystarczającą ilością oleju silnikowego lub oleju w skrzyni biegów,</li>
+          <li>brakiem płynu hamulcowego, AdBlue lub płynu chłodniczego,</li>
+          <li>niewłaściwym ciśnieniem w oponach,</li>
+          <li>przekroczeniem dopuszczalnej ładowności pojazdu,</li>
+          <li>użytkowaniem pojazdu niezgodnie z zaleceniami producenta, instrukcją obsługi lub obowiązującymi przepisami prawa.</li>
+        </ol>
+      </li>
+      <li>Wynajmujący jest uprawniony do obciążenia Najemcy kosztami naprawy szkody, a także kosztami związanymi z:
+        <ol class="reg-sub">
+          <li>brakami części, wyposażenia lub dokumentów pojazdu,</li>
+          <li>zużyciem pojazdu wykraczającym poza normalną eksploatację,</li>
+          <li>szkodami powstałymi na skutek niewłaściwej eksploatacji,</li>
+          <li>uszkodzeniem lusterek, reflektorów oraz drobnymi uszkodzeniami karoserii,</li>
+          <li>zwrotem brudnego pojazdu,</li>
+          <li>utratą wartości pojazdu po wypadku, jeżeli jego przyczyna leżała po stronie Najemcy lub osoby, której pojazd został powierzony.</li>
+        </ol>
+      </li>
+      <li>Jeżeli koszty naprawy szkody zostały określone w Tabeli Opłat, naprawienie szkody następuje poprzez zapłatę przez Najemcę kwoty wskazanej w tej Tabeli. W przypadku gdy rzeczywisty koszt naprawy przekracza kwotę wskazaną w Tabeli Opłat, Najemca ponosi odpowiedzialność do wysokości udziału własnego w szkodzie, z zastrzeżeniem ust. 13.</li>
+      <li>W przypadku szkód nieujętych w Tabeli Opłat Wynajmujący przedstawi Najemcy kosztorys naprawy, który stanowi podstawę do zapłaty należności w terminie 1 dnia od dnia otrzymania dokumentu księgowego.</li>
+      <li>W razie kolizji drogowej, wypadku, włamania lub kradzieży pojazdu Najemca zobowiązany jest każdorazowo wezwać Policję oraz dopilnować sporządzenia protokołu z miejsca zdarzenia.</li>
+      <li>Najemca zobowiązany jest do niezwłocznego poinformowania Wynajmującego o zdarzeniach, o których mowa w ust. 9, oraz do przekazania wszelkich informacji i dokumentów niezbędnych do likwidacji szkody, zgodnie z instrukcjami Wynajmującego.</li>
+      <li>Najemca zobowiązany jest do przedłożenia Wynajmującemu wypełnionego formularza zgłoszenia szkody najpóźniej w chwili zwrotu pojazdu. Brak formularza skutkuje obciążeniem Najemcy zgodnie z Tabelą Opłat.</li>
+      <li>Najemca nie jest uprawniony do dokonywania napraw, przeróbek, przeglądów ani jakichkolwiek zmian w pojeździe bez uprzedniej zgody Wynajmującego wyrażonej w formie pisemnej lub dokumentowej (e-mail), pod rygorem nieważności.</li>
+      <li>Najemca ponosi pełną odpowiedzialność za szkodę, niezależnie od jej zgłoszenia i dopełnienia formalności, jeżeli:
+        <ol class="reg-sub">
+          <li>pojazd był prowadzony pod wpływem alkoholu, narkotyków lub innych substancji psychoaktywnych,</li>
+          <li>doszło do rażącego naruszenia przepisów ruchu drogowego,</li>
+          <li>kierujący nie posiadał wymaganych uprawnień,</li>
+          <li>szkoda powstała wskutek nieprawidłowej eksploatacji pojazdu,</li>
+          <li>zdarzenie miało związek z popełnieniem przestępstwa,</li>
+          <li>szkoda została wyrządzona umyślnie lub w wyniku rażącego niedbalstwa,</li>
+          <li>doszło do przekazania pojazdu osobie trzeciej, która nie została wskazana w Umowie Najmu ani zaakceptowana przez Wynajmującego,</li>
+          <li>w toku likwidacji szkody wystąpiły uchybienia po stronie Najemcy lub Użytkownika.</li>
+        </ol>
+      </li>
+    </ol>
+  </section>
+
+  <section class="reg-sec" id="par-10">
+    <h2><b>§ 10</b> Obowiązki Wynajmującego</h2>
+    <ol class="reg-ol">
+      <li>W przypadku unieruchomienia pojazdu na okres dłuższy niż 12 godzin, spowodowanego awarią, za którą Najemca nie ponosi odpowiedzialności, Wynajmujący zapewni Najemcy – w miarę dostępności – pojazd zastępczy.</li>
+      <li>Pojazd zastępczy zostanie podstawiony w możliwie najkrótszym czasie, jednak nie później niż w terminie 12 godzin od skutecznego zgłoszenia unieruchomienia pojazdu, z zastrzeżeniem dostępności pojazdów zastępczych.</li>
+      <li>Pojazd zastępczy nie przysługuje w szczególności w przypadku:
+        <ol class="reg-sub">
+          <li>zdarzenia wynikłego z nieprawidłowej eksploatacji;</li>
+          <li>gdy zostały utracone: tablica/-e rejestracyjna, kluczyk/-i, dowód rejestracyjny, potwierdzenie zawarcia umowy OC;</li>
+          <li>gdy kluczyk został zatrzaśnięty wewnątrz pojazdu;</li>
+          <li>gdy Najemca zlecił naprawę pojazdu innemu wykonawcy niż wskazany przez Wynajmującego;</li>
+          <li>gdy unieruchomienie pojazdu nastąpiło w wyniku aktywowania przez Wynajmującego blokady pojazdu, zgodnie z postanowieniami Regulaminu, w szczególności w przypadku braku zwrotu pojazdu w terminie do 24 godzin od zakończenia najmu lub opóźnienia Najemcy w uiszczeniu należnych płatności.</li>
+        </ol>
+      </li>
+      <li>Wynajmujący decyduje, czy pojazd zastępczy zostanie udostępniony do czasu usunięcia awarii pojazdu pierwotnego, czy na cały pozostały okres trwania Umowy Najmu.</li>
+      <li>Kilometry przejechane pojazdem zastępczym wliczają się do limitu przebiegu określonego w Umowie Najmu.</li>
+      <li>Wynajmujący ma prawo odmówić udostępnienia pojazdu zastępczego, jeżeli szkoda komunikacyjna powstała z winy Najemcy. W takim przypadku Wynajmującemu przysługuje prawo wypowiedzenia umowy bez zachowania okresu wypowiedzenia.</li>
+      <li>Wynajmujący ponosi koszty badań technicznych, przeglądów okresowych oraz napraw serwisowych wynikających z normalnej eksploatacji pojazdu. Najemca ponosi koszty napraw wynikających z ponadnormatywnego zużycia pojazdu, w szczególności elementów takich jak klocki hamulcowe, ogumienie lub sprzęgło.</li>
+      <li>Wynajmujący nie ponosi odpowiedzialności za skutki czasowego braku możliwości korzystania z pojazdu spowodowane koniecznością przeprowadzenia badania technicznego, przeglądu okresowego lub naprawy, jak również wynikające z postępowań administracyjnych związanych z rejestracją, przerejestrowaniem lub dopuszczeniem pojazdu do ruchu.</li>
+    </ol>
+  </section>
+
+  <section class="reg-sec" id="par-11">
+    <h2><b>§ 11</b> Ubezpieczenie pojazdu</h2>
+    <ol class="reg-ol">
+      <li>Pojazdy będące przedmiotem najmu na zasadach wskazanych w niniejszym Regulaminie są objęte ubezpieczeniem OC na podstawie odrębnej umowy zawartej przez Wynajmującego z Towarzystwem Ubezpieczeniowym.</li>
+      <li>Ogólne Warunki Ubezpieczenia pojazdów są dostępne w Biurze Obsługi Klienta w Radomiu przy ul. Mokrej 2a.</li>
+      <li>Najemca jest zobowiązany przestrzegać postanowień ogólnych warunków ubezpieczenia. W przypadku udostępnienia pojazdu Użytkownikowi, Najemca jest zobowiązany do poinformowania osoby kierującej pojazdem o zobowiązaniu przestrzegania tych ogólnych warunków ubezpieczenia.</li>
+    </ol>
+  </section>
+
+  <section class="reg-sec" id="par-12">
+    <h2><b>§ 12</b> Odpowiedzialność za najem</h2>
+    <ol class="reg-ol">
+      <li>Wynajmujący ponosi wobec Najemcy odpowiedzialność za prawidłowe wykonanie Umowy Najmu, w tym za wady pojazdu, zgodnie z przepisami Kodeksu cywilnego oraz postanowieniami Umowy i Regulaminu, z zastrzeżeniem ust. 2–5 poniżej.</li>
+      <li>Wynajmujący nie ponosi odpowiedzialności w szczególności:
+        <ol class="reg-sub">
+          <li>za szkody powstałe w wyniku nieprawidłowej eksploatacji pojazdu przez Najemcę, Użytkownika lub osoby trzecie, w tym w szczególności za przebicie opony, uszkodzenie szyb lub elementów nadwozia,</li>
+          <li>za szkody wynikające z ingerencji w pojazd dokonanej bez zgody Wynajmującego lub z użytkowania pojazdu niezgodnie z jego przeznaczeniem, zaleceniami producenta, instrukcją obsługi lub obowiązującymi przepisami prawa,</li>
+          <li>za szkody powstałe wskutek działania siły wyższej,</li>
+          <li>za szkody powstałe w wyniku kolizji lub wypadku drogowego, jeżeli Wynajmujący nie ponosi za nie odpowiedzialności,</li>
+          <li>za rzeczy pozostawione, przechowywane lub przewożone w pojeździe przez Najemcę, Użytkownika lub osoby trzecie.</li>
+        </ol>
+      </li>
+      <li>Odpowiedzialność Najemcy za szkody w pojeździe powstałe w okresie trwania Umowy Najmu, z zastrzeżeniem przypadków wyłączenia odpowiedzialności określonych w Regulaminie, ograniczona jest do kwoty udziału własnego w wysokości 5 000,00 zł za każdą szkodę.</li>
+      <li>Najemca ma obowiązek niezwłocznego poinformowania Wynajmującego o każdej próbie kierowania roszczeń przez osoby trzecie w stosunku do pojazdu lub pojazdów wynajętych mu przez Wynajmującego.</li>
+      <li>Wynajmujący jest uprawniony do zatrzymania wpłaconej kaucji do dnia następującego po dniu sporządzenia wyceny powstałej szkody lub zakończenia procesu jej rozliczenia.</li>
+    </ol>
+  </section>
+
+  <section class="reg-sec" id="par-13">
+    <h2><b>§ 13</b> Kaucja zabezpieczająca</h2>
+    <ol class="reg-ol">
+      <li>Kaucja stanowi zabezpieczenie ewentualnych roszczeń Wynajmującego, w szczególności z tytułu szkód, braków w wyposażeniu, kar umownych lub nieuregulowanych należności.</li>
+      <li>Najemca zobowiązany jest do wpłaty kaucji zabezpieczającej na rzecz Wynajmującego, w wysokości ustalonej podczas ofertowania pojazdu. Kaucja może zostać wpłacona w formie gotówkowej, przelewem lub przelewem BLIK.</li>
+      <li>Zwrot kaucji następuje w dniu zwrotu pojazdu, pod warunkiem że:
+        <ol class="reg-sub">
+          <li>pojazd zostanie oddany w godzinach pracy biura;</li>
+          <li>nie stwierdzono żadnych szkód;</li>
+          <li>okres najmu nie przekroczył 14 dni.</li>
+        </ol>
+      </li>
+      <li>W przypadku zwrotu uszkodzonego pojazdu, kaucja pozostaje zatrzymana do momentu pełnego rozliczenia szkody, chyba że Wynajmujący zdecyduje się pokryć koszty szkody z zatrzymanej kaucji.</li>
+      <li>Jeżeli okres najmu przekracza 14 dni, kaucja zostaje zwrócona w terminie do 7 dni roboczych od dnia zwrotu pojazdu.</li>
+      <li>W przypadku, gdy w trakcie trwania najmu Wynajmujący wykorzysta całość lub część kaucji na pokrycie kosztów związanych z przedłużeniem najmu lub innymi należnościami, Najemca zobowiązany jest do uzupełnienia kaucji do pełnej wysokości w terminie nie dłuższym niż 12 godzin od momentu powiadomienia.</li>
+      <li>Niedokonanie uzupełnienia kaucji w terminie, o którym mowa w ust. 6, uprawnia Wynajmującego do natychmiastowego rozwiązania Umowy Najmu bez zachowania okresu wypowiedzenia oraz do zastosowania środków zabezpieczających, w tym zdalnego zablokowania pojazdu, zgodnie z postanowieniami Regulaminu.</li>
+      <li>W przypadku, gdy pojazd wymaga naprawy z przyczyn leżących po stronie Najemcy, Wynajmujący jest uprawniony do wstrzymania zwrotu kaucji do czasu całkowitego rozliczenia szkody, nie dłużej jednak niż przez 14 dni kalendarzowych od dnia sporządzenia kosztorysu naprawy.</li>
+    </ol>
+  </section>
+
+  <section class="reg-sec" id="par-14">
+    <h2><b>§ 14</b> Reklamacje</h2>
+    <ol class="reg-ol">
+      <li>Reklamacje związane z nieprawidłowym wykonaniem umowy najmu przez Wynajmującego oraz związane z płatnościami należy kierować: w formie pisemnej – przesyłką pocztową w rozumieniu art. 3 pkt 21 ustawy z dnia 23 listopada 2012 r. (Dz.U. poz. 1529) na adres: Power Rent Sp. z o.o., ul. Mokra 2a, 26-600 Radom lub w formie elektronicznej na adres: Bartosz.k@power.radom.pl.</li>
+      <li>Rekomenduje się wskazanie w reklamacji następujących danych: imienia i nazwiska osoby zgłaszającej reklamację, informacji i okoliczności dotyczących przedmiotu reklamacji, w szczególności rodzaju i daty wystąpienia nieprawidłowości, żądania Najemcy, danych kontaktowych składającego reklamację.</li>
+      <li>Wynajmujący udziela odpowiedzi na reklamację bez zbędnej zwłoki, jednak nie później niż w terminie 30 dni od dnia otrzymania reklamacji.</li>
+    </ol>
+  </section>
+
+  <section class="reg-sec" id="par-15">
+    <h2><b>§ 15</b> Dane osobowe Najemcy / Użytkownika</h2>
+    <ol class="reg-ol">
+      <li>Administratorem danych osobowych Najemcy i Użytkownika jest Power Rent Sp. z o.o. z siedzibą w Radomiu, ul. Mokra 2a, 26-600 Radom, KRS: 0000539597, NIP: 9482602652, REGON: 360508580, o kapitale zakładowym 750 tys. zł (zwana dalej Administratorem).</li>
+      <li>W sprawach związanych z danymi osobowymi Najemca i Użytkownik może kontaktować się za pośrednictwem adresu e-mail: Bartosz.k@power.rent.pl oraz pisemnie na adres: Power Rent, ul. Mokra 2a, 26-600 Radom.</li>
+      <li>Dane osobowe Najemcy i Użytkownika są przetwarzane przez Administratora w następujących celach: wykonania zawartej umowy najmu oraz podjęcia działań niezbędnych do jej realizacji (art. 6 ust. 1 lit. b RODO); udokumentowania wykonanej usługi na podstawie przepisów prawa podatkowego, celnego i rachunkowego (art. 6 ust. 1 lit. c RODO); w celach archiwalnych (dowodowych), prowadzenia audytów wewnętrznych i raportowania oraz realizacji praw i aktualizacji danych – stanowiących prawnie uzasadniony interes Administratora (art. 6 ust. 1 lit. f RODO).</li>
+      <li>Odbiorcami danych osobowych Najemcy i Użytkownika będą firmy świadczące usługi na zlecenie Administratora (w szczególności usługi księgowe, IT, serwisu, napraw, ubezpieczenia) oraz kancelarie prawne. Dane mogą być udostępniane organom publicznym w zakresie wynikającym z przepisów prawa.</li>
+      <li>Dane osobowe przetwarzane w związku z umową najmu Administrator będzie przetwarzać przez czas realizacji umowy, a po jej zakończeniu – do celów podatkowych – przez okres 5 lat licząc od końca roku kalendarzowego, w którym powstał obowiązek podatkowy, z zastrzeżeniem możliwości przedłużenia o okres przedawnienia roszczeń. Po tym okresie dane będą zanonimizowane lub usuwane.</li>
+      <li>Administrator nie zamierza przekazywać danych osobowych do tzw. „państwa trzeciego" (poza Europejski Obszar Gospodarczy) ani organizacji międzynarodowej.</li>
+      <li>Najemcy i Użytkownikowi przysługują prawa: dostępu do swoich danych oraz otrzymania ich kopii; sprostowania (poprawiania) danych; usunięcia danych (gdy przetwarzanie nie następuje w celu wywiązania się z obowiązku prawnego); ograniczenia przetwarzania; przenoszenia danych; wniesienia sprzeciwu wobec przetwarzania danych przetwarzanych na podstawie prawnie uzasadnionego interesu.</li>
+      <li>W celu skorzystania ze swoich praw Najemca i Użytkownik powinien kontaktować się z Inspektorem Ochrony Danych (dane kontaktowe wskazane w pkt 2 powyżej).</li>
+      <li>W przypadku uznania, że przetwarzanie danych osobowych narusza przepisy RODO, przysługuje prawo wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych (ul. Stawki 2, 00-193 Warszawa).</li>
+      <li>Przekazanie przez Najemcę i Użytkownika danych osobowych jest niezbędne do zawarcia umowy najmu samochodu. Niepodanie danych spowoduje niemożność zawarcia i realizacji umowy najmu.</li>
+      <li>Dane osobowe Najemcy i Użytkownika nie będą przetwarzane w sposób zautomatyzowany i nie będą profilowane.</li>
+      <li>W razie zmiany danych podanych Wynajmującemu Najemca i Użytkownik poinformuje Wynajmującego niezwłocznie, nie później niż w terminie 7 dni od zaistniałej zmiany, w formie mailowej na adres: Bartosz.k@power.radom.pl.</li>
+      <li>Jeżeli Najemca i Użytkownik nie poinformuje Wynajmującego o zmianie adresu do korespondencji, adresu e-mail lub numeru telefonu w ww. terminie, Wynajmujący kontaktuje się zgodnie z dotychczas wskazanymi danymi, a korespondencję uważa się za prawidłowo doręczoną.</li>
+      <li>Wynajmujący jest uprawniony do podjęcia kontaktu telefonicznego w celu potwierdzenia zmiany danych. W takim przypadku zmiana danych nie będzie skuteczna wobec Wynajmującego do czasu uzyskania tego potwierdzenia.</li>
+    </ol>
+  </section>
+
+  <section class="reg-sec" id="par-16">
+    <h2><b>§ 16</b> Postanowienia końcowe</h2>
+    <ol class="reg-ol">
+      <li>Zapłata kar umownych czy innych odszkodowań lub opłat umownych wynikających z umowy ramowej lub Regulaminu nie wyłącza prawa Wynajmującego do dochodzenia odszkodowania przewyższającego wysokość takich kar czy odszkodowań lub opłat na zasadach ogólnych.</li>
+      <li>Obciążenia z tytułu kar umownych zostaną udokumentowane przez Wynajmującego notą obciążeniową. Pozostałe obciążenia zostaną powiększone o podatek VAT obliczony zgodnie z obowiązującymi przepisami na dzień wystawienia faktury dokumentującej należność.</li>
+      <li>Najemca nie może, bez uprzedniej zgody Wynajmującego wyrażonej w formie pisemnej zastrzeżonej pod rygorem nieważności, przenieść całości lub części praw lub obowiązków wynikających z umowy najmu lub umowy ramowej na rzecz osób trzecich.</li>
+      <li>Wynajmujący jest uprawniony do przeniesienia całości lub części praw lub obowiązków wynikających z umowy najmu lub umowy ramowej na rzecz osób trzecich, na co Najemca wyraża zgodę akceptując umowę najmu, umowę ramową lub Regulamin. Jeśli termin zastrzeżony w umowie najmu lub umowie ramowej nie wskazuje, czy chodzi o dni robocze czy kalendarzowe, liczą się dni kalendarzowe.</li>
+      <li>Jeżeli poszczególne postanowienia umowy najmu, umowy ramowej lub Regulaminu okażą się nieważne lub bezskuteczne w całości lub w części z dowolnej przyczyny, inne postanowienia pozostają w mocy. Wynajmujący i Najemca zobowiązują się zastąpić postanowienia nieważne lub bezskuteczne innymi w taki sposób, aby jak najpełniej wypełnić cel umowy.</li>
+      <li>Umowa najmu oraz wynikające z niej zobowiązania podlegają polskiemu prawu (w szczególności w sprawach nieuregulowanych stosuje się odpowiednie przepisy Kodeksu cywilnego) oraz jurysdykcji polskich sądów powszechnych.</li>
+      <li>Wszelkie spory wynikające z Umowy strony poddają rozstrzygnięciu sądu właściwego miejscowo dla Wynajmującego.</li>
+    </ol>
+  </section>
+
+  <section class="reg-sec" id="par-17">
+    <h2><b>§ 17</b> Tabele opłat</h2>
+    <p>Określone w poniższych Tabelach Opłat obciążenia zostaną udokumentowane fakturą VAT. Poniższe opłaty nie uwzględniają podatku VAT (z wyłączeniem oznaczeń wskazanych pod tabelami).</p>
+
+    <div class="reg-table-wrap">
+      <table class="reg-table">
+        <caption>Pozostałe opłaty / kary umowne</caption>
+        <thead><tr><th>Lp.</th><th>Tytuł</th><th>Kwota</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Kara umowna za palenie tytoniu oraz innych środków w pojeździe lub używanie elektronicznych inhalatorów nikotyny (e-papieros)</td><td class="amt">500,00 PLN</td></tr>
+          <tr><td>2</td><td>Kara umowna za udostępnienie samochodu osobie nieuprawnionej</td><td class="amt">5 000,00 PLN</td></tr>
+          <tr><td>3</td><td>Kara umowna za demontaż z pojazdu urządzenia GPS</td><td class="amt">10 000,00 PLN</td></tr>
+          <tr><td>4</td><td>Kara umowna za wyjazd poza granice Polski bez zgody Wynajmującego</td><td class="amt">1 000,00 PLN</td></tr>
+          <tr><td>5</td><td>Opłata za dotankowanie auta (zwrot ze stanem zbiornika niższym niż przy wydaniu)</td><td class="amt">koszt paliwa wg cennika PKN Orlen + usługa serwisowa 30 zł; koszt AdBlue wg cennika PKN Orlen + usługa serwisowa 30 zł</td></tr>
+          <tr><td>6</td><td>Opłata za zwrot pojazdu z brudnym nadwoziem lub wnętrzem (w tym utrzymujący się zapach wymagający ozonowania)</td><td class="amt">osobowe (S, M): od 40,00 PLN; większe segmenty (L, L+, XL) oraz autolawety: od 50,00 PLN</td></tr>
+          <tr><td>7</td><td>Opłata za zwrot pojazdu z brudnym nadwoziem i wnętrzem</td><td class="amt">osobowe (S, M): od 50,00 PLN; większe segmenty (L, L+, XL) oraz autolawety: od 60,00 PLN</td></tr>
+          <tr><td>8</td><td>Kara umowna za zwrot pojazdu z brudną tapicerką wymagającą prania</td><td class="amt">200,00 PLN</td></tr>
+          <tr><td>9</td><td>Kara umowna za holowanie innych pojazdów wynajętym pojazdem</td><td class="amt">500,00 PLN</td></tr>
+          <tr><td>10</td><td>Kara umowna za zatankowanie pojazdu niewłaściwym rodzajem paliwa</td><td class="amt">1 000,00 PLN</td></tr>
+          <tr><td>11</td><td>Kara umowna za brak lub uszkodzenie kołpaka</td><td class="amt">120,00 PLN</td></tr>
+          <tr><td>12</td><td>Kara umowna za uszkodzenie felgi aluminiowej</td><td class="amt">500,00 PLN</td></tr>
+          <tr><td>13</td><td>Kara umowna za przewóz zwierząt</td><td class="amt">500,00 PLN</td></tr>
+          <tr><td>14</td><td>Kara umowna za przewożenie paliwa w kanistrze w kabinie kierowcy</td><td class="amt">500,00 PLN</td></tr>
+          <tr><td>15</td><td>Opłata za odbiór/zdanie w innym miejscu niż w Radomiu przy ul. Mokrej 2a</td><td class="amt">wycena indywidualna od 50 PLN</td></tr>
+          <tr><td>16</td><td>Kara umowna za brak kluczyka lub pilota do pojazdu</td><td class="amt">1 000,00 PLN</td></tr>
+          <tr><td>17</td><td>Kara umowna za brak dowodu rejestracyjnego, polisy ubezpieczeniowej, tablicy lub naklejki rejestracyjnej na szybie</td><td class="amt">500,00 PLN</td></tr>
+          <tr><td>18</td><td>Kara umowna za brak części wyposażenia samochodu niewymienionych w cenniku</td><td class="amt">wg cennika producenta + 30%</td></tr>
+          <tr><td>19</td><td>Kara umowna za każdy dzień przestoju pojazdu spowodowany uszkodzeniem auta, utratą dokumentów lub kluczyków związanych z koniecznością ich odtworzenia</td><td class="amt">100,00 PLN</td></tr>
+          <tr><td>20</td><td>Opłata za zwłokę w zwrocie samochodu do 5 h</td><td class="amt">40,00 PLN / 1h</td></tr>
+          <tr><td>21</td><td>Opłata za naprawy blacharsko-lakiernicze</td><td class="amt">koszt usługi lub części + 40%</td></tr>
+          <tr><td>22</td><td>Kara umowna za uszkodzenie szyby</td><td class="amt">wycena indywidualna od 1 000 PLN</td></tr>
+          <tr><td>23</td><td>Kara umowna za uszkodzenie opony</td><td class="amt">wycena indywidualna od 400 PLN</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="reg-note">* Kwoty podane są netto, z wyłączeniem pkt 20.</p>
+
+    <div class="reg-table-wrap">
+      <table class="reg-table">
+        <caption>Opłata za wyjazd zagraniczny</caption>
+        <thead><tr><th>Kraje</th><th>Opłata</th></tr></thead>
+        <tbody>
+          <tr><td>Niemcy, Czechy, Słowacja</td><td class="amt">200,00 PLN</td></tr>
+          <tr><td>Szwajcaria, Holandia, Belgia, Litwa, Łotwa, Dania, Austria, Węgry</td><td class="amt">400,00 PLN</td></tr>
+          <tr><td>Francja, Chorwacja, Słowenia, Estonia, Norwegia, Szwecja, Włochy</td><td class="amt">500,00 PLN</td></tr>
+          <tr><td>Hiszpania, Portugalia, Wielka Brytania, Rumunia, Bułgaria, Grecja</td><td class="amt">700,00 PLN</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="reg-note">* Kwoty podane są brutto.</p>
+
+    <div class="reg-table-wrap">
+      <table class="reg-table">
+        <caption>Kaucja</caption>
+        <thead><tr><th>Kraj / kraje</th><th>Kwota</th></tr></thead>
+        <tbody>
+          <tr><td>Polska</td><td class="amt">1 000 PLN</td></tr>
+          <tr><td>Austria, Niemcy, Czechy, Słowacja</td><td class="amt">1 500 PLN</td></tr>
+          <tr><td>Belgia, Chorwacja, Estonia, Holandia, Litwa, Łotwa, Szwajcaria, Dania, Węgry, Włochy</td><td class="amt">2 000 PLN</td></tr>
+          <tr><td>Dania, Francja, Hiszpania, Norwegia, Portugalia, Słowenia, Szwecja</td><td class="amt">3 000 PLN</td></tr>
+          <tr><td>Bułgaria, Grecja, Irlandia, Rumunia, Wielka Brytania</td><td class="amt">4 000 PLN</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="reg-foothint">
+    <p>Pełna, wiążąca wersja regulaminu dostępna jest do pobrania w formacie PDF (Wersja 1.6, obowiązująca od 01.03.2025). W sprawach nieuregulowanych prosimy o kontakt: <a href="tel:+48664201202">664&nbsp;201&nbsp;202</a> lub <a href="mailto:bartosz.k@power.radom.pl">bartosz.k@power.radom.pl</a>.</p>
+  </div>
+
+  <a class="reg-back" href="index.html">← Wróć na stronę główną</a>
+</div>
+
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand"><a href="index.html" class="logo logo--light"><span class="logo-badge">P</span><span class="logo-text"><span class="lr">Power</span><span class="lk">Rent</span></span></a><p>Wypożyczalnia busów i aut dostawczych w Radomiu. Ponad 10 lat na rynku, ponad 50 aut.</p><a href="tel:664201202" class="footer-phone">664 201 202</a></div>
+    <div class="footer-col"><h4>Nawigacja</h4><ul><li><a href="o-nas.html">O nas</a></li><li><a href="oferta.html">Nasza oferta</a></li><li><a href="uslugi.html">Usługi dodatkowe</a></li><li><a href="faq.html">FAQ</a></li><li><a href="cennik.html">Cennik</a></li><li><a href="rezerwacje.html">Rezerwacja</a></li></ul></div>
+    <div class="footer-col"><h4>Kontakt</h4><ul class="footer-contact"><li><span>Mokra 2A, 26-600 Radom</span></li><li><span class="lab">Tel:</span> <a href="tel:664201202">664 201 202</a></li><li><span class="lab">E-mail:</span> <a href="mailto:Donkozak@gmail.com">Donkozak@gmail.com</a></li><li><span class="lab">Godziny:</span> <span>Pn–Pt 8–17 · Sb 8–14</span></li></ul></div>
+  </div>
+  <div class="wrap footer-bottom">© 2026 Power Rent · Mokra 2A, 26-600 Radom · Wszelkie prawa zastrzeżone</div>
+</footer>
+
+<script>
+/* Navbar — burger + chowanie/scroll, zachowanie jak na stronie głównej */
+(function(){
+  var hdr=document.getElementById('hdr'), burger=document.getElementById('burger'), menu=document.getElementById('menu');
+  if(burger&&menu){
+    burger.addEventListener('click',function(){ menu.classList.toggle('open'); });
+    menu.addEventListener('click',function(e){ if(e.target&&e.target.closest('a')) menu.classList.remove('open'); });
+  }
+  if(hdr){
+    var onScroll=function(){ hdr.classList.toggle('scrolled', (window.pageYOffset||document.documentElement.scrollTop||0) > 8); };
+    window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  }
+})();
+</script>
+<script src="rezerwuj.js" defer></script>
+<script>
+/* O nas — reveal + licznik + pasek postępu */
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var revs = Array.prototype.slice.call(document.querySelectorAll('.ab-rev'));
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -10% 0px',threshold:0.12});
+    revs.forEach(function(el){io.observe(el);});
+  } else { revs.forEach(function(el){el.classList.add('in');}); }
+
+  function countUp(el){
+    var target = parseInt(el.getAttribute('data-count'),10);
+    var suf = el.getAttribute('data-suffix') || '';
+    if(reduce || !isFinite(target)){ el.textContent = (isFinite(target)?target:el.textContent) + suf; return; }
+    var dur=1100, t0=null;
+    function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/dur), e=1-Math.pow(1-p,3);
+      el.textContent = Math.round(target*e) + suf;
+      if(p<1) requestAnimationFrame(step); else el.textContent = target + suf; }
+    el.textContent = '0' + suf; requestAnimationFrame(step);
+  }
+  var odo = document.querySelector('.ab-odo'), fired=false;
+  function fire(){ if(fired)return; fired=true; Array.prototype.forEach.call(document.querySelectorAll('.ab-odo .n[data-count]'), countUp); }
+  if(odo && 'IntersectionObserver' in window){
+    var io2 = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){fire();io2.disconnect();}});},{threshold:0.3});
+    io2.observe(odo);
+  } else { fire(); }
+
+  var prog = document.getElementById('abProg');
+  if(prog){
+    var ticking=false;
+    function upd(){ var h=document.documentElement.scrollHeight-window.innerHeight; var y=window.pageYOffset||document.documentElement.scrollTop||0; prog.style.width=(h>0?Math.min(100,y/h*100):0)+'%'; ticking=false; }
+    window.addEventListener('scroll',function(){ if(!ticking){ ticking=true; (window.requestAnimationFrame||function(f){f();})(upd); } },{passive:true});
+    upd();
+  }
+})();
+</script>
+<style id="pr-nav-fix">
+.hphone{color:var(--accent,#e3121a);font-weight:800;border-radius:999px;padding:5px 11px;transition:transform .2s ease,background .2s,box-shadow .2s;animation:hphonePulse 2.6s ease-in-out infinite}
+.hphone:hover{transform:translateY(-1px) scale(1.04);background:rgba(227,18,26,.08);box-shadow:0 7px 18px -5px rgba(227,18,26,.5)}
+.hphone svg{stroke:var(--accent,#e3121a);transition:transform .3s}
+.hphone:hover svg{animation:hphoneRing .7s ease}
+@keyframes hphoneRing{0%,100%{transform:rotate(0)}15%{transform:rotate(-15deg)}30%{transform:rotate(12deg)}45%{transform:rotate(-9deg)}60%{transform:rotate(6deg)}75%{transform:rotate(-3deg)}}
+@keyframes hphonePulse{0%,100%{box-shadow:0 0 0 0 rgba(227,18,26,0)}50%{box-shadow:0 0 0 4px rgba(227,18,26,.10)}}
+@media (prefers-reduced-motion:reduce){.hphone,.hphone svg{animation:none}}
+</style>
+</body>
+</html>
