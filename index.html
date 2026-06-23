@@ -1130,4 +1130,12 @@ var PL=[['.wm-streaks',16],['.wm-grid',7],['.wm-mesh',5]],tx=0,ty=0,cx=0,cy=0;
 c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect();tx=((e.clientX-r.left)/r.width-.5);ty=((e.clientY-r.top)/r.height-.5);});
 (function raf(){cx+=(tx-cx)*.06;cy+=(ty-cy)*.06;for(var i=0;i<PL.length;i++){var el=c.querySelector(PL[i][0]);if(el)el.style.transform='translate('+(-cx*PL[i][1])+'px,'+(-cy*PL[i][1]*.5)+'px)';}requestAnimationFrame(raf);})();
 })();</script>
+<style id="pr-qcard-anim">
+@property --qb-a{syntax:"<angle>";initial-value:0deg;inherits:false}
+.qcard{position:relative}
+.qcard::before{content:"";position:absolute;inset:-2px;border-radius:20px;padding:2.5px;pointer-events:none;z-index:1;background:conic-gradient(from var(--qb-a),transparent 0deg,transparent 232deg,rgba(255,140,90,.85) 300deg,#ff2d2d 340deg,#ffe0d2 357deg,transparent 360deg);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;animation:qb-rot 4.6s linear infinite}
+.qcard::after{content:"";position:absolute;inset:-4px;border-radius:22px;z-index:-1;pointer-events:none;background:conic-gradient(from var(--qb-a),transparent 0deg,transparent 238deg,rgba(255,90,60,.75) 305deg,#e3121a 345deg,transparent 360deg);filter:blur(16px);opacity:.6;animation:qb-rot 4.6s linear infinite}
+@keyframes qb-rot{to{--qb-a:360deg}}
+@media(prefers-reduced-motion:reduce){.qcard::before,.qcard::after{animation:none}}
+</style>
 </body></html>
