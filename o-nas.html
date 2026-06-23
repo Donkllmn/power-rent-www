@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>O nas — Power Rent Radom · wynajem busów i aut dostawczych</title>
-<meta name="description" content="Power Rent to radomska wypożyczalnia busów, aut dostawczych, osobowych, lawet i chłodni. Ponad 10 lat na rynku, ponad 50 pojazdów, pełne ubezpieczenie i wyjazdy po całej Europie. Poznaj nas.">
+<meta name="description" content="Power Rent to radomska wypożyczalnia busów, aut dostawczych, osobowych, lawet i chłodni. Ponad 10 lat na rynku, ponad 50 pojazdów, OC i assistance w cenie oraz wyjazdy po całej Europie. Poznaj nas.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -210,6 +210,35 @@
 #hdr .burger span{width:24px;height:2.4px;background:var(--logo);border-radius:2px;transition:.25s}
 @media(max-width:680px){#hdr .nlinks,#hdr .hphone{display:none}#hdr .burger{display:flex}#hdr .nlinks.open{display:flex;position:absolute;top:calc(100% + 8px);left:0;right:0;flex-direction:column;align-items:stretch;gap:3px;padding:12px;border-radius:18px;background:rgba(255,255,255,.95);-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);border:1px solid rgba(255,255,255,.6);box-shadow:0 22px 50px -16px rgba(13,16,22,.32)}#hdr .nlinks.open a{padding:12px 14px;width:100%;color:var(--ink);font-size:16px;border-radius:11px}}
 </style>
+<style id="hero-fullbleed">
+/* ===== Tło hero: pełnoekranowe zdjęcie floty Power Rent ===== */
+.ab-hero{background:#0a0c10}
+.ab-hero-photo{position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:url("https://d2ol7oe51mr4n9.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/9ceb8c83-b8a3-4feb-9631-31ec9fa447b5.png");
+  background-size:cover;background-position:center}
+.ab-hero-photo::after{content:"";position:absolute;inset:0;background:
+  linear-gradient(90deg,rgba(8,9,13,.93) 0%,rgba(8,9,13,.74) 34%,rgba(8,9,13,.42) 66%,rgba(8,9,13,.60) 100%),
+  linear-gradient(0deg,rgba(8,9,13,.72),rgba(8,9,13,.12) 52%)}
+/* tekst i marquee nad zdjęciem */
+.ab-hero>.wrap{position:relative;z-index:3}
+.ab-hero .ab-marquee{position:relative;z-index:3}
+/* chowamy stary jasny dekor + starą kartę auta (zastępuje je zdjęcie) */
+.ab-hero .ab-hero-orb,.ab-hero .ab-hero-streaks{display:none}
+.ab-hero .ab-vancard,.ab-hero .ab-hero-art .glow{opacity:0!important}
+/* jasny tekst na ciemnym tle */
+.ab-hero .ab-eyebrow,.ab-hero .ab-eyebrow.light{color:#ff7a70}
+.ab-hero h1{color:#fff}
+.ab-hero .ab-lead{color:#d4d9e1}
+.ab-hero .btn-ghost{border-color:rgba(255,255,255,.45);color:#fff;background:transparent}
+.ab-hero .btn-ghost:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.6);color:#fff}
+.ab-hero .ab-chip{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:#eef0f3;box-shadow:none;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.ab-hero .ab-chip b{color:#fff}
+.ab-hero .ab-mq-track span{color:#ff4a3d;opacity:1}
+@media (max-width:760px){
+  .ab-hero-photo{background-position:center}
+  .ab-hero-photo::after{background:linear-gradient(180deg,rgba(8,9,13,.60),rgba(8,9,13,.90))}
+}
+</style>
 </head>
 <body>
 
@@ -235,13 +264,14 @@
 
 <!-- ===== HERO ===== -->
 <section class="ab-hero">
+  <div class="ab-hero-photo" aria-hidden="true"></div>
   <span class="ab-hero-orb" aria-hidden="true"></span>
   <span class="ab-hero-streaks" aria-hidden="true"></span>
   <div class="wrap ab-hero-grid">
     <div>
       <span class="ab-eyebrow light">O nas · Power Rent Radom</span>
       <h1>Każdy ładunek ma<br>u nas <span class="grad">swoje auto</span>.</h1>
-      <p class="ab-lead">Ponad 50 pojazdów — od mikrobusa, przez lawetę i chłodnię, po największe dostawczaki. Pełne ubezpieczenie, wyjazdy po całej Europie i auto dosłownie na już. Krótka umowa, jasne ceny, zero kombinowania.</p>
+      <p class="ab-lead">Ponad 50 pojazdów — od mikrobusa, przez lawetę i chłodnię, po największe dostawczaki. OC i assistance w cenie, wyjazdy po całej Europie i auto dosłownie na już. Krótka umowa, jasne ceny, zero kombinowania.</p>
       <div class="ab-hero-cta">
         <a class="btn btn-red" href="rezerwacje.html">Zarezerwuj online</a>
         <a class="btn btn-ghost" href="tel:+48664201202">Zadzwoń: 664 201 202</a>
@@ -249,7 +279,7 @@
       <div class="ab-chips">
         <span class="ab-chip"><span class="d"></span><b>50+</b> aut w taborze</span>
         <span class="ab-chip"><span class="d"></span><b>9</b> segmentów</span>
-        <span class="ab-chip"><span class="d"></span><b>100%</b> OC / AC</span>
+        <span class="ab-chip"><span class="d"></span><b>OC</b> + assistance</span>
         <span class="ab-chip"><span class="d"></span>wyjazdy <b>za granicę</b></span>
       </div>
     </div>
@@ -258,15 +288,13 @@
       <div class="ab-vancard">
         <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200412_27c8fc18-e150-471e-b9e5-24476c9c92c6.png" alt="Power Rent — duży bus dostawczy z floty">
       </div>
-      <div class="ab-fbadge f1"><span class="n">10<em>+</em></span><span class="l">lat na rynku</span></div>
-      <div class="ab-fbadge f2"><span class="n">50<em>+</em></span><span class="l">aut w taborze</span></div>
     </div>
   </div>
   <div class="wrap"><div class="ab-cue" aria-hidden="true"><span></span></div></div>
   <div class="ab-marquee" aria-hidden="true">
     <div class="ab-mq-track">
-      <span>Busy dostawcze</span><span>Lawety</span><span>Chłodnie</span><span>Auta osobowe</span><span>Wyjazdy za granicę</span><span>Pełne OC / AC</span><span>Radom · Mokra 2A</span>
-      <span>Busy dostawcze</span><span>Lawety</span><span>Chłodnie</span><span>Auta osobowe</span><span>Wyjazdy za granicę</span><span>Pełne OC / AC</span><span>Radom · Mokra 2A</span>
+      <span>Busy dostawcze</span><span>Lawety</span><span>Chłodnie</span><span>Auta osobowe</span><span>Wyjazdy za granicę</span><span>OC i assistance</span><span>Radom · Mokra 2A</span>
+      <span>Busy dostawcze</span><span>Lawety</span><span>Chłodnie</span><span>Auta osobowe</span><span>Wyjazdy za granicę</span><span>OC i assistance</span><span>Radom · Mokra 2A</span>
     </div>
   </div>
 </section>
@@ -322,8 +350,8 @@
       <span class="orb" aria-hidden="true"></span>
       <div>
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <h3>Pełne ubezpieczenie i&nbsp;auto gotowe do drogi</h3>
-        <p class="ftxt">Każdy pojazd z pakietem OC, AC i assistance — w Polsce i za granicą — regularnie serwisowany. Wsiadasz i jedziesz spokojnie, bez niespodzianek.</p>
+        <h3>Ubezpieczenie i&nbsp;auto gotowe do drogi</h3>
+        <p class="ftxt">Każdy pojazd ma OC i assistance w cenie — także za granicą — i jest serwisowany przed każdym wynajmem. Wsiadasz i jedziesz spokojnie, bez niespodzianek.</p>
         <a class="fcta" href="rezerwacje.html">Zarezerwuj auto <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
       <div class="pts">
