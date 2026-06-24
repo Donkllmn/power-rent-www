@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regulamin strony — Power Rent Radom</title>
+<meta name="description" content="Regulamin wynajmu pojazdów Power Rent Sp. z o.o. w Radomiu — warunki najmu, opłaty, kaucja, wyjazdy zagraniczne i tabele opłat.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ===================== O NAS — wersja „na maxa" ===================== */
+:root{--abz:cubic-bezier(.2,.7,.2,1);--abink:#0C0E12}
+.ab-progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--grad-red);z-index:9999;transition:width .1s linear}
+.ab-eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--red)}
+.ab-eyebrow::before{content:"";width:26px;height:2px;background:var(--grad-red);border-radius:2px}
+.ab-eyebrow.light{color:var(--red)}
+.ab-h2{font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(28px,4.2vw,48px);line-height:1.04;letter-spacing:-.02em;color:var(--ink);margin:14px 0 0}
+.ab-sub{color:var(--muted);font-size:clamp(15px,1.4vw,17.5px);line-height:1.7;max-width:620px;margin:16px 0 0}
+.ab-center{text-align:center;max-width:760px;margin:0 auto 44px}
+.ab-center .ab-sub{margin-left:auto;margin-right:auto}
+
+/* reveal */
+.ab-rev{opacity:0;transform:translateY(24px);transition:opacity .7s var(--abz),transform .7s var(--abz)}
+.ab-rev.in{opacity:1;transform:none}
+.ab-rev[data-d="1"]{transition-delay:.09s}.ab-rev[data-d="2"]{transition-delay:.18s}.ab-rev[data-d="3"]{transition-delay:.27s}.ab-rev[data-d="4"]{transition-delay:.36s}.ab-rev[data-d="5"]{transition-delay:.45s}
+
+/* ===== HERO ===== */
+.ab-hero{position:relative;overflow:hidden;isolation:isolate;color:var(--ink);padding:clamp(120px,16vh,190px) 0 0;background:radial-gradient(125% 115% at 88% -12%,#FFF1F0 0,#FFFFFF 44%,#F6F7FB 100%)}
+.ab-hero .wrap{position:relative;z-index:3}
+.ab-hero-orb{position:absolute;z-index:0;width:820px;height:820px;top:-360px;right:-260px;border-radius:50%;background:conic-gradient(from 0deg,rgba(255,74,61,.26),rgba(225,29,42,.09),rgba(183,20,32,0),rgba(255,74,61,.26));filter:blur(82px);animation:abSpin 36s linear infinite}
+.ab-hero-streaks{position:absolute;inset:-25%;z-index:0;background:repeating-linear-gradient(115deg,transparent 0 40px,rgba(18,20,25,.024) 40px 41px);animation:abStreak 20s linear infinite}
+@keyframes abSpin{to{transform:rotate(360deg)}}
+@keyframes abStreak{to{transform:translateX(-41px)}}
+.ab-hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:54px;align-items:center}
+.ab-hero h1{font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(40px,6.6vw,88px);line-height:.97;letter-spacing:-.025em;margin:20px 0 0}
+.ab-hero h1 .grad{background:linear-gradient(100deg,#FF6A5D,#E11D2A 52%,#FF4A3D);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:220% auto;animation:abShine 6s linear infinite}
+@keyframes abShine{to{background-position:220% center}}
+.ab-hero .ab-lead{color:var(--muted);font-size:clamp(15px,1.45vw,18px);line-height:1.72;max-width:560px;margin:24px 0 0}
+.ab-hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+.ab-hero .btn-ghost{border-color:var(--ink);color:var(--ink);background:transparent}
+.ab-hero .btn-ghost:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.ab-chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}
+.ab-chip{display:inline-flex;align-items:center;gap:9px;padding:9px 15px;border-radius:40px;background:#fff;border:1px solid var(--line);box-shadow:0 2px 10px -4px rgba(18,20,25,.12);font-size:13.5px;font-weight:600;color:var(--ink)}
+.ab-chip b{color:var(--ink);font-weight:800}
+.ab-chip .d{width:7px;height:7px;border-radius:50%;background:var(--grad-red)}
+/* hero van card */
+.ab-hero-art{position:relative;justify-self:center;z-index:3}
+.ab-hero-art .glow{position:absolute;inset:-14% -10%;background:radial-gradient(circle at 50% 46%,rgba(225,29,42,.5),transparent 62%);filter:blur(32px);z-index:0}
+.ab-vancard{position:relative;z-index:1;border-radius:24px;overflow:hidden;border:1px solid var(--line);box-shadow:0 40px 80px -34px rgba(18,20,25,.45);background:linear-gradient(160deg,#fff,#EEF1F6);transform:rotate(-3deg);animation:abFloat 7s ease-in-out infinite}
+.ab-vancard img{display:block;width:min(440px,78vw);height:auto}
+.ab-vancard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 64%,rgba(18,20,25,.05))}
+@keyframes abFloat{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(-3deg) translateY(-15px)}}
+.ab-fbadge{position:absolute;z-index:2;background:rgba(14,17,22,.86);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(8px);color:#fff;border-radius:16px;padding:12px 16px;box-shadow:0 18px 32px -12px rgba(0,0,0,.6)}
+.ab-fbadge .n{font-family:'Archivo',sans-serif;font-weight:900;font-size:27px;line-height:1;display:block}
+.ab-fbadge .n em{color:var(--red);font-style:normal}
+.ab-fbadge .l{font-size:10.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#AEB4BF;margin-top:3px}
+.ab-fbadge.f1{top:-20px;left:-28px;animation:abBob 6s ease-in-out infinite}
+.ab-fbadge.f2{bottom:-22px;right:-24px;animation:abBob 6s ease-in-out infinite .9s}
+@keyframes abBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+/* scroll cue */
+.ab-cue{display:flex;justify-content:center;margin-top:50px;padding-bottom:8px}
+.ab-cue span{width:26px;height:42px;border:2px solid rgba(18,20,25,.28);border-radius:16px;position:relative}
+.ab-cue span::after{content:"";position:absolute;left:50%;top:8px;width:4px;height:8px;border-radius:3px;background:var(--ink);transform:translateX(-50%);animation:abCue 1.6s ease-in-out infinite}
+@keyframes abCue{0%{opacity:0;transform:translate(-50%,0)}40%{opacity:1}100%{opacity:0;transform:translate(-50%,12px)}}
+/* marquee */
+.ab-marquee{margin-top:60px;border-top:1px solid rgba(18,20,25,.1);border-bottom:1px solid rgba(18,20,25,.1);background:var(--bg);padding:17px 0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.ab-mq-track{display:flex;width:max-content;white-space:nowrap;animation:abMarquee 28s linear infinite}
+.ab-mq-track span{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(16px,1.9vw,23px);color:var(--ink);opacity:.82;padding:0 28px;display:inline-flex;align-items:center;gap:28px}
+.ab-mq-track span::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--red)}
+@keyframes abMarquee{to{transform:translateX(-50%)}}
+
+/* ===== ODOMETR / LICZBY ===== */
+.ab-odo-sec{padding:64px 0}
+.ab-odo{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--paper);box-shadow:var(--shadow)}
+.ab-odo .cell{padding:34px 28px 30px;border-right:1px solid var(--line);position:relative}
+.ab-odo .cell:last-child{border-right:0}
+.ab-odo .n{font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(38px,5vw,62px);line-height:1;color:var(--ink);letter-spacing:-.02em}
+.ab-odo .n em{color:var(--red);font-style:normal}
+.ab-odo .l{margin-top:11px;color:var(--muted);font-weight:600;font-size:14.5px}
+.ab-odo .uline{margin-top:16px;height:3px;width:46px;background:var(--grad-red);border-radius:3px;transform-origin:left;transform:scaleX(.3);opacity:.4;transition:transform .9s var(--abz),opacity .9s}
+.ab-odo .cell.in .uline{transform:scaleX(1);opacity:1}
+
+/* ===== HISTORIA ===== */
+.ab-story-sec{padding:36px 0 84px}
+.ab-story-grid{display:grid;grid-template-columns:1fr 1.12fr;gap:58px;align-items:center}
+.ab-story-copy p{color:var(--muted);font-size:16.5px;line-height:1.78;margin:0 0 15px}
+.ab-story-copy p b{color:var(--ink);font-weight:700}
+.ab-story-facts{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.ab-fact{display:inline-flex;align-items:center;gap:9px;background:var(--bg);border:1px solid var(--line);border-radius:40px;padding:9px 15px;font-weight:700;font-size:13.5px;color:var(--ink)}
+.ab-fact svg{width:16px;height:16px;color:var(--red)}
+.ab-photo{position:relative;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid var(--line)}
+.ab-photo img{display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:16/11;transition:transform 1.3s var(--abz)}
+.ab-photo:hover img{transform:scale(1.045)}
+.ab-photo .since{position:absolute;top:18px;left:18px;background:var(--grad-red);color:#fff;font-family:'Archivo',sans-serif;font-weight:900;font-size:22px;line-height:1;padding:12px 15px;border-radius:15px;box-shadow:0 16px 28px -10px rgba(225,29,42,.6)}
+.ab-photo .since em{display:block;font-style:normal;font-size:10.5px;letter-spacing:.13em;font-weight:800;opacity:.92;margin-top:4px}
+.ab-photo .cap{position:absolute;left:0;right:0;bottom:0;padding:30px 22px 18px;background:linear-gradient(transparent,rgba(8,10,14,.8));color:#fff;display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px}
+.ab-photo .cap svg{width:17px;height:17px;color:#FF8079;flex:none}
+
+/* ===== DLACZEGO MY ===== */
+.ab-why-feat{position:relative;overflow:hidden;background:linear-gradient(155deg,#171B23,#0C0E12);color:#fff;border-radius:24px;padding:clamp(28px,3.4vw,42px);display:grid;grid-template-columns:1.25fr 1fr;gap:38px;align-items:center;box-shadow:var(--shadow-lg)}
+.ab-why-feat .orb{position:absolute;width:360px;height:360px;right:-90px;top:-130px;border-radius:50%;background:radial-gradient(circle,rgba(225,29,42,.38),transparent 64%);filter:blur(42px);pointer-events:none}
+.ab-why-feat>div{position:relative;z-index:1}
+.ab-why-feat .ic{width:60px;height:60px;border-radius:16px;background:var(--grad-red);color:#fff;display:grid;place-items:center;box-shadow:0 16px 30px -12px rgba(225,29,42,.7);margin-bottom:18px}
+.ab-why-feat .ic svg{width:28px;height:28px}
+.ab-why-feat h3{font-family:'Archivo',sans-serif;font-size:clamp(22px,2.6vw,30px);line-height:1.12;margin:0 0 11px}
+.ab-why-feat .ftxt{color:#C2C7D0;font-size:15.5px;line-height:1.7;margin:0 0 22px}
+.ab-why-feat .fcta{display:inline-flex;align-items:center;gap:8px;color:#fff;font-weight:700;font-size:14.5px;text-decoration:none}
+.ab-why-feat .fcta svg{width:18px;height:18px;color:#FF6A5D;transition:transform .3s}
+.ab-why-feat .fcta:hover svg{transform:translateX(4px)}
+.ab-why-feat .pts{display:flex;flex-direction:column;gap:15px}
+.ab-why-feat .pt{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;font-weight:600;color:#E8EAEE}
+.ab-why-feat .pt svg{width:22px;height:22px;color:#FF6A5D;flex:none}
+.ab-why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+.ab-wc{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:28px 26px;box-shadow:var(--shadow);transition:transform .4s var(--abz),box-shadow .4s var(--abz),border-color .4s}
+.ab-wc::before{content:"";position:absolute;left:0;top:0;height:3px;width:0;background:var(--grad-red);transition:width .5s var(--abz)}
+.ab-wc:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:#F3C3C7}
+.ab-wc:hover::before{width:100%}
+.ab-wc .ic{width:50px;height:50px;border-radius:14px;background:linear-gradient(150deg,rgba(225,29,42,.13),rgba(225,29,42,.05));color:var(--red);display:grid;place-items:center;margin-bottom:15px}
+.ab-wc .ic svg{width:24px;height:24px}
+.ab-wc h3{font-family:'Archivo',sans-serif;font-size:18px;margin:0 0 7px}
+.ab-wc p{color:var(--muted);font-size:14.5px;line-height:1.62;margin:0}
+@media(max-width:980px){.ab-why-feat{grid-template-columns:1fr;gap:26px}.ab-why-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.ab-why-grid{grid-template-columns:1fr}.ab-wc{padding:22px}}
+/* ===== FLOTA ===== */
+.ab-fleet-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.ab-fc{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--paper);box-shadow:var(--shadow);text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:transform .4s var(--abz),box-shadow .4s}
+.ab-fc:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.ab-fc-img{position:relative;aspect-ratio:4/3;overflow:hidden;background:radial-gradient(120% 120% at 50% 0,#fff,#EEF1F6)}
+.ab-fc-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--abz)}
+.ab-fc:hover .ab-fc-img img{transform:scale(1.07)}
+.ab-fc .seg{position:absolute;top:12px;left:12px;background:rgba(14,17,22,.85);color:#fff;font-weight:800;font-size:11.5px;letter-spacing:.04em;padding:5px 11px;border-radius:30px;backdrop-filter:blur(6px)}
+.ab-fc .od{position:absolute;bottom:12px;right:12px;background:var(--grad-red);color:#fff;font-weight:800;font-size:12.5px;padding:6px 11px;border-radius:30px;box-shadow:0 10px 18px -8px rgba(225,29,42,.6)}
+.ab-fc-body{padding:15px 16px 17px}
+.ab-fc-body h3{font-family:'Archivo',sans-serif;font-size:16.5px;margin:0 0 3px}
+.ab-fc-body .car{color:var(--muted);font-size:13px}
+.ab-fc-body .go{margin-top:11px;color:var(--red);font-weight:700;font-size:13.5px;display:inline-flex;gap:6px;align-items:center}
+.ab-fc-body .go svg{width:15px;height:15px;transition:transform .3s}
+.ab-fc:hover .go svg{transform:translateX(4px)}
+
+/* ===== 3 KROKI ===== */
+.ab-steps{position:relative}
+.ab-steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative}
+.ab-steps-grid::before{content:"";position:absolute;top:46px;left:16%;right:16%;height:2px;background:repeating-linear-gradient(90deg,var(--line) 0 10px,transparent 10px 18px);z-index:0}
+.ab-step{position:relative;z-index:1;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:var(--shadow);transition:transform .4s var(--abz),box-shadow .4s}
+.ab-step:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.ab-step .num{display:inline-grid;place-items:center;width:58px;height:58px;border-radius:50%;background:var(--paper);border:2px solid var(--red);font-family:'Archivo',sans-serif;font-weight:900;font-size:24px;color:var(--red);margin-bottom:16px}
+.ab-step h3{font-family:'Archivo',sans-serif;font-size:19px;margin:0 0 7px}
+.ab-step p{color:var(--muted);font-size:14.5px;line-height:1.62;margin:0}
+
+/* ===== KONTAKT ===== */
+.ab-contact-grid{display:grid;grid-template-columns:.92fr 1.08fr;border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);background:var(--paper)}
+.ab-ci{padding:42px}
+.ab-ci h3{font-family:'Archivo',sans-serif;font-size:clamp(22px,2.4vw,28px);margin:0 0 6px}
+.ab-ci .lead{color:var(--muted);font-size:15px;line-height:1.65;margin:0 0 24px}
+.ab-ci-row{display:flex;gap:14px;align-items:flex-start;padding:15px 0;border-top:1px solid var(--line)}
+.ab-ci-row:first-of-type{border-top:0}
+.ab-ci-row .ci-ic{width:40px;height:40px;border-radius:11px;background:linear-gradient(150deg,rgba(225,29,42,.13),rgba(225,29,42,.05));color:var(--red);display:grid;place-items:center;flex:none}
+.ab-ci-row .ci-ic svg{width:19px;height:19px}
+.ab-ci-row .k{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ab-ci-row .v{font-size:17px;font-weight:700;color:var(--ink);margin-top:2px}
+.ab-ci-row .v a{color:inherit;text-decoration:none}
+.ab-ci-row .v a:hover{color:var(--red)}
+.ab-ci-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.ab-map{min-height:420px;position:relative}
+.ab-map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+
+@media(max-width:980px){
+  .ab-hero-grid,.ab-story-grid,.ab-contact-grid{grid-template-columns:1fr;gap:36px}
+  .ab-hero-art{order:-1}
+  .ab-bento{grid-template-columns:1fr 1fr}
+  .ab-bt,.ab-bt.wide,.ab-bt.feat{grid-column:auto;grid-row:auto}
+  .ab-fleet-grid{grid-template-columns:1fr 1fr}
+  .ab-odo{grid-template-columns:1fr 1fr}.ab-odo .cell:nth-child(2){border-right:0}.ab-odo .cell:nth-child(1),.ab-odo .cell:nth-child(2){border-bottom:1px solid var(--line)}
+  .ab-steps-grid{grid-template-columns:1fr}.ab-steps-grid::before{display:none}
+  .ab-map{min-height:320px}
+}
+@media(max-width:560px){
+  .ab-bento,.ab-fleet-grid{grid-template-columns:1fr}
+  .ab-odo{grid-template-columns:1fr}.ab-odo .cell{border-right:0;border-bottom:1px solid var(--line)}.ab-odo .cell:last-child{border-bottom:0}
+  .ab-ci,.ab-bt,.ab-step{padding:22px}
+  .ab-fbadge.f1{left:-10px}.ab-fbadge.f2{right:-10px}
+}
+@media (prefers-reduced-motion:reduce){
+  .ab-hero-orb,.ab-hero-streaks,.ab-vancard,.ab-fbadge,.ab-mq-track,.ab-hero h1 .grad,.ab-cue span::after{animation:none!important}
+  .ab-rev{transition:none}.ab-vancard{transform:rotate(-3deg)}
+}
+
+/* ===================== NAVBAR — identyczny jak na stronie głównej ===================== */
+#hdr{position:sticky;top:0;z-index:90;background:transparent;padding-top:14px;transition:padding .3s;--accent:#e3121a;--on-accent:#fff;--accent-glow:0 10px 24px -8px rgba(227,18,26,.5);--logo:#0e1014;--nav-tx:#39414f;--ink:#0e1014;--fd:'Space Grotesk',system-ui,sans-serif}
+#hdr .nav{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;height:62px;max-width:1180px;margin:0 auto;padding:0 14px 0 22px;border-radius:20px;background:rgba(255,255,255,.52);-webkit-backdrop-filter:blur(22px) saturate(185%);backdrop-filter:blur(22px) saturate(185%);border:1px solid rgba(255,255,255,.62);box-shadow:0 14px 40px -14px rgba(13,16,22,.28),0 1px 0 inset rgba(255,255,255,.9);transition:height .3s,background .3s,box-shadow .3s}
+#hdr.scrolled .nav{height:54px;background:rgba(255,255,255,.74);box-shadow:0 16px 44px -14px rgba(13,16,22,.34),0 1px 0 inset rgba(255,255,255,.95)}
+#hdr .logo{font-family:var(--fd);font-weight:800;font-size:23px;letter-spacing:-.03em;display:flex;align-items:center;gap:0;color:var(--logo);text-decoration:none}
+#hdr .logo-img{height:26px;width:auto;display:block;transition:height .3s}
+#hdr.scrolled .logo-img{height:23px}
+#hdr .nlinks{display:flex;align-items:center;gap:3px;font-weight:500;font-size:15px}
+#hdr .nlinks a{color:var(--nav-tx);position:relative;z-index:1;padding:9px 14px;border-radius:11px;text-decoration:none;transition:color .22s,transform .28s cubic-bezier(.2,1.2,.4,1)}
+#hdr .nlinks a::before{content:"";position:absolute;inset:0;border-radius:inherit;background:rgba(227,18,26,.1);opacity:0;transform:scale(.78);transition:opacity .25s,transform .42s cubic-bezier(.2,1.35,.4,1);z-index:-1}
+#hdr .nlinks a:hover{color:var(--accent);transform:translateY(-2px)}
+#hdr .nlinks a:hover::before{opacity:1;transform:scale(1)}
+#hdr .nlinks a.on{color:var(--accent)}
+#hdr .nlinks a.on::before{opacity:1;transform:scale(1)}
+#hdr .nright{display:flex;align-items:center;gap:11px}
+#hdr .hphone{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;color:var(--logo);white-space:nowrap;text-decoration:none}
+#hdr .hphone svg{width:17px;height:17px;stroke:var(--accent)}
+#hdr .btn-a{background:var(--accent);color:var(--on-accent);box-shadow:var(--accent-glow);border:0;border-radius:12px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;transition:transform .25s,filter .25s}
+#hdr .btn-a:hover{transform:translateY(-2px);filter:brightness(1.05)}
+#hdr .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
+#hdr .burger span{width:24px;height:2.4px;background:var(--logo);border-radius:2px;transition:.25s}
+@media(max-width:680px){#hdr .nlinks,#hdr .hphone{display:none}#hdr .burger{display:flex}#hdr .nlinks.open{display:flex;position:absolute;top:calc(100% + 8px);left:0;right:0;flex-direction:column;align-items:stretch;gap:3px;padding:12px;border-radius:18px;background:rgba(255,255,255,.95);-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);border:1px solid rgba(255,255,255,.6);box-shadow:0 22px 50px -16px rgba(13,16,22,.32)}#hdr .nlinks.open a{padding:12px 14px;width:100%;color:var(--ink);font-size:16px;border-radius:11px}}
+</style>
+</head>
+<body>
+
+<div class="ab-progress" id="abProg" aria-hidden="true"></div>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="index.html" class="logo" aria-label="Power Rent — strona główna"><img class="logo-img" src="https://power-rent-www.vercel.app/powerrent-logo.png" alt="PowerRent"></a>
+    <nav class="nlinks" id="menu">
+      <a href="o-nas.html">O nas</a>
+      <a href="oferta.html">Oferta</a>
+      <a href="uslugi.html">Usługi</a>
+      <a href="cennik.html">Cennik</a>
+      <a href="index.html#kontakt">Kontakt</a>
+    </nav>
+    <div class="nright">
+      <a href="tel:+48664201202" class="hphone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2"></path></svg>664 201 202</a>
+      <a href="rezerwacje.html" class="btn btn-a" style="padding:11px 18px">Rezerwuj</a>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<style>
+.reg-hero{background:linear-gradient(180deg,#fff,#f6f7f8);border-bottom:1px solid rgba(0,0,0,.06);padding:56px 0 34px;position:relative;overflow:hidden}
+.reg-hero::after{content:"";position:absolute;top:-30%;right:-6%;width:480px;height:480px;background:radial-gradient(circle,rgba(227,18,26,.10),transparent 64%);pointer-events:none}
+.reg-wrap{max-width:920px;margin:0 auto;padding:0 22px}
+.reg-ey{font-size:13px;font-weight:800;letter-spacing:.16em;color:#e3121a;text-transform:uppercase}
+.reg-hero h1{font-size:clamp(30px,4.4vw,46px);font-weight:800;letter-spacing:-.02em;margin:10px 0 10px;color:#0e1014;line-height:1.05}
+.reg-hero p.lead{color:#5f6877;font-size:16.5px;max-width:680px;line-height:1.6;margin:0}
+.reg-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.reg-meta span{font-size:13px;font-weight:600;color:#3a3e44;background:#fff;border:1px solid rgba(0,0,0,.09);border-radius:999px;padding:8px 15px}
+.reg-dl{display:inline-flex;align-items:center;gap:9px;margin-top:22px;background:#e3121a;color:#fff;font-weight:700;font-size:14.5px;padding:12px 20px;border-radius:12px;text-decoration:none;box-shadow:0 14px 30px -12px rgba(227,18,26,.5);transition:transform .2s,box-shadow .2s}
+.reg-dl:hover{transform:translateY(-2px);box-shadow:0 20px 38px -12px rgba(227,18,26,.55)}
+.reg-dl svg{width:18px;height:18px}
+.reg-toc{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:20px;padding:24px 28px;margin:38px auto;box-shadow:0 16px 40px -24px rgba(18,20,25,.2)}
+.reg-toc h2{font-size:13px;text-transform:uppercase;letter-spacing:.12em;color:#e3121a;margin:0 0 16px;font-weight:800}
+.reg-toc ol{columns:2;column-gap:34px;margin:0;padding:0;list-style:none;counter-reset:toc}
+.reg-toc li{counter-increment:toc;margin:0 0 11px;break-inside:avoid;font-size:14.5px}
+.reg-toc a{color:#1a1d22;text-decoration:none;display:flex;gap:9px;align-items:baseline}
+.reg-toc a::before{content:"§ " counter(toc);color:#e3121a;font-weight:800;font-size:12.5px;min-width:30px}
+.reg-toc a:hover{color:#e3121a}
+.reg-body{padding:8px 0 54px}
+.reg-sec{margin:0 auto 36px;scroll-margin-top:88px}
+.reg-sec h2{font-size:20px;font-weight:800;color:#0e1014;margin:0 0 16px;padding-bottom:11px;border-bottom:2px solid rgba(227,18,26,.2);display:flex;align-items:baseline;gap:10px}
+.reg-sec h2 b{color:#e3121a;font-weight:800}
+.reg-sec p{font-size:15px;line-height:1.72;color:#33373d;margin:0 0 12px}
+.reg-ol{padding-left:24px;margin:0 0 12px;counter-reset:none}
+.reg-ol>li{font-size:15px;line-height:1.72;color:#33373d;margin:0 0 11px;padding-left:4px}
+.reg-ol>li::marker{color:#0e1014;font-weight:700}
+.reg-sub{list-style:lower-latin;margin:9px 0 9px;padding-left:22px}
+.reg-sub>li{font-size:14.5px;line-height:1.65;color:#4a4e55;margin:0 0 7px}
+.reg-sub>li::marker{color:#9aa0a8;font-weight:600}
+.reg-table-wrap{overflow-x:auto;margin:16px 0 6px;border:1px solid rgba(0,0,0,.08);border-radius:14px}
+.reg-table{width:100%;border-collapse:collapse;font-size:14px;min-width:440px}
+.reg-table caption{caption-side:top;text-align:left;font-weight:800;color:#0e1014;font-size:15px;padding:14px 16px 4px}
+.reg-table th{background:#f4f5f6;text-align:left;padding:12px 16px;font-weight:700;color:#1a1d22;border-bottom:2px solid rgba(0,0,0,.1)}
+.reg-table td{padding:11px 16px;border-top:1px solid rgba(0,0,0,.06);color:#33373d;vertical-align:top;line-height:1.5}
+.reg-table td.amt{font-weight:700;white-space:nowrap;color:#0e1014;text-align:right}
+.reg-table tr:nth-child(even) td{background:#fafbfb}
+.reg-note{font-size:12.5px;color:#6b7280;font-style:italic;margin:8px 0 0}
+.reg-back{display:inline-flex;align-items:center;gap:8px;margin:8px 0 0;font-weight:700;color:#e3121a;text-decoration:none;font-size:14.5px}
+.reg-back:hover{text-decoration:underline}
+.reg-foothint{background:#f6f7f8;border:1px solid rgba(0,0,0,.07);border-radius:16px;padding:22px 26px;margin:30px auto 0}
+.reg-foothint p{margin:0;font-size:14.5px;color:#4a4e55;line-height:1.6}
+@media(max-width:640px){.reg-toc ol{columns:1}.reg-table{font-size:13px}.reg-table th,.reg-table td{padding:9px 11px}.reg-sec h2{font-size:18px}}
+</style>
+
+<section class="reg-hero">
+  <div class="reg-wrap">
+    <div class="reg-ey">Dokumenty</div>
+    <h1>Regulamin strony</h1>
+    <p class="lead">Zasady korzystania z serwisu internetowego Power Rent oraz świadczenia usług drogą elektroniczną. Dotyczy każdego Użytkownika odwiedzającego stronę.</p>
+    <div class="reg-meta">
+      <span>Wersja 1.0</span>
+      <span>Obowiązuje od 24.06.2026</span>
+      <span>Power Rent Sp. z o.o.</span>
+    </div>
+  </div>
+</section>
+
+<div class="reg-wrap">
+  <nav class="reg-toc" aria-label="Spis treści">
+    <h2>Spis treści</h2>
+    <ol>
+      <li><a href="#par-1">Postanowienia ogólne</a></li>
+      <li><a href="#par-2">Definicje</a></li>
+      <li><a href="#par-3">Rodzaje i zakres usług</a></li>
+      <li><a href="#par-4">Warunki techniczne</a></li>
+      <li><a href="#par-5">Zasady korzystania z Serwisu</a></li>
+      <li><a href="#par-6">Rezerwacja i zapytania</a></li>
+      <li><a href="#par-7">Własność intelektualna</a></li>
+      <li><a href="#par-8">Reklamacje</a></li>
+      <li><a href="#par-9">Odpowiedzialność</a></li>
+      <li><a href="#par-10">Dane osobowe</a></li>
+      <li><a href="#par-11">Postanowienia końcowe</a></li>
+    </ol>
+  </nav>
+</div>
+
+<div class="reg-wrap reg-body">
+
+  <section class="reg-sec" id="par-1">
+    <h2><b>§ 1</b> Postanowienia ogólne</h2>
+    <ol class="reg-ol">
+      <li>Niniejszy regulamin (dalej „Regulamin") określa zasady korzystania z serwisu internetowego Power Rent (dalej „Serwis") oraz zasady świadczenia usług drogą elektroniczną za jego pośrednictwem.</li>
+      <li>Właścicielem i operatorem Serwisu (dalej „Usługodawca") jest Power Rent Sp. z o.o. z siedzibą w Radomiu, ul. Mokra 2a, 26-600 Radom, wpisana do rejestru przedsiębiorców KRS pod numerem 0000539597, NIP: 9482602652, REGON: 360508580.</li>
+      <li>Kontakt z Usługodawcą jest możliwy pod adresem siedziby oraz elektronicznie: e-mail: <a href="mailto:Donkozak@gmail.com">Donkozak@gmail.com</a>, tel.: <a href="tel:+48664201202">664&nbsp;201&nbsp;202</a>.</li>
+      <li>Regulamin jest udostępniony nieodpłatnie i w sposób umożliwiający jego pozyskanie, odtworzenie i utrwalenie. Każdy Użytkownik zobowiązany jest zapoznać się z Regulaminem przed rozpoczęciem korzystania z Serwisu.</li>
+      <li>Korzystanie z Serwisu jest dobrowolne i nieodpłatne oraz oznacza akceptację postanowień Regulaminu.</li>
+    </ol>
+  </section>
+
+  <section class="reg-sec" id="par-2">
+    <h2><b>§ 2</b> Definicje</h2>
+    <p>Użyte w Regulaminie pojęcia oznaczają:</p>
+    <ol class="reg-ol">
+      <li><b>Usługodawca</b> – Power Rent Sp. z o.o. z siedzibą w Radomiu, ul. Mokra 2a, 26-600 Radom, wpisana do rejestru przedsiębiorców KRS pod numerem 0000539597, NIP: 9482602652, REGON: 360508580;</li>
+      <li><b>Serwis</b> – serwis internetowy Power Rent wraz ze wszystkimi podstronami i funkcjonalnościami;</li>
+      <li><b>Użytkownik</b> – każda osoba fizyczna, prawna lub jednostka organizacyjna korzystająca z Serwisu;</li>
+      <li><b>Konsument</b> – Użytkownik będący konsumentem w rozumieniu art. 22¹ Kodeksu cywilnego;</li>
+      <li><b>Usługa Elektroniczna</b> – usługa świadczona drogą elektroniczną przez Usługodawcę na rzecz Użytkownika za pośrednictwem Serwisu;</li>
+      <li><b>Formularz</b> – interaktywny formularz dostępny w Serwisie służący do złożenia zapytania lub wstępnej rezerwacji pojazdu;</li>
+      <li><b>Regulamin wynajmu</b> – odrębny regulamin określający warunki najmu pojazdów, dostępny w Serwisie.</li>
+    </ol>
+  </section>
+
+  <section class="reg-sec" id="par-3">
+    <h2><b>§ 3</b> Rodzaje i zakres usług</h2>
+    <p>Usługodawca świadczy za pośrednictwem Serwisu następujące nieodpłatne Usługi Elektroniczne:</p>
+    <ol class="reg-ol">
+      <li>udostępnianie treści informacyjnych o ofercie, flocie pojazdów, cenniku i usługach dodatkowych;</li>
+      <li>umożliwienie złożenia zapytania lub wstępnej rezerwacji pojazdu za pomocą Formularza;</li>
+      <li>umożliwienie kontaktu z Usługodawcą (formularz kontaktowy, połączenie telefoniczne, wiadomość e-mail).</li>
+    </ol>
+    <p>Treści prezentowane w Serwisie mają charakter informacyjny i nie stanowią oferty w rozumieniu art. 66 Kodeksu cywilnego, chyba że wyraźnie wskazano inaczej.</p>
+  </section>
+
+  <section class="reg-sec" id="par-4">
+    <h2><b>§ 4</b> Warunki techniczne</h2>
+    <p>Do prawidłowego korzystania z Serwisu niezbędne jest:</p>
+    <ol class="reg-ol">
+      <li>urządzenie z dostępem do sieci Internet;</li>
+      <li>aktualna wersja przeglądarki internetowej z obsługą JavaScript i plików cookies;</li>
+      <li>aktywne konto poczty elektronicznej (do korzystania z funkcji wymagających kontaktu).</li>
+    </ol>
+    <p>Usługodawca dokłada starań, aby korzystanie z Serwisu było możliwe dla użytkowników popularnych przeglądarek, systemów i urządzeń. Zakazane jest dostarczanie przez Użytkownika treści o charakterze bezprawnym.</p>
+  </section>
+
+  <section class="reg-sec" id="par-5">
+    <h2><b>§ 5</b> Zasady korzystania z Serwisu</h2>
+    <ol class="reg-ol">
+      <li>Użytkownik zobowiązany jest do korzystania z Serwisu w sposób zgodny z prawem, dobrymi obyczajami oraz postanowieniami Regulaminu, z poszanowaniem dóbr osobistych i praw osób trzecich.</li>
+      <li>Zakazane jest podejmowanie działań mogących zakłócić prawidłowe funkcjonowanie Serwisu, w szczególności ingerencja w jego treść lub elementy techniczne, korzystanie z automatów (botów), nieautoryzowane pozyskiwanie danych (scraping) oraz próby naruszenia zabezpieczeń.</li>
+      <li>Użytkownik podający dane za pośrednictwem Serwisu zobowiązany jest do podawania danych prawdziwych, aktualnych i kompletnych.</li>
+    </ol>
+  </section>
+
+  <section class="reg-sec" id="par-6">
+    <h2><b>§ 6</b> Rezerwacja i zapytania</h2>
+    <ol class="reg-ol">
+      <li>Wypełnienie i wysłanie Formularza stanowi zapytanie lub wstępną rezerwację i nie jest równoznaczne z zawarciem umowy najmu pojazdu.</li>
+      <li>Po otrzymaniu zgłoszenia Usługodawca kontaktuje się z Użytkownikiem w celu potwierdzenia dostępności pojazdu, warunków oraz ustalenia szczegółów.</li>
+      <li>Zawarcie umowy najmu następuje na zasadach określonych w Regulaminie wynajmu oraz w indywidualnej umowie zawieranej z Najemcą; do zawarcia umowy może być wymagane osobiste stawiennictwo i okazanie wymaganych dokumentów.</li>
+      <li>Usługodawca zastrzega sobie prawo do odmowy realizacji zgłoszenia, w szczególności w przypadku braku dostępności pojazdu lub niespełnienia warunków najmu.</li>
+    </ol>
+  </section>
+
+  <section class="reg-sec" id="par-7">
+    <h2><b>§ 7</b> Własność intelektualna</h2>
+    <ol class="reg-ol">
+      <li>Wszelkie treści zamieszczone w Serwisie, w tym teksty, grafiki, zdjęcia, logotypy, znaki towarowe, układ i kompozycja strony, podlegają ochronie prawnej i stanowią własność Usługodawcy lub są wykorzystywane na podstawie odpowiednich uprawnień.</li>
+      <li>Korzystanie z treści Serwisu dozwolone jest wyłącznie w zakresie dozwolonego użytku osobistego. Jakiekolwiek kopiowanie, zwielokrotnianie, rozpowszechnianie lub wykorzystywanie treści w innym zakresie wymaga uprzedniej, pisemnej zgody Usługodawcy.</li>
+    </ol>
+  </section>
+
+  <section class="reg-sec" id="par-8">
+    <h2><b>§ 8</b> Reklamacje</h2>
+    <ol class="reg-ol">
+      <li>Reklamacje dotyczące funkcjonowania Serwisu oraz świadczonych Usług Elektronicznych Użytkownik może składać na adres e-mail: <a href="mailto:Donkozak@gmail.com">Donkozak@gmail.com</a> lub pisemnie na adres siedziby Usługodawcy.</li>
+      <li>Reklamacja powinna zawierać opis problemu oraz dane kontaktowe umożliwiające udzielenie odpowiedzi.</li>
+      <li>Usługodawca rozpatruje reklamację niezwłocznie, nie później niż w terminie 14 dni od dnia jej otrzymania, i informuje Użytkownika o sposobie jej rozpatrzenia na podany adres.</li>
+    </ol>
+  </section>
+
+  <section class="reg-sec" id="par-9">
+    <h2><b>§ 9</b> Odpowiedzialność</h2>
+    <ol class="reg-ol">
+      <li>Usługodawca dokłada starań, aby Serwis działał w sposób ciągły i prawidłowy, nie gwarantuje jednak nieprzerwanej dostępności i zastrzega prawo do czasowych przerw, w szczególności w celu konserwacji, aktualizacji lub z przyczyn technicznych.</li>
+      <li>Usługodawca nie ponosi odpowiedzialności za szkody wynikłe z przyczyn niezależnych od Usługodawcy, działania siły wyższej, nieprawidłowego korzystania z Serwisu przez Użytkownika ani za skutki podania przez Użytkownika nieprawdziwych lub niekompletnych danych.</li>
+      <li>Informacje zawarte w Serwisie mają charakter ogólny i informacyjny; wiążące warunki najmu określają Regulamin wynajmu oraz indywidualna umowa.</li>
+    </ol>
+  </section>
+
+  <section class="reg-sec" id="par-10">
+    <h2><b>§ 10</b> Dane osobowe</h2>
+    <ol class="reg-ol">
+      <li>Administratorem danych osobowych Użytkowników jest Power Rent Sp. z o.o. z siedzibą w Radomiu, ul. Mokra 2a, 26-600 Radom, wpisana do rejestru przedsiębiorców KRS pod numerem 0000539597, NIP: 9482602652, REGON: 360508580.</li>
+      <li>Zasady przetwarzania danych osobowych oraz wykorzystywania plików cookies opisane zostały w <a href="polityka-prywatnosci.html">Polityce prywatności</a> dostępnej w Serwisie.</li>
+    </ol>
+  </section>
+
+  <section class="reg-sec" id="par-11">
+    <h2><b>§ 11</b> Postanowienia końcowe</h2>
+    <ol class="reg-ol">
+      <li>W sprawach nieuregulowanych w Regulaminie zastosowanie mają przepisy prawa polskiego, w szczególności Kodeksu cywilnego oraz ustawy o świadczeniu usług drogą elektroniczną.</li>
+      <li>Konsument ma możliwość skorzystania z pozasądowych sposobów rozpatrywania reklamacji i dochodzenia roszczeń, w tym za pośrednictwem powiatowego (miejskiego) rzecznika konsumentów oraz platformy ODR dostępnej pod adresem <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>.</li>
+      <li>Usługodawca zastrzega sobie prawo do zmiany Regulaminu z ważnych przyczyn; zmiany wchodzą w życie z chwilą opublikowania zaktualizowanej wersji w Serwisie i nie naruszają praw nabytych Użytkowników.</li>
+      <li>Regulamin obowiązuje od dnia 24.06.2026 r.</li>
+    </ol>
+  </section>
+
+  <div class="reg-foothint">
+    <p>Niniejszy dokument jest wzorem przygotowanym na potrzeby Serwisu i może wymagać dostosowania do indywidualnej sytuacji oraz weryfikacji przez radcę prawnego. W razie pytań prosimy o kontakt: e-mail: <a href="mailto:Donkozak@gmail.com">Donkozak@gmail.com</a>, tel.: <a href="tel:+48664201202">664&nbsp;201&nbsp;202</a>.</p>
+  </div>
+
+  <a class="reg-back" href="index.html">← Wróć na stronę główną</a>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand"><a href="index.html" class="logo logo--light"><span class="logo-badge">P</span><span class="logo-text"><span class="lr">Power</span><span class="lk">Rent</span></span></a><p>Wypożyczalnia busów i aut dostawczych w Radomiu. Ponad 10 lat na rynku, ponad 50 aut.</p><a href="tel:664201202" class="footer-phone">664 201 202</a></div>
+    <div class="footer-col"><h4>Nawigacja</h4><ul><li><a href="o-nas.html">O nas</a></li><li><a href="oferta.html">Nasza oferta</a></li><li><a href="uslugi.html">Usługi dodatkowe</a></li><li><a href="faq.html">FAQ</a></li><li><a href="cennik.html">Cennik</a></li><li><a href="rezerwacje.html">Rezerwacja</a></li></ul></div>
+    <div class="footer-col"><h4>Kontakt</h4><ul class="footer-contact"><li><span>Mokra 2A, 26-600 Radom</span></li><li><span class="lab">Tel:</span> <a href="tel:664201202">664 201 202</a></li><li><span class="lab">E-mail:</span> <a href="mailto:Donkozak@gmail.com">Donkozak@gmail.com</a></li><li><span class="lab">Godziny:</span> <span>Pn–Pt 8–17 · Sb 8–14</span></li></ul></div>
+  </div>
+  <div class="wrap footer-bottom">© 2026 Power Rent · Mokra 2A, 26-600 Radom · Wszelkie prawa zastrzeżone</div>
+  <div class="wrap footer-legal-row"><a href="regulamin.html">Regulamin wynajmu</a><span aria-hidden="true">·</span><a href="regulamin-strony.html">Regulamin strony</a><span aria-hidden="true">·</span><a href="polityka-prywatnosci.html">Polityka prywatności</a></div>
+</footer>
+
+<script>
+/* Navbar — burger + chowanie/scroll, zachowanie jak na stronie głównej */
+(function(){
+  var hdr=document.getElementById('hdr'), burger=document.getElementById('burger'), menu=document.getElementById('menu');
+  if(burger&&menu){
+    burger.addEventListener('click',function(){ menu.classList.toggle('open'); });
+    menu.addEventListener('click',function(e){ if(e.target&&e.target.closest('a')) menu.classList.remove('open'); });
+  }
+  if(hdr){
+    var onScroll=function(){ hdr.classList.toggle('scrolled', (window.pageYOffset||document.documentElement.scrollTop||0) > 8); };
+    window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  }
+})();
+</script>
+<script src="rezerwuj.js" defer></script>
+<script>
+/* O nas — reveal + licznik + pasek postępu */
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var revs = Array.prototype.slice.call(document.querySelectorAll('.ab-rev'));
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -10% 0px',threshold:0.12});
+    revs.forEach(function(el){io.observe(el);});
+  } else { revs.forEach(function(el){el.classList.add('in');}); }
+
+  function countUp(el){
+    var target = parseInt(el.getAttribute('data-count'),10);
+    var suf = el.getAttribute('data-suffix') || '';
+    if(reduce || !isFinite(target)){ el.textContent = (isFinite(target)?target:el.textContent) + suf; return; }
+    var dur=1100, t0=null;
+    function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/dur), e=1-Math.pow(1-p,3);
+      el.textContent = Math.round(target*e) + suf;
+      if(p<1) requestAnimationFrame(step); else el.textContent = target + suf; }
+    el.textContent = '0' + suf; requestAnimationFrame(step);
+  }
+  var odo = document.querySelector('.ab-odo'), fired=false;
+  function fire(){ if(fired)return; fired=true; Array.prototype.forEach.call(document.querySelectorAll('.ab-odo .n[data-count]'), countUp); }
+  if(odo && 'IntersectionObserver' in window){
+    var io2 = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){fire();io2.disconnect();}});},{threshold:0.3});
+    io2.observe(odo);
+  } else { fire(); }
+
+  var prog = document.getElementById('abProg');
+  if(prog){
+    var ticking=false;
+    function upd(){ var h=document.documentElement.scrollHeight-window.innerHeight; var y=window.pageYOffset||document.documentElement.scrollTop||0; prog.style.width=(h>0?Math.min(100,y/h*100):0)+'%'; ticking=false; }
+    window.addEventListener('scroll',function(){ if(!ticking){ ticking=true; (window.requestAnimationFrame||function(f){f();})(upd); } },{passive:true});
+    upd();
+  }
+})();
+</script>
+<style id="pr-nav-fix">
+.hphone{color:var(--accent,#e3121a);font-weight:800;border-radius:999px;padding:5px 11px;transition:transform .2s ease,background .2s,box-shadow .2s;animation:hphonePulse 2.6s ease-in-out infinite}
+.hphone:hover{transform:translateY(-1px) scale(1.04);background:rgba(227,18,26,.08);box-shadow:0 7px 18px -5px rgba(227,18,26,.5)}
+.hphone svg{stroke:var(--accent,#e3121a);transition:transform .3s}
+.hphone:hover svg{animation:hphoneRing .7s ease}
+@keyframes hphoneRing{0%,100%{transform:rotate(0)}15%{transform:rotate(-15deg)}30%{transform:rotate(12deg)}45%{transform:rotate(-9deg)}60%{transform:rotate(6deg)}75%{transform:rotate(-3deg)}}
+@keyframes hphonePulse{0%,100%{box-shadow:0 0 0 0 rgba(227,18,26,0)}50%{box-shadow:0 0 0 4px rgba(227,18,26,.10)}}
+@media (prefers-reduced-motion:reduce){.hphone,.hphone svg{animation:none}}
+</style>
+<style id="footer-legal-style">.footer-legal-row{max-width:1180px;margin:0 auto;padding:14px 22px 2px;display:flex;flex-wrap:wrap;justify-content:center;gap:7px 14px;align-items:center}.footer-legal-row a{color:rgba(255,255,255,.62);font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}.footer-legal-row a:hover{color:#fff}.footer-legal-row span{color:rgba(255,255,255,.28);font-size:12px}</style>
+</body>
+</html>
