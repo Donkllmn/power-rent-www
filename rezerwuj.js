@@ -102,7 +102,7 @@
   /* ---- NAVBAR: znajdź przycisk rezerwacji w nagłówku i ustaw "Rezerwuj online" ---- */
   function fixNav() {
     if (!CFG.fixNav) return;
-    var heads = document.querySelectorAll('header, nav, .hd, .site-header, .navbar');
+    var heads = document.querySelectorAll('#hdr, header, .hd, .site-header, .navbar');
     var seen = [], found = false;
     Array.prototype.forEach.call(heads, function (h) {
       if (h.closest && h.closest('footer')) return;
@@ -111,6 +111,9 @@
         if (seen.indexOf(a) !== -1) return;
         var t = (a.textContent || '').trim();
         var href = (a.getAttribute('href') || '');
+        // NIE ruszaj spisu treści, treści ani linków kotwicowych (#...) — tylko realny przycisk w navbarze
+        if (/^#/.test(href)) return;
+        if (a.closest && a.closest('.reg-toc, .reg-body, .reg-hero, main, article, footer, .footer, .prz-band, .prz-cta')) return;
         var looksLikeBook = /rezerw/i.test(t) ||
                             /rezerwacje\.html/i.test(href) ||
                             (/#rezerwacj/i.test(href) && /rezerw/i.test(t));
