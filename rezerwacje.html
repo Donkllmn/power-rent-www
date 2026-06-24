@@ -69,6 +69,8 @@
 .cal-d.empty{visibility:hidden;cursor:default}
 .cal-d:hover:not(.past):not(.from):not(.to){background:var(--bg2)}
 .cal-d.past{color:#C9CFD7;cursor:not-allowed}
+.cal-d.nopick{color:#C9CFD7;cursor:not-allowed;text-decoration:line-through}
+.cal-d.nopick:hover{background:transparent}
 .cal-d.today{box-shadow:inset 0 0 0 1.5px var(--line)}
 .cal-d.inr{background:rgba(225,29,42,.1);border-radius:0;color:var(--red-d)}
 .cal-d.from,.cal-d.to{background:var(--grad-red);color:#fff;font-weight:800}
@@ -400,11 +402,40 @@
 
 <footer class="site-footer">
   <div class="wrap footer-grid">
-    <div class="footer-brand"><a href="index.html" class="logo logo--light"><span class="logo-badge">P</span><span class="logo-text"><span class="lr">Power</span><span class="lk">Rent</span></span></a><p>Wypożyczalnia busów i aut dostawczych w Radomiu. Ponad 10 lat na rynku, ponad 50 aut.</p><a href="tel:664201202" class="footer-phone">664 201 202</a></div>
-    <div class="footer-col"><h4>Nawigacja</h4><ul><li><a href="o-nas.html">O nas</a></li><li><a href="oferta.html">Nasza oferta</a></li><li><a href="uslugi.html">Usługi dodatkowe</a></li><li><a href="faq.html">FAQ</a></li><li><a href="cennik.html">Cennik</a></li><li><a href="rezerwacje.html">Rezerwacja</a></li></ul></div>
-    <div class="footer-col"><h4>Kontakt</h4><ul class="footer-contact"><li><span>Mokra 2A, 26-600 Radom</span></li><li><span class="lab">Tel:</span> <a href="tel:664201202">664 201 202</a></li><li><span class="lab">E-mail:</span> <a href="mailto:Donkozak@gmail.com">Donkozak@gmail.com</a></li><li><span class="lab">Godziny:</span> <span>Pn–Pt 8–17 · Sb 8–14</span></li></ul></div>
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo" aria-label="Power Rent — strona główna"><img src="https://power-rent-www.vercel.app/powerrent-logo.png" alt="Power Rent"></a>
+      <p>Wypożyczalnia busów i aut dostawczych w Radomiu. Ponad 10 lat na rynku, ponad 50 aut.</p>
+      <a href="tel:664201202" class="footer-phone">664 201 202</a>
+    </div>
+    <div class="footer-col">
+      <h4>Nawigacja</h4>
+      <ul>
+        <li><a href="o-nas.html">O nas</a></li>
+        <li><a href="oferta.html">Nasza oferta</a></li>
+        <li><a href="uslugi.html">Usługi dodatkowe</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="cennik.html">Cennik</a></li>
+        <li><a href="rezerwacje.html">Rezerwacja</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Kontakt</h4>
+      <ul class="footer-contact">
+        <li><span>Mokra 2A, 26-600 Radom</span></li>
+        <li><span class="lab">Tel:</span> <a href="tel:664201202">664 201 202</a></li>
+        <li><span class="lab">E-mail:</span> <a href="mailto:bartosz.k@power.radom.pl">bartosz.k@power.radom.pl</a></li>
+        <li><span class="lab">Godziny:</span> <span>Pn–Pt 8–17 · Sb 8–14</span></li>
+      </ul>
+    </div>
   </div>
-  <div class="wrap footer-bottom">© 2026 Power Rent · Mokra 2A, 26-600 Radom · Wszelkie prawa zastrzeżone · <a href="regulamin.html" style="color:inherit;text-decoration:underline">Regulamin</a></div>
+  <div class="wrap footer-bottom">© 2026 Power Rent · Mokra 2A, 26-600 Radom · Wszelkie prawa zastrzeżone</div>
+  <div class="wrap footer-legal-row">
+    <a href="regulamin.html">Regulamin wynajmu</a>
+    <span aria-hidden="true">·</span>
+    <a href="regulamin-strony.html">Regulamin strony</a>
+    <span aria-hidden="true">·</span>
+    <a href="polityka-prywatnosci.html">Polityka prywatności</a>
+  </div>
 </footer>
 
 <script src="script.js" defer></script>
@@ -523,7 +554,32 @@
 
   // ----- calendar -----
   (function(){var t=new Date();calY=t.getFullYear();calM=t.getMonth();})();
-  (function(){var o='';for(var hh=6;hh<=22;hh++){for(var mm=0;mm<60;mm+=30){var v=(hh<10?'0'+hh:hh)+':'+(mm===0?'00':'30');o+='<option value="'+v+'"'+(v==='08:00'?' selected':'')+'>'+v+'</option>';}}el('r-hOd').innerHTML=o;el('r-hDo').innerHTML=o;})();
+  // ----- GODZINY PRACY (odbiór/zwrot) -----
+  // dzień tygodnia z daty "YYYY-MM-DD" (0 = niedziela)
+  function dayOf(ds){if(!ds)return -1;var p=String(ds).split('-');return new Date(+p[0],+p[1]-1,+p[2]).getDay();}
+  // okno godzin [od,do] dla danego dnia; ODBIÓR w niedzielę = null (zamknięte)
+  function hoursWindow(day,isReturn){
+    if(day===0)return isReturn?[8,14]:null;   // niedziela: odbiór ZAMKNIĘTY, zwrot 08–14
+    if(day===6)return [8,14];                  // sobota 08–14
+    return [8,17];                             // pn–pt 08–17
+  }
+  // przebuduj listę godzin w <select> wg dnia, zachowując wybór jeśli wciąż dozwolony
+  function buildHours(id,day,isReturn){
+    var s=el(id);if(!s)return;
+    var w=hoursWindow(day,isReturn);
+    if(!w){s.innerHTML='<option value="">—</option>';s.value='';return;}
+    var cur=s.value,o='',ok=false;
+    for(var hh=w[0];hh<=w[1];hh++){for(var mm=0;mm<60;mm+=30){if(hh===w[1]&&mm>0)break;
+      var v=(hh<10?'0'+hh:hh)+':'+(mm===0?'00':'30');o+='<option value="'+v+'">'+v+'</option>';if(v===cur)ok=true;}}
+    s.innerHTML=o;s.value=ok?cur:((w[0]<10?'0'+w[0]:w[0])+':00');
+  }
+  // niedziela jako dzień ODBIORU jest zablokowana; jako ZWROT — dozwolona
+  function wouldBePickup(ds){
+    if(!calFrom||(calFrom&&calTo))return true;   // wybieramy odbiór
+    if(calFrom&&!calTo)return ds<calFrom;        // wcześniejszy dzień = nowy odbiór
+    return true;
+  }
+  buildHours('r-hOd',1,false);buildHours('r-hDo',1,true);   // domyślnie pn (08–17)
   el('r-hOd').addEventListener('change',function(){calRangeTxt();});
   el('r-hDo').addEventListener('change',function(){calRangeTxt();});
   function calRender(){
@@ -532,10 +588,13 @@
     var today=ymd(new Date());var h='';var i;
     for(i=0;i<off;i++)h+='<span class="cal-d empty"></span>';
     for(var d=1;d<=dim;d++){var ds=calY+'-'+pad(calM+1)+'-'+pad(d);var cls='cal-d';var past=ds<today;
-      if(past)cls+=' past';if(ds===today)cls+=' today';
+      var sunPick=(dayOf(ds)===0 && wouldBePickup(ds));   // niedziela, gdy byłaby ODBIOREM
+      if(past)cls+=' past';else if(sunPick)cls+=' nopick';
+      if(ds===today)cls+=' today';
       if(ds===calFrom)cls+=' from';if(ds===calTo)cls+=' to';
       if(calFrom&&calTo&&ds>calFrom&&ds<calTo)cls+=' inr';
-      h+='<button type="button" class="'+cls+'"'+(past?' disabled':'')+' data-d="'+ds+'">'+d+'</button>';
+      var dis=(past||sunPick);
+      h+='<button type="button" class="'+cls+'"'+(dis?' disabled':'')+' data-d="'+ds+'"'+(sunPick?' title="W niedzielę nie wydajemy aut — można tylko zwracać"':'')+'>'+d+'</button>';
     }
     el('calGrid').innerHTML=h;
   }
@@ -545,10 +604,13 @@
     else if(calFrom)r.innerHTML='Odbiór: <b>'+fmtDate(calFrom)+'</b> — wybierz dzień zwrotu.';
     else r.textContent='Wybierz dzień odbioru.';
   }
-  el('calGrid').addEventListener('click',function(e){var b=e.target.closest('.cal-d');if(!b||b.classList.contains('past')||b.classList.contains('empty'))return;
+  el('calGrid').addEventListener('click',function(e){var b=e.target.closest('.cal-d');if(!b||b.classList.contains('past')||b.classList.contains('empty')||b.classList.contains('nopick'))return;
     var ds=b.getAttribute('data-d');
+    if(dayOf(ds)===0 && wouldBePickup(ds)){warn('W niedzielę nie wydajemy aut — odbiór możliwy pn–sob. Zwrot w niedzielę jest możliwy.');return;}
     if(!calFrom||(calFrom&&calTo)){calFrom=ds;calTo=null;}
     else{if(ds<calFrom){calFrom=ds;}else{calTo=ds;}}
+    buildHours('r-hOd',dayOf(calFrom),false);
+    if(calTo)buildHours('r-hDo',dayOf(calTo),true);
     calRender();calRangeTxt();hideWarn();
     if(calFrom&&calTo){sel.carId='';sel.proceedNoCar=false;loadCars();el('tripSec').style.display='block';updateKaucja();}
     else{el('carsSec').style.display='none';el('tripSec').style.display='none';}
@@ -662,7 +724,17 @@
   function clientName(){return sel.typ==='firma'?val('r-firma').trim():val('r-name').trim();}
   function validate(n){
     if(n===1){if(!sel.seg){warn('Wybierz rodzaj pojazdu.');return false;}return true;}
-    if(n===2){if(!calFrom||!calTo){warn('Wybierz termin odbioru i zwrotu w kalendarzu.');return false;}if(rangeHours()<=0){warn('Godzina/data zwrotu musi być późniejsza niż odbioru.');return false;}if(!sel.carId&&!sel.proceedNoCar){warn('Wybierz auto z listy dostępnych (albo „Wyślij zapytanie mimo to", jeśli brak wolnych).');return false;}return true;}
+    if(n===2){
+      if(!calFrom||!calTo){warn('Wybierz termin odbioru i zwrotu w kalendarzu.');return false;}
+      if(dayOf(calFrom)===0){warn('Odbiór auta nie jest możliwy w niedzielę — wybierz dzień odbioru pn–sob.');return false;}
+      var wo=hoursWindow(dayOf(calFrom),false),ho=hm(val('r-hOd'));
+      if(!wo||ho<wo[0]*60||ho>wo[1]*60){warn('Godzina odbioru poza godzinami pracy ('+(dayOf(calFrom)===6?'sob 08:00–14:00':'pn–pt 08:00–17:00')+').');return false;}
+      var wd=hoursWindow(dayOf(calTo),true),hd=hm(val('r-hDo'));
+      if(!wd||hd<wd[0]*60||hd>wd[1]*60){warn('Godzina zwrotu poza godzinami pracy w wybranym dniu (nd/sob 08:00–14:00, pn–pt 08:00–17:00).');return false;}
+      if(rangeHours()<=0){warn('Godzina/data zwrotu musi być późniejsza niż odbioru.');return false;}
+      if(!sel.carId&&!sel.proceedNoCar){warn('Wybierz auto z listy dostępnych (albo „Wyślij zapytanie mimo to", jeśli brak wolnych).');return false;}
+      return true;
+    }
     if(n===3){if(!clientName()){warn(sel.typ==='firma'?'Podaj nazwę firmy.':'Podaj imię i nazwisko.');return false;}var ph=nipDigits(val('r-phone'));if(ph.length<7){warn('Podaj poprawny numer telefonu.');return false;}return true;}
     return true;
   }
@@ -729,7 +801,7 @@
     sel={seg:'',segCode:'',carId:'',carLabel:'',carSeg:'',car:null,typ:'ind',proceedNoCar:false,zagranica:false,kraj:'',kaucja:1000,oplata:0};maxStep=1;calFrom=null;calTo=null;
     ['r-name','r-pesel','r-prawo','r-dowod','r-firma','r-nip','r-phone','r-email','r-adres','r-kod','r-miasto','r-msg'].forEach(function(id){var e=el(id);if(e)e.value='';});
     el('nipStatus').textContent='';el('nipStatus').className='nip-status';
-    if(el('r-hOd').options.length){el('r-hOd').value='08:00';el('r-hDo').value='08:00';}loadedCars=[];if(el('wzSumAlt'))el('wzSumAlt').style.display='none';
+    buildHours('r-hOd',1,false);buildHours('r-hDo',1,true);el('r-hOd').value='08:00';el('r-hDo').value='08:00';loadedCars=[];if(el('wzSumAlt'))el('wzSumAlt').style.display='none';
     var cards=el('wzVeh').querySelectorAll('.wz-veh');for(var i=0;i<cards.length;i++)cards[i].classList.remove('sel');
     el('carsSec').style.display='none';el('tripSec').style.display='none';
     var tt=el('tripToggle').querySelectorAll('button');for(var z=0;z<tt.length;z++)tt[z].classList.toggle('on',tt[z].getAttribute('data-z')==='0');
@@ -753,6 +825,14 @@
 @keyframes hphoneRing{0%,100%{transform:rotate(0)}15%{transform:rotate(-15deg)}30%{transform:rotate(12deg)}45%{transform:rotate(-9deg)}60%{transform:rotate(6deg)}75%{transform:rotate(-3deg)}}
 @keyframes hphonePulse{0%,100%{box-shadow:0 0 0 0 rgba(227,18,26,0)}50%{box-shadow:0 0 0 4px rgba(227,18,26,.10)}}
 @media (prefers-reduced-motion:reduce){.hphone,.hphone svg{animation:none}}
+</style>
+<style id="footer-legal-style">
+.footer-logo{display:inline-flex;align-items:center;background:#fff;border-radius:12px;padding:9px 14px;margin-bottom:14px}
+.footer-logo img{height:34px;width:auto;display:block}
+.footer-legal-row{max-width:1180px;margin:0 auto;padding:14px 22px 2px;display:flex;flex-wrap:wrap;justify-content:center;gap:7px 14px;align-items:center}
+.footer-legal-row a{color:rgba(255,255,255,.62);font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}
+.footer-legal-row a:hover{color:#fff}
+.footer-legal-row span{color:rgba(255,255,255,.28);font-size:12px}
 </style>
 </body>
 </html>
