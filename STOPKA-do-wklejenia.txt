@@ -1,0 +1,9 @@
+<!-- ====== STOPKA: PASEK PRAWNY ======
+   Wklej tuż PRZED zamykającym </footer> tej podstrony.
+   (Jeśli w footer-bottom masz inline link „· Regulamin", możesz go usunąć,
+    bo te linki są teraz w pasku poniżej.) -->
+  <div class="wrap footer-legal-row"><a href="regulamin.html">Regulamin wynajmu</a><span aria-hidden="true">·</span><a href="regulamin-strony.html">Regulamin strony</a><span aria-hidden="true">·</span><a href="polityka-prywatnosci.html">Polityka prywatności</a></div>
+
+<!-- ====== oraz ten styl tuż PRZED </body> ====== -->
+<style id="footer-legal-style">.footer-legal-row{max-width:1180px;margin:0 auto;padding:14px 22px 2px;display:flex;flex-wrap:wrap;justify-content:center;gap:7px 14px;align-items:center}.footer-legal-row a{color:rgba(255,255,255,.62);font-size:13px;font-weight:500;text-decoration:none;transition:color .2s}.footer-legal-row a:hover{color:#fff}.footer-legal-row span{color:rgba(255,255,255,.28);font-size:12px}</style>
+
