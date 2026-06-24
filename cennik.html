@@ -130,7 +130,6 @@ table.price td.amt.amt-na{color:var(--muted);font-weight:600;font-variant-numeri
 .price-taxnote .neto{color:var(--red)}
 .price-taxnote .dot{width:7px;height:7px;border-radius:50%;background:var(--grad-red);display:inline-block;margin-right:8px;vertical-align:middle}
 
-
 /* ===================== NAVBAR — identyczny jak na stronie głównej ===================== */
 #hdr{position:sticky;top:0;z-index:90;background:transparent;padding-top:14px;transition:padding .3s;--accent:#e3121a;--on-accent:#fff;--accent-glow:0 10px 24px -8px rgba(227,18,26,.5);--logo:#0e1014;--nav-tx:#39414f;--ink:#0e1014;--fd:'Space Grotesk',system-ui,sans-serif}
 #hdr .nav{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;height:62px;max-width:1180px;margin:0 auto;padding:0 14px 0 22px;border-radius:20px;background:rgba(255,255,255,.52);-webkit-backdrop-filter:blur(22px) saturate(185%);backdrop-filter:blur(22px) saturate(185%);border:1px solid rgba(255,255,255,.62);box-shadow:0 14px 40px -14px rgba(13,16,22,.28),0 1px 0 inset rgba(255,255,255,.9);transition:height .3s,background .3s,box-shadow .3s}
@@ -201,10 +200,9 @@ table.price td.amt.amt-na{color:var(--muted);font-weight:600;font-variant-numeri
       <a href="#lawety">Auto-lawety</a>
       <a href="#chlodnie-furgon">Chłodnie — furgony</a>
       <a href="#chlodnie-kontener">Chłodnie — kontenery</a>
-      <a href="#plandeka">Plandeki</a>
-      <a href="#sedan">Osobowe — sedan</a>
       <a href="#kombi">Osobowe — kombi</a>
       <a href="#suv">Osobowe — SUV</a>
+      <a href="#plandeka">Plandeki</a>
     </div>
 
     <div class="price-taxnote rv"><span><span class="dot"></span><b>Najem krótkoterminowy</b> — ceny brutto</span><span><span class="dot"></span><b>Najem długoterminowy</b> (miesięczny) — ceny <b class="neto">netto</b></span></div>
@@ -266,20 +264,6 @@ table.price td.amt.amt-na{color:var(--muted);font-weight:600;font-variant-numeri
       </div>
     </div>
 
-    <div class="pseg rv" id="plandeka">
-      <div class="pseg-head"><h3>Auta dostawcze z plandeką</h3><div class="from">już od <b>380 zł</b>/doba</div></div>
-      <div class="ptables">
-        <div class="ptable"><h4>Wynajem krótkoterminowy <span class="pt-tax">ceny brutto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">280 zł</td><td>300 km</td></tr><tr><td>1 doba</td><td class="amt">380 zł</td><td>500 km</td></tr><tr><td>1 doba</td><td class="amt">450 zł</td><td>1000 km</td></tr><tr><td>1 doba</td><td class="amt">500 zł</td><td>bez limitu</td></tr></tbody></table></div>
-        <div class="ptable"><h4>Wynajem długoterminowy <span class="pt-tax">ceny netto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">5500 zł</td><td>6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">6500 zł</td><td>11 000 km</td></tr><tr><td>1 mies.</td><td class="amt">7500 zł</td><td>16 000 km</td></tr><tr><td>1 mies.</td><td class="amt">9000 zł</td><td>bez limitu</td></tr></tbody></table></div>
-      </div>
-    </div>
-
-    <div class="pseg rv has-photo" id="sedan">
-      <div class="pseg-head"><h3>Auto osobowe — sedan</h3><div class="from">już od <b>230 zł</b> / 5 h</div></div>
-      <figure class="pseg-photo"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200444_759ee268-7ed4-49cb-b9ef-71d97eb7963f.png" alt="Auto osobowe — sedan — Power Rent" loading="lazy"></figure>
-      <div class="ptables"><div class="ptable"><h4>Wynajem krótkoterminowy <span class="pt-tax">ceny brutto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">230 zł</td><td>do 100 km</td></tr><tr><td>1 doba</td><td class="amt">280 zł</td><td>do 300 km</td></tr><tr><td>1 doba</td><td class="amt">350 zł</td><td>do 600 km</td></tr><tr><td>1 doba</td><td class="amt">500 zł</td><td>bez limitu</td></tr></tbody></table></div><div class="ptable"><h4>Wynajem długoterminowy <span class="pt-tax">ceny netto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">3 500 zł</td><td>do 3 000 km</td></tr><tr><td>1 mies.</td><td class="amt">4 500 zł</td><td>do 6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">5 500 zł</td><td>do 9 000 km</td></tr><tr><td>1 mies.</td><td class="amt">7 000 zł</td><td>bez limitu</td></tr></tbody></table></div></div>
-    </div>
-
     <div class="pseg rv has-photo" id="kombi">
       <div class="pseg-head"><h3>Auto osobowe — kombi automat</h3><div class="from">już od <b>250 zł</b>/doba</div></div>
       <figure class="pseg-photo"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200449_c11bbded-d5e2-4ae1-b8a6-6a78073b9905.png" alt="Auto osobowe — kombi automat — Power Rent" loading="lazy"></figure>
@@ -289,9 +273,18 @@ table.price td.amt.amt-na{color:var(--muted);font-weight:600;font-variant-numeri
       </div>
     </div>
 
-    <div class="pseg rv" id="suv">
+    <div class="pseg rv has-photo" id="suv">
       <div class="pseg-head"><h3>Auto osobowe — SUV automat</h3><div class="from">już od <b>200 zł</b> / 5 h</div></div>
+      <figure class="pseg-photo"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260617_200444_759ee268-7ed4-49cb-b9ef-71d97eb7963f.png" alt="Auto osobowe — SUV automat (Peugeot 408 GT) — Power Rent" loading="lazy"></figure>
       <div class="ptables"><div class="ptable"><h4>Wynajem krótkoterminowy <span class="pt-tax">ceny brutto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">200 zł</td><td>do 100 km</td></tr><tr><td>1 doba</td><td class="amt">230 zł</td><td>do 300 km</td></tr><tr><td>1 doba</td><td class="amt">280 zł</td><td>do 600 km</td></tr><tr><td>1 doba</td><td class="amt">430 zł</td><td>bez limitu</td></tr></tbody></table></div><div class="ptable"><h4>Wynajem długoterminowy <span class="pt-tax">ceny netto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">3 000 zł</td><td>do 3 000 km</td></tr><tr><td>1 mies.</td><td class="amt">4 000 zł</td><td>do 6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">5 000 zł</td><td>do 9 000 km</td></tr><tr><td>1 mies.</td><td class="amt">7 000 zł</td><td>bez limitu</td></tr></tbody></table></div></div>
+    </div>
+
+    <div class="pseg rv" id="plandeka">
+      <div class="pseg-head"><h3>Auta dostawcze z plandeką</h3><div class="from">już od <b>380 zł</b>/doba</div></div>
+      <div class="ptables">
+        <div class="ptable"><h4>Wynajem krótkoterminowy <span class="pt-tax">ceny brutto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>5 godz.</td><td class="amt">280 zł</td><td>300 km</td></tr><tr><td>1 doba</td><td class="amt">380 zł</td><td>500 km</td></tr><tr><td>1 doba</td><td class="amt">450 zł</td><td>1000 km</td></tr><tr><td>1 doba</td><td class="amt">500 zł</td><td>bez limitu</td></tr></tbody></table></div>
+        <div class="ptable"><h4>Wynajem długoterminowy <span class="pt-tax">ceny netto</span></h4><table class="price"><thead><tr><th>Okres</th><th>Cena</th><th>Limit km</th></tr></thead><tbody><tr><td>1 mies.</td><td class="amt">5500 zł</td><td>6 000 km</td></tr><tr><td>1 mies.</td><td class="amt">6500 zł</td><td>11 000 km</td></tr><tr><td>1 mies.</td><td class="amt">7500 zł</td><td>16 000 km</td></tr><tr><td>1 mies.</td><td class="amt">9000 zł</td><td>bez limitu</td></tr></tbody></table></div>
+      </div>
     </div>
 
     <div class="grid-2" style="margin-top:8px">
