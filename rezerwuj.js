@@ -99,50 +99,65 @@
     document.head.appendChild(s);
   }
 
-  /* ---- NAVBAR: znajdź przycisk rezerwacji w nagłówku i ustaw "Rezerwuj online" ---- */
+  /* ---- NAVBAR: ustaw DOKŁADNIE JEDEN przycisk "Rezerwuj online" (bez duplikatów) ---- */
   function fixNav() {
     if (!CFG.fixNav) return;
     var heads = document.querySelectorAll('#hdr, header, .hd, .site-header, .navbar');
-    var seen = [], found = false;
+
+    // 1) zbierz kandydatów (linki rezerwacji w nagłówku, z pominięciem treści, stopki i telefonu)
+    var cands = [];
     Array.prototype.forEach.call(heads, function (h) {
       if (h.closest && h.closest('footer')) return;
-      var links = h.querySelectorAll('a');
-      Array.prototype.forEach.call(links, function (a) {
-        if (seen.indexOf(a) !== -1) return;
+      Array.prototype.forEach.call(h.querySelectorAll('a'), function (a) {
+        if (cands.indexOf(a) !== -1) return;
+        if (a.closest && a.closest('.reg-toc, .reg-body, .reg-hero, main, article, footer, .footer, .prz-band, .prz-cta')) return;
         var t = (a.textContent || '').trim();
         var href = (a.getAttribute('href') || '');
-        // NIE ruszaj spisu treści, treści ani linków kotwicowych (#...) — tylko realny przycisk w navbarze
-        if (/^#/.test(href)) return;
-        if (a.closest && a.closest('.reg-toc, .reg-body, .reg-hero, main, article, footer, .footer, .prz-band, .prz-cta')) return;
-        var looksLikeBook = /rezerw/i.test(t) ||
-                            /rezerwacje\.html/i.test(href) ||
-                            (/#rezerwacj/i.test(href) && /rezerw/i.test(t));
-        // pomiń telefon
-        if (/tel:/i.test(href) || /\d{3}\s?\d{3}\s?\d{3}/.test(t)) return;
-        if (!looksLikeBook) return;
-        seen.push(a);
-        a.setAttribute('href', bookHref());
-        // nie kasuj ikon — ustaw tekst tylko gdy nie ma elementów-dzieci
-        if (!a.querySelector('*')) a.textContent = 'Rezerwuj online';
-        a.setAttribute('data-prz-nav', '1');
-        found = true;
+        if (/tel:/i.test(href) || /\d{3}\s?\d{3}\s?\d{3}/.test(t)) return;     // pomiń telefon
+        if (/rezerw/i.test(t) || /rezerwacje\.html/i.test(href)) cands.push(a);
       });
     });
-    // awaryjnie: gdy w nagłówku nie ma żadnego przycisku rezerwacji — dołóż
-    if (!found) {
+
+    // 2) wybierz JEDEN: najpierw realny przycisk (klasa btn / href rezerwacje.html), potem pierwszy z brzegu
+    var primary = null;
+    for (var i = 0; i < cands.length; i++) {
+      var cl = (cands[i].className || ''), hr = (cands[i].getAttribute('href') || '');
+      if (/\bbtn\b/.test(cl) || /rezerwacje\.html/i.test(hr)) { primary = cands[i]; break; }
+    }
+    if (!primary && cands.length) primary = cands[0];
+
+    if (primary) {
+      primary.setAttribute('href', bookHref());
+      if (!primary.querySelector('*')) primary.textContent = 'Rezerwuj online';
+      primary.setAttribute('data-prz-nav', '1');
+    } else {
+      // brak jakiegokolwiek przycisku → dołóż jeden (o ile go jeszcze nie ma)
       var host = document.querySelector('.nav-actions') ||
                  document.querySelector('header .wrap') ||
                  document.querySelector('header');
-      if (host) {
-        var a = document.createElement('a');
-        a.className = 'btn btn-red prz-nav-add';
-        a.setAttribute('href', bookHref());
-        a.setAttribute('data-prz-nav', '1');
-        a.textContent = 'Rezerwuj online';
-        a.style.cssText = 'display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:11px;background:var(--grad-red,linear-gradient(135deg,#E11D2A,#C20E1B));color:#fff;font-weight:800;text-decoration:none;margin-left:auto';
-        host.appendChild(a);
+      if (host && !host.querySelector('[data-prz-nav],[data-prz-add]')) {
+        var add = document.createElement('a');
+        add.className = 'btn btn-red prz-nav-add';
+        add.setAttribute('href', bookHref());
+        add.setAttribute('data-prz-add', '1');
+        add.textContent = 'Rezerwuj online';
+        add.style.cssText = 'display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:11px;background:var(--grad-red,linear-gradient(135deg,#E11D2A,#C20E1B));color:#fff;font-weight:800;text-decoration:none;margin-left:auto';
+        host.appendChild(add);
+        primary = add;
       }
     }
+
+    // 3) BEZPIECZNIK: usuń ewentualne DUPLIKATY "Rezerwuj online" w nagłówku (zostaw tylko wybrany)
+    Array.prototype.forEach.call(heads, function (h) {
+      if (h.closest && h.closest('footer')) return;
+      Array.prototype.forEach.call(h.querySelectorAll('a'), function (a) {
+        if (a === primary) return;
+        var txt = (a.textContent || '').trim().toLowerCase();
+        if ((a.hasAttribute('data-prz-nav') || a.hasAttribute('data-prz-add') || txt === 'rezerwuj online') && a.parentNode) {
+          a.parentNode.removeChild(a);
+        }
+      });
+    });
   }
 
   /* ---- dołóż "Rezerwuj online" obok istniejących przycisków "Zadzwoń i zarezerwuj" ---- */
