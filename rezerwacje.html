@@ -474,7 +474,7 @@
     {seg:'Bus 8/9-osobowy',sc:'BUS',t:'Bus 8/9 osób',d:'Wyjazdy grupowe, przewóz ekip',ic:'bus'},
     {seg:'Auto-laweta',sc:'LAW',t:'Auto-laweta',d:'Transport pojazdów',ic:'tow'},
     {seg:'Chłodnia',sc:'CHŁ',t:'Chłodnia',d:'Transport w niskiej temperaturze',ic:'fridge'},
-    {seg:'Auto z plandeką',sc:'',t:'Z plandeką',d:'Otwarta zabudowa / plandeka',ic:'tarp'},
+    {seg:'Auto z plandeką',sc:'',t:'Z plandeką',d:'Otwarta zabudowa / plandeka',ic:'tarp',img:'https://d8j0ntlcm91z4.cloudfront.net/user_3FBNDxDErwwR0aW1mMDAvNcPYWS/hf_20260626_124345_56e2418e-53d4-46dd-900a-79f7f5215051.png'},
     {seg:'Auto osobowe (sedan / kombi / SUV)',sc:'OSO',t:'Osobowe',d:'Sedan, kombi lub SUV — automat',ic:'car'},
     {seg:'Nie wiem — proszę o doradztwo',sc:'',t:'Nie wiem',d:'Pomożemy dobrać auto',ic:'q'}
   ];
@@ -494,7 +494,7 @@
   var SEG_PHOTO={
     'S':CF+'hf_20260617_200336_fd130bf2-48c2-4327-b52d-1a09264d655d.png',
     'M':CF+'hf_20260617_200347_633102cd-ed81-4cee-99fb-1768be9f65d8.png',
-    'L':CF+'hf_20260618_144108_a532f8c4-ce2b-4655-93e1-c4932296ce79.png',
+    'L':CF+'hf_20260626_130716_32e25fb3-36bc-45a7-a5ca-24a20940826e.png',
     'L+':CF+'hf_20260617_200405_1c147392-2dab-4357-815e-824d84a8d847.png',
     'XL':CF+'hf_20260617_200412_27c8fc18-e150-471e-b9e5-24476c9c92c6.png',
     'BUS':CF+'hf_20260618_085325_633d50e0-0993-4247-b51a-bf7ee8c47eaa.png',
@@ -525,7 +525,7 @@
 
   // ----- vehicle category cards -----
   (function(){var h='';for(var i=0;i<CATS.length;i++){var c=CATS[i];
-    h+='<button type="button" class="wz-veh" data-i="'+i+'" style="animation-delay:'+(i*0.045)+'s"><span class="wz-veh-check">\u2713</span><div class="wz-veh-photo"><span class="wz-veh-gl">'+IC[c.ic]+'</span>'+(SEG_PHOTO[c.sc]?'<img src="'+esc(SEG_PHOTO[c.sc])+'" alt="'+esc(c.t)+'" loading="lazy" onerror="this.remove()">':'')+'</div><h4>'+c.t+'</h4><p>'+c.d+'</p></button>';
+    h+='<button type="button" class="wz-veh" data-i="'+i+'" style="animation-delay:'+(i*0.045)+'s"><span class="wz-veh-check">\u2713</span><div class="wz-veh-photo"><span class="wz-veh-gl">'+IC[c.ic]+'</span>'+((c.img||SEG_PHOTO[c.sc])?'<img src="'+esc(c.img||SEG_PHOTO[c.sc])+'" alt="'+esc(c.t)+'" loading="lazy" onerror="this.remove()">':'')+'</div><h4>'+c.t+'</h4><p>'+c.d+'</p></button>';
   }el('wzVeh').innerHTML=h;})();
   el('wzVeh').addEventListener('click',function(e){var b=e.target.closest('.wz-veh');if(!b)return;
     var cards=el('wzVeh').querySelectorAll('.wz-veh');for(var i=0;i<cards.length;i++)cards[i].classList.remove('sel');
