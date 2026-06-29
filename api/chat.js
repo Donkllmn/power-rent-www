@@ -42,7 +42,7 @@ WARUNKI:
 
 POMOC DROGOWA POWERHOL24: całodobowo (24/7) — auto zastępcze, dowóz i wypompowanie paliwa, wymiana koła, transport do 3 aut. Tel 664 201 202.
 
-KONTAKT: telefon 664 201 202 oraz 692 422 337; adres ul. Mokra 2A, 26-600 Radom; e-mail bartosz.k@power.radom.pl; WhatsApp 664 201 202. Pełny cennik jest na stronie w zakładce „Cennik".`;
+KONTAKT: telefon 664 201 202 oraz 692 422 337; adres ul. Mokra 2A, 26-600 Radom; e-mail Faktury2@power.radom.pl; WhatsApp 664 201 202. Pełny cennik jest na stronie w zakładce „Cennik".`;
 
 function safeParse(s) { try { return JSON.parse(s); } catch (e) { return {}; } }
 

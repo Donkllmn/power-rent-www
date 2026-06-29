@@ -423,7 +423,7 @@
       <ul class="footer-contact">
         <li><span>Mokra 2A, 26-600 Radom</span></li>
         <li><span class="lab">Tel:</span> <a href="tel:664201202">664 201 202</a></li>
-        <li><span class="lab">E-mail:</span> <a href="mailto:bartosz.k@power.radom.pl">bartosz.k@power.radom.pl</a></li>
+        <li><span class="lab">E-mail:</span> <a href="mailto:Faktury2@power.radom.pl">Faktury2@power.radom.pl</a></li>
         <li><span class="lab">Godziny:</span> <span>Pn–Pt 8–17 · Sb 8–14</span></li>
       </ul>
     </div>
@@ -525,7 +525,7 @@
 
   // ----- vehicle category cards -----
   (function(){var h='';for(var i=0;i<CATS.length;i++){var c=CATS[i];
-    h+='<button type="button" class="wz-veh" data-i="'+i+'" style="animation-delay:'+(i*0.045)+'s"><span class="wz-veh-check">\u2713</span><div class="wz-veh-photo"><span class="wz-veh-gl">'+IC[c.ic]+'</span>'+((c.img||SEG_PHOTO[c.sc])?'<img src="'+esc(c.img||SEG_PHOTO[c.sc])+'" alt="'+esc(c.t)+'" loading="lazy" onerror="this.remove()">':'')+'</div><h4>'+c.t+'</h4><p>'+c.d+'</p></button>';
+    h+='<button type="button" class="wz-veh" data-i="'+i+'" style="animation-delay:'+(i*0.045)+'s"><span class="wz-veh-check">\u2713</span><div class="wz-veh-photo"><span class="wz-veh-gl">'+IC[c.ic]+'</span>'+(c.img||SEG_PHOTO[c.sc])?'<img src="'+esc(c.img||SEG_PHOTO[c.sc])+'" alt="'+esc(c.t)+'" loading="lazy" onerror="this.remove()">':'')+'</div><h4>'+c.t+'</h4><p>'+c.d+'</p></button>';
   }el('wzVeh').innerHTML=h;})();
   el('wzVeh').addEventListener('click',function(e){var b=e.target.closest('.wz-veh');if(!b)return;
     var cards=el('wzVeh').querySelectorAll('.wz-veh');for(var i=0;i<cards.length;i++)cards[i].classList.remove('sel');
