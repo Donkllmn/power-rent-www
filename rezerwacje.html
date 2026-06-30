@@ -378,6 +378,9 @@
           <div class="wz-sub">Wszystko się zgadza? Wyślij rezerwację — odezwiemy się telefonicznie z potwierdzeniem i ceną.</div>
           <div id="wzReceipt"></div>
           <div class="wz-info"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.6h.01"/></svg><span>Rezerwacja jest wstępna — dostępność i cenę potwierdzamy telefonicznie. Cena ustalana jest indywidualnie, zależnie od terminu i długości najmu.</span></div>
+          <div class="wz-hours" style="display:flex;gap:12px;align-items:flex-start;margin-top:12px;padding:14px 16px;background:#fff;border:1px solid #e7e9ee;border-left:4px solid #e3121a;border-radius:12px;font-size:13.5px;line-height:1.55;color:#0e1014">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;margin-top:1px;color:#e3121a"><circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 2"/></svg>
+            <span>Rezerwację potwierdzamy w godzinach <b>8:00–17:00 od poniedziałku do piątku</b> oraz w <b>soboty 8:00–14:00</b>. Jeśli chcesz szybsze potwierdzenie, zadzwoń: <a href="tel:664201202" style="color:#e3121a;font-weight:800;white-space:nowrap">664&nbsp;201&nbsp;202</a>.</span></div>
         </div>
 
         <div class="wz-warn" id="wzWarn"></div>
@@ -518,6 +521,10 @@
     'OSO':CF+'hf_20260617_200444_759ee268-7ed4-49cb-b9ef-71d97eb7963f.png',
     'CHŁ':CF+'hf_20260617_200417_8419eb41-b939-4a30-99b7-ebe79c4036de.png'
   };
+  /* === ZDJĘCIA PRZYPISANE DO KONKRETNEGO AUTA (po numerze rejestracyjnym) ===
+     Ma pierwszeństwo przed zdjęciem segmentowym. Dotyczy tylko wymienionych aut. */
+  var CARFIX={'WR961FC':CF+'hf_20260630_095905_ea8887b2-f6fe-4d27-9411-9a28cea27084.png'};
+  function plateKey(v){return (v&&v.plate?String(v.plate):'').toUpperCase().replace(/\s+/g,'');}
   function segRate(sg){return RATES[sg]||200;}
   function autoDiscount(d){return 0;}/* Cennik krotkoterminowy: stala stawka dobowa, bez rabatu za liczbe dob (cena = doby x stawka). Najem miesieczny ma osobne stawki w cenniku. */
   function hm(s){var m=/^(\d{1,2}):(\d{2})$/.exec(s||'');return m?((+m[1])*60+(+m[2])):0;}
@@ -526,7 +533,7 @@
   function rentDaysN(){return dobyCount();}
   function calcPrice(sg){var days=rentDaysN();if(!days||!sg||!RATES[sg])return null;var rate=segRate(sg),base=days*rate,disc=autoDiscount(days),total=Math.max(0,Math.round(base*(1-disc/100)));return{days:days,rate:rate,base:base,disc:disc,total:total};}
   function illusKey(sg){if(sg==='BUS')return'bus';if(sg==='LAW')return'tow';if(sg==='CHŁ')return'fridge';if(sg==='OSO')return'car';return'van';}
-  function carPhoto(v){var url=v.photo||SEG_PHOTO[v.seg]||'';return '<div class="car-photo"><div class="car-illus">'+IC[illusKey(v.seg)]+'</div>'+(url?'<img src="'+esc(url)+'" alt="'+esc(v.model||'')+'" loading="lazy" onerror="this.remove()">':'')+'</div>';}
+  function carPhoto(v){var url=CARFIX[plateKey(v)]||v.photo||SEG_PHOTO[v.seg]||'';return '<div class="car-photo"><div class="car-illus">'+IC[illusKey(v.seg)]+'</div>'+(url?'<img src="'+esc(url)+'" alt="'+esc(v.model||'')+'" loading="lazy" onerror="this.remove()">':'')+'</div>';}
   var MN=['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'];
   var MS=['sty','lut','mar','kwi','maj','cze','lip','sie','wrz','paź','lis','gru'];
 
@@ -755,7 +762,7 @@
     return true;
   }
   function priceSeg(){return sel.carSeg||sel.segCode||'';}
-  function carHeroImg(v){var url=(v&&v.photo)||(v&&SEG_PHOTO[v.seg])||(sel.segCode?SEG_PHOTO[sel.segCode]:'')||'';return url?'<img class="rcpt-img" src="'+esc(url)+'" alt="" onerror="this.remove()">':'';}
+  function carHeroImg(v){var url=(v&&CARFIX[plateKey(v)])||(v&&v.photo)||(v&&SEG_PHOTO[v.seg])||(sel.segCode?SEG_PHOTO[sel.segCode]:'')||'';return url?'<img class="rcpt-img" src="'+esc(url)+'" alt="" onerror="this.remove()">':'';}
   function countUp(elm,to){var dur=750,t0=null;function st(ts){if(!t0)t0=ts;var p=Math.min(1,(ts-t0)/dur),e=1-Math.pow(1-p,3);elm.textContent=Math.round(to*e).toLocaleString('pl-PL')+' zł';if(p<1)requestAnimationFrame(st);}requestAnimationFrame(st);}
   function renderSum(){
     var pr=calcPrice(priceSeg()),rentT=pr?pr.total:0,oplata=sel.oplata||0,atPickup=rentT+oplata+sel.kaucja;
