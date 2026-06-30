@@ -1918,6 +1918,7 @@ tr.res-online:hover{background:linear-gradient(90deg,#DCEAFE,transparent 55%)}
   var currentView='grafik';
   var statusFilter='all';
   var searchQ='';
+  var rezShown=80; /* ile wierszy rezerwacji renderujemy naraz (reszta na żądanie — chroni przed zamrożeniem przy tysiącach rekordów) */
   var editingId=null, detId=null;
   var RES=[];
   var KEY='pr_panel_v3';
@@ -2056,6 +2057,9 @@ tr.res-online:hover{background:linear-gradient(90deg,#DCEAFE,transparent 55%)}
     rangeEl.innerHTML=fmt(ds[0])+' <span>–</span> '+fmt(ds[DAYS-1])+' <span>'+ds[0].getFullYear()+'</span>';
     renderStats();
     var activeCount=FLEET.filter(function(v){return !isArchived(v);}).length;
+    /* Indeks rezerwacji wg pojazdu — budowany raz na render, dzięki czemu busyToday/barsFor
+       nie przeszukują wszystkich rezerwacji osobno dla każdego z aut (było O(auta x rezerwacje)). */
+    var _byVeh={};for(var _bi=0;_bi<RES.length;_bi++){var _bx=RES[_bi];(_byVeh[_bx.vehicleId]||(_byVeh[_bx.vehicleId]=[])).push(_bx);}
     var html='<div class="gh-row"><div class="corner">Pojazd · '+activeCount+'</div>';
     for(var i=0;i<ds.length;i++){var d=ds[i];var we=(d.getDay()===0||d.getDay()===6);var td=ymd(d)===ymd(TODAY);
       html+='<div class="dhead'+(we?' we':'')+(td?' today':'')+'" data-date="'+ymd(d)+'"><div class="wd">'+WD[d.getDay()]+'</div><div class="dn">'+d.getDate()+'</div></div>';}
@@ -2064,9 +2068,9 @@ tr.res-online:hover{background:linear-gradient(90deg,#DCEAFE,transparent 55%)}
       if(segFilter!=='all'&&segFilter!==sg)continue;
       var list=FLEET.filter(function(v){return v.seg===sg&&!isArchived(v);});
       if(!list.length)continue;
-      (function(){var fr=[],bz=[];list.forEach(function(v){(busyToday(v.id)?bz:fr).push(v);});list=fr.concat(bz);})();
+      (function(){var fr=[],bz=[];list.forEach(function(v){(busyToday(v.id,_byVeh)?bz:fr).push(v);});list=fr.concat(bz);})();
       html+='<div class="grp"><span class="badge">'+sg+'</span>'+SEG[sg]+' · '+list.length+' aut</div>';
-      for(var v=0;v<list.length;v++){var vv=list[v];var bz=busyToday(vv.id);
+      for(var v=0;v<list.length;v++){var vv=list[v];var bz=busyToday(vv.id,_byVeh);
         var unav=(vv.st==='serwis'||vv.st==='uszkodzony');
         html+='<div class="g-row'+(bz?' gbusy':'')+(unav?' gunavail':'')+'"><div class="vcell">'+
           '<span class="stat-dot '+(bz||unav?'busy':'free')+'" title="'+(unav?(vv.st==='serwis'?'W serwisie':'Uszkodzone'):(bz?'Wynajęte / zajęte dziś':'Wolne dziś'))+'"></span>'+
@@ -2076,16 +2080,17 @@ tr.res-online:hover{background:linear-gradient(90deg,#DCEAFE,transparent 55%)}
         html+='<div class="track" data-veh="'+vv.id+'">';
         for(var c=0;c<ds.length;c++){var dd=ds[c];var we2=(dd.getDay()===0||dd.getDay()===6);var td2=ymd(dd)===ymd(TODAY);
           html+='<div class="daycell'+(we2?' we':'')+(td2?' today':'')+'" data-date="'+ymd(dd)+'"></div>';}
-        html+=barsFor(vv.id,ymd(ds[0]));
+        html+=barsFor(vv.id,ymd(ds[0]),_byVeh);
         html+='</div></div>';}
     }
     grafikEl.innerHTML=html;
     if(typeof applyColSel==='function')applyColSel();
   }
   function hourFrac(s){var m=/^(\d{1,2}):(\d{2})$/.exec(s||'');return m?((+m[1])*60+(+m[2]))/1440:0;}
-  function barsFor(vehId,startStr){
+  function barsFor(vehId,startStr,_idx){
     var out='';
-    for(var i=0;i<RES.length;i++){var x=RES[i];if(x.vehicleId!==vehId)continue;
+    var _l=_idx?(_idx[vehId]||[]):RES;
+    for(var i=0;i<_l.length;i++){var x=_l[i];if(!_idx&&x.vehicleId!==vehId)continue;
       var si=diffDays(startStr,x.from),ei=diffDays(startStr,x.to);
       if(ei<0||si>DAYS-1)continue;
       var from=Math.max(si,0),to=Math.min(ei,DAYS-1);
@@ -2108,8 +2113,8 @@ tr.res-online:hover{background:linear-gradient(90deg,#DCEAFE,transparent 55%)}
     return out;
   }
   function barTitle(x){var v=veh(x.vehicleId);return (v?v.model+' '+v.plate:'')+' · '+x.from+' '+(x.godzOd||'')+' → '+x.to+' '+(x.godzDo||'')+' · '+STATUS[x.status]+(x.client&&x.status!=='blokada'?' · '+x.client:'');}
-  function busyToday(id){var t=ymd(TODAY);for(var i=0;i<RES.length;i++){var x=RES[i];
-    if(x.vehicleId!==id||x.status==='anulowana'||x.status==='zakonczona')continue;
+  function busyToday(id,_idx){var t=ymd(TODAY);var _l=_idx?(_idx[id]||[]):RES;for(var i=0;i<_l.length;i++){var x=_l[i];
+    if((!_idx&&x.vehicleId!==id)||x.status==='anulowana'||x.status==='zakonczona')continue;
     if(t>=x.from&&t<=x.to)return true;}return false;}
   function activeToday(){var t=ymd(TODAY),busy={},out={wyd:0,zwr:0,trasa:0};
     for(var i=0;i<RES.length;i++){var x=RES[i];
@@ -2203,7 +2208,8 @@ tr.res-online:hover{background:linear-gradient(90deg,#DCEAFE,transparent 55%)}
     rows.sort(function(a,b){return a.from<b.from?1:(a.from>b.from?-1:0);});
     rcountEl.textContent=rows.length+(rows.length===1?' rezerwacja':' rezerwacji');
     if(!rows.length){rbodyEl.innerHTML='<tr><td colspan="6"><div class="rempty">Brak rezerwacji dla wybranego filtra.</div></td></tr>';return;}
-    rbodyEl.innerHTML=rows.map(function(x){var v=veh(x.vehicleId);
+    var _shown=Math.min(rezShown,rows.length);
+    var _rhtml=rows.slice(0,_shown).map(function(x){var v=veh(x.vehicleId);
       return '<tr data-id="'+x.id+'" class="'+(x.source==='web'?'res-online':'')+'">'+
         '<td>'+(v?('<div class="veh">'+esc(v.model)+(x.source==='web'?' <span style="color:#2D7DF6;font-size:12px" title="Rezerwacja z internetu">🌐</span>':'')+'</div><div class="plate">'+esc(v.plate)+' '+vehBadges(v)+'</div>'):(x.source==='web'?('<div class="veh" style="color:#1E5BB8">🌐 Zapytanie z www</div><div class="plate" style="color:#2D7DF6">'+(x.segWanted?esc(x.segWanted):'do przypisania')+'</div>'):'<div class="veh" style="color:var(--muted)">— do przypisania —</div>'))+'</td>'+
         '<td>'+(x.status==='blokada'?'<span style="color:var(--muted)">— blokada —</span>':(esc(x.client||'—')+(x.source==='web'?' <span class="online-badge">ONLINE</span>':'')))+'</td>'+
@@ -2213,10 +2219,12 @@ tr.res-online:hover{background:linear-gradient(90deg,#DCEAFE,transparent 55%)}
         '<td class="amt">'+(x.deposit?esc(x.deposit)+' zł':'—')+'</td>'+
       '</tr>';
     }).join('');
+    if(rows.length>_shown){_rhtml+='<tr class="rmore-row"><td colspan="6" style="text-align:center;padding:12px 8px"><button id="rMoreBtn" type="button" style="background:#fff;border:1px solid var(--line,#e5e7eb);border-radius:10px;padding:9px 18px;font:inherit;font-weight:600;cursor:pointer">Pokaż więcej (pozostało '+(rows.length-_shown)+')</button></td></tr>';}
+    rbodyEl.innerHTML=_rhtml;
   }
-  rtabsEl.addEventListener('click',function(e){var b=e.target.closest('.rtab');if(!b)return;statusFilter=b.getAttribute('data-st');renderRezerwacje();});
-  rbodyEl.addEventListener('click',function(e){var tr=e.target.closest('tr[data-id]');if(tr)openDetails(tr.getAttribute('data-id'));});
-  document.getElementById('rsearch').addEventListener('input',function(){searchQ=this.value;renderRows();});
+  rtabsEl.addEventListener('click',function(e){var b=e.target.closest('.rtab');if(!b)return;statusFilter=b.getAttribute('data-st');rezShown=80;renderRezerwacje();});
+  rbodyEl.addEventListener('click',function(e){var mb=e.target.closest('#rMoreBtn');if(mb){rezShown+=120;renderRows();return;}var tr=e.target.closest('tr[data-id]');if(tr)openDetails(tr.getAttribute('data-id'));});
+  document.getElementById('rsearch').addEventListener('input',function(){searchQ=this.value;rezShown=80;renderRows();});
   (function(){var ob=document.getElementById('onlineBar');if(!ob)return;ob.addEventListener('click',function(e){
     var b=e.target.closest('.ob-btn');
     if(b){e.stopPropagation();var id=b.getAttribute('data-id');if(b.getAttribute('data-act')==='ok')confirmOnline(id,b);else declineOnline(id);return;}
@@ -3004,7 +3012,7 @@ tr.res-online:hover{background:linear-gradient(90deg,#DCEAFE,transparent 55%)}
   g('stAlerts').addEventListener('click',function(e){var r=e.target.closest('.al');if(r)openVeh(r.getAttribute('data-veh'));});
 
   /* ===== KLIENCI ===== */
-  var clSearchQ='', clFilterV='all';
+  var clSearchQ='', clFilterV='all', cliShown=80;
   function clTyp(c){return c.typ==='firma'?'firma':'ind';}
   function clFiltered(){
     var q=clSearchQ.toLowerCase();
@@ -3015,11 +3023,18 @@ tr.res-online:hover{background:linear-gradient(90deg,#DCEAFE,transparent 55%)}
       return true;
     });
   }
-  function clientStats(c){
+  function buildClientIndex(){var byId={},byName={};for(var i=0;i<RES.length;i++){var x=RES[i];if(x.clientId){(byId[x.clientId]||(byId[x.clientId]=[])).push(x);}else{var n=(x.client||'').trim().toLowerCase();if(n)(byName[n]||(byName[n]=[])).push(x);}}return {byId:byId,byName:byName};}
+  function clientStats(c,_idx){
     var nm=(c.name||'').trim().toLowerCase(), rentals=[];
-    for(var i=0;i<RES.length;i++){var x=RES[i];
-      var m=x.clientId?(x.clientId===c.id):(nm&&(x.client||'').trim().toLowerCase()===nm);
-      if(m&&x.status!=='blokada')rentals.push(x);
+    if(_idx){
+      var _a=_idx.byId[c.id]||[],_b=nm?(_idx.byName[nm]||[]):[];
+      for(var _i=0;_i<_a.length;_i++){if(_a[_i].status!=='blokada')rentals.push(_a[_i]);}
+      for(var _j=0;_j<_b.length;_j++){if(_b[_j].status!=='blokada')rentals.push(_b[_j]);}
+    }else{
+      for(var i=0;i<RES.length;i++){var x=RES[i];
+        var m=x.clientId?(x.clientId===c.id):(nm&&(x.client||'').trim().toLowerCase()===nm);
+        if(m&&x.status!=='blokada')rentals.push(x);
+      }
     }
     rentals.sort(function(a,b){return (b.from||'').localeCompare(a.from||'');});
     var completed=0,cancelled=0,active=0,spend=0;
@@ -3042,16 +3057,19 @@ tr.res-online:hover{background:linear-gradient(90deg,#DCEAFE,transparent 55%)}
     var ind=0,firma=0,blk=0;for(var i=0;i<CLIENTS.length;i++){var cc=CLIENTS[i];if(clTyp(cc)==='firma')firma++;else ind++;if(cc.blocked)blk++;}
     g('clStats').innerHTML=stat('d-ink','Wszyscy klienci',CLIENTS.length)+stat('d-blue','Indywidualni',ind)+stat('d-amber','Firmowi',firma)+stat('d-red','Zablokowani',blk);
     var list=clFiltered();
+    var _cidx=buildClientIndex();
     var topMode=(clFilterV==='top');
-    if(topMode){var _sp={};list.forEach(function(c){_sp[c.id]=clientStats(c).spend;});list.sort(function(a,b){return (_sp[b.id]||0)-(_sp[a.id]||0)||(a.name||'').localeCompare(b.name||'','pl');});}
+    if(topMode){var _sp={};list.forEach(function(c){_sp[c.id]=clientStats(c,_cidx).spend;});list.sort(function(a,b){return (_sp[b.id]||0)-(_sp[a.id]||0)||(a.name||'').localeCompare(b.name||'','pl');});}
     else list.sort(function(a,b){return (a.name||'').localeCompare(b.name||'','pl');});
     g('clCount').textContent=list.length+(list.length===CLIENTS.length?'':' z '+CLIENTS.length)+(list.length===1?' klient':' klientów');
-    var h='';list.forEach(function(c,ix){var ty=clTyp(c);var blocked=!!c.blocked;var st=clientStats(c),rel=reliability(c,st);
+    var _cliShown=Math.min(cliShown,list.length);
+    var h='';list.slice(0,_cliShown).forEach(function(c,ix){var ty=clTyp(c);var blocked=!!c.blocked;var st=clientStats(c,_cidx),rel=reliability(c,st);
       h+='<tr data-id="'+c.id+'" class="'+(blocked?'cl-blocked':'')+'"><td><div class="cl-name">'+(topMode?'<span class="cl-rank'+(ix<3?' cl-rank-'+(ix+1):'')+'">'+(ix+1)+'</span>':'')+'<span class="cl-dot '+rel.cls+'" title="'+esc(rel.label)+(rel.score!=null?' ('+rel.score+')':'')+'"></span>'+esc(c.name||'—')+(blocked?' <span class="blk-badge">ZABLOKOWANY</span>':'')+'</div>'+(st.count?'<div class="cl-substats">'+st.count+(st.count===1?' najem':' najm.')+' · '+money(st.spend)+'</div>':'')+(c.note?'<div class="cl-note">'+esc(c.note)+'</div>':'')+'</td>'+
         '<td><span class="ctyp ctyp-'+ty+'">'+(ty==='firma'?'Firma':'Osoba')+'</span></td>'+
         '<td class="cl-mono">'+esc(c.phone||'—')+'</td>'+
         '<td class="cl-hideSm">'+esc(c.email||'—')+'</td>'+
         '<td class="cl-mono">'+esc(c.nip||c.pesel||'—')+'</td></tr>';});
+    if(list.length>_cliShown){h+='<tr class="clmore-row"><td colspan="6" style="text-align:center;padding:12px 8px"><button id="clMoreBtn" type="button" style="background:#fff;border:1px solid var(--line,#e5e7eb);border-radius:10px;padding:9px 18px;font:inherit;font-weight:600;cursor:pointer">Pokaż więcej (pozostało '+(list.length-_cliShown)+')</button></td></tr>';}
     g('clBody').innerHTML=h;
     g('clEmpty').classList.toggle('hide',list.length>0);
     document.querySelector('#viewKlienci .cl-wrap').classList.toggle('hide',list.length===0);
@@ -3092,10 +3110,10 @@ tr.res-online:hover{background:linear-gradient(90deg,#DCEAFE,transparent 55%)}
   }
   g('c-typ').addEventListener('change',paintCliTyp);
   g('cliSave').onclick=saveCli; g('cliDel').onclick=delCli;
-  g('clBody').addEventListener('click',function(e){var r=e.target.closest('tr[data-id]');if(r)openCli(r.getAttribute('data-id'));});
-  g('clSearch').addEventListener('input',function(){clSearchQ=this.value.trim();renderKlienci();});
+  g('clBody').addEventListener('click',function(e){var mb=e.target.closest('#clMoreBtn');if(mb){cliShown+=120;renderKlienci();return;}var r=e.target.closest('tr[data-id]');if(r)openCli(r.getAttribute('data-id'));});
+  g('clSearch').addEventListener('input',function(){clSearchQ=this.value.trim();cliShown=80;renderKlienci();});
   (function(){var tf=g('tkFilter');if(tf)tf.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;startTaskFilter=b.getAttribute('data-tf');[].forEach.call(this.querySelectorAll('button'),function(x){x.classList.toggle('on',x===b);});if(typeof renderStart==='function')renderStart();});})();
-  g('clFilter').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;clFilterV=b.getAttribute('data-cf');[].forEach.call(this.querySelectorAll('button'),function(x){x.classList.toggle('on',x===b);});renderKlienci();});
+  g('clFilter').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;clFilterV=b.getAttribute('data-cf');cliShown=80;[].forEach.call(this.querySelectorAll('button'),function(x){x.classList.toggle('on',x===b);});renderKlienci();});
   [].forEach.call(document.querySelectorAll('[data-newcli]'),function(b){b.onclick=function(){openCli(null);};});
   cliOverlay.addEventListener('click',function(e){if(e.target===cliOverlay)closeAll();});
 
