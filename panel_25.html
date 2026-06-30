@@ -2034,7 +2034,12 @@ tr.res-online:hover{background:linear-gradient(90deg,#DCEAFE,transparent 55%)}
     var cr={start:'· Start',analityka:'· Analityka',grafik:'· Grafik rezerwacji',rezerwacje:'· Rezerwacje',flota:'· Flota',archiwum:'· Archiwum',serwis:'· Serwis',klienci:'· Klienci',rozliczenia:'· Rozliczenia',ustawienia:'· Ustawienia',finanse:'· Finanse'};
     document.getElementById('crumbSub').textContent = cr[v]||'';
     if(typeof animateView==='function')animateView(v);
-    renderActive();
+    /* Odroczenie ciężkiego renderowania o klatkę: animacja wejścia widoku zdąży
+       się płynnie pokazać, a treść (np. tysiące rezerwacji) doładuje się zaraz po niej.
+       Strażnik currentView===_vv pomija renderowanie widoków pominiętych przy szybkim klikaniu. */
+    var _vv=v;
+    if(window.requestAnimationFrame){requestAnimationFrame(function(){requestAnimationFrame(function(){if(currentView===_vv)renderActive();});});}
+    else{renderActive();}
   }
   function renderActive(){ if(currentView==='start')renderStart();else if(currentView==='analityka')renderAnalityka();else if(currentView==='finanse')renderFinanse();else if(currentView==='grafik')renderGrafik();else if(currentView==='rezerwacje')renderRezerwacje();else if(currentView==='flota')renderFlota();else if(currentView==='archiwum')renderArchiwum();else if(currentView==='serwis')renderSerwis();else if(currentView==='klienci')renderKlienci();else if(currentView==='rozliczenia')renderRozliczenia();else renderUstawienia(); if(typeof updateBell==='function')updateBell(); }
   document.getElementById('modnav').addEventListener('click',function(e){
