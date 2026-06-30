@@ -1040,6 +1040,65 @@ tr.res-online:hover{background:linear-gradient(90deg,#DCEAFE,transparent 55%)}
 @media (prefers-reduced-motion:reduce){.btn-add::after{animation:none}}
 </style>
 <script>try{if(localStorage.getItem('pr_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
+<style>
+/* =====================================================================
+   POPRAWKI MOBILNE — czytelność i brak ucinania na telefonie
+   (wszystko w @media — na komputerze nic się nie zmienia)
+   ===================================================================== */
+@media (max-width:768px){
+  /* Strona nie rozpycha się w poziomie */
+  html,body{max-width:100%;overflow-x:hidden}
+
+  /* Karty, paski i siatki MOGĄ zwężać się do szerokości ekranu (zamiast rozpychać stronę)... */
+  *{min-width:0}
+  /* Górny pasek: bez ujemnych marginesów (na telefonie wychodziły 16px poza ekran) */
+  .topbar{margin-left:0;margin-right:0}
+  /* ...ALE zakładki na górze trzymają swoją szerokość i przewijają się w poziomie (nie zlewają się) */
+  .modnav{gap:6px;padding:5px 6px}
+  .modnav button{flex:0 0 auto}
+
+  /* Szerokie tabele/treści przewijają się poziomo WEWNĄTRZ swojej karty, nie rozpychają strony */
+  #stUpcoming,#stSeg,.rlist-wrap,.grid-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+  /* iPhone: pola min. 16px — telefon nie przybliża ekranu po dotknięciu pola */
+  input,select,textarea{font-size:16px!important}
+  input,select,textarea,.btn,.btn-add{min-height:44px}
+
+  /* Kafelki KPI / statystyki: 2 czytelne kolumny */
+  .kpi,.stats{grid-template-columns:repeat(2,1fr);gap:10px}
+  .kpi .v,.stat .v{font-size:21px}
+  .kpic,.stat{padding:13px 14px}
+
+  /* Sekcje dwukolumnowe -> jedna kolumna */
+  .st-cols{grid-template-columns:1fr}
+
+  /* Nagłówki nieco mniejsze, ale wyraźne */
+  .pagehead h1{font-size:20px}
+  .st-hello h1{font-size:22px}
+
+  /* Modale i okna wpasowane w ekran */
+  .modal{max-width:100%}
+  .overlay{padding:10px}
+}
+
+/* Tylko bardzo wąskie telefony — jedna kolumna kafelków */
+@media (max-width:360px){
+  .kpi,.stats{grid-template-columns:1fr}
+  .pagehead h1{font-size:19px}
+}
+
+/* Widoczny znacznik wersji — TYLKO na telefonie (na komputerze niewidoczny).
+   Służy do potwierdzenia, że załadowała się nowa wersja panelu. */
+@media (max-width:768px){
+  #appRoot::after,body::after{
+    content:"✅ wersja mobilna 3 — panel poprawiony";
+    display:block;text-align:center;
+    margin:18px 12px 26px;padding:10px 12px;
+    font-size:12px;font-weight:600;color:#0a7d2c;
+    background:#e9f9ef;border:1px solid #b6e6c6;border-radius:10px;
+  }
+}
+</style>
 </head>
 <body>
 
