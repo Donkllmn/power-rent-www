@@ -814,10 +814,26 @@
       adres:val('r-adres').trim(),kod:val('r-kod').trim(),miasto:val('r-miasto').trim(),
       msg:val('r-msg').trim(),website:val('r-website')
     };
-    fetch(SB_URL+'/functions/v1/web-booking',{method:'POST',headers:HDR,body:JSON.stringify(data)})
-      .then(function(r){return r.ok?r.json():Promise.reject(r);})
-      .then(function(){sending=false;btn.disabled=false;el('wzBody').style.display='none';document.querySelector('.wz-nav').style.display='none';el('wzSteps').parentNode.style.display='none';el('wzOk').classList.add('show');confetti();el('wizard').scrollIntoView({behavior:'smooth',block:'start'});})
-      .catch(function(){sending=false;btn.disabled=false;btn.innerHTML='Wyślij rezerwację';warn('Nie udało się wysłać. Zadzwoń pod 664 201 202 albo spróbuj ponownie za chwilę.');});
+    function doPost(){
+      fetch(SB_URL+'/functions/v1/web-booking',{method:'POST',headers:HDR,body:JSON.stringify(data)})
+        .then(function(r){return r.ok?r.json():Promise.reject(r);})
+        .then(function(){sending=false;btn.disabled=false;el('wzBody').style.display='none';document.querySelector('.wz-nav').style.display='none';el('wzSteps').parentNode.style.display='none';el('wzOk').classList.add('show');confetti();el('wizard').scrollIntoView({behavior:'smooth',block:'start'});})
+        .catch(function(){sending=false;btn.disabled=false;btn.innerHTML='Wyślij rezerwację';warn('Nie udało się wysłać. Zadzwoń pod 664 201 202 albo spróbuj ponownie za chwilę.');});
+    }
+    /* Ostateczna kontrola dostępności: jeśli wybrano konkretne auto, upewniamy się, że nadal jest wolne
+       w tym terminie (ochrona, gdyby ktoś zarezerwował je w międzyczasie). */
+    if(sel.carId){
+      fetch(SB_URL+'/functions/v1/web-fleet?from='+calFrom+'&to='+calTo,{headers:HDR})
+        .then(function(r){return r.ok?r.json():Promise.reject(r);})
+        .then(function(d){
+          var free=((d&&d.cars)||[]).some(function(c){return String(c.id)===String(sel.carId);});
+          if(!free){sending=false;btn.disabled=false;btn.innerHTML='Wyślij rezerwację';
+            warn('To auto zostało właśnie zajęte w tym terminie. Wróć do kroku „Auto” i wybierz inne wolne auto, albo zadzwoń: 664 201 202.');
+            return;}
+          doPost();
+        })
+        .catch(function(){doPost();});
+    }else{doPost();}
   }
 
   el('wzReset').addEventListener('click',function(){

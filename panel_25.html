@@ -2353,14 +2353,14 @@ tr.res-online:hover{background:linear-gradient(90deg,#DCEAFE,transparent 55%)}
       });
     }
     if(v&&from&&to&&g('f-status').value!=='anulowana'){
-      var cf=(typeof conflictFor==='function')?conflictFor(g('f-veh').value,from,to,editingId):null;
+      var cf=(typeof conflictFor==='function')?conflictFor(g('f-veh').value,from,to,editingId,g('f-godzOd').value,g('f-godzDo').value):null;
       if(cf){var cv=veh(cf.vehicleId);msgs.push('⛔ <b>Kolizja terminów</b> — ten pojazd ma już rezerwację '+fmtY(cf.from)+'–'+fmtY(cf.to)+(cf.status==='blokada'?' (blokada)':(cf.client?' ('+esc(cf.client)+')':'')));}
     }
     var modal=g('formOverlay').querySelector('.modal');
     if(msgs.length){box.innerHTML=msgs.join('<br>');box.classList.remove('hide');if(modal)modal.classList.add('warn');}
     else{box.classList.add('hide');box.innerHTML='';if(modal)modal.classList.remove('warn');}
   }
-  ['f-veh','f-from','f-to'].forEach(function(id){var el=g(id);if(el)el.addEventListener('change',updateFormWarn);});
+  ['f-veh','f-from','f-to','f-godzOd','f-godzDo'].forEach(function(id){var el=g(id);if(el)el.addEventListener('change',updateFormWarn);});
 
   function printUmowa(){
     var x={vehicleId:g('f-veh').value,from:g('f-from').value,to:g('f-to').value,godzOd:g('f-godzOd').value,godzDo:g('f-godzDo').value,
@@ -2448,9 +2448,11 @@ tr.res-online:hover{background:linear-gradient(90deg,#DCEAFE,transparent 55%)}
       rabat:g('f-rabat').value,dok:g('f-dok').value,note:g('f-note').value.trim(),platnosc:g('payToggle').getAttribute('data-val'),
       drivers:readDrivers(),acc:readAccessories(),umowaNr:g('f-umowaNr').value.trim(),umowaData:g('f-umowaData').value,umowaPodp:g('f-umowaPodp').checked};
     if(o.status!=='anulowana'&&typeof conflictFor==='function'){
-      var cfS=conflictFor(o.vehicleId,o.from,o.to,editingId);
+      var cfS=conflictFor(o.vehicleId,o.from,o.to,editingId,o.godzOd,o.godzDo);
       if(cfS){var cvS=veh(cfS.vehicleId);
-        if(!confirm('Uwaga: ten pojazd ('+(cvS?cvS.model+' '+cvS.plate:'')+') ma już rezerwację '+fmtY(cfS.from)+'–'+fmtY(cfS.to)+(cfS.status==='blokada'?' (blokada)':(cfS.client?' — '+cfS.client:''))+'.\n\nZapisać mimo nakładających się terminów?'))return;}
+        alert('⛔ Nie można zapisać — pojazd '+(cvS?cvS.model+' '+cvS.plate:'')+' jest już zajęty w tym terminie.\n\nKoliduje z rezerwacją:  '+fmtY(cfS.from)+(cfS.godzOd?' '+cfS.godzOd:'')+'  –  '+fmtY(cfS.to)+(cfS.godzDo?' '+cfS.godzDo:'')+(cfS.status==='blokada'?'   (blokada)':(cfS.client?'   — '+cfS.client:''))+'.\n\nWybierz inny termin albo inny pojazd.');
+        return;
+      }
     }
     if(status!=='blokada'){
       var prof={typ:o.typ,name:client,phone:o.phone,email:o.email,adres:o.adres,miasto:o.miasto,kod:o.kod,pesel:o.pesel,nip:o.nip,prawojazdy:o.prawojazdy,dowod:o.dowod};
@@ -3308,11 +3310,14 @@ tr.res-online:hover{background:linear-gradient(90deg,#DCEAFE,transparent 55%)}
   (function(){var b=g('pcAuto');if(b)b.addEventListener('click',function(){priceAuto=!priceAuto;b.classList.toggle('on',priceAuto);updatePriceCalc();});})();
 
   /* ---- Wykrywanie kolizji (double-booking) ---- */
-  function conflictFor(vehId,from,to,ignoreId){
+  function _resTs(dateStr,hm,isEnd){var dm=/^(\d{4})-(\d{2})-(\d{2})$/.exec(dateStr||'');if(!dm)return isEnd?Infinity:-Infinity;var base=Date.UTC(+dm[1],+dm[2]-1,+dm[3]);var t=/^(\d{1,2}):(\d{2})$/.exec(hm||'');var mins=t?((+t[1])*60+(+t[2])):(isEnd?1439:0);return base+mins*60000;}
+  function conflictFor(vehId,from,to,ignoreId,godzOd,godzDo){
     if(!vehId||!from||!to)return null;
+    var aS=_resTs(from,godzOd,false), aE=_resTs(to,godzDo,true);
     for(var i=0;i<RES.length;i++){var x=RES[i];
       if(x.id===ignoreId)continue; if(x.vehicleId!==vehId)continue; if(x.status==='anulowana')continue;
-      if(from<=x.to&&x.from<=to)return x;
+      var bS=_resTs(x.from,x.godzOd,false), bE=_resTs(x.to,x.godzDo,true);
+      if(aS<bE&&bS<aE)return x;
     }
     return null;
   }
@@ -3359,7 +3364,7 @@ tr.res-online:hover{background:linear-gradient(90deg,#DCEAFE,transparent 55%)}
         if(nw<COLW-6){nw=COLW-6;nl=drag.origLeft+drag.origWidth-(COLW-6);}
         drag.bar.style.left=nl+'px';drag.bar.style.width=nw+'px';
       }else{var nw2=drag.origWidth+dxDays*COLW;if(nw2<COLW-6)nw2=COLW-6;drag.bar.style.width=nw2+'px';}
-      var cf=conflictFor(tv,nf,nt,drag.res.id); drag.valid=!cf;
+      var cf=conflictFor(tv,nf,nt,drag.res.id,drag.res.godzOd,drag.res.godzDo); drag.valid=!cf;
       drag.bar.classList.toggle('invalid',!!cf); clearDrop();
       if(drag.mode==='move'){for(var k=0;k<drag.trackRects.length;k++){if(drag.trackRects[k].veh===tv){drag.trackRects[k].el.classList.add(cf?'drop-bad':'drop-ok');break;}}}
     });
