@@ -99,7 +99,7 @@ html[data-theme="dark"] .logo{background:#fff;border-radius:7px;padding:3px 8px}
 .s-anulowana{background:#EEF1F4;color:#9098A4}
 .s-blokada{background:repeating-linear-gradient(45deg,#E4E7EC 0 6px,#F3F4F6 6px 12px);color:#5C6472;border-color:var(--line2)}
 
-.grid-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--paper)}
+.grid-scroll{overflow:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--paper);-webkit-overflow-scrolling:touch}
 .grafik{min-width:max-content}
 .gh-row{display:flex;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--paper);z-index:5}
 .corner{width:var(--vcol);flex:0 0 var(--vcol);position:sticky;left:0;background:var(--paper);z-index:6;border-right:1px solid var(--line);display:flex;align-items:center;padding:0 14px;font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
@@ -2085,7 +2085,20 @@ tr.res-online:hover{background:linear-gradient(90deg,#DCEAFE,transparent 55%)}
     }
     grafikEl.innerHTML=html;
     if(typeof applyColSel==='function')applyColSel();
+    fitGrafik();
   }
+  /* Dopasowuje wysokość obszaru grafiku do widocznej części ekranu, dzięki czemu
+     pasek z kalendarzem (dni u góry) i kolumna pojazdów zostają przyklejone
+     podczas przewijania listy w dół. */
+  function fitGrafik(){
+    var gs=document.querySelector('#viewGrafik .grid-scroll');
+    if(!gs||vGraf.classList.contains('hide'))return;
+    var top=gs.getBoundingClientRect().top;
+    var h=window.innerHeight-top-16;
+    if(h<260)h=260;
+    gs.style.maxHeight=h+'px';
+  }
+  window.addEventListener('resize',fitGrafik);
   function hourFrac(s){var m=/^(\d{1,2}):(\d{2})$/.exec(s||'');return m?((+m[1])*60+(+m[2]))/1440:0;}
   function barsFor(vehId,startStr,_idx){
     var out='';
