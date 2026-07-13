@@ -2017,7 +2017,55 @@ tr.res-online:hover{background:linear-gradient(90deg,#DCEAFE,transparent 55%)}
 
   /* ===== przełączanie widoków ===== */
   var vGraf=document.getElementById('viewGrafik'), vRez=document.getElementById('viewRezerwacje'), vFlota=document.getElementById('viewFlota'), vStart=document.getElementById('viewStart'), vKli=document.getElementById('viewKlienci'), vRoz=document.getElementById('viewRozliczenia'), vUst=document.getElementById('viewUstawienia'), vServ=document.getElementById('viewSerwis'), vAn=document.getElementById('viewAnalityka'), vArch=document.getElementById('viewArchiwum'), vFin=document.getElementById('viewFinanse');
+  /* ===== Blokada hasłem dla zakładek: Finanse, Analityka, Rozliczenia ===== */
+  var FIN_LOCK={finanse:1,analityka:1,rozliczenia:1};
+  var finUnlocked=false, _finPending=null, _finGate=null;
+  var FIN_CODE='IR2026';
+  function buildFinGate(){
+    if(_finGate)return _finGate;
+    var ov=document.createElement('div');
+    ov.className='overlay'; ov.id='finGate';
+    ov.innerHTML='<div class="modal" style="max-width:420px">'+
+      '<div class="modal-h"><h2>🔒 Dostęp chroniony</h2><button class="x" data-fgx aria-label="Zamknij">×</button></div>'+
+      '<div class="modal-b">'+
+        '<p style="margin:0 0 14px;color:#3A4150;font-size:14px;line-height:1.5">Ta sekcja jest zabezpieczona. Wpisz kod dostępu, aby zobaczyć jej zawartość.</p>'+
+        '<div class="field" style="margin-bottom:6px"><label for="finPassInp">Kod dostępu</label><input id="finPassInp" type="password" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="••••••"></div>'+
+        '<div id="finPassErr" style="display:none;color:var(--red);font-size:13px;font-weight:600;margin-top:4px">Nieprawidłowy kod. Spróbuj ponownie.</div>'+
+      '</div>'+
+      '<div class="modal-f"><button class="btn" data-fgx style="background:#F1F3F6;color:#3A4150">Anuluj</button><button class="btn btn-red" id="finPassOk" style="flex:1">Odblokuj</button></div>'+
+    '</div>';
+    document.body.appendChild(ov);
+    _finGate=ov;
+    var inp=ov.querySelector('#finPassInp'), err=ov.querySelector('#finPassErr');
+    function close(){ov.classList.remove('open');inp.value='';err.style.display='none';_finPending=null;}
+    function submit(){
+      if((inp.value||'').trim().toUpperCase()===FIN_CODE){
+        finUnlocked=true; var v=_finPending; close();
+        if(v)switchView(v);
+        if(typeof toast==='function')toast('Dostęp odblokowany ✓');
+      } else {
+        err.style.display='block'; inp.value=''; inp.focus();
+        try{inp.animate([{transform:'translateX(0)'},{transform:'translateX(-7px)'},{transform:'translateX(7px)'},{transform:'translateX(0)'}],{duration:260});}catch(e){}
+      }
+    }
+    ov.addEventListener('click',function(e){
+      if(e.target===ov||e.target.closest('[data-fgx]'))close();
+      else if(e.target.closest('#finPassOk'))submit();
+    });
+    inp.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();submit();}else if(e.key==='Escape'){close();}});
+    inp.addEventListener('input',function(){err.style.display='none';});
+    return ov;
+  }
+  function askFinPass(v){
+    _finPending=v;
+    var ov=buildFinGate();
+    ov.classList.add('open');
+    var inp=ov.querySelector('#finPassInp'); inp.value='';
+    ov.querySelector('#finPassErr').style.display='none';
+    setTimeout(function(){inp.focus();},40);
+  }
   function switchView(v){
+    if(FIN_LOCK[v]&&!finUnlocked){ askFinPass(v); return; }
     currentView=v;
     vStart.classList.toggle('hide',v!=='start');
     vGraf.classList.toggle('hide',v!=='grafik');
